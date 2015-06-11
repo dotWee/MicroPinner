@@ -1,0 +1,8 @@
+<resources>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/accent</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+    </style>
+</resources>

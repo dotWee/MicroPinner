@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/activity_vertical_margin"
+    android:paddingBottom="0dp"
+    android:theme="@style/DialogTheme"
+    tools:context=".EditActivity">
+
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Title" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/buttonPin"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="16dp"
+            android:text="Pin" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="8dp"
+        android:paddingStart="8dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/buttonCancel"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="16dp"
+            android:text="Cancel" />
+
+    </LinearLayout>
+</LinearLayout>

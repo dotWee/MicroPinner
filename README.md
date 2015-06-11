@@ -1,9 +1,7 @@
-# MicroPinner
+# <img src="art/ic_web.png" height="50px"/> MicroPinner
 
 MicroPinner is a lightweight dialog-only application, which lets you pin text to your statusbar.
 <br>You can also customize the pins priority and visibility (Android 5.+ only).
-
-<img src="art/ic_web.png"/>
 
 ## Features
 
@@ -40,14 +38,14 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
 
 1. Version: v1.0 (Initial release)
     - date: 11th June 2015
-    - sha1 checksum: <i>ce67e91f42bca5d9d927f73c7d423071f887ad59</i>
+    - sha1 checksum: *ce67e91f42bca5d9d927f73c7d423071f887ad59*
     - download: [Github](https://github.com/dotWee/MicroPinner/releases) | [Play Store](https://play.google.com/store/apps/details?id=de.dotwee.micropinner)
 
 ## Build
 
 This project is developed using JetBrain's IntelliJ IDEA 14.1 and the latest Gradle-wrapper.
 
-To build this application, import this project into Android Studio or IntelliJ IDEA.
+To build MicroPinner, simply import this project into Android Studio or IntelliJ IDEA.
 
 ## Todo
 
@@ -59,4 +57,4 @@ To build this application, import this project into Android Studio or IntelliJ I
 ## License
 
 Copyright (c) 2015 Lukas 'dotwee' Wolfsteiner
-The source-code of MicroPinner is licensed under the [_Do What The Fuck You Want To_](/LICENSE) public license.
+The source-code of MicroPinner is licensed under the [_Do What The Fuck You Want To_](/LICENSE.md) public license.

@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (DEBUG) Log.i(LOG_TAG, "Spinner selected: " + selected);
 
         if (selected.equalsIgnoreCase("low")) return Notification.PRIORITY_LOW;
+        else if (selected.equalsIgnoreCase("min")) return Notification.PRIORITY_MIN;
         else if (selected.equalsIgnoreCase("high")) return Notification.PRIORITY_HIGH;
         else return Notification.PRIORITY_DEFAULT;
     }

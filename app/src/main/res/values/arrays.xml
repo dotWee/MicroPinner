@@ -2,6 +2,7 @@
 <resources>
     <string-array name="array_priorities">
         <item>Default</item>
+        <item>Min</item>
         <item>Low</item>
         <item>High</item>
     </string-array>

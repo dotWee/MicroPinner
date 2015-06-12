@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import de.dotwee.micropinner.R;
@@ -20,12 +21,17 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private final static String LOG_TAG = "EditActivity";
     EditText editTextContent, editTextTitle;
     Button buttonCancel, buttonPin;
+    TextView dialogTitle;
     Intent receivedIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_main);
+
+        // setup dialog title
+        dialogTitle = (TextView) findViewById(R.id.dialogTitle);
+        dialogTitle.setText(getResources().getString(R.string.edit_name));
 
         receivedIntent = getIntent();
         sendBroadcast(new Intent(this, BootReceiver.class));
@@ -45,6 +51,10 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         // hide spinner
         findViewById(R.id.spinnerVisibility).setVisibility(View.GONE);
         findViewById(R.id.spinnerPriority).setVisibility(View.GONE);
+
+        // hide description textviews
+        findViewById(R.id.textViewVisibility).setVisibility(View.GONE);
+        findViewById(R.id.textViewPriority).setVisibility(View.GONE);
     }
 
     void updatePin() {

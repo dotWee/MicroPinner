@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.dialog_main);
 
         buttonCancel = (Button) findViewById(R.id.buttonCancel);
         buttonPin = (Button) findViewById(R.id.buttonPin);

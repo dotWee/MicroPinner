@@ -25,7 +25,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
+        setContentView(R.layout.dialog_main);
 
         receivedIntent = getIntent();
         sendBroadcast(new Intent(this, BootReceiver.class));
@@ -41,6 +41,10 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
         editTextTitle.setText(receivedIntent.getStringExtra(MainActivity.EXTRA_TITLE));
+
+        // hide spinner
+        findViewById(R.id.spinnerVisibility).setVisibility(View.GONE);
+        findViewById(R.id.spinnerPriority).setVisibility(View.GONE);
     }
 
     void updatePin() {

@@ -12,7 +12,6 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -25,17 +24,17 @@ import java.util.Random;
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.tools.BootReceiver;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, Spinner.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_VISIBILITY = "EXTRA_VISIBILITY", EXTRA_PRIORITY = "EXTRA_PRIORITY", EXTRA_TITLE = "EXTRA_TITLE", EXTRA_CONTENT = "EXTRA_CONTENT", EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION";
-    public static final boolean DEBUG = false;
     public static final String PREF_FIRSTUSE = "pref_firstuse", PREF_SHOWNEWPIN = "pref_shownewpin";
-    SharedPreferences sharedPreferences;
+    public static final String LOG_TAG = "MainActivity";
+    public static final boolean DEBUG = true;
+
     Spinner spinnerVisibility, spinnerPriority;
     EditText editTextContent, editTextTitle;
+    SharedPreferences sharedPreferences;
     CheckBox checkBoxShowNewPin;
     TextView dialogTitle;
-    private int VISIBILITY_SELECTED = 1;
-    private int PRIORITY_SELECTED = 0;
 
     public static Notification generatePin(Context context, int visibility, int priority, int id, String title, String content) {
         Notification.Builder notification = new Notification.Builder(context)
@@ -90,11 +89,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sendBroadcast(new Intent(this, BootReceiver.class));
 
         spinnerVisibility = (Spinner) findViewById(R.id.spinnerVisibility);
-        spinnerVisibility.setOnItemSelectedListener(this);
         spinnerVisibility.setAdapter(getVisibilityAdapter());
 
         spinnerPriority = (Spinner) findViewById(R.id.spinnerPriority);
-        spinnerPriority.setOnItemSelectedListener(this);
         spinnerPriority.setAdapter(getPriorityAdapter());
 
         if (!sharedPreferences.getBoolean(PREF_FIRSTUSE, false)) {
@@ -123,11 +120,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public int _getVisibility() {
-        return VISIBILITY_SELECTED;
+
+        String selected = spinnerVisibility.getSelectedItem().toString();
+        if (DEBUG) Log.i(LOG_TAG, "Spinner selected: " + selected);
+
+        if (Build.VERSION.SDK_INT >= 21) {
+
+            if (selected.equalsIgnoreCase("private")) return Notification.VISIBILITY_PRIVATE;
+            else if (selected.equalsIgnoreCase("secret")) return Notification.VISIBILITY_SECRET;
+            else return Notification.VISIBILITY_PUBLIC;
+        } else return 0;
     }
 
     public int _getPriority() {
-        return PRIORITY_SELECTED;
+
+        String selected = spinnerPriority.getSelectedItem().toString();
+        if (DEBUG) Log.i(LOG_TAG, "Spinner selected: " + selected);
+
+        if (selected.equalsIgnoreCase("low")) return Notification.PRIORITY_LOW;
+        else if (selected.equalsIgnoreCase("high")) return Notification.PRIORITY_HIGH;
+        else return Notification.PRIORITY_DEFAULT;
     }
 
     public String _getTitle() {
@@ -149,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         else {
             if (DEBUG)
-                Log.i("Main Activity", "New pin: " + "\nTitle: " + title + "\nContent: " + content + "\nVisibility: " + _getVisibility() + "\nPriority: " + _getPriority());
+                Log.i(LOG_TAG, "New pin: " + "\nTitle: " + title + "\nContent: " + content + "\nVisibility: " + _getVisibility() + "\nPriority: " + _getPriority());
             notificationManager.notify(notificationID, generatePin(this, _getVisibility(), _getPriority(), notificationID, title, content));
             finish();
         }
@@ -163,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (DEBUG) Log.i("MainActivity", "clicked: " + v.getId());
+        if (DEBUG) Log.i(LOG_TAG, "clicked: " + v.getId());
         switch (v.getId()) {
             case R.id.buttonCancel:
                 finish();
@@ -175,45 +187,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sharedPreferences.edit().putBoolean(PREF_SHOWNEWPIN, checkBoxShowNewPin.isChecked()).apply();
                 sendBroadcast(new Intent(this, BootReceiver.class));
         }
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String selected = parent.getItemAtPosition(position).toString();
-
-        switch (selected) {
-            case "Low":
-                PRIORITY_SELECTED = Notification.PRIORITY_LOW;
-                break;
-
-            case "Default":
-                PRIORITY_SELECTED = Notification.PRIORITY_DEFAULT;
-                break;
-
-            case "High":
-                PRIORITY_SELECTED = Notification.PRIORITY_HIGH;
-                break;
-        }
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            switch (selected) {
-                case "Private":
-                    VISIBILITY_SELECTED = Notification.VISIBILITY_PRIVATE;
-                    break;
-
-                case "Public":
-                    VISIBILITY_SELECTED = Notification.VISIBILITY_PUBLIC;
-                    break;
-
-                case "Secret":
-                    VISIBILITY_SELECTED = Notification.VISIBILITY_SECRET;
-                    break;
-            }
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }

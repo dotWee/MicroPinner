@@ -103,6 +103,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     PackageManager.DONT_KILL_APP);
                     */
 
+            if (Build.VERSION.SDK_INT < 21)
+                Toast.makeText(this, getResources().getText(R.string.message_visibility_unsupported), Toast.LENGTH_LONG).show();
+
             sharedPreferences.edit().putBoolean(PREF_FIRSTUSE, true).apply();
         }
     }

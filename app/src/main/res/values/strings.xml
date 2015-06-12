@@ -3,4 +3,6 @@
 
     <string name="main_name">New Pin</string>
     <string name="edit_name">Edit Pin</string>
+
+    <string name="message_visibility_unsupported">Hey! Seems like you are using a older Android Version, where the visibility-setting is unsupported.</string>
 </resources>

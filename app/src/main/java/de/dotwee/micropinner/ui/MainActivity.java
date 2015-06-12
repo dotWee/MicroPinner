@@ -126,10 +126,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void pinEntry() {
-        int i = randomNotificationID();
-
+        String title = _getTitle();
+        int notificationID = randomNotificationID();
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(i, generatePin(this, _getVisibility(), _getPriority(), i, _getTitle(), _getContent()));
+
+        if (title.equalsIgnoreCase("") | title.equalsIgnoreCase(null))
+            Toast.makeText(this, "The title has to contain text.", Toast.LENGTH_SHORT).show();
+
+
+        else
+            notificationManager.notify(notificationID, generatePin(this, _getVisibility(), _getPriority(), notificationID, title, _getContent()));
     }
 
     private int randomNotificationID() {

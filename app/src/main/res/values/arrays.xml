@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="array_priorities">
-        <item>Default</item>
-        <item>Min</item>
-        <item>Low</item>
-        <item>High</item>
+        <item>@string/priority_default</item>
+        <item>@string/priority_min</item>
+        <item>@string/priority_low</item>
+        <item>@string/priority_high</item>
     </string-array>
 
     <string-array name="array_visibilities">
-        <item>Public</item>
-        <item>Private</item>
-        <item>Secret</item>
+        <item>@string/visibility_public</item>
+        <item>@string/visibility_private</item>
+        <item>@string/visibility_secret</item>
     </string-array>
 </resources>

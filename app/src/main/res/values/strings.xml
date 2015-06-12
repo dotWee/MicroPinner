@@ -8,7 +8,7 @@
     <string name="message_empty_title">The title has to contain text.</string>
     <string name="message_pin_new">Click to pin something new.</string>
 
-    <string name="visibility_default">default</string>
+    <string name="visibility_public">public</string>
     <string name="visibility_private">private</string>
     <string name="visibility_secret">secret</string>
 

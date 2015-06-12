@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MicroPinner</string>
+
+    <string name="main_name">Neuer Pin</string>
+    <string name="edit_name">Bearbeite Pin</string>
+
+    <string name="message_visibility_unsupported">Hey! Sieht aus als verwendest du eine Android-Version, bei der die Sichtbarkein nicht unterstützt wird.</string>
+    <string name="message_empty_title">Du musst einen Titel eingeben.</string>
+    <string name="message_pin_new">Click um einen neuen Pin zu erstellen.</string>
+
+    <string name="visibility_public">Normal</string>
+    <string name="visibility_private">Privat</string>
+    <string name="visibility_secret">Geheim</string>
+
+    <string name="priority_min">Minumum</string>
+    <string name="priority_low">Niedrig</string>
+    <string name="priority_high">Hoch</string>
+    <string name="priority_default">Normal</string>
+</resources>

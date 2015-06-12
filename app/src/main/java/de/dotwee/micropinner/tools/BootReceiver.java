@@ -45,10 +45,10 @@ public class BootReceiver extends BroadcastReceiver {
         }
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        notificationManager.cancel(DEFAULT_NOTIFICATIONID);
 
         if (sharedPreferences.getBoolean(MainActivity.PREF_SHOWNEWPIN, true))
             notificationManager.notify(DEFAULT_NOTIFICATIONID, defaultNotification.build());
+        else notificationManager.cancel(DEFAULT_NOTIFICATIONID);
     }
 
 }

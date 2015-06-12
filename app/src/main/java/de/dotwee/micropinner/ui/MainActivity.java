@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -35,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText editTextContent, editTextTitle;
     CheckBox checkBoxShowNewPin;
     TextView dialogTitle;
-    Button buttonCancel, buttonPin;
     private int VISIBILITY_SELECTED = 1;
     private int PRIORITY_SELECTED = 0;
 
@@ -68,24 +66,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_main);
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // setup dialog title
         dialogTitle = (TextView) findViewById(R.id.dialogTitle);
         dialogTitle.setText(getResources().getString(R.string.main_name));
 
+        // setup checkbox and set it to its last instance state
         checkBoxShowNewPin = (CheckBox) findViewById(R.id.checkBoxNewPin);
-        checkBoxShowNewPin.setChecked(sharedPreferences.getBoolean(MainActivity.PREF_SHOWNEWPIN, false));
+        checkBoxShowNewPin.setChecked(sharedPreferences.getBoolean(MainActivity.PREF_SHOWNEWPIN, true));
         checkBoxShowNewPin.setOnClickListener(this);
 
-        buttonCancel = (Button) findViewById(R.id.buttonCancel);
-        buttonPin = (Button) findViewById(R.id.buttonPin);
+        // declare buttons
+        findViewById(R.id.buttonCancel).setOnClickListener(this);
+        findViewById(R.id.buttonPin).setOnClickListener(this);
 
         editTextContent = (EditText) findViewById(R.id.editTextContent);
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
+
+        // set focus to the title input
         editTextTitle.performClick();
 
         sendBroadcast(new Intent(this, BootReceiver.class));
-
-        buttonCancel.setOnClickListener(this);
-        buttonPin.setOnClickListener(this);
 
         spinnerVisibility = (Spinner) findViewById(R.id.spinnerVisibility);
         spinnerVisibility.setOnItemSelectedListener(this);
@@ -95,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spinnerPriority.setOnItemSelectedListener(this);
         spinnerPriority.setAdapter(getPriorityAdapter());
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (!sharedPreferences.getBoolean(PREF_FIRSTUSE, false)) {
 
             /*
@@ -171,9 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 pinEntry();
                 break;
             case R.id.checkBoxNewPin:
-                if (checkBoxShowNewPin.isChecked())
-                    sharedPreferences.edit().putBoolean(PREF_SHOWNEWPIN, false).apply();
-                else sharedPreferences.edit().putBoolean(PREF_SHOWNEWPIN, true).apply();
+                sharedPreferences.edit().putBoolean(PREF_SHOWNEWPIN, checkBoxShowNewPin.isChecked()).apply();
                 sendBroadcast(new Intent(this, BootReceiver.class));
         }
     }

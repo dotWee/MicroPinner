@@ -28,7 +28,7 @@ import de.dotwee.micropinner.tools.BootReceiver;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, Spinner.OnItemSelectedListener {
     public static final String EXTRA_VISIBILITY = "EXTRA_VISIBILITY", EXTRA_PRIORITY = "EXTRA_PRIORITY", EXTRA_TITLE = "EXTRA_TITLE", EXTRA_CONTENT = "EXTRA_CONTENT", EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION";
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     public static final String PREF_FIRSTUSE = "pref_firstuse", PREF_SHOWNEWPIN = "pref_shownewpin";
     SharedPreferences sharedPreferences;
     Spinner spinnerVisibility, spinnerPriority;

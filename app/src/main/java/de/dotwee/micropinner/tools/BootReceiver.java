@@ -7,7 +7,9 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.ui.MainActivity;
@@ -17,6 +19,7 @@ import de.dotwee.micropinner.ui.MainActivity;
  */
 public class BootReceiver extends BroadcastReceiver {
     private final static String LOG_TAG = "BootReceiver";
+    private final static int DEFAULT_NOTIFICATIONID = 0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -26,7 +29,7 @@ public class BootReceiver extends BroadcastReceiver {
         stackBuilder.addNextIntent(mainIntent);
 
         PendingIntent mainPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification.Builder defaultNotification = new Notification.Builder(context)
                 .setContentTitle(context.getResources().getString(R.string.main_name))
                 .setContentText("Click to pin something new.")
@@ -41,8 +44,11 @@ public class BootReceiver extends BroadcastReceiver {
             defaultNotification.setVisibility(Notification.VISIBILITY_PUBLIC);
         }
 
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, defaultNotification.build());
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        notificationManager.cancel(DEFAULT_NOTIFICATIONID);
+
+        if (sharedPreferences.getBoolean(MainActivity.PREF_SHOWNEWPIN, true))
+            notificationManager.notify(DEFAULT_NOTIFICATIONID, defaultNotification.build());
     }
 
 }

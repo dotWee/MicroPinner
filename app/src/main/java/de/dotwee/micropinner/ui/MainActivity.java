@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -27,9 +29,12 @@ import de.dotwee.micropinner.tools.BootReceiver;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, Spinner.OnItemSelectedListener {
     public static final String EXTRA_VISIBILITY = "EXTRA_VISIBILITY", EXTRA_PRIORITY = "EXTRA_PRIORITY", EXTRA_TITLE = "EXTRA_TITLE", EXTRA_CONTENT = "EXTRA_CONTENT", EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION";
     public static final boolean DEBUG = true;
-    public static final String PREF_FIRSTUSE = "pref_firstuse";
+    public static final String PREF_FIRSTUSE = "pref_firstuse", PREF_SHOWNEWPIN = "pref_shownewpin";
+    SharedPreferences sharedPreferences;
     Spinner spinnerVisibility, spinnerPriority;
     EditText editTextContent, editTextTitle;
+    CheckBox checkBoxShowNewPin;
+    TextView dialogTitle;
     Button buttonCancel, buttonPin;
     private int VISIBILITY_SELECTED = 1;
     private int PRIORITY_SELECTED = 0;
@@ -63,6 +68,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_main);
 
+        dialogTitle = (TextView) findViewById(R.id.dialogTitle);
+        dialogTitle.setText(getResources().getString(R.string.main_name));
+
+        checkBoxShowNewPin = (CheckBox) findViewById(R.id.checkBoxNewPin);
+        checkBoxShowNewPin.setChecked(sharedPreferences.getBoolean(MainActivity.PREF_SHOWNEWPIN, false));
+        checkBoxShowNewPin.setOnClickListener(this);
+
         buttonCancel = (Button) findViewById(R.id.buttonCancel);
         buttonPin = (Button) findViewById(R.id.buttonPin);
 
@@ -83,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spinnerPriority.setOnItemSelectedListener(this);
         spinnerPriority.setAdapter(getPriorityAdapter());
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (!sharedPreferences.getBoolean(PREF_FIRSTUSE, false)) {
 
             /*
@@ -93,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     PackageManager.DONT_KILL_APP);
                     */
 
-            Toast.makeText(this, "App-Icon is now hidden.", Toast.LENGTH_SHORT).show();
             sharedPreferences.edit().putBoolean(PREF_FIRSTUSE, true).apply();
         }
     }
@@ -135,11 +146,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (title.equalsIgnoreCase("") | title.equalsIgnoreCase(null))
             Toast.makeText(this, "The title has to contain text.", Toast.LENGTH_SHORT).show();
 
-
         else {
             if (DEBUG)
                 Log.i("Main Activity", "New pin: " + "\nTitle: " + title + "\nContent: " + content + "\nVisibility: " + _getVisibility() + "\nPriority: " + _getPriority());
             notificationManager.notify(notificationID, generatePin(this, _getVisibility(), _getPriority(), notificationID, title, content));
+            finish();
         }
     }
 
@@ -158,8 +169,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.buttonPin:
                 pinEntry();
-                finish();
                 break;
+            case R.id.checkBoxNewPin:
+                if (checkBoxShowNewPin.isChecked())
+                    sharedPreferences.edit().putBoolean(PREF_SHOWNEWPIN, false).apply();
+                else sharedPreferences.edit().putBoolean(PREF_SHOWNEWPIN, true).apply();
+                sendBroadcast(new Intent(this, BootReceiver.class));
         }
     }
 

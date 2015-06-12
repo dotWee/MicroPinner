@@ -3,16 +3,16 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_vertical_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_margin"
     android:theme="@style/DialogTheme"
     tools:context=".MainActivity">
 
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/activity_vertical_margin">
+        android:paddingBottom="@dimen/title_padding_bottom"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin">
 
         <TextView
             android:id="@+id/dialogTitle"
@@ -27,9 +27,11 @@
     </GridLayout>
 
     <LinearLayout
-        android:layout_width="240dp"
+        android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -111,22 +113,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginLeft="@dimen/activity_margin"
+        android:layout_marginRight="@dimen/activity_margin"
         android:layout_marginTop="8dp"
+        android:singleLine="true"
         android:text="Show &quot;New Pin&quot; notification"
         android:textColor="@android:color/primary_text_dark" />
 
-    <GridLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="8dp">
 
         <Button
             android:id="@+id/buttonPin"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="64dp"
             android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_gravity="start"
-            android:layout_row="0"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:text="Pin" />
 
         <Button
@@ -134,9 +140,12 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="2"
-            android:layout_gravity="end"
-            android:layout_row="0"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/buttonPin"
+            android:layout_toStartOf="@+id/buttonPin"
+            android:paddingRight="8dp"
             android:text="Cancel" />
-    </GridLayout>
+
+    </RelativeLayout>
+
 </LinearLayout>

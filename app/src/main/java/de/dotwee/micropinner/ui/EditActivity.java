@@ -20,7 +20,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private final static String LOG_TAG = "EditActivity";
     EditText editTextContent, editTextTitle;
     Button buttonCancel, buttonPin;
-    private Intent receivedIntent;
+    Intent receivedIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         editTextTitle.setText(receivedIntent.getStringExtra(MainActivity.EXTRA_TITLE));
     }
 
-    public void updatePin() {
+    void updatePin() {
         String newContent = editTextContent.getText().toString();
         String newTitle = editTextTitle.getText().toString();
 

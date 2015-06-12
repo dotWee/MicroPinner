@@ -3,6 +3,11 @@
 MicroPinner is a lightweight dialog-only application, which lets you pin text to your statusbar.
 <br>You can also customize the pins priority and visibility (Android 5.+ only).
 
+<a href="https://play.google.com/store/apps/details?id=de.dotwee.micropinner">
+  <img alt="Get it on Google Play"
+       src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+</a>
+
 ## Features
 
 + **Material Design aligned**  
@@ -11,9 +16,9 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
     Weights deodexed less than a single megabyte.
 + **Zero battery & memory impact**  
     It won't drain your battery nor your memory. No background-services, no background-processes. Incase it does, your SystemUI is a b**ch.
-+ **Permission free** (almost)  
++ **Permission free** (almost)
     It will neither spy on your SMS's, nor call it's mothership over network. It just want to know when your devices finished its boot-procress, to restore your pins.
-+ **Open source**  
++ **Open source**
     The complete source-code is available here on Github.
 + **Backwards compatible**  
     Works on Android 4.1 and up.
@@ -39,7 +44,12 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
 1. Version: v1.0 (Initial release)
     - date: 11th June 2015
     - sha1 checksum: *ce67e91f42bca5d9d927f73c7d423071f887ad59*
-    - download: [Github](https://github.com/dotWee/MicroPinner/releases) | [Play Store](https://play.google.com/store/apps/details?id=de.dotwee.micropinner)
+    - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.0/release_v1.0.apk)
+
+2. Version: v1.1 (Disallow empty titles and let user decide if he wants to see the "new pin"-notification)
+    - date: 12th June 2015
+    - sha1 checksum: *3003cedb937a73f943e618c9f7cd3e82bc468e20*
+    - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.1/release_v1.1.apk)
 
 ## Build
 

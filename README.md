@@ -51,6 +51,11 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
     - sha1 checksum: *3003cedb937a73f943e618c9f7cd3e82bc468e20*
     - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.1/release_v1.1.apk)
 
+2. Version: v1.2 (Fix non-working visibility & priority)
+    - date: 12th June 2015
+    - sha1 checksum: *a01095619f18e4d9f6b35065125e907f64246948*
+    - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.2/release_v1.2.apk);
+
 ## Build
 
 This project is developed using JetBrain's IntelliJ IDEA 14.1 and the latest Gradle-wrapper.

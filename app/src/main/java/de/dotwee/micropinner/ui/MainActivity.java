@@ -26,6 +26,7 @@ import de.dotwee.micropinner.tools.BootReceiver;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, Spinner.OnItemSelectedListener {
     public static final String EXTRA_VISIBILITY = "EXTRA_VISIBILITY", EXTRA_PRIORITY = "EXTRA_PRIORITY", EXTRA_TITLE = "EXTRA_TITLE", EXTRA_CONTENT = "EXTRA_CONTENT", EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION";
+    public static final boolean DEBUG = true;
     public static final String PREF_FIRSTUSE = "pref_firstuse";
     Spinner spinnerVisibility, spinnerPriority;
     EditText editTextContent, editTextTitle;
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void pinEntry() {
         String title = _getTitle();
+        String content = _getContent();
         int notificationID = randomNotificationID();
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
@@ -134,8 +136,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "The title has to contain text.", Toast.LENGTH_SHORT).show();
 
 
-        else
-            notificationManager.notify(notificationID, generatePin(this, _getVisibility(), _getPriority(), notificationID, title, _getContent()));
+        else {
+            if (DEBUG)
+                Log.i("Main Activity", "New pin: " + "\nTitle: " + title + "\nContent: " + content + "\nVisibility: " + _getVisibility() + "\nPriority: " + _getPriority());
+            notificationManager.notify(notificationID, generatePin(this, _getVisibility(), _getPriority(), notificationID, title, content));
+        }
     }
 
     private int randomNotificationID() {
@@ -146,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Log.i("MainActivity", "clicked: " + v.getId());
+        if (DEBUG) Log.i("MainActivity", "clicked: " + v.getId());
         switch (v.getId()) {
             case R.id.buttonCancel:
                 finish();

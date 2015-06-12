@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkBoxShowNewPin.setChecked(sharedPreferences.getBoolean(MainActivity.PREF_SHOWNEWPIN, true));
         checkBoxShowNewPin.setOnClickListener(this);
 
-        // declare buttons
+        // declare buttons and edittexts
         findViewById(R.id.buttonCancel).setOnClickListener(this);
         findViewById(R.id.buttonPin).setOnClickListener(this);
 
@@ -86,23 +86,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // set focus to the title input
         editTextTitle.performClick();
 
+        // simulate device-boot by sending a new intent to @link BootReceiver.class
         sendBroadcast(new Intent(this, BootReceiver.class));
+
+        // declare spinner
+        spinnerPriority = (Spinner) findViewById(R.id.spinnerPriority);
+        spinnerPriority.setAdapter(getPriorityAdapter());
 
         spinnerVisibility = (Spinner) findViewById(R.id.spinnerVisibility);
         spinnerVisibility.setAdapter(getVisibilityAdapter());
 
-        spinnerPriority = (Spinner) findViewById(R.id.spinnerPriority);
-        spinnerPriority.setAdapter(getPriorityAdapter());
-
+        // check if first use
         if (!sharedPreferences.getBoolean(PREF_FIRSTUSE, false)) {
 
-            /*
+            /* hide icon from launcher
             getPackageManager().setComponentEnabledSetting(
                     new ComponentName(this, MainActivity.class),
                     PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                     PackageManager.DONT_KILL_APP);
                     */
 
+            // friendly notification that visibility is broken for SDK < 21
             if (Build.VERSION.SDK_INT < 21)
                 Toast.makeText(this, getResources().getText(R.string.message_visibility_unsupported), Toast.LENGTH_LONG).show();
 
@@ -123,26 +127,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public int _getVisibility() {
-
         String selected = spinnerVisibility.getSelectedItem().toString();
         if (DEBUG) Log.i(LOG_TAG, "Spinner selected: " + selected);
 
         if (Build.VERSION.SDK_INT >= 21) {
-
-            if (selected.equalsIgnoreCase("private")) return Notification.VISIBILITY_PRIVATE;
-            else if (selected.equalsIgnoreCase("secret")) return Notification.VISIBILITY_SECRET;
+            if (selected.equalsIgnoreCase(getResources().getString(R.string.visibility_private)))
+                return Notification.VISIBILITY_PRIVATE;
+            else if (selected.equalsIgnoreCase(getResources().getString(R.string.visibility_secret)))
+                return Notification.VISIBILITY_SECRET;
             else return Notification.VISIBILITY_PUBLIC;
         } else return 0;
     }
 
     public int _getPriority() {
-
         String selected = spinnerPriority.getSelectedItem().toString();
         if (DEBUG) Log.i(LOG_TAG, "Spinner selected: " + selected);
 
-        if (selected.equalsIgnoreCase("low")) return Notification.PRIORITY_LOW;
-        else if (selected.equalsIgnoreCase("min")) return Notification.PRIORITY_MIN;
-        else if (selected.equalsIgnoreCase("high")) return Notification.PRIORITY_HIGH;
+        if (selected.equalsIgnoreCase(getResources().getString(R.string.priority_low)))
+            return Notification.PRIORITY_LOW;
+        else if (selected.equalsIgnoreCase(getResources().getString(R.string.priority_min)))
+            return Notification.PRIORITY_MIN;
+        else if (selected.equalsIgnoreCase(getResources().getString(R.string.priority_high)))
+            return Notification.PRIORITY_HIGH;
         else return Notification.PRIORITY_DEFAULT;
     }
 
@@ -161,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         if (title.equalsIgnoreCase("") | title.equalsIgnoreCase(null))
-            Toast.makeText(this, "The title has to contain text.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getText(R.string.message_empty_title), Toast.LENGTH_SHORT).show();
 
         else {
             if (DEBUG)
@@ -180,16 +186,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (DEBUG) Log.i(LOG_TAG, "clicked: " + v.getId());
+
         switch (v.getId()) {
             case R.id.buttonCancel:
                 finish();
                 break;
+
             case R.id.buttonPin:
                 pinEntry();
                 break;
+
             case R.id.checkBoxNewPin:
                 sharedPreferences.edit().putBoolean(PREF_SHOWNEWPIN, checkBoxShowNewPin.isChecked()).apply();
                 sendBroadcast(new Intent(this, BootReceiver.class));
+                break;
         }
     }
 }

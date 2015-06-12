@@ -5,4 +5,15 @@
     <string name="edit_name">Edit Pin</string>
 
     <string name="message_visibility_unsupported">Hey! Seems like you are using a older Android Version, where the visibility-setting is unsupported.</string>
+    <string name="message_empty_title">The title has to contain text.</string>
+    <string name="message_pin_new">Click to pin something new.</string>
+
+    <string name="visibility_default">default</string>
+    <string name="visibility_private">private</string>
+    <string name="visibility_secret">secret</string>
+
+    <string name="priority_min">min</string>
+    <string name="priority_low">low</string>
+    <string name="priority_high">high</string>
+    <string name="priority_default">default</string>
 </resources>

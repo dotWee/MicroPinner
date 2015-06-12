@@ -7,7 +7,6 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
@@ -32,7 +31,7 @@ public class BootReceiver extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification.Builder defaultNotification = new Notification.Builder(context)
                 .setContentTitle(context.getResources().getString(R.string.main_name))
-                .setContentText("Click to pin something new.")
+                .setContentText(context.getResources().getString(R.string.message_pin_new))
                 .setPriority(Notification.PRIORITY_LOW)
                 .setOngoing(true)
                 .setAutoCancel(true)
@@ -44,9 +43,7 @@ public class BootReceiver extends BroadcastReceiver {
             defaultNotification.setVisibility(Notification.VISIBILITY_PUBLIC);
         }
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        if (sharedPreferences.getBoolean(MainActivity.PREF_SHOWNEWPIN, true))
+        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean(MainActivity.PREF_SHOWNEWPIN, true))
             notificationManager.notify(DEFAULT_NOTIFICATIONID, defaultNotification.build());
         else notificationManager.cancel(DEFAULT_NOTIFICATIONID);
     }

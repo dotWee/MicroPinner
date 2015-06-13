@@ -19,6 +19,7 @@ import de.dotwee.micropinner.tools.BootReceiver;
  */
 public class EditActivity extends AppCompatActivity implements View.OnClickListener {
     private final static String LOG_TAG = "EditActivity";
+    NotificationManager notificationManager;
     EditText editTextContent, editTextTitle;
     Button buttonCancel, buttonPin;
     TextView dialogTitle;
@@ -33,11 +34,17 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         dialogTitle = (TextView) findViewById(R.id.dialogTitle);
         dialogTitle.setText(getResources().getString(R.string.edit_name));
 
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
         receivedIntent = getIntent();
         sendBroadcast(new Intent(this, BootReceiver.class));
 
         buttonCancel = (Button) findViewById(R.id.buttonCancel);
         buttonCancel.setOnClickListener(this);
+
+        if (receivedIntent.getBooleanExtra(MainActivity.EXTRA_PERSISTENT, false)) {
+            buttonCancel.setText("Delete");
+        }
 
         buttonPin = (Button) findViewById(R.id.buttonPin);
         buttonPin.setOnClickListener(this);
@@ -67,15 +74,16 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             receivedIntent.putExtra(MainActivity.EXTRA_CONTENT, newContent);
             receivedIntent.putExtra(MainActivity.EXTRA_TITLE, newTitle);
 
-            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1), MainActivity.generatePin(
                     this,
                     receivedIntent.getIntExtra(MainActivity.EXTRA_VISIBILITY, 0), // get visibility from intent
                     receivedIntent.getIntExtra(MainActivity.EXTRA_PRIORITY, 0),
                     receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1),
                     newTitle,
-                    newContent
+                    newContent,
+                    receivedIntent.getBooleanExtra(MainActivity.EXTRA_PERSISTENT, false)
             ));
+            finish();
         }
     }
 
@@ -84,11 +92,12 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.buttonPin:
                 updatePin();
-                finish();
                 break;
 
             case R.id.buttonCancel:
-                finish();
+                if (receivedIntent.getBooleanExtra(MainActivity.EXTRA_PERSISTENT, false))
+                    notificationManager.cancel(receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1));
+                else finish();
                 break;
         }
     }

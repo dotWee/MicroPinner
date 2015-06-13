@@ -26,22 +26,23 @@ import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.tools.BootReceiver;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    public static final String EXTRA_VISIBILITY = "EXTRA_VISIBILITY", EXTRA_PRIORITY = "EXTRA_PRIORITY", EXTRA_TITLE = "EXTRA_TITLE", EXTRA_CONTENT = "EXTRA_CONTENT", EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION";
+    public static final String EXTRA_VISIBILITY = "EXTRA_VISIBILITY", EXTRA_PRIORITY = "EXTRA_PRIORITY", EXTRA_TITLE = "EXTRA_TITLE", EXTRA_CONTENT = "EXTRA_CONTENT", EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION", EXTRA_PERSISTENT = "EXTRA_PERSISTENT";
     public static final String PREF_FIRSTUSE = "pref_firstuse", PREF_SHOWNEWPIN = "pref_shownewpin";
     public static final String LOG_TAG = "MainActivity";
     public static final boolean DEBUG = true;
 
+    CheckBox checkBoxShowNewPin, checkBoxPersistentPin;
     Spinner spinnerVisibility, spinnerPriority;
     EditText editTextContent, editTextTitle;
     SharedPreferences sharedPreferences;
-    CheckBox checkBoxShowNewPin;
     Switch switchAdvanced;
     TextView dialogTitle;
 
-    public static Notification generatePin(Context context, int visibility, int priority, int id, String title, String content) {
+    public static Notification generatePin(Context context, int visibility, int priority, int id, String title, String content, boolean persistent) {
         Notification.Builder notification = new Notification.Builder(context)
                 .setContentTitle(title)
                 .setContentText(content)
+                .setOngoing(persistent)
                 .setPriority(priority)
                 .setSmallIcon(R.drawable.ic_star_24dp);
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         Intent resultIntent = new Intent(context, EditActivity.class);
+        resultIntent.putExtra(EXTRA_PERSISTENT, persistent);
         resultIntent.putExtra(EXTRA_NOTIFICATION, id);
         resultIntent.putExtra(EXTRA_CONTENT, content);
         resultIntent.putExtra(EXTRA_TITLE, title);
@@ -77,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkBoxShowNewPin = (CheckBox) findViewById(R.id.checkBoxNewPin);
         checkBoxShowNewPin.setChecked(sharedPreferences.getBoolean(MainActivity.PREF_SHOWNEWPIN, true));
         checkBoxShowNewPin.setOnClickListener(this);
+
+        checkBoxPersistentPin = (CheckBox) findViewById(R.id.checkBoxPersistentPin);
+        checkBoxPersistentPin.setOnClickListener(this);
 
         // declare buttons and edittexts
         findViewById(R.id.buttonCancel).setOnClickListener(this);
@@ -170,6 +175,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return editTextContent.getText().toString();
     }
 
+    public boolean _getPersistent() {
+        return checkBoxPersistentPin.isChecked();
+    }
+
     private void pinEntry() {
         String title = _getTitle();
         String content = _getContent();
@@ -182,16 +191,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else {
             if (DEBUG)
                 Log.i(LOG_TAG, "New pin: " + "\nTitle: " + title + "\nContent: " + content + "\nVisibility: " + _getVisibility() + "\nPriority: " + _getPriority());
-            notificationManager.notify(notificationID, generatePin(this, _getVisibility(), _getPriority(), notificationID, title, content));
+            notificationManager.notify(notificationID, generatePin(this, _getVisibility(), _getPriority(), notificationID, title, content, _getPersistent()));
             finish();
         }
     }
 
     private void switchAdvancedLayout(boolean expand) {
+        // TODO expand animation
+
         if (expand) {
             checkBoxShowNewPin.setVisibility(View.VISIBLE);
+            checkBoxPersistentPin.setVisibility(View.VISIBLE);
         } else {
             checkBoxShowNewPin.setVisibility(View.GONE);
+            checkBoxPersistentPin.setVisibility(View.GONE);
         }
     }
 

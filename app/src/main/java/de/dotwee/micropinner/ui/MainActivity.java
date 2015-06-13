@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText editTextContent, editTextTitle;
     SharedPreferences sharedPreferences;
     CheckBox checkBoxShowNewPin;
+    Switch switchAdvanced;
     TextView dialogTitle;
 
     public static Notification generatePin(Context context, int visibility, int priority, int id, String title, String content) {
@@ -80,6 +82,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.buttonCancel).setOnClickListener(this);
         findViewById(R.id.buttonPin).setOnClickListener(this);
 
+        // setup advanced-switch
+        switchAdvanced = (Switch) findViewById(R.id.switchAdvanced);
+        switchAdvanced.setOnClickListener(this);
+
         editTextContent = (EditText) findViewById(R.id.editTextContent);
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
 
@@ -88,6 +94,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // simulate device-boot by sending a new intent to @link BootReceiver.class
         sendBroadcast(new Intent(this, BootReceiver.class));
+
+        // hide advanced stuff
+        checkBoxShowNewPin.setChecked(false);
+        switchAdvancedLayout(false);
 
         // declare spinner
         spinnerPriority = (Spinner) findViewById(R.id.spinnerPriority);
@@ -177,6 +187,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void switchAdvancedLayout(boolean expand) {
+        if (expand) {
+            checkBoxShowNewPin.setVisibility(View.VISIBLE);
+        } else {
+            checkBoxShowNewPin.setVisibility(View.GONE);
+        }
+    }
+
     private int randomNotificationID() {
         int start = 1, end = 256;
 
@@ -199,6 +217,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.checkBoxNewPin:
                 sharedPreferences.edit().putBoolean(PREF_SHOWNEWPIN, checkBoxShowNewPin.isChecked()).apply();
                 sendBroadcast(new Intent(this, BootReceiver.class));
+                break;
+
+            case R.id.switchAdvanced:
+                if (switchAdvanced.isChecked()) switchAdvancedLayout(true);
+                else switchAdvancedLayout(false);
                 break;
         }
     }

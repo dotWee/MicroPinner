@@ -21,7 +21,7 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
 + **Open source**
     The complete source-code is available here on Github.
 + **Backwards compatible**  
-    Works on Android 4.1 and up.
+    Works on Android 4.1 and up. Lower than 4.1 breaks priority feature.
 + **Choosable priority**  
     Give your pin the priority you think it deserves.
 + **Editable pins**  
@@ -33,7 +33,6 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
     Hide your pin on the lockscreen by using Android 5's visibility-API: Choose between *public*, *private* and *secret*.
 
 ## Screenshots
-
 
 <img src="art/sc_new.png" height="400px"/>
 &nbsp;<img src="art/sc_new_used.png" height="400px"/>
@@ -51,10 +50,15 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
     - sha1 checksum: *3003cedb937a73f943e618c9f7cd3e82bc468e20*
     - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.1/release_v1.1.apk)
 
-2. Version: v1.2 (Fix non-working visibility & priority)
+3. Version: v1.2 (Fix non-working visibility & priority)
     - date: 12th June 2015
     - sha1 checksum: *a01095619f18e4d9f6b35065125e907f64246948*
     - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.2/release_v1.2.apk);
+
+4. Version: v1.3 (Reworked layout | German translation | new MIN-priority)
+    - date: *upcoming*
+    - sha1 checksum:
+    - download:
 
 ## Build
 
@@ -64,10 +68,12 @@ To build MicroPinner, simply import this project into Android Studio or IntelliJ
 
 ## Todo
 
++ Choosable notification color (sdk21+ only)
++ Choosable notification-category
++ Allow persistent pins
 + Implement image-pins
 + Choosable icon
-+ Choosable notification-category
-+ Choosable notification color (sdk21+ only)
++ Hide pin-icon
 
 ## License
 

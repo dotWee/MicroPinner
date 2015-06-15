@@ -68,12 +68,16 @@ To build MicroPinner, simply import this project into Android Studio or IntelliJ
 
 ## Todo
 
-+ Choosable notification color (sdk21+ only)
++ Choosable icon (not sure about including icons - that would increase the application size about 3kb per image)
++ Create a FAQ and a link inside the app
 + Choosable notification-category
-+ Allow persistent pins
++ Choosable notification color
++ Allow hiding the pin-icon
++ <del>Allow persistent pins</del> (implemented, will be available in next update)
++ <del>Implement min-priority</del> (implemented, will also be available in next update)
 + Implement image-pins
-+ Choosable icon
-+ Hide pin-icon
++ (Code) Documentation
++ Single-line pin
 
 ## License
 

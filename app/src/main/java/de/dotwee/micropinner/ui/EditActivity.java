@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +23,9 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private final static String LOG_TAG = "EditActivity";
     NotificationManager notificationManager;
     EditText editTextContent, editTextTitle;
+    CheckBox checkBoxPersistentPin;
     Button buttonCancel, buttonPin;
+    Switch switchAdvanced;
     TextView dialogTitle;
     Intent receivedIntent;
 
@@ -30,38 +34,46 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_main);
 
+        receivedIntent = getIntent();
+        sendBroadcast(new Intent(this, BootReceiver.class));
+
+        notificationManager = (NotificationManager)
+                getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // setup persistent checkbox
+        checkBoxPersistentPin = (CheckBox) findViewById(R.id.checkBoxPersistentPin);
+        checkBoxPersistentPin.setOnClickListener(this);
+
         // setup dialog title
         dialogTitle = (TextView) findViewById(R.id.dialogTitle);
         dialogTitle.setText(getResources().getString(R.string.edit_name));
 
-        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        receivedIntent = getIntent();
-        sendBroadcast(new Intent(this, BootReceiver.class));
+        // setup advanced-switch
+        switchAdvanced = (Switch) findViewById(R.id.switchAdvanced);
+        switchAdvanced.setOnClickListener(this);
 
+        // setup buttons
+        buttonPin = (Button) findViewById(R.id.buttonPin);
+        buttonPin.setOnClickListener(this);
         buttonCancel = (Button) findViewById(R.id.buttonCancel);
         buttonCancel.setOnClickListener(this);
 
-        if (receivedIntent.getBooleanExtra(MainActivity.EXTRA_PERSISTENT, false)) {
-            buttonCancel.setText("Delete");
-        }
+        restoreFromIntent();
+        switchAdvancedLayout(false);
+    }
 
-        buttonPin = (Button) findViewById(R.id.buttonPin);
-        buttonPin.setOnClickListener(this);
-
+    void restoreFromIntent() {
         editTextContent = (EditText) findViewById(R.id.editTextContent);
         editTextContent.setText(receivedIntent.getStringExtra(MainActivity.EXTRA_CONTENT));
 
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
         editTextTitle.setText(receivedIntent.getStringExtra(MainActivity.EXTRA_TITLE));
 
-        // hide spinner
-        findViewById(R.id.spinnerVisibility).setVisibility(View.GONE);
-        findViewById(R.id.spinnerPriority).setVisibility(View.GONE);
-
-        // hide description textviews
-        findViewById(R.id.textViewVisibility).setVisibility(View.GONE);
-        findViewById(R.id.textViewPriority).setVisibility(View.GONE);
+        if (receivedIntent.getBooleanExtra(MainActivity.EXTRA_PERSISTENT, false)) {
+            checkBoxPersistentPin.setChecked(true);
+            buttonCancel.setText("Delete");
+        }
     }
 
     void updatePin() {
@@ -81,15 +93,38 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                     receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1),
                     newTitle,
                     newContent,
-                    receivedIntent.getBooleanExtra(MainActivity.EXTRA_PERSISTENT, false)
+                    checkBoxPersistentPin.isChecked()
             ));
             finish();
+        }
+    }
+
+    private void switchAdvancedLayout(boolean expand) {
+        // TODO expand animation
+
+        if (expand) {
+            checkBoxPersistentPin.setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.checkBoxNewPin).setVisibility(View.GONE);
+            checkBoxPersistentPin.setVisibility(View.GONE);
+
+            // hide spinner
+            findViewById(R.id.spinnerVisibility).setVisibility(View.GONE);
+            findViewById(R.id.spinnerPriority).setVisibility(View.GONE);
+
+            // hide description textviews
+            findViewById(R.id.textViewVisibility).setVisibility(View.GONE);
+            findViewById(R.id.textViewPriority).setVisibility(View.GONE);
         }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.switchAdvanced:
+                switchAdvancedLayout(checkBoxPersistentPin.isChecked());
+                break;
+
             case R.id.buttonPin:
                 updatePin();
                 break;

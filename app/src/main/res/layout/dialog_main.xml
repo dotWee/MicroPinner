@@ -54,7 +54,8 @@
                     android:id="@+id/editTextTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Title" />
+                    android:hint="Title"
+                    android:inputType="textCapSentences|textAutoComplete|textImeMultiLine|textAutoCorrect|text|textMultiLine" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -92,7 +93,8 @@
                     android:id="@+id/editTextContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Content" />
+                    android:hint="Content"
+                    android:inputType="textCapSentences|textAutoComplete|textImeMultiLine|textAutoCorrect|text|textMultiLine" />
 
             </android.support.design.widget.TextInputLayout>
 

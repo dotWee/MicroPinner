@@ -132,7 +132,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.buttonCancel:
                 if (receivedIntent.getBooleanExtra(MainActivity.EXTRA_PERSISTENT, false))
                     notificationManager.cancel(receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1));
-                else finish();
+                finish();
                 break;
         }
     }

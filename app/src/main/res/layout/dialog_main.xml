@@ -21,8 +21,7 @@
             android:layout_height="match_parent"
             android:layout_column="0"
             android:layout_row="0"
-            android:gravity="center_vertical"
-            android:text="Dialog title" />
+            android:gravity="center_vertical" />
 
         <Switch
             android:id="@+id/switchAdvanced"
@@ -54,7 +53,7 @@
                     android:id="@+id/editTextTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Title"
+                    android:hint="@string/input_hint_title"
                     android:inputType="textCapSentences|textAutoComplete|textImeMultiLine|textAutoCorrect|text|textMultiLine" />
 
             </android.support.design.widget.TextInputLayout>
@@ -65,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="Visibility"
+                android:text="@string/input_description_visibility"
                 android:textColor="?attr/colorAccent" />
 
             <Spinner
@@ -93,7 +92,7 @@
                     android:id="@+id/editTextContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Content"
+                    android:hint="@string/input_hint_content"
                     android:inputType="textCapSentences|textAutoComplete|textImeMultiLine|textAutoCorrect|text|textMultiLine" />
 
             </android.support.design.widget.TextInputLayout>
@@ -104,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="Priority"
+                android:text="@string/input_description_priority"
                 android:textColor="?attr/colorAccent" />
 
             <Spinner
@@ -125,7 +124,7 @@
         android:layout_marginRight="@dimen/activity_margin"
         android:layout_marginTop="8dp"
         android:singleLine="true"
-        android:text="Show &quot;New Pin&quot; notification"
+        android:text="@string/input_description_shownewpin"
         android:textColor="@android:color/primary_text_dark" />
 
     <CheckBox
@@ -137,7 +136,7 @@
         android:layout_marginLeft="@dimen/activity_margin"
         android:layout_marginRight="@dimen/activity_margin"
         android:singleLine="true"
-        android:text="Make pin persistent"
+        android:text="@string/input_description_makepinpersistent"
         android:textColor="@android:color/primary_text_dark" />
 
     <RelativeLayout
@@ -153,7 +152,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="Pin" />
+            android:text="@string/dialog_action_pin" />
 
         <Button
             android:id="@+id/buttonCancel"
@@ -164,7 +163,7 @@
             android:layout_toLeftOf="@+id/buttonPin"
             android:layout_toStartOf="@+id/buttonPin"
             android:paddingRight="8dp"
-            android:text="Cancel" />
+            android:text="@string/dialog_action_cancel" />
 
     </RelativeLayout>
 

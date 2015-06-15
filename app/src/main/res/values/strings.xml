@@ -4,6 +4,18 @@
     <string name="main_name">New Pin</string>
     <string name="edit_name">Edit Pin</string>
 
+    <string name="input_description_priority">Priority</string>
+    <string name="input_description_visibility">Visibility</string>
+
+    <string name="input_description_shownewpin">Show &quot;New Pin&quot; notification</string>
+    <string name="input_description_makepinpersistent">Make pin persistent</string>
+
+    <string name="dialog_action_pin">Pin</string>
+    <string name="dialog_action_cancel">Cancel</string>
+
+    <string name="input_hint_title">Title</string>
+    <string name="input_hint_content">Content</string>
+
     <string name="message_visibility_unsupported">Hey! Seems like you are using a older Android Version, where the visibility-setting is unsupported.</string>
     <string name="message_empty_title">The title has to contain text.</string>
     <string name="message_pin_new">Click to pin something new.</string>

@@ -5,6 +5,18 @@
     <string name="main_name">Neuer Pin</string>
     <string name="edit_name">Bearbeite Pin</string>
 
+    <string name="input_description_priority">Priority</string>
+    <string name="input_description_visibility">Visibility</string>
+
+    <string name="input_description_shownewpin">Zeige 'Neuer Pin' Benachrichtigung</string>
+    <string name="input_description_makepinpersistent">Mache Pin permanent</string>
+
+    <string name="dialog_action_pin">Pin</string>
+    <string name="dialog_action_cancel">Abbrechen</string>
+
+    <string name="input_hint_title">Titel</string>
+    <string name="input_hint_content">Inhalt</string>
+
     <string name="message_visibility_unsupported">Hey! Sieht aus als verwendest du eine Android-Version, bei der die Sichtbarkein nicht unterstützt wird.</string>
     <string name="message_empty_title">Du musst einen Titel eingeben.</string>
     <string name="message_pin_new">Click um einen neuen Pin zu erstellen.</string>

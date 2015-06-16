@@ -42,16 +42,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Notification.Builder notification = new Notification.Builder(context)
                 .setContentTitle(title)
                 .setContentText(content)
-                .setSmallIcon(R.drawable.ic_star_24dp);
+                .setSmallIcon(R.drawable.ic_star_24dp)
+                .setPriority(priority)
+                .setOngoing(priority == Notification.PRIORITY_MIN);
 
         if (Build.VERSION.SDK_INT >= 21) {
             notification.setVisibility(visibility);
         }
-
-        if (persistent) {
-            notification.setPriority(Notification.PRIORITY_MIN);
-            notification.setOngoing(true);
-        } else notification.setPriority(priority);
 
         Intent resultIntent = new Intent(context, EditActivity.class);
         resultIntent.putExtra(EXTRA_PERSISTENT, persistent);

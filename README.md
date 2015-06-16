@@ -10,30 +10,30 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
 
 ## Features
 
-+ **Material Design aligned**  
-    Design follows the [Material Design Dialog](https://www.google.com/design/spec/components/dialogs.html#dialogs-specs) guidelines.
-+ **Lightweight**  
-    Weights deodexed less than 800kb.
-+ **Zero battery & memory impact**  
-    It won't drain your battery nor your memory. No background-services, no background-processes. Incase it does, tell your SystemUI she's a b**ch.
-+ **Backwards compatible**  
-    Works on Android 4.1 and up. Lower than 4.1 breaks priority feature.
++ **Material Design aligned**
+<br>    Design follows the [Material Design Dialog](https://www.google.com/design/spec/components/dialogs.html#dialogs-specs) guidelines.
++ **Lightweight**
+<br>    Weights deodexed less than 750kb.
++ **Zero battery & memory impact**
+<br>    It won't drain your battery nor your memory. No background-services, no background-processes. Incase it does, tell your SystemUI she's a b**ch.
++ **Backwards compatible**
+<br>    Works on Android 4.1 and up. Lower than 4.1 breaks priority feature.
 + **Permission free**
-    It will neither spy on your SMS's, nor call it's mothership over network.
-    It just want to know when your devices finished its boot-procress, to restore your pins.
+<br>    It will neither spy on your SMS's, nor call it's mothership over network.
+<br>    It just want to know when your devices finished its boot-procress, to restore your pins.
 + **Open source**
-    The whole source-code is available here on Github.
-+ **Persistent pins**
-    Declare your pins as persistent and delete them by clicking on them.
-+ **Choosable priority**  
-    Give your pin the priority you think it deserves.
-+ **Editable pins**  
-    Edit your pins easily by clicking on them.
+<br>    The whole source-code is available here on Github.
++ **Permanent pins**
+<br>    Declare your pins as permenent and delete them by clicking on them.
++ **Choosable priority**
+<br>    Give your pin the priority you think it deserves.
++ **Editable pins**
+<br>    Edit your pins easily by clicking on them.
 
 #### Android 5.+ only
 
-+ **Choosable visibility**  
-    Hide your pin on the lockscreen by using Android 5's visibility-API: Choose between *public*, *private* and *secret*.
++ **Choosable visibility**
+<br>    Hide your pin on the lockscreen by using Android 5's visibility-API: Choose between *public*, *private* and *secret*.
 
 ## Screenshots
 
@@ -46,22 +46,22 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
 1. Version: v1.0 (Initial release)
     - date: 11th June 2015
     - sha1 checksum: *ce67e91f42bca5d9d927f73c7d423071f887ad59*
-    - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.0/release_v1.0.apk)
+    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.0/release_v1.0.apk)
 
 2. Version: v1.1 (Disallow empty titles and let user decide if he wants to see the "new pin"-notification)
     - date: 12th June 2015
     - sha1 checksum: *3003cedb937a73f943e618c9f7cd3e82bc468e20*
-    - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.1/release_v1.1.apk)
+    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.1/release_v1.1.apk)
 
 3. Version: v1.2 (Fix non-working visibility & priority)
     - date: 12th June 2015
     - sha1 checksum: *a01095619f18e4d9f6b35065125e907f64246948*
-    - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.2/release_v1.2.apk);
+    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.2/release_v1.2.apk);
 
-4. Version: v1.3 (Reworked layout | German translation | MIN-priority | Persistent pins | Auto-capitalization)
-    - date: *upcoming*
-    - sha1 checksum:
-    - download:
+4. Version: v1.3 (Reworked layout | German translation | MIN-priority | Persistent pins | Auto-capitalization | Hideable pin icon (you need to set the priority to min!))
+    - date: 16th June 2015
+    - sha1 checksum: *885f8ac5dfbf3ceabc1d6b37526ffc9b85b3d0cd*
+    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.3/release_v1.3.apk)
 
 ## Questions / Issues / Bugs
 
@@ -78,7 +78,7 @@ To compile MicroPinner, simply import this project into Android Studio or Intell
 + Create a FAQ and a link inside the app
 + Choosable notification-category
 + Choosable notification color
-+ Allow hiding the pin-icon
++ <del>Allow hiding the pin-icon</del> (implemented, simply set the priority to 'min')
 + <del>Allow persistent pins</del> (implemented, will be available in next update)
 + <del>Implement min-priority</del> (implemented, will also be available in next update)
 + Implement image-pins

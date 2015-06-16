@@ -69,7 +69,7 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
 5. Version: v1.4 (Fast fix for multiple persistent notifications)
     - date: 16th June 2015
     - sha1 checksum: *0b95003458962e9124f460ded4b33cbaf2f930fd*
-    - direct download:
+    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.4/release_v1.4.apk)
 
 ## Questions / Issues / Bugs
 

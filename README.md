@@ -41,6 +41,9 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
 &nbsp;<img src="art/sc_new_used.png" height="400px"/>
 &nbsp;<img src="art/sc_edit.png" height="400px"/>
 
+<img src="art/sc_example.png" height="400px"/>
+&nbsp;<img src="art/sc_example_min.png" height="400px"/>
+
 ## Changelog
 
 1. Version: v1.0 (Initial release)

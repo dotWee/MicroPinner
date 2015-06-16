@@ -102,9 +102,9 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private void switchAdvancedLayout(boolean expand) {
         // TODO expand animation
 
-        if (expand) {
-            checkBoxPersistentPin.setVisibility(View.VISIBLE);
-        } else {
+        if (expand) checkBoxPersistentPin.setVisibility(View.VISIBLE);
+
+        else {
             findViewById(R.id.checkBoxNewPin).setVisibility(View.GONE);
             checkBoxPersistentPin.setVisibility(View.GONE);
 
@@ -122,7 +122,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.switchAdvanced:
-                switchAdvancedLayout(checkBoxPersistentPin.isChecked());
+                switchAdvancedLayout(switchAdvanced.isChecked());
                 break;
 
             case R.id.buttonPin:

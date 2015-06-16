@@ -44,14 +44,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setContentText(content)
                 .setSmallIcon(R.drawable.ic_star_24dp)
                 .setPriority(priority)
-                .setOngoing(priority == Notification.PRIORITY_MIN);
+                .setOngoing(priority == Notification.PRIORITY_MIN | persistent);
 
         if (Build.VERSION.SDK_INT >= 21) {
             notification.setVisibility(visibility);
         }
 
         Intent resultIntent = new Intent(context, EditActivity.class);
-        resultIntent.putExtra(EXTRA_PERSISTENT, persistent);
+
+        resultIntent.putExtra(EXTRA_PERSISTENT, priority == Notification.PRIORITY_MIN | persistent);
         resultIntent.putExtra(EXTRA_NOTIFICATION, id);
         resultIntent.putExtra(EXTRA_CONTENT, content);
         resultIntent.putExtra(EXTRA_TITLE, title);

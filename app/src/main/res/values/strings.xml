@@ -12,6 +12,7 @@
 
     <string name="dialog_action_pin">Pin</string>
     <string name="dialog_action_cancel">Cancel</string>
+    <string name="dialog_action_delete">Delete</string>
 
     <string name="input_hint_title">Title</string>
     <string name="input_hint_content">Content</string>

@@ -72,7 +72,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
         if (receivedIntent.getBooleanExtra(MainActivity.EXTRA_PERSISTENT, false)) {
             checkBoxPersistentPin.setChecked(true);
-            buttonCancel.setText("Delete");
+            buttonCancel.setText(getResources().getString(R.string.dialog_action_delete));
         }
     }
 
@@ -81,7 +81,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         String newTitle = editTextTitle.getText().toString();
 
         if (newTitle.equalsIgnoreCase("") | newTitle.equalsIgnoreCase(null))
-            Toast.makeText(this, "The title has to contain text.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.message_empty_title), Toast.LENGTH_SHORT).show();
         else {
             receivedIntent.putExtra(MainActivity.EXTRA_CONTENT, newContent);
             receivedIntent.putExtra(MainActivity.EXTRA_TITLE, newTitle);

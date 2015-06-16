@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resultIntent.putExtra(EXTRA_VISIBILITY, visibility);
         resultIntent.putExtra(EXTRA_PRIORITY, priority);
 
-        notification.setContentIntent(PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+        notification.setContentIntent(PendingIntent.getActivity(context, id, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
         return notification.build();
     }

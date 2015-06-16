@@ -1,19 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MainWrapper"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:animateLayoutChanges="true"
-    android:orientation="vertical"
-    android:paddingTop="@dimen/activity_margin"
-    android:theme="@style/DialogTheme"
+    android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/title_padding_bottom"
-        android:paddingLeft="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin">
+    <GridLayout style="@style/DialogHeader">
 
         <TextView
             android:id="@+id/dialogTitle"
@@ -33,22 +25,16 @@
 
     </GridLayout>
 
-    <LinearLayout
-        android:layout_width="275dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin">
+    <TableLayout style="@style/DialogContent.Table">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.45"
-            android:orientation="vertical">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_column="0">
 
                 <EditText
                     android:id="@+id/editTextTitle"
@@ -59,35 +45,10 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <TextView
-                android:id="@+id/textViewVisibility"
-                style="@style/TextAppearance.AppCompat.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="@string/input_description_visibility"
-                android:textColor="?attr/colorAccent" />
-
-            <Spinner
-                android:id="@+id/spinnerVisibility"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <Space
-            android:layout_width="8dp"
-            android:layout_height="match_parent" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.45"
-            android:orientation="vertical">
-
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_column="1">
 
                 <EditText
                     android:id="@+id/editTextContent"
@@ -97,77 +58,75 @@
                     android:inputType="textCapSentences|textAutoComplete|textImeMultiLine|textAutoCorrect|text|textMultiLine" />
 
             </android.support.design.widget.TextInputLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textViewVisibility"
+                style="@style/DialogText.Description"
+                android:layout_column="0"
+                android:text="@string/input_description_visibility" />
 
             <TextView
                 android:id="@+id/textViewPriority"
-                style="@style/TextAppearance.AppCompat.Small"
-                android:layout_width="wrap_content"
+                style="@style/DialogText.Description"
+                android:layout_column="1"
+                android:text="@string/input_description_priority" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/spinnerVisibility"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="@string/input_description_priority"
-                android:textColor="?attr/colorAccent" />
+                android:layout_column="0" />
 
             <Spinner
                 android:id="@+id/spinnerPriority"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_column="1" />
+        </TableRow>
+    </TableLayout>
 
-        </LinearLayout>
+    <LinearLayout
+        style="@style/DialogContent.List"
+        android:animateLayoutChanges="true">
+
+        <CheckBox
+            android:id="@+id/checkBoxNewPin"
+            style="@style/DialogText.CheckBox"
+            android:text="@string/input_description_shownewpin" />
+
+        <CheckBox
+            android:id="@+id/checkBoxPersistentPin"
+            style="@style/DialogText.CheckBox"
+            android:text="@string/input_description_makepinpersistent" />
 
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/checkBoxNewPin"
-        style="@style/TextAppearance.AppCompat.Small"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_margin"
-        android:layout_marginRight="@dimen/activity_margin"
-        android:layout_marginTop="8dp"
-        android:animateLayoutChanges="true"
-        android:singleLine="true"
-        android:text="@string/input_description_shownewpin"
-        android:textColor="@android:color/primary_text_dark" />
-
-    <CheckBox
-        android:id="@+id/checkBoxPersistentPin"
-        style="@style/TextAppearance.AppCompat.Small"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="@dimen/activity_margin"
-        android:layout_marginRight="@dimen/activity_margin"
-        android:animateLayoutChanges="true"
-        android:singleLine="true"
-        android:text="@string/input_description_makepinpersistent"
-        android:textColor="@android:color/primary_text_dark" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
-
-        <Button
-            android:id="@+id/buttonPin"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="64dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/dialog_action_pin" />
+    <LinearLayout style="@style/DialogFooter">
 
         <Button
             android:id="@+id/buttonCancel"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/DialogButtons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/buttonPin"
-            android:layout_toStartOf="@+id/buttonPin"
-            android:paddingRight="8dp"
             android:text="@string/dialog_action_cancel" />
 
-    </RelativeLayout>
+        <Button
+            android:id="@+id/buttonPin"
+            style="@style/DialogButtons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_action_pin" />
+
+    </LinearLayout>
 
 </LinearLayout>

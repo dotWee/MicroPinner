@@ -9,4 +9,76 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="MainWrapper">
+        <item name="android:animateLayoutChanges">true</item>
+        <item name="android:theme">@style/DialogTheme</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="DialogHeader">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <style name="DialogContent">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+
+        <item name="android:paddingBottom">16dp</item>
+
+        <item name="android:minWidth">256dp</item>
+        <item name="android:maxWidth">384dp</item>
+    </style>
+
+    <style name="DialogContent.Table">
+        <item name="android:stretchColumns">0,1</item>
+    </style>
+
+    <style name="DialogContent.List">
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingBottom">0dp</item>
+    </style>
+
+    <style name="DialogText" parent="TextAppearance.AppCompat.Small" />
+
+    <style name="DialogText.CheckBox">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+
+        <item name="android:singleLine">true</item>
+        <item name="android:animateLayoutChanges">true</item>
+        <item name="android:textColor">@android:color/primary_text_dark</item>
+    </style>
+
+    <style name="DialogText.Description">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">?attr/colorAccent</item>
+        <item name="android:padding">8dp</item>
+
+    </style>
+
+    <style name="DialogFooter">
+        <item name="android:gravity">end</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:animateLayoutChanges">true</item>
+    </style>
+
+    <style name="DialogButtons" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:animateLayoutChanges">true</item>
+        <item name="android:minWidth">64dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
 </resources>

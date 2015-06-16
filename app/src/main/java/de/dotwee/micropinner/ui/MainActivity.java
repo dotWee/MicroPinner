@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private int randomNotificationID() {
-        int start = 1, end = 256;
+        int start = 1, end = Integer.MAX_VALUE;
 
         return new Random().nextInt(end - start + 1) + start;
     }

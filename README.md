@@ -11,17 +11,20 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
 ## Features
 
 + **Material Design aligned**  
-    Design follows the Material Design Dialog guidelines.
+    Design follows the [Material Design Dialog](https://www.google.com/design/spec/components/dialogs.html#dialogs-specs) guidelines.
 + **Lightweight**  
-    Weights deodexed less than a single megabyte.
+    Weights deodexed less than 800kb.
 + **Zero battery & memory impact**  
-    It won't drain your battery nor your memory. No background-services, no background-processes. Incase it does, your SystemUI is a b**ch.
-+ **Permission free** (almost)
-    It will neither spy on your SMS's, nor call it's mothership over network. It just want to know when your devices finished its boot-procress, to restore your pins.
-+ **Open source**
-    The complete source-code is available here on Github.
+    It won't drain your battery nor your memory. No background-services, no background-processes. Incase it does, tell your SystemUI she's a b**ch.
 + **Backwards compatible**  
     Works on Android 4.1 and up. Lower than 4.1 breaks priority feature.
++ **Permission free**
+    It will neither spy on your SMS's, nor call it's mothership over network.
+    It just want to know when your devices finished its boot-procress, to restore your pins.
++ **Open source**
+    The whole source-code is available here on Github.
++ **Persistent pins**
+    Declare your pins as persistent and delete them by clicking on them.
 + **Choosable priority**  
     Give your pin the priority you think it deserves.
 + **Editable pins**  
@@ -55,16 +58,19 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
     - sha1 checksum: *a01095619f18e4d9f6b35065125e907f64246948*
     - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.2/release_v1.2.apk);
 
-4. Version: v1.3 (Reworked layout | German translation | new MIN-priority | Allow persistent pins | Enable auto-capitalization)
+4. Version: v1.3 (Reworked layout | German translation | MIN-priority | Persistent pins | Auto-capitalization)
     - date: *upcoming*
     - sha1 checksum:
     - download:
 
+## Questions / Issues / Bugs
+
+Please check the [FAQ](/docs/FAQ.md) first.
+
 ## Build
 
 This project is developed using JetBrain's IntelliJ IDEA 14.1 and the latest Gradle-wrapper.
-
-To build MicroPinner, simply import this project into Android Studio or IntelliJ IDEA.
+To compile MicroPinner, simply import this project into Android Studio or IntelliJ IDEA and press the build-button.
 
 ## Todo
 

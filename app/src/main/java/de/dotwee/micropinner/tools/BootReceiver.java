@@ -33,11 +33,12 @@ public class BootReceiver extends BroadcastReceiver {
                 .setContentTitle(context.getResources().getString(R.string.main_name))
                 .setContentText(context.getResources().getString(R.string.message_pin_new))
                 .setPriority(Notification.PRIORITY_LOW)
-                .setShowWhen(false)
                 .setOngoing(true)
                 .setAutoCancel(true)
                 .setContentIntent(mainPendingIntent)
                 .setSmallIcon(R.drawable.ic_pin_24dp);
+
+        if (Build.VERSION.SDK_INT >= 17) defaultNotification.setShowWhen(false);
 
         if (Build.VERSION.SDK_INT >= 21) {
             defaultNotification.setColor(context.getResources().getColor(R.color.accent));

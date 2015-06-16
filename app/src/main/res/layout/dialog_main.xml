@@ -38,10 +38,8 @@
 
                 <EditText
                     android:id="@+id/editTextTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/input_hint_title"
-                    android:inputType="textCapSentences|textAutoComplete|textImeMultiLine|textAutoCorrect|text|textMultiLine" />
+                    style="@style/DialogInput.EditText"
+                    android:hint="@string/input_hint_title" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -52,10 +50,8 @@
 
                 <EditText
                     android:id="@+id/editTextContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/input_hint_content"
-                    android:inputType="textCapSentences|textAutoComplete|textImeMultiLine|textAutoCorrect|text|textMultiLine" />
+                    style="@style/DialogInput.EditText"
+                    android:hint="@string/input_hint_content" />
 
             </android.support.design.widget.TextInputLayout>
         </TableRow>

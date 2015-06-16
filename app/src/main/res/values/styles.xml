@@ -25,6 +25,18 @@
         <item name="android:paddingBottom">12dp</item>
     </style>
 
+    <style name="DialogInput" />
+
+    <style name="DialogInput.EditText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+
+        <item name="android:maxWidth">128dp</item>
+        <item name="android:inputType">
+            textCapSentences|textAutoComplete|textImeMultiLine|textAutoCorrect|text|textMultiLine
+        </item>
+    </style>
+
     <style name="DialogContent">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>

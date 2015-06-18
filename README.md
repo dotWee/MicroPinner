@@ -83,15 +83,15 @@ To compile MicroPinner, simply import this project into Android Studio or Intell
 ## Todo
 
 + Choosable icon (not sure about including icons - that would increase the application size about 3kb per image)
-+ Create a FAQ and a link inside the app
++ <del>Create a FAQ<del> ([here](/docs/FAQ.md)) and a link inside the app
 + Choosable notification-category
 + Choosable notification color
-+ <del>Allow hiding the pin-icon</del> (implemented, simply set the priority to 'min')
-+ <del>Allow persistent pins</del> (implemented, will be available in next update)
-+ <del>Implement min-priority</del> (implemented, will also be available in next update)
++ <del>Allow hiding the pin-icon</del> (implemented, available since v1.4 - simply set the priority to 'min')
++ <del>Allow persistent pins</del> (implemented, available since v1.4)
++ <del>Implement min-priority</del> (implemented, available since v1.4)
 + Implement image-pins
 + (Code) Documentation
-+ Single-line pin
++ Single-line pin (in progress but help needed, check issue #2)
 
 ## License
 

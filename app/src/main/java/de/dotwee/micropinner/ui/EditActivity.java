@@ -86,7 +86,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             receivedIntent.putExtra(MainActivity.EXTRA_CONTENT, newContent);
             receivedIntent.putExtra(MainActivity.EXTRA_TITLE, newTitle);
 
-            notificationManager.notify(receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1), MainActivity.generatePin(
+            MainActivity.generatePin(
                     this,
                     receivedIntent.getIntExtra(MainActivity.EXTRA_VISIBILITY, 0), // get visibility from intent
                     receivedIntent.getIntExtra(MainActivity.EXTRA_PRIORITY, 0),
@@ -94,7 +94,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                     newTitle,
                     newContent,
                     checkBoxPersistentPin.isChecked()
-            ));
+            );
             finish();
         }
     }

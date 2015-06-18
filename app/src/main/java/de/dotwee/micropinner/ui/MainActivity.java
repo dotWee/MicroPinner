@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RemoteViews;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -38,10 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Switch switchAdvanced;
     TextView dialogTitle;
 
-    public static Notification generatePin(Context context, int visibility, int priority, int id, String title, String content, boolean persistent) {
+    public static void generatePin(Context context, int visibility, int priority, int id, String title, String content, boolean persistent) {
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+
         Notification.Builder notification = new Notification.Builder(context)
-                .setContentTitle(title)
-                .setContentText(content)
                 .setSmallIcon(R.drawable.ic_star_24dp)
                 .setPriority(priority)
                 .setOngoing(priority == Notification.PRIORITY_MIN | persistent);
@@ -61,8 +62,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resultIntent.putExtra(EXTRA_PRIORITY, priority);
 
         notification.setContentIntent(PendingIntent.getActivity(context, id, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+        Notification finishedNotification = null;
 
-        return notification.build();
+        if (content.equalsIgnoreCase("") | content.equalsIgnoreCase(null)) {
+            RemoteViews singleLineView = new RemoteViews(context.getPackageName(), R.layout.singleline_notification);
+            singleLineView.setTextViewText(R.id.title, title);
+
+            Notification notificationBuilt = notification.build();
+            notificationBuilt.contentView = singleLineView;
+            finishedNotification = notificationBuilt;
+            Log.i(LOG_TAG, "Use singleline layout");
+        } else {
+            notification.setContentText(content);
+            notification.setContentTitle(title);
+
+            finishedNotification = notification.build();
+        }
+
+        notificationManager.notify(id, finishedNotification);
     }
 
     @Override
@@ -184,7 +201,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String title = _getTitle();
         String content = _getContent();
         int notificationID = randomNotificationID();
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         if (title.equalsIgnoreCase("") | title.equalsIgnoreCase(null))
             Toast.makeText(this, getResources().getText(R.string.message_empty_title), Toast.LENGTH_SHORT).show();
@@ -192,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else {
             if (DEBUG)
                 Log.i(LOG_TAG, "New pin: " + "\nTitle: " + title + "\nContent: " + content + "\nVisibility: " + _getVisibility() + "\nPriority: " + _getPriority());
-            notificationManager.notify(notificationID, generatePin(this, _getVisibility(), _getPriority(), notificationID, title, content, _getPersistent()));
+            generatePin(this, _getVisibility(), _getPriority(), notificationID, title, content, _getPersistent());
             finish();
         }
     }

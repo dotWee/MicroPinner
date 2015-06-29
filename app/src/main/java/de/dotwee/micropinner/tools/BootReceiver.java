@@ -48,6 +48,8 @@ public class BootReceiver extends BroadcastReceiver {
         if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean(MainActivity.PREF_SHOWNEWPIN, true))
             notificationManager.notify(DEFAULT_NOTIFICATIONID, defaultNotification.build());
         else notificationManager.cancel(DEFAULT_NOTIFICATIONID);
+
+        new JsonHandler(context).restorePins();
     }
 
 }

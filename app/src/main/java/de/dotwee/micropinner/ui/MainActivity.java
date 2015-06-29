@@ -24,6 +24,8 @@ import java.util.Random;
 
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.tools.BootReceiver;
+import de.dotwee.micropinner.tools.DeleteReceiver;
+import de.dotwee.micropinner.tools.JsonHandler;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_VISIBILITY = "EXTRA_VISIBILITY", EXTRA_PRIORITY = "EXTRA_PRIORITY", EXTRA_TITLE = "EXTRA_TITLE", EXTRA_CONTENT = "EXTRA_CONTENT", EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION", EXTRA_PERSISTENT = "EXTRA_PERSISTENT";
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setContentText(content)
                 .setSmallIcon(R.drawable.ic_star_24dp)
                 .setPriority(priority)
+                .setDeleteIntent(PendingIntent.getBroadcast(context, id, new Intent(context, DeleteReceiver.class).setAction("notification_cancelled").putExtra(MainActivity.EXTRA_NOTIFICATION, id), PendingIntent.FLAG_CANCEL_CURRENT))
                 .setOngoing(priority == Notification.PRIORITY_MIN | persistent);
 
         if (Build.VERSION.SDK_INT >= 21) {
@@ -61,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resultIntent.putExtra(EXTRA_PRIORITY, priority);
 
         notification.setContentIntent(PendingIntent.getActivity(context, id, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+
+        JsonHandler jsonHandler = new JsonHandler(context);
+        jsonHandler.editJsonArray(jsonHandler.genPinObject(title, content, visibility, priority, persistent, id));
 
         return notification.build();
     }

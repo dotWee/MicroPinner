@@ -102,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sendBroadcast(new Intent(this, BootReceiver.class));
 
         // hide advanced stuff
-        checkBoxShowNewPin.setChecked(false);
         switchAdvancedLayout(false);
 
         // declare spinner

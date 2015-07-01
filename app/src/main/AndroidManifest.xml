@@ -27,13 +27,15 @@
             android:label="@string/edit_name"
             android:theme="@style/DialogTheme" />
 
-        <receiver android:name=".tools.BootReceiver">
+        <receiver android:name=".tools.OnDeleteReceiver"/>
+
+        <receiver
+            android:name=".tools.OnBootReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="ANDROID.INTENT.ACTION.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-        <receiver android:name=".tools.DeleteReceiver" />
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.ui.MainActivity;
@@ -16,12 +17,15 @@ import de.dotwee.micropinner.ui.MainActivity;
 /**
  * Created by Lukas on 09.06.2015.
  */
-public class BootReceiver extends BroadcastReceiver {
-    private final static String LOG_TAG = "BootReceiver";
+public class OnBootReceiver extends BroadcastReceiver {
+    private final static String LOG_TAG = "OnBootReceiver";
     private final static int DEFAULT_NOTIFICATIONID = 0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.i(LOG_TAG, "Received boot-intent. Restoring pins...");
+        new JsonHandler(context).restore();
+
         Intent mainIntent = new Intent(context, MainActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(MainActivity.class);
@@ -48,8 +52,6 @@ public class BootReceiver extends BroadcastReceiver {
         if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean(MainActivity.PREF_SHOWNEWPIN, true))
             notificationManager.notify(DEFAULT_NOTIFICATIONID, defaultNotification.build());
         else notificationManager.cancel(DEFAULT_NOTIFICATIONID);
-
-        new JsonHandler(context).restorePins();
     }
 
 }

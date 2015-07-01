@@ -23,9 +23,9 @@ import android.widget.Toast;
 import java.util.Random;
 
 import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.tools.BootReceiver;
-import de.dotwee.micropinner.tools.DeleteReceiver;
 import de.dotwee.micropinner.tools.JsonHandler;
+import de.dotwee.micropinner.tools.OnBootReceiver;
+import de.dotwee.micropinner.tools.OnDeleteReceiver;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_VISIBILITY = "EXTRA_VISIBILITY", EXTRA_PRIORITY = "EXTRA_PRIORITY", EXTRA_TITLE = "EXTRA_TITLE", EXTRA_CONTENT = "EXTRA_CONTENT", EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION", EXTRA_PERSISTENT = "EXTRA_PERSISTENT";
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setContentText(content)
                 .setSmallIcon(R.drawable.ic_star_24dp)
                 .setPriority(priority)
-                .setDeleteIntent(PendingIntent.getBroadcast(context, id, new Intent(context, DeleteReceiver.class).setAction("notification_cancelled").putExtra(MainActivity.EXTRA_NOTIFICATION, id), PendingIntent.FLAG_CANCEL_CURRENT))
+                .setDeleteIntent(PendingIntent.getBroadcast(context, id, new Intent(context, OnDeleteReceiver.class).setAction("notification_cancelled").putExtra(MainActivity.EXTRA_NOTIFICATION, id), PendingIntent.FLAG_CANCEL_CURRENT))
                 .setOngoing(priority == Notification.PRIORITY_MIN | persistent);
 
         if (Build.VERSION.SDK_INT >= 21) {
@@ -64,9 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resultIntent.putExtra(EXTRA_PRIORITY, priority);
 
         notification.setContentIntent(PendingIntent.getActivity(context, id, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-
-        JsonHandler jsonHandler = new JsonHandler(context);
-        jsonHandler.editJsonArray(jsonHandler.genPinObject(title, content, visibility, priority, persistent, id));
+        new JsonHandler(context).append(title, content, visibility, priority, persistent, id);
 
         return notification.build();
     }
@@ -75,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_main);
+        new JsonHandler(this).restore();
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -104,8 +103,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // set focus to the title input
         editTextTitle.performClick();
 
-        // simulate device-boot by sending a new intent to @link BootReceiver.class
-        sendBroadcast(new Intent(this, BootReceiver.class));
+        // simulate device-boot by sending a new intent to @link OnBootReceiver.class
+        sendBroadcast(new Intent(this, OnBootReceiver.class));
 
         // hide advanced stuff
         checkBoxShowNewPin.setChecked(false);
@@ -236,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.checkBoxNewPin:
                 sharedPreferences.edit().putBoolean(PREF_SHOWNEWPIN, checkBoxShowNewPin.isChecked()).apply();
-                sendBroadcast(new Intent(this, BootReceiver.class));
+                sendBroadcast(new Intent(this, OnBootReceiver.class));
                 break;
 
             case R.id.switchAdvanced:

@@ -14,7 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.tools.BootReceiver;
+import de.dotwee.micropinner.tools.JsonHandler;
+import de.dotwee.micropinner.tools.OnBootReceiver;
 
 /**
  * Created by Lukas on 09.06.2015.
@@ -35,7 +36,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.dialog_main);
 
         receivedIntent = getIntent();
-        sendBroadcast(new Intent(this, BootReceiver.class));
+        sendBroadcast(new Intent(this, OnBootReceiver.class));
 
         notificationManager = (NotificationManager)
                 getSystemService(Context.NOTIFICATION_SERVICE);
@@ -95,6 +96,13 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                     newContent,
                     checkBoxPersistentPin.isChecked()
             ));
+
+            new JsonHandler(this).edit(newTitle,
+                                       newContent,
+                                       receivedIntent.getIntExtra(MainActivity.EXTRA_VISIBILITY, 0),
+                                       receivedIntent.getIntExtra(MainActivity.EXTRA_PRIORITY, 0),
+                                       checkBoxPersistentPin.isChecked(), receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1)
+            );
             finish();
         }
     }

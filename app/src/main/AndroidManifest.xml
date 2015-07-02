@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.dotwee.micropinner">
+<manifest package="de.dotwee.micropinner"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -27,7 +27,11 @@
             android:label="@string/edit_name"
             android:theme="@style/DialogTheme" />
 
-        <receiver android:name=".tools.BootReceiver">
+        <receiver android:name=".tools.OnDeleteReceiver"/>
+
+        <receiver
+            android:name=".tools.OnBootReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="ANDROID.INTENT.ACTION.BOOT_COMPLETED" />
             </intent-filter>

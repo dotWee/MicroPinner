@@ -103,11 +103,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // set focus to the title input
         editTextTitle.performClick();
 
-        // simulate device-boot by sending a new intent to @link OnBootReceiver.class
+        // simulate device-boot by sending a new intent to class OnBootReceiver
         sendBroadcast(new Intent(this, OnBootReceiver.class));
 
         // hide advanced stuff
-        checkBoxShowNewPin.setChecked(false);
         switchAdvancedLayout(false);
 
         // declare spinner

@@ -23,6 +23,9 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
 <br>    It just want to know when your devices finished its boot-procress, to restore your pins.
 + **Open source**
 <br>    The whole source-code is available here on Github.
++ **Restore functions**
+<br>    Pins are saved until you swipe them away.
+<br>    To restore your pins for example after a reboot, simply open the dialog.
 + **Permanent pins**
 <br>    Declare your pins as permenent and delete them by clicking on them.
 + **Choosable priority**
@@ -69,6 +72,11 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
 5. Version: v1.4 (Fast fix for multiple persistent notifications)
     - date: 16th June 2015
     - sha1 checksum: *0b95003458962e9124f460ded4b33cbaf2f930fd*
+    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.4/release_v1.4.apk)
+
+6. Version: v1.5 (Implemented restore-functions)
+    - date: 02nd July 2015
+    - sha1 checksum: *52a5266009413e13e1228a7166e1b6523bd094ca*
     - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.4/release_v1.4.apk)
 
 ## Questions / Issues / Bugs

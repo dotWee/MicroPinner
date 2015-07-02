@@ -77,7 +77,7 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
 6. Version: v1.5 (Implemented restore-functions)
     - date: 02nd July 2015
     - sha1 checksum: *52a5266009413e13e1228a7166e1b6523bd094ca*
-    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.4/release_v1.4.apk)
+    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.5/release_v1.5.apk)
 
 ## Questions / Issues / Bugs
 

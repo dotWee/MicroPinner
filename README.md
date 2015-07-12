@@ -79,6 +79,11 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
     - sha1 checksum: *52a5266009413e13e1228a7166e1b6523bd094ca*
     - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.5/release_v1.5.apk)
 
+7. Version: 1.5.1 (Declare pin-restoring as experimental and add option to enable/disable)
+    - date: 12th July 2015
+    - sha1 checksum: *865fcfade343ef77bf1a93445feaa36df117fe6b*
+    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.5.1/release_v1.5.1.apk)
+
 ## Questions / Issues / Bugs
 
 Please check the [FAQ](/docs/FAQ.md) first.

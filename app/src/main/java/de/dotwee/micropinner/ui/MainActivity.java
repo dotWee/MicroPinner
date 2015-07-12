@@ -29,11 +29,11 @@ import de.dotwee.micropinner.tools.OnDeleteReceiver;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_VISIBILITY = "EXTRA_VISIBILITY", EXTRA_PRIORITY = "EXTRA_PRIORITY", EXTRA_TITLE = "EXTRA_TITLE", EXTRA_CONTENT = "EXTRA_CONTENT", EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION", EXTRA_PERSISTENT = "EXTRA_PERSISTENT";
-    public static final String PREF_FIRSTUSE = "pref_firstuse", PREF_SHOWNEWPIN = "pref_shownewpin";
+    public static final String PREF_FIRSTUSE = "pref_firstuse", PREF_SHOWNEWPIN = "pref_shownewpin", PREF_ENABLERESTORE = "pref_enablerestore";
     public static final String LOG_TAG = "MainActivity";
     public static final boolean DEBUG = true;
 
-    CheckBox checkBoxShowNewPin, checkBoxPersistentPin;
+    CheckBox checkBoxShowNewPin, checkBoxPersistentPin, checkBoxEnableRestore;
     Spinner spinnerVisibility, spinnerPriority;
     EditText editTextContent, editTextTitle;
     SharedPreferences sharedPreferences;
@@ -85,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkBoxShowNewPin = (CheckBox) findViewById(R.id.checkBoxNewPin);
         checkBoxShowNewPin.setChecked(sharedPreferences.getBoolean(MainActivity.PREF_SHOWNEWPIN, true));
         checkBoxShowNewPin.setOnClickListener(this);
+
+        checkBoxEnableRestore = (CheckBox) findViewById(R.id.checkBoxEnableRestore);
+        checkBoxEnableRestore.setOnClickListener(this);
 
         checkBoxPersistentPin = (CheckBox) findViewById(R.id.checkBoxPersistentPin);
         checkBoxPersistentPin.setOnClickListener(this);
@@ -207,9 +210,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (expand) {
             checkBoxShowNewPin.setVisibility(View.VISIBLE);
             checkBoxPersistentPin.setVisibility(View.VISIBLE);
+            checkBoxEnableRestore.setVisibility(View.VISIBLE);
         } else {
             checkBoxShowNewPin.setVisibility(View.GONE);
             checkBoxPersistentPin.setVisibility(View.GONE);
+            checkBoxEnableRestore.setVisibility(View.GONE);
         }
     }
 
@@ -235,6 +240,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.checkBoxNewPin:
                 sharedPreferences.edit().putBoolean(PREF_SHOWNEWPIN, checkBoxShowNewPin.isChecked()).apply();
                 sendBroadcast(new Intent(this, OnBootReceiver.class));
+                break;
+
+            case R.id.checkBoxEnableRestore:
+                sharedPreferences.edit().putBoolean(PREF_ENABLERESTORE, checkBoxEnableRestore.isChecked()).apply();
                 break;
 
             case R.id.switchAdvanced:

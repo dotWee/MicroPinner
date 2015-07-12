@@ -113,6 +113,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         if (expand) checkBoxPersistentPin.setVisibility(View.VISIBLE);
 
         else {
+            findViewById(R.id.checkBoxEnableRestore).setVisibility(View.GONE);
             findViewById(R.id.checkBoxNewPin).setVisibility(View.GONE);
             checkBoxPersistentPin.setVisibility(View.GONE);
 

@@ -8,8 +8,8 @@ android {
         applicationId "de.dotwee.micropinner"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 15
-        versionName "v1.5"
+        versionCode 16
+        versionName "v1.5.1"
     }
     buildTypes {
         debug {

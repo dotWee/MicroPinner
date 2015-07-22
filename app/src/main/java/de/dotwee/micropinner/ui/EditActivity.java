@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -20,7 +21,7 @@ import de.dotwee.micropinner.tools.OnBootReceiver;
 /**
  * Created by Lukas on 09.06.2015.
  */
-public class EditActivity extends AppCompatActivity implements View.OnClickListener {
+public class EditActivity extends AppCompatActivity implements View.OnClickListener, Switch.OnCheckedChangeListener {
     private final static String LOG_TAG = "EditActivity";
     NotificationManager notificationManager;
     EditText editTextContent, editTextTitle;
@@ -52,6 +53,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
         // setup advanced-switch
         switchAdvanced = (Switch) findViewById(R.id.switchAdvanced);
+        switchAdvanced.setOnCheckedChangeListener(this);
         switchAdvanced.setOnClickListener(this);
 
         // setup buttons
@@ -142,6 +144,16 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 if (receivedIntent.getBooleanExtra(MainActivity.EXTRA_PERSISTENT, false))
                     notificationManager.cancel(receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1));
                 finish();
+                break;
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        switch (buttonView.getId()) {
+            case R.id.switchAdvanced:
+                if (switchAdvanced.isChecked()) switchAdvancedLayout(true);
+                else switchAdvancedLayout(false);
                 break;
         }
     }

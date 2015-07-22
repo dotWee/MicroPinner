@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -27,7 +28,7 @@ import de.dotwee.micropinner.tools.JsonHandler;
 import de.dotwee.micropinner.tools.OnBootReceiver;
 import de.dotwee.micropinner.tools.OnDeleteReceiver;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, Switch.OnCheckedChangeListener {
     public static final String EXTRA_VISIBILITY = "EXTRA_VISIBILITY", EXTRA_PRIORITY = "EXTRA_PRIORITY", EXTRA_TITLE = "EXTRA_TITLE", EXTRA_CONTENT = "EXTRA_CONTENT", EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION", EXTRA_PERSISTENT = "EXTRA_PERSISTENT";
     public static final String PREF_FIRSTUSE = "pref_firstuse", PREF_SHOWNEWPIN = "pref_shownewpin", PREF_ENABLERESTORE = "pref_enablerestore";
     public static final String LOG_TAG = "MainActivity";
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // setup advanced-switch
         switchAdvanced = (Switch) findViewById(R.id.switchAdvanced);
+        switchAdvanced.setOnCheckedChangeListener(this);
         switchAdvanced.setOnClickListener(this);
 
         editTextContent = (EditText) findViewById(R.id.editTextContent);
@@ -246,6 +248,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sharedPreferences.edit().putBoolean(PREF_ENABLERESTORE, checkBoxEnableRestore.isChecked()).apply();
                 break;
 
+            case R.id.switchAdvanced:
+                if (switchAdvanced.isChecked()) switchAdvancedLayout(true);
+                else switchAdvancedLayout(false);
+                break;
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        switch (buttonView.getId()) {
             case R.id.switchAdvanced:
                 if (switchAdvanced.isChecked()) switchAdvancedLayout(true);
                 else switchAdvancedLayout(false);

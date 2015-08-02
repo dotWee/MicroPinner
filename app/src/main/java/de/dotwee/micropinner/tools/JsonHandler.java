@@ -85,11 +85,11 @@ public class JsonHandler {
 
     private void write(JSONArray jsonArray) {
         if (jsonArray == null || jsonArray.toString().isEmpty()) {
-            sharedPreferences.edit().putString(ARRAY_KEY, "{}").commit();
+            sharedPreferences.edit().putString(ARRAY_KEY, "{}").apply();
             Log.i(LOG_TAG, "write / Writing empty array.");
         }
         else {
-            sharedPreferences.edit().putString(ARRAY_KEY, jsonArray.toString()).commit();
+            sharedPreferences.edit().putString(ARRAY_KEY, jsonArray.toString()).apply();
             Log.i(LOG_TAG, "write / New array: " + jsonArray.toString());
         }
     }

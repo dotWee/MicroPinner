@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkBoxShowNewPin.setOnClickListener(this);
 
         checkBoxEnableRestore = (CheckBox) findViewById(R.id.checkBoxEnableRestore);
+        checkBoxEnableRestore.setChecked(sharedPreferences.getBoolean(PREF_ENABLERESTORE, false));
         checkBoxEnableRestore.setOnClickListener(this);
 
         checkBoxPersistentPin = (CheckBox) findViewById(R.id.checkBoxPersistentPin);

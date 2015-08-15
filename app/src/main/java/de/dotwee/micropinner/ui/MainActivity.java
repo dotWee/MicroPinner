@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setSmallIcon(R.drawable.ic_star_24dp)
                 .setPriority(priority)
                 .setDeleteIntent(PendingIntent.getBroadcast(context, id, new Intent(context, OnDeleteReceiver.class).setAction("notification_cancelled").putExtra(MainActivity.EXTRA_NOTIFICATION, id), PendingIntent.FLAG_CANCEL_CURRENT))
-                .setOngoing(priority == Notification.PRIORITY_MIN | persistent);
+                .setOngoing(persistent);
 
         if (Build.VERSION.SDK_INT >= 21) {
             notification.setVisibility(visibility);
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Intent resultIntent = new Intent(context, EditActivity.class);
 
-        resultIntent.putExtra(EXTRA_PERSISTENT, priority == Notification.PRIORITY_MIN | persistent);
+        resultIntent.putExtra(EXTRA_PERSISTENT, persistent);
         resultIntent.putExtra(EXTRA_NOTIFICATION, id);
         resultIntent.putExtra(EXTRA_CONTENT, content);
         resultIntent.putExtra(EXTRA_TITLE, title);

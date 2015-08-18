@@ -18,7 +18,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -62,16 +61,14 @@ public class PinHandler {
         preferences.edit().putString("index", index).apply();
     }
 
-    private void removeFromIndex(int id) {
-        Iterator<Integer> ids = getIndex().iterator();
+    private void removeFromIndex(int idToRemove) {
+        List<Integer> ids = getIndex();
         StringBuilder newIndex = new StringBuilder();
 
+        for (int id : ids)
+            if (id != idToRemove) newIndex.append(",").append(id);
 
-        while (ids.hasNext())
-            if (ids.next() == id) ids.remove();
-            else newIndex.append(",").append(ids.next());
-
-        preferences.edit().putString("index", newIndex.toString().substring(1)).apply();
+        preferences.edit().putString("index", newIndex.toString()).apply();
     }
 
     public Map<Integer, Pin> getPins() {

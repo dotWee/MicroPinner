@@ -8,7 +8,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import de.dotwee.micropinner.R;
@@ -49,7 +48,7 @@ public class OnBootReceiver extends BroadcastReceiver {
             defaultNotification.setVisibility(Notification.VISIBILITY_PUBLIC);
         }
 
-        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean(MainActivity.PREF_SHOWNEWPIN, true))
+        if (PreferencesHandler.getInstance(context).isShowNewPinEnabled())
             notificationManager.notify(DEFAULT_NOTIFICATIONID, defaultNotification.build());
         else notificationManager.cancel(DEFAULT_NOTIFICATIONID);
     }

@@ -47,7 +47,7 @@ public class JsonHandler {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         JSONArray jsonArray = get();
 
-        if (jsonArray != null && isEnabled())
+        if (jsonArray != null && PreferencesHandler.getInstance(context).isRestoreEnabled())
             try {
             if (jsonArray.length() != 0) for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -102,7 +102,7 @@ public class JsonHandler {
     public void append(JSONObject jsonObject) {
         JSONArray jsonArray = get();
         if (jsonArray != null) jsonArray.put(jsonObject);
-        if (isEnabled()) write(jsonArray);
+        if (PreferencesHandler.getInstance(context).isRestoreEnabled()) write(jsonArray);
     }
 
     public void edit(String title, String content, int visibility, int priority, boolean persistent, int notification_id) {
@@ -130,10 +130,6 @@ public class JsonHandler {
             e.printStackTrace();
         }
 
-        if (isEnabled()) write(newArray);
-    }
-
-    private boolean isEnabled() {
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(MainActivity.PREF_ENABLERESTORE, false);
+        if (PreferencesHandler.getInstance(context).isRestoreEnabled()) write(newArray);
     }
 }

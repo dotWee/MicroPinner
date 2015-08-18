@@ -5,10 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -27,17 +25,17 @@ import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.tools.JsonHandler;
 import de.dotwee.micropinner.tools.OnBootReceiver;
 import de.dotwee.micropinner.tools.OnDeleteReceiver;
+import de.dotwee.micropinner.tools.PreferencesHandler;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, Switch.OnCheckedChangeListener {
     public static final String EXTRA_VISIBILITY = "EXTRA_VISIBILITY", EXTRA_PRIORITY = "EXTRA_PRIORITY", EXTRA_TITLE = "EXTRA_TITLE", EXTRA_CONTENT = "EXTRA_CONTENT", EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION", EXTRA_PERSISTENT = "EXTRA_PERSISTENT";
-    public static final String PREF_FIRSTUSE = "pref_firstuse", PREF_SHOWNEWPIN = "pref_shownewpin", PREF_ENABLERESTORE = "pref_enablerestore";
     public static final String LOG_TAG = "MainActivity";
     public static final boolean DEBUG = true;
+    PreferencesHandler preferencesHandler;
 
     CheckBox checkBoxShowNewPin, checkBoxPersistentPin, checkBoxEnableRestore;
     Spinner spinnerVisibility, spinnerPriority;
     EditText editTextContent, editTextTitle;
-    SharedPreferences sharedPreferences;
     Switch switchAdvanced;
     TextView dialogTitle;
 
@@ -76,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.dialog_main);
         new JsonHandler(this).restore();
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferencesHandler = PreferencesHandler.getInstance(this);
 
         // setup dialog title
         dialogTitle = (TextView) findViewById(R.id.dialogTitle);
@@ -84,11 +82,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // setup checkbox and set it to its last instance state
         checkBoxShowNewPin = (CheckBox) findViewById(R.id.checkBoxNewPin);
-        checkBoxShowNewPin.setChecked(sharedPreferences.getBoolean(MainActivity.PREF_SHOWNEWPIN, true));
+        checkBoxShowNewPin.setChecked(preferencesHandler.isShowNewPinEnabled());
         checkBoxShowNewPin.setOnClickListener(this);
 
         checkBoxEnableRestore = (CheckBox) findViewById(R.id.checkBoxEnableRestore);
-        checkBoxEnableRestore.setChecked(sharedPreferences.getBoolean(PREF_ENABLERESTORE, false));
+        checkBoxEnableRestore.setChecked(preferencesHandler.isRestoreEnabled());
         checkBoxEnableRestore.setOnClickListener(this);
 
         checkBoxPersistentPin = (CheckBox) findViewById(R.id.checkBoxPersistentPin);
@@ -123,21 +121,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spinnerVisibility.setAdapter(getVisibilityAdapter());
 
         // check if first use
-        if (!sharedPreferences.getBoolean(PREF_FIRSTUSE, false)) {
-
-            /* hide icon from launcher
-            getPackageManager().setComponentEnabledSetting(
-                    new ComponentName(this, MainActivity.class),
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP);
-                    */
-
+        if (preferencesHandler.isFirstUse())
             // friendly notification that visibility is broken for SDK < 21
             if (Build.VERSION.SDK_INT < 21)
                 Toast.makeText(this, getResources().getText(R.string.message_visibility_unsupported), Toast.LENGTH_LONG).show();
-
-            sharedPreferences.edit().putBoolean(PREF_FIRSTUSE, true).apply();
-        }
     }
 
     private ArrayAdapter<String> getPriorityAdapter() {
@@ -241,12 +228,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.checkBoxNewPin:
-                sharedPreferences.edit().putBoolean(PREF_SHOWNEWPIN, checkBoxShowNewPin.isChecked()).apply();
+                preferencesHandler.setShowNewPinEnabled(checkBoxShowNewPin.isChecked());
                 sendBroadcast(new Intent(this, OnBootReceiver.class));
                 break;
 
             case R.id.checkBoxEnableRestore:
-                sharedPreferences.edit().putBoolean(PREF_ENABLERESTORE, checkBoxEnableRestore.isChecked()).apply();
+                preferencesHandler.setRestoreEnabled(checkBoxEnableRestore.isChecked());
                 break;
 
             case R.id.switchAdvanced:

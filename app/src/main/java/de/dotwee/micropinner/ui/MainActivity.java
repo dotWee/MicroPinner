@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // setup advanced-switch
         switchAdvanced = (Switch) findViewById(R.id.switchAdvanced);
+        switchAdvanced.setChecked(preferencesHandler.isAdvancedUsed());
         switchAdvanced.setOnCheckedChangeListener(this);
         switchAdvanced.setOnClickListener(this);
 
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sendBroadcast(new Intent(this, OnBootReceiver.class));
 
         // hide advanced stuff
-        switchAdvancedLayout(false);
+        switchAdvancedLayout(preferencesHandler.isAdvancedUsed());
 
         // declare spinner
         spinnerPriority = (Spinner) findViewById(R.id.spinnerPriority);
@@ -199,8 +200,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.switchAdvanced:
-                if (switchAdvanced.isChecked()) switchAdvancedLayout(true);
-                else switchAdvancedLayout(false);
+                switchAdvancedLayout(switchAdvanced.isChecked());
+                preferencesHandler.setAdvancedUse(switchAdvanced.isChecked());
                 break;
         }
     }
@@ -209,8 +210,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
             case R.id.switchAdvanced:
-                if (switchAdvanced.isChecked()) switchAdvancedLayout(true);
-                else switchAdvancedLayout(false);
+                switchAdvancedLayout(switchAdvanced.isChecked());
+                preferencesHandler.setAdvancedUse(switchAdvanced.isChecked());
                 break;
         }
     }

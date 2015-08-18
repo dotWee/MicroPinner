@@ -9,7 +9,11 @@ import android.preference.PreferenceManager;
  * for project MicroPinner.
  */
 public class PreferencesHandler {
-    public static final String PREF_FIRSTUSE = "pref_firstuse", PREF_SHOWNEWPIN = "pref_shownewpin", PREF_ENABLERESTORE = "pref_enablerestore";
+    public static final String PREF_FIRSTUSE = "pref_firstuse",
+            PREF_SHOWNEWPIN = "pref_shownewpin",
+            PREF_ENABLERESTORE = "pref_enablerestore",
+            PREF_ADVANCEDUSE = "pref_advanceduse";
+
     private final static String LOG_TAG = "PreferencesHandler";
     private static PreferencesHandler instance;
     private SharedPreferences preferences;
@@ -50,5 +54,13 @@ public class PreferencesHandler {
         }
 
         return ret;
+    }
+
+    public boolean isAdvancedUsed() {
+        return preferences.getBoolean(PREF_ADVANCEDUSE, false);
+    }
+
+    public void setAdvancedUse(Boolean b) {
+        preferences.edit().putBoolean(PREF_ADVANCEDUSE, b).apply();
     }
 }

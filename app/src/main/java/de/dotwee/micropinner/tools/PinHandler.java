@@ -63,7 +63,7 @@ public class PinHandler {
     }
 
     private void removeFromIndex(int id) {
-        Iterator<Integer> ids = getIndex();
+        Iterator<Integer> ids = getIndex().iterator();
         StringBuilder newIndex = new StringBuilder();
 
 
@@ -76,15 +76,16 @@ public class PinHandler {
 
     public Map<Integer, Pin> getPins() {
         Map<Integer, Pin> pinMap = new HashMap<>();
-        Iterator<Integer> ids = getIndex();
+        List<Integer> ids = getIndex();
 
-        while (ids.hasNext())
-            pinMap.put(ids.next(), getPin(ids.next()));
+        if (!ids.isEmpty())
+            for (int id : ids)
+                pinMap.put(id, getPin(id));
 
         return pinMap;
     }
 
-    private Iterator<Integer> getIndex() {
+    private List<Integer> getIndex() {
         String index = preferences.getString("index", null);
         List<Integer> ids = new ArrayList<>();
 
@@ -95,7 +96,7 @@ public class PinHandler {
                 ids.add(Integer.parseInt(id));
         }
 
-        return ids.iterator();
+        return ids;
     }
 
     private Pin getPin(int id) {
@@ -200,6 +201,7 @@ public class PinHandler {
             return PendingIntent.getActivity(context, id, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         }
 
+        @SuppressWarnings("ResourceType")
         public Notification toNotification(Context context, PendingIntent contentIntent) {
             Notification.Builder notification = new Notification.Builder(context)
                     .setContentTitle(title)

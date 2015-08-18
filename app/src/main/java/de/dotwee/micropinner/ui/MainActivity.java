@@ -1,9 +1,6 @@
 package de.dotwee.micropinner.ui;
 
 import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,13 +19,11 @@ import android.widget.Toast;
 import java.util.Random;
 
 import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.tools.JsonHandler;
 import de.dotwee.micropinner.tools.OnBootReceiver;
-import de.dotwee.micropinner.tools.OnDeleteReceiver;
+import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, Switch.OnCheckedChangeListener {
-    public static final String EXTRA_VISIBILITY = "EXTRA_VISIBILITY", EXTRA_PRIORITY = "EXTRA_PRIORITY", EXTRA_TITLE = "EXTRA_TITLE", EXTRA_CONTENT = "EXTRA_CONTENT", EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION", EXTRA_PERSISTENT = "EXTRA_PERSISTENT";
     public static final String LOG_TAG = "MainActivity";
     public static final boolean DEBUG = true;
     PreferencesHandler preferencesHandler;
@@ -39,40 +34,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Switch switchAdvanced;
     TextView dialogTitle;
 
-    public static Notification generatePin(Context context, int visibility, int priority, int id, String title, String content, boolean persistent) {
-        Notification.Builder notification = new Notification.Builder(context)
-                .setContentTitle(title)
-                .setContentText(content)
-                .setSmallIcon(R.drawable.ic_star_24dp)
-                .setPriority(priority)
-                .setDeleteIntent(PendingIntent.getBroadcast(context, id, new Intent(context, OnDeleteReceiver.class).setAction("notification_cancelled").putExtra(MainActivity.EXTRA_NOTIFICATION, id), PendingIntent.FLAG_CANCEL_CURRENT))
-                .setOngoing(persistent);
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            notification.setVisibility(visibility);
-        }
-
-        Intent resultIntent = new Intent(context, EditActivity.class);
-
-        resultIntent.putExtra(EXTRA_PERSISTENT, persistent);
-        resultIntent.putExtra(EXTRA_NOTIFICATION, id);
-        resultIntent.putExtra(EXTRA_CONTENT, content);
-        resultIntent.putExtra(EXTRA_TITLE, title);
-
-        resultIntent.putExtra(EXTRA_VISIBILITY, visibility);
-        resultIntent.putExtra(EXTRA_PRIORITY, priority);
-
-        notification.setContentIntent(PendingIntent.getActivity(context, id, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-        new JsonHandler(context).append(title, content, visibility, priority, persistent, id);
-
-        return notification.build();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_main);
-        new JsonHandler(this).restore();
 
         preferencesHandler = PreferencesHandler.getInstance(this);
 
@@ -179,17 +144,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void pinEntry() {
         String title = _getTitle();
-        String content = _getContent();
         int notificationID = randomNotificationID();
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         if (title.equalsIgnoreCase("") | title.equalsIgnoreCase(null))
             Toast.makeText(this, getResources().getText(R.string.message_empty_title), Toast.LENGTH_SHORT).show();
 
         else {
-            if (DEBUG)
-                Log.i(LOG_TAG, "New pin: " + "\nTitle: " + title + "\nContent: " + content + "\nVisibility: " + _getVisibility() + "\nPriority: " + _getPriority());
-            notificationManager.notify(notificationID, generatePin(this, _getVisibility(), _getPriority(), notificationID, title, content, _getPersistent()));
+            PinHandler.Pin pin = new PinHandler.Pin(_getVisibility(), _getPriority(), notificationID, _getTitle(), _getContent(), _getPersistent());
+            new PinHandler(this).persistPin(pin);
             finish();
         }
     }

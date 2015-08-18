@@ -15,28 +15,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.tools.JsonHandler;
 import de.dotwee.micropinner.tools.OnBootReceiver;
+import de.dotwee.micropinner.tools.PinHandler;
 
 /**
  * Created by Lukas on 09.06.2015.
  */
 public class EditActivity extends AppCompatActivity implements View.OnClickListener, Switch.OnCheckedChangeListener {
     private final static String LOG_TAG = "EditActivity";
+
     NotificationManager notificationManager;
     EditText editTextContent, editTextTitle;
     CheckBox checkBoxPersistentPin;
     Button buttonCancel, buttonPin;
     Switch switchAdvanced;
     TextView dialogTitle;
-    Intent receivedIntent;
+    PinHandler.Pin pin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_main);
 
-        receivedIntent = getIntent();
+        pin = (PinHandler.Pin) getIntent().getSerializableExtra(PinHandler.Pin.EXTRA_INTENT);
         sendBroadcast(new Intent(this, OnBootReceiver.class));
 
         notificationManager = (NotificationManager)
@@ -68,12 +69,12 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
     void restoreFromIntent() {
         editTextContent = (EditText) findViewById(R.id.editTextContent);
-        editTextContent.setText(receivedIntent.getStringExtra(MainActivity.EXTRA_CONTENT));
+        editTextContent.setText(pin.getContent());
 
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
-        editTextTitle.setText(receivedIntent.getStringExtra(MainActivity.EXTRA_TITLE));
+        editTextTitle.setText(pin.getTitle());
 
-        if (receivedIntent.getBooleanExtra(MainActivity.EXTRA_PERSISTENT, false)) {
+        if (pin.isPersistent()) {
             checkBoxPersistentPin.setChecked(true);
             buttonCancel.setText(getResources().getString(R.string.dialog_action_delete));
         }
@@ -85,26 +86,10 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
         if (newTitle.equalsIgnoreCase("") | newTitle.equalsIgnoreCase(null))
             Toast.makeText(this, getResources().getString(R.string.message_empty_title), Toast.LENGTH_SHORT).show();
+
         else {
-            receivedIntent.putExtra(MainActivity.EXTRA_CONTENT, newContent);
-            receivedIntent.putExtra(MainActivity.EXTRA_TITLE, newTitle);
-
-            notificationManager.notify(receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1), MainActivity.generatePin(
-                    this,
-                    receivedIntent.getIntExtra(MainActivity.EXTRA_VISIBILITY, 0), // get visibility from intent
-                    receivedIntent.getIntExtra(MainActivity.EXTRA_PRIORITY, 0),
-                    receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1),
-                    newTitle,
-                    newContent,
-                    checkBoxPersistentPin.isChecked()
-            ));
-
-            new JsonHandler(this).edit(newTitle,
-                                       newContent,
-                                       receivedIntent.getIntExtra(MainActivity.EXTRA_VISIBILITY, 0),
-                                       receivedIntent.getIntExtra(MainActivity.EXTRA_PRIORITY, 0),
-                                       checkBoxPersistentPin.isChecked(), receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1)
-            );
+            pin.setTitle(newTitle);
+            pin.setContent(newContent);
             finish();
         }
     }
@@ -141,8 +126,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.buttonCancel:
-                if (receivedIntent.getBooleanExtra(MainActivity.EXTRA_PERSISTENT, false))
-                    notificationManager.cancel(receivedIntent.getIntExtra(MainActivity.EXTRA_NOTIFICATION, 1));
+                if (pin.isPersistent())
+                    notificationManager.cancel(pin.getId());
                 finish();
                 break;
         }

@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 
+import java.util.Map;
+
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.ui.MainActivity;
 
@@ -22,8 +24,8 @@ public class OnBootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i(LOG_TAG, "Received boot-intent. Restoring pins...");
-        new JsonHandler(context).restore();
+        Log.i(LOG_TAG, "Received boot-intent.");
+
 
         Intent mainIntent = new Intent(context, MainActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
@@ -51,6 +53,17 @@ public class OnBootReceiver extends BroadcastReceiver {
         if (PreferencesHandler.getInstance(context).isShowNewPinEnabled())
             notificationManager.notify(DEFAULT_NOTIFICATIONID, defaultNotification.build());
         else notificationManager.cancel(DEFAULT_NOTIFICATIONID);
+
+        if (PreferencesHandler.getInstance(context).isRestoreEnabled()) {
+            Map<Integer, PinHandler.Pin> pinMap = new PinHandler(context).getPins();
+            for (Map.Entry<Integer, PinHandler.Pin> entry : pinMap.entrySet()) {
+                PinHandler.Pin pin = entry.getValue();
+
+                PendingIntent pinIntent = pin.toIntent(context);
+                Notification pinNotification = pin.toNotification(context, pinIntent);
+                notificationManager.notify(pin.getId(), pinNotification);
+            }
+        }
     }
 
 }

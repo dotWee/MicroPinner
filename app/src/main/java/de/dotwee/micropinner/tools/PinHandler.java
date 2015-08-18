@@ -57,7 +57,7 @@ public class PinHandler {
     private void addToIndex(int id) {
         String index = preferences.getString("index", null);
         if (index == null) index = String.valueOf(id);
-        else index = index + "|" + id;
+        else index = index + "," + id;
 
         preferences.edit().putString("index", index).apply();
     }
@@ -89,7 +89,7 @@ public class PinHandler {
         List<Integer> ids = new ArrayList<>();
 
         if (index != null && !index.isEmpty()) {
-            String[] plainIds = index.split("|");
+            String[] plainIds = index.split(",");
 
             for (String id : plainIds)
                 ids.add(Integer.parseInt(id));

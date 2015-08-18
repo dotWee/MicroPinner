@@ -1,4 +1,4 @@
-package de.dotwee.micropinner.tools;
+package de.dotwee.micropinner.receiver;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -13,6 +13,8 @@ import android.util.Log;
 import java.util.Map;
 
 import de.dotwee.micropinner.R;
+import de.dotwee.micropinner.tools.PinHandler;
+import de.dotwee.micropinner.tools.PreferencesHandler;
 import de.dotwee.micropinner.ui.MainActivity;
 
 /**

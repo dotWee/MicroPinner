@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.tools.OnBootReceiver;
+import de.dotwee.micropinner.receiver.OnBootReceiver;
 import de.dotwee.micropinner.tools.PinHandler;
 
 /**

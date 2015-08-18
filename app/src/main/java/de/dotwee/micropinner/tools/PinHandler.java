@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.dotwee.micropinner.R;
+import de.dotwee.micropinner.receiver.OnDeleteReceiver;
 import de.dotwee.micropinner.ui.EditActivity;
 
 /**

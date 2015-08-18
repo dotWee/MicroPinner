@@ -1,8 +1,10 @@
-package de.dotwee.micropinner.tools;
+package de.dotwee.micropinner.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import de.dotwee.micropinner.tools.PinHandler;
 
 /**
  * Created by Lukas on 26.06.2015.

@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.util.Random;
 
 import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.tools.OnBootReceiver;
+import de.dotwee.micropinner.receiver.OnBootReceiver;
 import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 

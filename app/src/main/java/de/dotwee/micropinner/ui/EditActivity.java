@@ -90,6 +90,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         else {
             pin.setTitle(newTitle);
             pin.setContent(newContent);
+
+            new PinHandler(this).persistPin(pin);
             finish();
         }
     }

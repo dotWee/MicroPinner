@@ -69,7 +69,7 @@ public class PinHandler {
 
         while (ids.hasNext())
             if (ids.next() == id) ids.remove();
-            else newIndex.append("|").append(ids.next());
+            else newIndex.append(",").append(ids.next());
 
         preferences.edit().putString("index", newIndex.toString().substring(1)).apply();
     }

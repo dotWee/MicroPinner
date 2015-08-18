@@ -90,7 +90,8 @@ public class PinHandler {
             String[] plainIds = index.split(",");
 
             for (String id : plainIds)
-                ids.add(Integer.parseInt(id));
+                if (!id.isEmpty() && !id.equalsIgnoreCase(""))
+                    ids.add(Integer.parseInt(id));
         }
 
         return ids;

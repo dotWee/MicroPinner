@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     CheckBox checkBoxShowNewPin, checkBoxPersistentPin, checkBoxEnableRestore;
     Spinner spinnerVisibility, spinnerPriority;
     EditText editTextContent, editTextTitle;
-    List<View> advancedViewList;
+    List<View> advancedViewList, clickViewList;
     Switch switchAdvanced;
     TextView dialogTitle;
 
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_main);
 
+        clickViewList = new ArrayList<>();
         advancedViewList = new ArrayList<>();
         preferencesHandler = PreferencesHandler.getInstance(this);
 
@@ -44,27 +45,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // setup checkbox and set it to its last instance state
         checkBoxShowNewPin = (CheckBox) findViewById(R.id.checkBoxNewPin);
         checkBoxShowNewPin.setChecked(preferencesHandler.isShowNewPinEnabled());
-        checkBoxShowNewPin.setOnClickListener(this);
         advancedViewList.add(checkBoxShowNewPin);
 
         checkBoxEnableRestore = (CheckBox) findViewById(R.id.checkBoxEnableRestore);
         checkBoxEnableRestore.setChecked(preferencesHandler.isRestoreEnabled());
-        checkBoxEnableRestore.setOnClickListener(this);
         advancedViewList.add(checkBoxEnableRestore);
 
         checkBoxPersistentPin = (CheckBox) findViewById(R.id.checkBoxPersistentPin);
-        checkBoxPersistentPin.setOnClickListener(this);
         advancedViewList.add(checkBoxPersistentPin);
 
         // declare buttons and edittexts
-        findViewById(R.id.buttonCancel).setOnClickListener(this);
-        findViewById(R.id.buttonPin).setOnClickListener(this);
+        clickViewList.add(findViewById(R.id.buttonCancel));
+        clickViewList.add(findViewById(R.id.buttonPin));
 
         // setup advanced-switch
         switchAdvanced = (Switch) findViewById(R.id.switchAdvanced);
         switchAdvanced.setChecked(preferencesHandler.isAdvancedUsed());
         switchAdvanced.setOnCheckedChangeListener(this);
-        switchAdvanced.setOnClickListener(this);
+        clickViewList.add(switchAdvanced);
 
         editTextContent = (EditText) findViewById(R.id.editTextContent);
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
@@ -84,6 +82,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         spinnerVisibility = (Spinner) findViewById(R.id.spinnerVisibility);
         spinnerVisibility.setAdapter(getVisibilityAdapter());
+
+        clickViewList.addAll(advancedViewList);
+        for (View view : clickViewList)
+            view.setOnClickListener(this);
 
         // check if first use
         if (preferencesHandler.isFirstUse())

@@ -7,21 +7,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Random;
-
+import android.widget.*;
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.receiver.OnBootReceiver;
 import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, Switch.OnCheckedChangeListener {
     public static final String LOG_TAG = "MainActivity";
@@ -31,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     CheckBox checkBoxShowNewPin, checkBoxPersistentPin, checkBoxEnableRestore;
     Spinner spinnerVisibility, spinnerPriority;
     EditText editTextContent, editTextTitle;
+    List<View> advancedViewList;
     Switch switchAdvanced;
     TextView dialogTitle;
 
@@ -39,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_main);
 
+        advancedViewList = new ArrayList<>();
         preferencesHandler = PreferencesHandler.getInstance(this);
 
         // setup dialog title
@@ -49,13 +45,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkBoxShowNewPin = (CheckBox) findViewById(R.id.checkBoxNewPin);
         checkBoxShowNewPin.setChecked(preferencesHandler.isShowNewPinEnabled());
         checkBoxShowNewPin.setOnClickListener(this);
+        advancedViewList.add(checkBoxShowNewPin);
 
         checkBoxEnableRestore = (CheckBox) findViewById(R.id.checkBoxEnableRestore);
         checkBoxEnableRestore.setChecked(preferencesHandler.isRestoreEnabled());
         checkBoxEnableRestore.setOnClickListener(this);
+        advancedViewList.add(checkBoxEnableRestore);
 
         checkBoxPersistentPin = (CheckBox) findViewById(R.id.checkBoxPersistentPin);
         checkBoxPersistentPin.setOnClickListener(this);
+        advancedViewList.add(checkBoxPersistentPin);
 
         // declare buttons and edittexts
         findViewById(R.id.buttonCancel).setOnClickListener(this);
@@ -160,15 +159,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void switchAdvancedLayout(boolean expand) {
         // TODO expand animation
 
-        if (expand) {
-            checkBoxShowNewPin.setVisibility(View.VISIBLE);
-            checkBoxPersistentPin.setVisibility(View.VISIBLE);
-            checkBoxEnableRestore.setVisibility(View.VISIBLE);
-        } else {
-            checkBoxShowNewPin.setVisibility(View.GONE);
-            checkBoxPersistentPin.setVisibility(View.GONE);
-            checkBoxEnableRestore.setVisibility(View.GONE);
-        }
+        for (View view : advancedViewList)
+            view.setVisibility(expand ? View.VISIBLE : View.GONE);
     }
 
     private int randomNotificationID() {

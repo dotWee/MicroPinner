@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public int _getVisibility() {
         String selected = spinnerVisibility.getSelectedItem().toString();
-        if (DEBUG) Log.i(LOG_TAG, "Spinner selected: " + selected);
+        Log.i(LOG_TAG, "Spinner selected: " + selected);
 
         if (Build.VERSION.SDK_INT >= 21) {
             if (selected.equalsIgnoreCase(getResources().getString(R.string.visibility_private)))
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public int _getPriority() {
         String selected = spinnerPriority.getSelectedItem().toString();
-        if (DEBUG) Log.i(LOG_TAG, "Spinner selected: " + selected);
+        Log.i(LOG_TAG, "Spinner selected: " + selected);
 
         if (selected.equalsIgnoreCase(getResources().getString(R.string.priority_low)))
             return Notification.PRIORITY_LOW;
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (DEBUG) Log.i(LOG_TAG, "clicked: " + v.getId());
+        Log.i(LOG_TAG, "clicked: " + v.getId());
 
         switch (v.getId()) {
             case R.id.buttonCancel:

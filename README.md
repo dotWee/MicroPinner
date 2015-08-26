@@ -1,7 +1,7 @@
 # <img src="art/ic_web.png" height="50px"/> MicroPinner
 
-MicroPinner is a lightweight dialog-only application, which lets you pin text to your statusbar.
-<br>You can also customize the pins priority and visibility (Android 5.+ only).
+MicroPinner is a lightweight dialog-only application, which lets you create your own notifications.
+<br>You can also customize the notifications title and content, as well as its priority and visibility (Android 5.+ only).
 
 <a href="https://play.google.com/store/apps/details?id=de.dotwee.micropinner">
   <img alt="Get it on Google Play"
@@ -49,7 +49,7 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
 
 ## Changelog
 
-View the [CHANGELOG.md](CHANGELOG.md).
+View the [CHANGELOG.md](/docs/CHANGELOG.md).
 
 ## Questions / Issues / Bugs
 
@@ -57,21 +57,21 @@ Please check the [FAQ](/docs/FAQ.md) first.
 
 ## Build
 
-This project is developed using JetBrain's IntelliJ IDEA 14.1 and the latest Gradle-wrapper.
+This project is developed using JetBrain's latest IntelliJ IDEA and the latest Gradle-wrapper.
 To compile MicroPinner, simply import this project into Android Studio or IntelliJ IDEA and press the build-button.
+You may need to sign the built apk. Read the official [documentation about signing applications](https://developer.android.com/tools/publishing/app-signing.html) for a how-to.
 
 ## Todo
 
-+ Choosable icon (not sure about including icons - that would increase the application size about 3kb per image)
-+ <del>Create a FAQ<del> ([here](/docs/FAQ.md)) and a link inside the app
++ <del>Choosable icon</del> Won't be included. To much data-bloat, I want to keep this app as slim as possible.
++ <del>Create a FAQ</del> Read it ([here](/docs/FAQ.md).
 + Choosable notification-category
 + Choosable notification color
-+ <del>Allow hiding the pin-icon</del> (implemented, available since v1.4 - simply set the priority to 'min')
-+ <del>Allow persistent pins</del> (implemented, available since v1.4)
-+ <del>Implement min-priority</del> (implemented, available since v1.4)
-+ Implement image-pins
++ <del>Allow hiding the pin-icon</del> Available since v1.4 - simply set the priority to 'min'.
++ <del>Allow persistent pins</del> Implemented in v1.4 - use the persistent-checkbox.
++ <del>Implement min-priority</del> Also implemented in Version v1.4.
 + (Code) Documentation
-+ Single-line pin (in progress but help needed, check issue #2)
++ Single-line pin (in progress but i need some help, check issue #2)
 
 ## License
 

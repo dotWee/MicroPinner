@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Switch switchAdvanced;
     TextView dialogTitle;
 
+    private static int randomNotificationID() {
+        return new Random().nextInt(Integer.MAX_VALUE - 2) + 1;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,12 +167,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         for (View view : advancedViewList)
             view.setVisibility(expand ? View.VISIBLE : View.GONE);
-    }
-
-    private int randomNotificationID() {
-        int start = 1, end = Integer.MAX_VALUE;
-
-        return new Random().nextInt(end - start + 1) + start;
     }
 
     @Override

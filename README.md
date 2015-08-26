@@ -41,11 +41,12 @@ MicroPinner is a lightweight dialog-only application, which lets you create your
 ## Screenshots
 
 <img src="art/sc_new.png" height="400px"/>
-&nbsp;<img src="art/sc_new_used.png" height="400px"/>
-&nbsp;<img src="art/sc_edit.png" height="400px"/>
+&nbsp;<img src="art/sc_new_advanced.png" height="400px"/>
+&nbsp;<img src="art/sc_new_filled.png" height="400px"/>
 
-<img src="art/sc_example.png" height="400px"/>
-&nbsp;<img src="art/sc_example_min.png" height="400px"/>
+<img src="art/sc_pin_example.png" height="400px"/>
+&nbsp;<img src="art/sc_edit_filled.png" height="400px"/>
+&nbsp;<img src="art/sc_edit_advanced.png" height="400px"/>
 
 ## Changelog
 

@@ -8,9 +8,9 @@
     <string name="input_description_priority">Priorité</string>
     <string name="input_description_visibility">Visibilité</string>
 
-    <string name="input_description_shownewpin">Afficher la notification &quot;Nouvelle Épingle&quot;</string>
+    <string name="input_description_shownewpin">Notification &quot;Nouvelle Épingle&quot;</string>
     <string name="input_description_makepinpersistent">Épingle permanente</string>
-    <string name="input_description_enablerestore">Activer la restauration des épingles (expérimental)</string>
+    <string name="input_description_enablerestore">Activer la restauration des épingles</string>
 
     <string name="dialog_action_pin">Épingler</string>
     <string name="dialog_action_cancel">Annuler</string>
@@ -19,7 +19,7 @@
     <string name="input_hint_title">Titre</string>
     <string name="input_hint_content">Contenu</string>
 
-    <string name="message_visibility_unsupported">Il semblerait que vous utilisiez une ancienne version d\'Android, qui ne supporte pas l\'option de visibilité.</string>
+    <string name="message_visibility_unsupported">Il semblerait que vous utilisiez une ancienne version d'Android, qui ne supporte pas l'option de visibilité.</string>
     <string name="message_empty_title">Le titre doit contenir du texte.</string>
     <string name="message_pin_new">Appuyer pour ajouter une épingle.</string>
 
@@ -27,7 +27,7 @@
     <string name="visibility_private">privé</string>
     <string name="visibility_secret">secret</string>
 
-    <string name="priority_min">min</string>
+    <string name="priority_min">minimum</string>
     <string name="priority_low">basse</string>
     <string name="priority_high">haute</string>
     <string name="priority_default">par défaut</string>

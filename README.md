@@ -49,50 +49,7 @@ MicroPinner is a lightweight dialog-only application, which lets you pin text to
 
 ## Changelog
 
-1. Version: v1.0 (Initial release)
-    - date: 11th June 2015
-    - sha1 checksum: *ce67e91f42bca5d9d927f73c7d423071f887ad59*
-    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.0/release_v1.0.apk)
-
-2. Version: v1.1 (Disallow empty titles and let user decide if he wants to see the "new pin"-notification)
-    - date: 12th June 2015
-    - sha1 checksum: *3003cedb937a73f943e618c9f7cd3e82bc468e20*
-    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.1/release_v1.1.apk)
-
-3. Version: v1.2 (Fix non-working visibility & priority)
-    - date: 12th June 2015
-    - sha1 checksum: *a01095619f18e4d9f6b35065125e907f64246948*
-    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.2/release_v1.2.apk);
-
-4. Version: v1.3 (Reworked layout | German translation | MIN-priority | Persistent pins | Auto-capitalization | Hideable pin icon (you need to set the priority to min!))
-    - date: 16th June 2015
-    - sha1 checksum: *885f8ac5dfbf3ceabc1d6b37526ffc9b85b3d0cd*
-    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.3/release_v1.3.apk)
-
-5. Version: v1.4 (Fast fix for multiple persistent notifications)
-    - date: 16th June 2015
-    - sha1 checksum: *0b95003458962e9124f460ded4b33cbaf2f930fd*
-    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.4/release_v1.4.apk)
-
-6. Version: v1.5 (Implemented restore-functions)
-    - date: 02nd July 2015
-    - sha1 checksum: *52a5266009413e13e1228a7166e1b6523bd094ca*
-    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.5/release_v1.5.apk)
-
-7. Version: 1.5.1 (Declare pin-restoring as experimental and add option to enable/disable)
-    - date: 12th July 2015
-    - sha1 checksum: *865fcfade343ef77bf1a93445feaa36df117fe6b*
-    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.5.1/release_v1.5.1.apk)
-
-8. Version: 1.5.2 (Fix pin-restoring after boots, add fallbacks for larger devices)
-    - date: 25th July 2015
-    - sha1 checksum: *ea050bab828d94a2a5a2b59a21a600ed5c182314*
-    - direct download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.5.2/release_v1.5.2.apk)
-
-9. Version: 1.6 (French translation, stable pin-restoring, cached checkbox-states)
-    - date: unreleased
-    - sha1 checksum:
-    - direct download:
+View the [CHANGELOG.md](CHANGELOG.md).
 
 ## Questions / Issues / Bugs
 

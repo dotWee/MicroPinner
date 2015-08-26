@@ -49,8 +49,8 @@
 #### [Version: 1.5.2 / 25th July 2015]
 - sha1 checksum: *ea050bab828d94a2a5a2b59a21a600ed5c182314*
 - changes:
-- Fix pin-restoring after device-boot
-- Add layout fallbacks for larger devices
+    - Fix pin-restoring after device-boot
+    - Add layout fallbacks for larger devices
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.5.2/release_v1.5.2.apk)
 
 #### [Version: 1.6 / work-in-progress]
@@ -59,4 +59,5 @@
     - French translation
     - Stable pin-restoring
     - Cached checkbox-states
+    - Removed usage of deprecated apis
 - download:

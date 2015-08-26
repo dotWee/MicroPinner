@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void pinEntry() {
         String title = _getTitle();
 
-        if (title.equalsIgnoreCase("") | title.equalsIgnoreCase(null))
+        if (title.isEmpty())
             Toast.makeText(this, getResources().getText(R.string.message_empty_title), Toast.LENGTH_SHORT).show();
 
         else {

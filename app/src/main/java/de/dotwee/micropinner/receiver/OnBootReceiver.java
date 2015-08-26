@@ -74,7 +74,7 @@ public class OnBootReceiver extends BroadcastReceiver {
 
         // the visibility api is only available on lollipop and up
         if (Build.VERSION.SDK_INT >= 21) {
-            defaultNotification.setColor(context.getResources().getColor(R.color.accent));
+            defaultNotification.setColor(context.getResources().getColor(R.color.accent, context.getTheme()));
             defaultNotification.setVisibility(Notification.VISIBILITY_PUBLIC);
         }
 

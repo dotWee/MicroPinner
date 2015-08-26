@@ -150,13 +150,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void pinEntry() {
         String title = _getTitle();
-        int notificationID = randomNotificationID();
 
         if (title.equalsIgnoreCase("") | title.equalsIgnoreCase(null))
             Toast.makeText(this, getResources().getText(R.string.message_empty_title), Toast.LENGTH_SHORT).show();
 
         else {
-            PinHandler.Pin pin = new PinHandler.Pin(_getVisibility(), _getPriority(), notificationID, _getTitle(), _getContent(), _getPersistent());
+            PinHandler.Pin pin = new PinHandler.Pin(_getVisibility(), _getPriority(), randomNotificationID(), _getTitle(), _getContent(), _getPersistent());
             new PinHandler(this).persistPin(pin);
             finish();
         }

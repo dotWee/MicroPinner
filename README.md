@@ -10,33 +10,40 @@ MicroPinner is a lightweight dialog-only application, which lets you create your
 
 ## Features
 
-+ **Material Design aligned**
-<br>    Design follows the [Material Design Dialog](https://www.google.com/design/spec/components/dialogs.html#dialogs-specs) guidelines.
-+ **Lightweight**
-<br>    Weights deodexed less than 750kb.
-+ **Zero battery & memory impact**
-<br>    It won't drain your battery nor your memory. No background-services, no background-processes. Incase it does, tell your SystemUI she's a b**ch.
-+ **Backwards compatible**
-<br>    Works on Android 4.1 and up. Lower than 4.1 breaks priority feature.
-+ **Permission free**
-<br>    It will neither spy on your SMS's, nor call it's mothership over network.
-<br>    It just want to know when your devices finished its boot-procress, to restore your pins.
-+ **Open source**
-<br>    The whole source-code is available here on Github.
-+ **Restore functions**
-<br>    Pins are saved until you swipe them away.
-<br>    To restore your pins for example after a reboot, simply open the dialog.
-+ **Permanent pins**
-<br>    Declare your pins as permenent and delete them by clicking on them.
-+ **Choosable priority**
-<br>    Give your pin the priority you think it deserves.
-+ **Editable pins**
-<br>    Edit your pins easily by clicking on them.
+###### **Material Design aligned**
+Design follows the [Material Design Dialog](https://www.google.com/design/spec/components/dialogs.html#dialogs-specs) guidelines.
+
+###### **Lightweight**
+Weights less than 750kb.
+
+###### **Zero battery & memory impact**  
+It won't drain your battery nor your memory. No background-services, no background-processes. Incase it does, tell your SystemUI she's a b**ch.
+
+###### **Backwards compatible**  
+Works on Android 4.1 and up. Lower than 4.1 breaks priority feature.
+
+###### **Permission free**
+It will neither spy on your SMS's, nor call it's mothership over network. It just want to know when your devices finished its boot-process, to restore your pins.
+
+###### **Open source**
+The whole source-code is available here on Github.
+
+###### **Restore functions**
+Pins are saved until you swipe them away. To restore your pins for example after a reboot, simply open the dialog.
+
+###### **Permanent pins**
+Declare your pins as permanent and delete them by clicking on them.
+
+###### **Choosable priority**
+Give your pin the priority you think it deserves.
+
+###### **Editable pins**
+Edit your pins easily by clicking on them.
 
 #### Android 5.+ only
 
-+ **Choosable visibility**
-<br>    Hide your pin on the lockscreen by using Android 5's visibility-API: Choose between *public*, *private* and *secret*.
+###### **Choosable visibility**
+Hide your pin on the lockscreen by using Android 5's visibility-API: Choose between *public*, *private* and *secret*.
 
 ## Screenshots
 

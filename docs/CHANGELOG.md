@@ -1,17 +1,17 @@
-#### [Version v1.0 / 11th June 2015]
+#### [Version v1.0 / 11st June 2015]
 - sha1 checksum: *ce67e91f42bca5d9d927f73c7d423071f887ad59*
 - changes:
     - Initial Release
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.0/release_v1.0.apk)
 
-#### [Version: v1.1 / 12th June 2015]
+#### [Version: v1.1 / 12nd June 2015]
 - sha1 checksum: *3003cedb937a73f943e618c9f7cd3e82bc468e20*
 - changes:
     - Disallow empty title
     - User decidable "new pin"-notification
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.1/release_v1.1.apk)
 
-#### [Version: v1.2 / 12th June 2015]
+#### [Version: v1.2 / 12nd June 2015]
 - sha1 checksum: *a01095619f18e4d9f6b35065125e907f64246948*
 - changes:
     - Fix non-working visibility & priority
@@ -40,7 +40,7 @@
     - Implemented experimental restore-functions
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.5/release_v1.5.apk)
 
-#### [Version: 1.5.1 / 12th July 2015]
+#### [Version: 1.5.1 / 12nd July 2015]
 - sha1 checksum: *865fcfade343ef77bf1a93445feaa36df117fe6b*
 - changes:
     - Add checkbox to enable/disable restore-functions
@@ -53,11 +53,11 @@
     - Add layout fallbacks for larger devices
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.5.2/release_v1.5.2.apk)
 
-#### [Version: 1.6 / work-in-progress]
-- sha1 checksum:
+#### [Version: 1.6 / 31st August 2015]
+- sha1 checksum: aaa26f1eede2b208def52291d2c4625b2581d226
 - changes:
     - French translation
     - Stable pin-restoring
     - Cached checkbox-states
     - Removed usage of deprecated apis
-- download:
+- download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.6/release_v1.6.apk)

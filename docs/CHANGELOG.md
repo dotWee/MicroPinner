@@ -61,3 +61,9 @@
     - Cached checkbox-states
     - Removed usage of deprecated apis
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.6/release_v1.6.apk)
+
+#### [Version: 1.6.1 / 03ed September 2015]
+- sha1 checksum: f444a8fc7835adc327dbc8e50ad9a905c3f48c5e
+- changes:
+    - Minor force-close Fix
+- download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.6.1/release_v1.6.1.apk)

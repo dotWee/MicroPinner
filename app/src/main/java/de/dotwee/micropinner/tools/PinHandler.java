@@ -9,21 +9,15 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Base64;
+import de.dotwee.micropinner.R;
+import de.dotwee.micropinner.receiver.OnDeleteReceiver;
+import de.dotwee.micropinner.ui.EditActivity;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.receiver.OnDeleteReceiver;
-import de.dotwee.micropinner.ui.EditActivity;
 
 /**
  * Created by lukas on 18.08.2015 - 16:33
@@ -52,6 +46,7 @@ public class PinHandler {
 
     public void removePin(Pin pin) {
         removeFromIndex(pin.getId());
+        removeFromPreferences(pin.getId());
     }
 
     private void addToIndex(int id) {
@@ -70,6 +65,10 @@ public class PinHandler {
             if (id != idToRemove) newIndex.append(",").append(id);
 
         preferences.edit().putString("index", newIndex.toString()).apply();
+    }
+
+    private void removeFromPreferences(int idToRemove) {
+        preferences.edit().remove("pin_" + idToRemove).apply();
     }
 
     public Map<Integer, Pin> getPins() {

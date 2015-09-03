@@ -40,13 +40,13 @@ public class PinHandler {
         Notification pinNotification = pin.toNotification(context, pinIntent);
         notificationManager.notify(pin.getId(), pinNotification);
 
-        preferences.edit().putString("pin_" + pin.getId(), pin.toString()).apply();
+        preferences.edit().putString(pin.getName(), pin.toString()).apply();
         addToIndex(pin.getId());
     }
 
     public void removePin(Pin pin) {
-        removeFromIndex(pin.getId());
-        removeFromPreferences(pin.getId());
+        removeFromPreferences(pin);
+        removeFromIndex(pin);
     }
 
     private void addToIndex(int id) {
@@ -57,18 +57,18 @@ public class PinHandler {
         preferences.edit().putString("index", index).apply();
     }
 
-    private void removeFromIndex(int idToRemove) {
+    private void removeFromIndex(Pin pinToRemove) {
         List<Integer> ids = getIndex();
         StringBuilder newIndex = new StringBuilder();
 
         for (int id : ids)
-            if (id != idToRemove) newIndex.append(",").append(id);
+            if (id != pinToRemove.getId()) newIndex.append(",").append(id);
 
         preferences.edit().putString("index", newIndex.toString()).apply();
     }
 
-    private void removeFromPreferences(int idToRemove) {
-        preferences.edit().remove("pin_" + idToRemove).apply();
+    private void removeFromPreferences(Pin pinToRemove) {
+        preferences.edit().remove(pinToRemove.getName()).apply();
     }
 
     public Map<Integer, Pin> getPins() {
@@ -197,6 +197,10 @@ public class PinHandler {
             resultIntent.putExtra(EXTRA_INTENT, this);
 
             return PendingIntent.getActivity(context, id, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+
+        public String getName() {
+            return "pin_" + id;
         }
 
         @SuppressWarnings("ResourceType")

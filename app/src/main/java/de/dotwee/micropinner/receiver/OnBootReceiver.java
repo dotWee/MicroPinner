@@ -73,10 +73,8 @@ public class OnBootReceiver extends BroadcastReceiver {
         if (Build.VERSION.SDK_INT >= 17) defaultNotification.setShowWhen(false);
 
         // the visibility api is only available on lollipop and up
-        if (Build.VERSION.SDK_INT >= 21) {
-            defaultNotification.setColor(context.getResources().getColor(R.color.accent, context.getTheme()));
+        if (Build.VERSION.SDK_INT >= 21)
             defaultNotification.setVisibility(Notification.VISIBILITY_PUBLIC);
-        }
 
         return defaultNotification;
     }

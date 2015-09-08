@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (parentPin.isPersistent())
                 mainView.buttonCancel.setText(getString(R.string.dialog_action_delete));
 
-            mainView.restoreFromPin(parentPin);
+            mainView.restore(parentPin);
         }
 
 

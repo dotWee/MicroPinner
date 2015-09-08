@@ -146,6 +146,21 @@ public class MainView {
     }
 
     /**
+     * Restore data from a parent.
+     *
+     * @param pin should be the parent.
+     */
+    public void restore(PinHandler.Pin pin) {
+
+        // set the dialog title
+        dialogTitle.setText(activity.getResources().getString(R.string.edit_name));
+
+        editTextTitle.setText(pin.getTitle());
+        editTextContent.setText(pin.getContent());
+        checkBoxPersistentPin.setChecked(pin.isPersistent());
+    }
+
+    /**
      * Getter for pin's title.
      *
      * @return the content of editTextTitle.
@@ -220,16 +235,5 @@ public class MainView {
         // if not ready, show a message and return false
         Toast.makeText(activity, activity.getText(R.string.message_empty_title), Toast.LENGTH_SHORT).show();
         return false;
-    }
-
-    /**
-     * Restore data from a parent.
-     *
-     * @param pin should be the parent.
-     */
-    public void restoreFromPin(PinHandler.Pin pin) {
-        editTextTitle.setText(pin.getTitle());
-        editTextContent.setText(pin.getContent());
-        checkBoxPersistentPin.setChecked(pin.isPersistent());
     }
 }

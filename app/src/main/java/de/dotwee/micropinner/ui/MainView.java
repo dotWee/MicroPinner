@@ -35,14 +35,16 @@ public class MainView {
 
     private Switch.OnCheckedChangeListener onCheckedChangeListener;
     private View.OnClickListener onClickListener;
+    private View.OnLongClickListener onLongClickListener;
 
     private PreferencesHandler preferencesHandler;
     private Context activity;
     private View view;
 
-    public MainView(Context context, View.OnClickListener onClickListener, Switch.OnCheckedChangeListener onCheckedChangeListener) {
+    public MainView(Context context, View.OnClickListener onClickListener, View.OnLongClickListener onLongClickListener, Switch.OnCheckedChangeListener onCheckedChangeListener) {
         this.preferencesHandler = PreferencesHandler.getInstance(context);
         this.onCheckedChangeListener = onCheckedChangeListener;
+        this.onLongClickListener = onLongClickListener;
         this.onClickListener = onClickListener;
 
         this.activity = context;
@@ -80,6 +82,7 @@ public class MainView {
         // 'advanced' switch
         switchAdvanced = (Switch) view.findViewById(R.id.switchAdvanced);
         switchAdvanced.setOnCheckedChangeListener(onCheckedChangeListener);
+        switchAdvanced.setOnLongClickListener(onLongClickListener);
 
         // spinner for priority and visibility
         spinnerPriority = (Spinner) view.findViewById(R.id.spinnerPriority);

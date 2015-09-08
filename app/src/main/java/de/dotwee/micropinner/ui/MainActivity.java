@@ -17,7 +17,7 @@ import de.dotwee.micropinner.receiver.OnDeleteReceiver;
 import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, Switch.OnCheckedChangeListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, Switch.OnCheckedChangeListener {
     private final static String LOG_TAG = "MainActivity";
 
     NotificationManager notificationManager;
@@ -29,13 +29,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        preferencesHandler = PreferencesHandler.getInstance(this);
+        if (preferencesHandler.isLightThemeEnabled())
+            setTheme(R.style.DialogTheme_Light);
+
         setContentView(R.layout.dialog_main);
 
         notificationManager = (NotificationManager)
                 getSystemService(Context.NOTIFICATION_SERVICE);
 
-        preferencesHandler = PreferencesHandler.getInstance(this);
-        mainView = new MainView(this, this, this);
+        mainView = new MainView(this, this, this, this);
         mainView.init();
 
         // simulate device-boot by sending a new intent to class OnBootReceiver
@@ -132,5 +136,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 preferencesHandler.setAdvancedUse(mainView.switchAdvanced.isChecked());
                 break;
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        if (v.getId() == mainView.switchAdvanced.getId()) {
+            preferencesHandler.setLightThemeEnabled(!preferencesHandler.isLightThemeEnabled());
+            this.recreate();
+        }
+
+        return false;
     }
 }

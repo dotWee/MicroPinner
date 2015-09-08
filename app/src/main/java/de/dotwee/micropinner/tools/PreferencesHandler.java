@@ -12,7 +12,8 @@ public class PreferencesHandler {
     public static final String PREF_FIRSTUSE = "pref_firstuse",
             PREF_SHOWNEWPIN = "pref_shownewpin",
             PREF_ENABLERESTORE = "pref_enablerestore",
-            PREF_ADVANCEDUSE = "pref_advanceduse";
+            PREF_ADVANCEDUSE = "pref_advanceduse",
+            PREF_LIGHTTHEME = "pref_lighttheme";
 
     private final static String LOG_TAG = "PreferencesHandler";
     private static PreferencesHandler instance;
@@ -34,7 +35,7 @@ public class PreferencesHandler {
     }
 
     public void setRestoreEnabled(boolean b) {
-        preferences.edit().putBoolean(PREF_ENABLERESTORE, b).apply();
+        applyPreference(PREF_ENABLERESTORE, b);
     }
 
     public boolean isShowNewPinEnabled() {
@@ -42,7 +43,7 @@ public class PreferencesHandler {
     }
 
     public void setShowNewPinEnabled(boolean b) {
-        preferences.edit().putBoolean(PREF_SHOWNEWPIN, b).apply();
+        applyPreference(PREF_SHOWNEWPIN, b);
     }
 
     public boolean isFirstUse() {
@@ -61,6 +62,18 @@ public class PreferencesHandler {
     }
 
     public void setAdvancedUse(Boolean b) {
-        preferences.edit().putBoolean(PREF_ADVANCEDUSE, b).apply();
+        applyPreference(PREF_ADVANCEDUSE, b);
+    }
+
+    public boolean isLightThemeEnabled() {
+        return preferences.getBoolean(PREF_LIGHTTHEME, false);
+    }
+
+    public void setLightThemeEnabled(Boolean b) {
+        applyPreference(PREF_LIGHTTHEME, b);
+    }
+
+    private void applyPreference(String key, boolean state) {
+        preferences.edit().putBoolean(key, state).apply();
     }
 }

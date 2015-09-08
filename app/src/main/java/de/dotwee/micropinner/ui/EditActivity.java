@@ -6,9 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.receiver.OnBootReceiver;
+import de.dotwee.micropinner.receiver.OnDeleteReceiver;
 import de.dotwee.micropinner.tools.PinHandler;
 
 /**
@@ -121,8 +129,13 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.buttonCancel:
-                if (pin.isPersistent())
+                if (pin.isPersistent()) {
                     notificationManager.cancel(pin.getId());
+
+                    Intent intent = new Intent(this, OnDeleteReceiver.class);
+                    intent.putExtra(PinHandler.Pin.EXTRA_INTENT, pin);
+                    sendBroadcast(intent);
+                }
                 finish();
                 break;
         }

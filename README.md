@@ -56,6 +56,10 @@ Hide your pin on the lockscreen by using Android 5's visibility-API: Choose betw
 &nbsp;<img src="art/sc_edit_filled.png" height="400px"/>
 &nbsp;<img src="art/sc_edit_advanced.png" height="400px"/>
 
+<img src="art/sc_light_new.png" height="400px"/>
+&nbsp;<img src="art/sc_light_new_advanced.png" height="400px"/>
+&nbsp;<img src="art/sc_light_new_filled.png" height="400px"/>
+
 ## Changelog
 
 View the [CHANGELOG.md](/docs/CHANGELOG.md).
@@ -67,8 +71,8 @@ Please check the [FAQ](/docs/FAQ.md) first.
 ## Build
 
 This project is developed using JetBrain's latest IntelliJ IDEA and the latest Gradle-wrapper.
-To compile MicroPinner, simply import this project into Android Studio or IntelliJ IDEA and press the build-button.
-You may need to sign the built apk. Read the official [documentation about signing applications](https://developer.android.com/tools/publishing/app-signing.html) for a how-to.
+To compile MicroPinner, simply import this project into **Android Studio or IntelliJ IDEA** and press the build-button.
+**You may need to sign the built apk.** Read the official [documentation about signing applications](https://developer.android.com/tools/publishing/app-signing.html) for a how-to.
 
 ## Todo
 

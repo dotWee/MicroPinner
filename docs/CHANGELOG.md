@@ -67,3 +67,14 @@
 - changes:
     - Minor force-close Fix
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.6.1/release_v1.6.1.apk)
+
+#### [Version: 1.7 / work-in-progress]
+- sha1 checksum:
+- changes:
+    - New light-theme (hold the advanced-switch to enable/disable)
+    - Updated UI after the august-release of Material Design
+    - Enable pin-restoring by default
+    - Fix restoring deleted pins
+    - Reduced apk to 730kb
+- download:
+

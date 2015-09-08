@@ -9,15 +9,21 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Base64;
-import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.receiver.OnDeleteReceiver;
-import de.dotwee.micropinner.ui.EditActivity;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import de.dotwee.micropinner.R;
+import de.dotwee.micropinner.receiver.OnDeleteReceiver;
+import de.dotwee.micropinner.ui.EditActivity;
 
 /**
  * Created by lukas on 18.08.2015 - 16:33
@@ -50,21 +56,19 @@ public class PinHandler {
     }
 
     private void addToIndex(int id) {
-        String index = preferences.getString("index", null);
-        if (index == null) index = String.valueOf(id);
-        else index = index + "," + id;
+        List<Integer> ids = getIndex();
+        ids.add(id);
 
-        preferences.edit().putString("index", index).apply();
+        this.writeIndex(ids);
     }
 
     private void removeFromIndex(Pin pinToRemove) {
-        List<Integer> ids = getIndex();
-        StringBuilder newIndex = new StringBuilder();
+        List<Integer> oldIndex = getIndex(), newIndex = new ArrayList<>();
 
-        for (int id : ids)
-            if (id != pinToRemove.getId()) newIndex.append(",").append(id);
+        for (Integer id : oldIndex)
+            if (id != pinToRemove.getId()) newIndex.add(id);
 
-        preferences.edit().putString("index", newIndex.toString()).apply();
+        this.writeIndex(newIndex);
     }
 
     private void removeFromPreferences(Pin pinToRemove) {
@@ -82,19 +86,41 @@ public class PinHandler {
         return pinMap;
     }
 
-    private List<Integer> getIndex() {
-        String index = preferences.getString("index", null);
-        List<Integer> ids = new ArrayList<>();
+    private boolean writeIndex(List<Integer> index) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        String serializedIndex = "";
 
-        if (index != null && !index.isEmpty()) {
-            String[] plainIds = index.split(",");
+        try {
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+            objectOutputStream.writeObject(index);
+            objectOutputStream.close();
 
-            for (String id : plainIds)
-                if (!id.isEmpty() && !id.equalsIgnoreCase(""))
-                    ids.add(Integer.parseInt(id));
+            serializedIndex = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
 
-        return ids;
+        preferences.edit().putString("index", serializedIndex).apply();
+        return true;
+    }
+
+    private List<Integer> getIndex() {
+        String serializedIndex = preferences.getString("index", null);
+        List<Integer> index = new ArrayList<>();
+
+        if (serializedIndex != null) {
+            byte[] indexData = Base64.decode(serializedIndex, Base64.DEFAULT);
+            try {
+                ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(indexData));
+                index = (List<Integer>) objectInputStream.readObject();
+                objectInputStream.close();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return index;
     }
 
     private Pin getPin(int id) {

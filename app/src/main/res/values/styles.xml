@@ -83,11 +83,9 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:animateLayoutChanges">true</item>
     </style>
 
     <style name="DialogButtons" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:animateLayoutChanges">true</item>
         <item name="android:singleLine">true</item>
         <item name="android:layout_marginRight">2dp</item>
     </style>

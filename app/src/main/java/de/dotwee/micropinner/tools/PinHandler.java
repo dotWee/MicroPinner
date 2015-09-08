@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.receiver.OnDeleteReceiver;
@@ -161,10 +162,12 @@ public class PinHandler {
 
         boolean persistent = false;
 
-        public Pin(int visibility, int priority, int id, String title, String content, boolean persistent) {
+        public Pin(int visibility, int priority, String title, String content, boolean persistent) {
+            this.id = new Random().nextInt(Integer.MAX_VALUE - 2) + 1;
+            ;
+
             this.visibility = visibility;
             this.priority = priority;
-            this.id = id;
             this.title = title;
             this.content = content;
             this.persistent = persistent;

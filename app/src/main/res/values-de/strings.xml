@@ -10,7 +10,6 @@
 
     <string name="input_description_shownewpin">Zeige &quot;Neuer Pin&quot; Benachrichtigung</string>
     <string name="input_description_makepinpersistent">Mache Pin permanent</string>
-    <string name="input_description_enablerestore">Aktiviere Pin Wiederherstellung</string>
 
     <string name="dialog_action_pin">Pin</string>
     <string name="dialog_action_cancel">Abbrechen</string>
@@ -27,7 +26,7 @@
     <string name="visibility_private">Privat</string>
     <string name="visibility_secret">Geheim</string>
 
-    <string name="priority_min">Minumum</string>
+    <string name="priority_min">Minimum</string>
     <string name="priority_low">Niedrig</string>
     <string name="priority_high">Hoch</string>
     <string name="priority_default">Normal</string>

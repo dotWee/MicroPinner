@@ -105,11 +105,6 @@
             style="@style/DialogText.CheckBox"
             android:text="@string/input_description_makepinpersistent" />
 
-        <CheckBox
-            android:id="@+id/checkBoxEnableRestore"
-            style="@style/DialogText.CheckBox"
-            android:text="@string/input_description_enablerestore" />
-
     </LinearLayout>
 
     <LinearLayout style="@style/DialogFooter">

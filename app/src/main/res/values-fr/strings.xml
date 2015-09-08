@@ -10,7 +10,6 @@
 
     <string name="input_description_shownewpin">Notification &quot;Nouvelle Épingle&quot;</string>
     <string name="input_description_makepinpersistent">Épingle permanente</string>
-    <string name="input_description_enablerestore">Activer la restauration des épingles</string>
 
     <string name="dialog_action_pin">Épingler</string>
     <string name="dialog_action_cancel">Annuler</string>

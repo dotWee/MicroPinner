@@ -117,10 +117,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sendBroadcast(new Intent(this, OnBootReceiver.class));
                 break;
 
-            case R.id.checkBoxEnableRestore:
-                preferencesHandler.setRestoreEnabled(mainView.checkBoxEnableRestore.isChecked());
-                break;
-
             case R.id.switchAdvanced:
                 switchAdvancedLayout(mainView.switchAdvanced.isChecked());
                 preferencesHandler.setAdvancedUse(mainView.switchAdvanced.isChecked());

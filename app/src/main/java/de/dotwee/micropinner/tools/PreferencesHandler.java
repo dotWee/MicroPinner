@@ -30,14 +30,6 @@ public class PreferencesHandler {
         return instance;
     }
 
-    public boolean isRestoreEnabled() {
-        return preferences.getBoolean(PREF_ENABLERESTORE, false);
-    }
-
-    public void setRestoreEnabled(boolean b) {
-        applyPreference(PREF_ENABLERESTORE, b);
-    }
-
     public boolean isShowNewPinEnabled() {
         return preferences.getBoolean(PREF_SHOWNEWPIN, true);
     }

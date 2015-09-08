@@ -24,7 +24,7 @@ import de.dotwee.micropinner.tools.PreferencesHandler;
  * Created by Lukas Wolfsteiner on 08.09.2015
  */
 public class MainView {
-    public CheckBox checkBoxShowNewPin, checkBoxPersistentPin, checkBoxEnableRestore;
+    public CheckBox checkBoxShowNewPin, checkBoxPersistentPin;
     public Spinner spinnerVisibility, spinnerPriority;
     public EditText editTextContent, editTextTitle;
 
@@ -72,7 +72,6 @@ public class MainView {
         buttonCancel = (Button) view.findViewById(R.id.buttonCancel);
 
         checkBoxShowNewPin = (CheckBox) view.findViewById(R.id.checkBoxNewPin);
-        checkBoxEnableRestore = (CheckBox) view.findViewById(R.id.checkBoxEnableRestore);
         checkBoxPersistentPin = (CheckBox) view.findViewById(R.id.checkBoxPersistentPin);
 
         // edit texts for title and content
@@ -119,7 +118,6 @@ public class MainView {
     private void adaptLists() {
         advancedViewList = new ArrayList<>();
         advancedViewList.add(checkBoxPersistentPin);
-        advancedViewList.add(checkBoxEnableRestore);
         advancedViewList.add(checkBoxShowNewPin);
 
         clickViewList = new ArrayList<>();
@@ -144,7 +142,6 @@ public class MainView {
         editTextTitle.performClick();
 
         switchAdvanced.setChecked(preferencesHandler.isAdvancedUsed());
-        checkBoxEnableRestore.setChecked(preferencesHandler.isRestoreEnabled());
         checkBoxShowNewPin.setChecked(preferencesHandler.isShowNewPinEnabled());
     }
 

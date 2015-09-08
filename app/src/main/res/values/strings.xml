@@ -9,7 +9,6 @@
 
     <string name="input_description_shownewpin">Show &quot;New Pin&quot; notification</string>
     <string name="input_description_makepinpersistent">Make pin persistent</string>
-    <string name="input_description_enablerestore">Enable pin-restoring</string>
 
     <string name="dialog_action_pin">Pin</string>
     <string name="dialog_action_cancel">Cancel</string>

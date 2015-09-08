@@ -9,12 +9,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
+
+import java.util.Map;
+
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 import de.dotwee.micropinner.ui.MainActivity;
-
-import java.util.Map;
 
 /**
  * Created by Lukas on 09.06.2015.
@@ -35,24 +36,20 @@ public class OnBootReceiver extends BroadcastReceiver {
 
         else notificationManager.cancel(DEFAULT_NOTIFICATIONID);
 
-        // check if pin-restoring is enabled
-        if (PreferencesHandler.getInstance(context).isRestoreEnabled()) {
+        // get all pins
+        Map<Integer, PinHandler.Pin> pinMap = new PinHandler(context).getPins();
 
-            // if yes, get a map of all saved pins
-            Map<Integer, PinHandler.Pin> pinMap = new PinHandler(context).getPins();
+        // foreach through them all
+        for (Map.Entry<Integer, PinHandler.Pin> entry : pinMap.entrySet()) {
+            PinHandler.Pin pin = entry.getValue();
 
-            // foreach through them all
-            for (Map.Entry<Integer, PinHandler.Pin> entry : pinMap.entrySet()) {
-                PinHandler.Pin pin = entry.getValue();
+            PendingIntent pinIntent = pin.toIntent(context);
 
-                PendingIntent pinIntent = pin.toIntent(context);
+            // create a notification out of the object
+            Notification pinNotification = pin.toNotification(context, pinIntent);
 
-                // create a notification out of the object
-                Notification pinNotification = pin.toNotification(context, pinIntent);
-
-                // and finally restore it
-                notificationManager.notify(pin.getId(), pinNotification);
-            }
+            // and finally restore it
+            notificationManager.notify(pin.getId(), pinNotification);
         }
     }
 

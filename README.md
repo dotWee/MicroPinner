@@ -10,39 +10,40 @@ MicroPinner is a lightweight dialog-only application, which lets you create your
 
 ## Features
 
-###### **Material Design aligned**
-Design follows the [Material Design Dialog](https://www.google.com/design/spec/components/dialogs.html#dialogs-specs) guidelines.
++ **Material Design aligned**
+Design follows the [Material Design](https://www.google.com/design/spec/components/dialogs.html#dialogs-specs) dialog-guidelines.
 
-###### **Lightweight**
++ **Lightweight**
 Weights less than 750kb.
 
-###### **Zero battery & memory impact**  
-It won't drain your battery nor your memory. No background-services, no background-processes. Incase it does, tell your SystemUI she's a b**ch.
++ **Zero battery & memory impact**  
+It won't drain your battery nor your memory.
+No background-services, no background-processes.
 
-###### **Backwards compatible**  
++ **Backwards compatible**  
 Works on Android 4.1 and up. Lower than 4.1 breaks priority feature.
 
-###### **Permission free**
-It will neither spy on your SMS's, nor call it's mothership over network. It just want to know when your devices finished its boot-process, to restore your pins.
++ **Permission free**
+It will neither spy on your SMS's, nor call it's mothership over network.
 
-###### **Open source**
++ **Open source**
 The whole source-code is available here on Github.
 
-###### **Restore functions**
-Pins are saved until you swipe them away. To restore your pins for example after a reboot, simply open the dialog.
++ **Restore functions**
+Pins are saved until you swipe them away.
 
-###### **Permanent pins**
++ **Permanent pins**
 Declare your pins as permanent and delete them by clicking on them.
 
-###### **Choosable priority**
++ **Choosable priority**
 Give your pin the priority you think it deserves.
 
-###### **Editable pins**
++ **Editable pins**
 Edit your pins easily by clicking on them.
 
 #### Android 5.+ only
 
-###### **Choosable visibility**
++ **Choosable visibility**
 Hide your pin on the lockscreen by using Android 5's visibility-API: Choose between *public*, *private* and *secret*.
 
 ## Screenshots

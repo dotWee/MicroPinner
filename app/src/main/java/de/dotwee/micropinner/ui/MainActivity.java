@@ -1,5 +1,7 @@
 package de.dotwee.micropinner.ui;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,18 +13,26 @@ import android.widget.Toast;
 
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.receiver.OnBootReceiver;
+import de.dotwee.micropinner.receiver.OnDeleteReceiver;
 import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, Switch.OnCheckedChangeListener {
-    public static final String LOG_TAG = "MainActivity";
+    private final static String LOG_TAG = "MainActivity";
+
+    NotificationManager notificationManager;
     PreferencesHandler preferencesHandler;
+    PinHandler.Pin parentPin;
+    boolean hasParentPin;
     MainView mainView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_main);
+
+        notificationManager = (NotificationManager)
+                getSystemService(Context.NOTIFICATION_SERVICE);
 
         preferencesHandler = PreferencesHandler.getInstance(this);
         mainView = new MainView(this, this, this);
@@ -39,6 +49,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // friendly notification that visibility is broken for SDK < 21
             if (Build.VERSION.SDK_INT < 21)
                 Toast.makeText(this, getResources().getText(R.string.message_visibility_unsupported), Toast.LENGTH_LONG).show();
+
+
+        parentPin = (PinHandler.Pin) getIntent().getSerializableExtra(PinHandler.Pin.EXTRA_INTENT);
+        if (parentPin != null) {
+            hasParentPin = true;
+
+            if (parentPin.isPersistent())
+                mainView.buttonCancel.setText(getString(R.string.dialog_action_delete));
+
+            mainView.restoreFromPin(parentPin);
+        }
+
+
     }
 
     private void pinEntry() {
@@ -50,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     mainView.getContent(),
                     mainView.isPersistent()
             );
+
+            if (hasParentPin)
+                pin.setId(parentPin.getId());
 
             new PinHandler(this).persistPin(pin);
             finish();
@@ -66,6 +92,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.buttonCancel:
+                if (hasParentPin)
+                    if (parentPin.isPersistent()) {
+                        notificationManager.cancel(parentPin.getId());
+
+                        Intent intent = new Intent(this, OnDeleteReceiver.class);
+                        intent.putExtra(PinHandler.Pin.EXTRA_INTENT, parentPin);
+                        sendBroadcast(intent);
+                    }
+
                 finish();
                 break;
 

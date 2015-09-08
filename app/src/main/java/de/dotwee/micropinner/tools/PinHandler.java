@@ -24,7 +24,7 @@ import java.util.Random;
 
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.receiver.OnDeleteReceiver;
-import de.dotwee.micropinner.ui.EditActivity;
+import de.dotwee.micropinner.ui.MainActivity;
 
 /**
  * Created by lukas on 18.08.2015 - 16:33
@@ -164,8 +164,16 @@ public class PinHandler {
 
         public Pin(int visibility, int priority, String title, String content, boolean persistent) {
             this.id = new Random().nextInt(Integer.MAX_VALUE - 2) + 1;
-            ;
 
+            this.visibility = visibility;
+            this.priority = priority;
+            this.title = title;
+            this.content = content;
+            this.persistent = persistent;
+        }
+
+        public Pin(int visibility, int priority, String title, String content, boolean persistent, int id) {
+            this.id = id;
             this.visibility = visibility;
             this.priority = priority;
             this.title = title;
@@ -222,7 +230,7 @@ public class PinHandler {
         }
 
         public PendingIntent toIntent(Context context) {
-            Intent resultIntent = new Intent(context, EditActivity.class);
+            Intent resultIntent = new Intent(context, MainActivity.class);
             resultIntent.putExtra(EXTRA_INTENT, this);
 
             return PendingIntent.getActivity(context, id, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);

@@ -21,12 +21,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.EditActivity"
-            android:excludeFromRecents="true"
-            android:label="@string/edit_name"
-            android:theme="@style/DialogTheme" />
-
         <receiver android:name=".receiver.OnDeleteReceiver" />
 
         <receiver

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.dotwee.micropinner.R;
+import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 
 /**
@@ -27,6 +29,7 @@ public class MainView {
     public EditText editTextContent, editTextTitle;
 
     public List<View> advancedViewList, clickViewList;
+    public Button buttonCancel;
     public Switch switchAdvanced;
     public TextView dialogTitle;
 
@@ -64,9 +67,9 @@ public class MainView {
 
         // setup the dialog header and title
         dialogTitle = (TextView) view.findViewById(R.id.dialogTitle);
+        buttonCancel = (Button) view.findViewById(R.id.buttonCancel);
 
         checkBoxShowNewPin = (CheckBox) view.findViewById(R.id.checkBoxNewPin);
-
         checkBoxEnableRestore = (CheckBox) view.findViewById(R.id.checkBoxEnableRestore);
         checkBoxPersistentPin = (CheckBox) view.findViewById(R.id.checkBoxPersistentPin);
 
@@ -217,5 +220,16 @@ public class MainView {
         // if not ready, show a message and return false
         Toast.makeText(activity, activity.getText(R.string.message_empty_title), Toast.LENGTH_SHORT).show();
         return false;
+    }
+
+    /**
+     * Restore data from a parent.
+     *
+     * @param pin should be the parent.
+     */
+    public void restoreFromPin(PinHandler.Pin pin) {
+        editTextTitle.setText(pin.getTitle());
+        editTextContent.setText(pin.getContent());
+        checkBoxPersistentPin.setChecked(pin.isPersistent());
     }
 }

@@ -31,29 +31,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_column="0">
+            <TextView
+                style="@style/DialogText.Description"
+                android:layout_column="0"
+                android:text="@string/input_description_title" />
 
-                <EditText
-                    android:id="@+id/editTextTitle"
-                    style="@style/DialogInput.EditText"
-                    android:hint="@string/input_hint_title" />
+            <TextView
+                style="@style/DialogText.Description"
+                android:layout_column="1"
+                android:text="@string/input_description_content" />
+        </TableRow>
 
-            </android.support.design.widget.TextInputLayout>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_column="1">
+            <EditText
+                android:id="@+id/editTextTitle"
+                style="@style/DialogInput.EditText"
+                android:layout_column="0"
+                android:hint="@string/input_hint_title" />
 
-                <EditText
-                    android:id="@+id/editTextContent"
-                    style="@style/DialogInput.EditText"
-                    android:hint="@string/input_hint_content" />
-
-            </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/editTextContent"
+                style="@style/DialogInput.EditText"
+                android:layout_column="1"
+                android:hint="@string/input_hint_content" />
         </TableRow>
 
         <TableRow
@@ -61,13 +64,11 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textViewVisibility"
                 style="@style/DialogText.Description"
                 android:layout_column="0"
                 android:text="@string/input_description_visibility" />
 
             <TextView
-                android:id="@+id/textViewPriority"
                 style="@style/DialogText.Description"
                 android:layout_column="1"
                 android:text="@string/input_description_priority" />

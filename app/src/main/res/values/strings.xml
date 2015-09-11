@@ -4,6 +4,9 @@
     <string name="main_name">New Pin</string>
     <string name="edit_name">Edit Pin</string>
 
+    <string name="input_description_title">Title</string>
+    <string name="input_description_content">Content</string>
+
     <string name="input_description_priority">Priority</string>
     <string name="input_description_visibility">Visibility</string>
 

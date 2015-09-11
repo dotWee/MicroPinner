@@ -5,25 +5,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <GridLayout style="@style/DialogHeader">
+    <LinearLayout style="@style/DialogHeader">
 
         <TextView
             android:id="@+id/dialogTitle"
             style="@style/TextAppearance.AppCompat.Widget.ActionMode.Title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_column="0"
-            android:layout_row="0"
             android:gravity="center_vertical" />
 
         <Switch
             android:id="@+id/switchAdvanced"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_column="2"
-            android:layout_row="0" />
+            android:layout_weight="1" />
 
-    </GridLayout>
+    </LinearLayout>
 
     <TableLayout style="@style/DialogContent.Table">
 

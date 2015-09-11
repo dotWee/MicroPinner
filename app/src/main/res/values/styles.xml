@@ -86,7 +86,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textColor">?attr/colorAccent</item>
-        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_margin">8dp</item>
     </style>
 
     <style name="DialogFooter">

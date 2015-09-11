@@ -8,7 +8,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 
 import java.util.Map;
 
@@ -26,8 +25,6 @@ public class OnBootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i(LOG_TAG, "Received boot-intent.");
-
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         // check if the should be shown
@@ -53,9 +50,15 @@ public class OnBootReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * @param context
+     * @return the default "new pin" notification
+     */
     private Notification.Builder getNewPinNotification(Context context) {
 
-        PendingIntent pendingIntent = getTaskStack(context, new Intent(context, MainActivity.class))
+        PendingIntent pendingIntent = TaskStackBuilder.create(context)
+                .addParentStack(MainActivity.class)
+                .addNextIntent(new Intent(context, MainActivity.class))
                 .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification.Builder defaultNotification = new Notification.Builder(context)
@@ -67,22 +70,15 @@ public class OnBootReceiver extends BroadcastReceiver {
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.ic_pin_24dp);
 
-        if (Build.VERSION.SDK_INT >= 17) defaultNotification.setShowWhen(false);
+
+        // function .setShowWhen is only available on API => 17
+        if (Build.VERSION.SDK_INT >= 17)
+            defaultNotification.setShowWhen(false);
 
         // the visibility api is only available on lollipop and up
         if (Build.VERSION.SDK_INT >= 21)
             defaultNotification.setVisibility(Notification.VISIBILITY_PUBLIC);
 
         return defaultNotification;
-    }
-
-    private TaskStackBuilder getTaskStack(Context context, Intent intent) {
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-
-        // use the main activity as parent
-        stackBuilder.addParentStack(MainActivity.class);
-        stackBuilder.addNextIntent(intent);
-
-        return stackBuilder;
     }
 }

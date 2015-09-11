@@ -36,12 +36,21 @@ public class PinHandler {
     private SharedPreferences preferences;
     private Context context;
 
+    /**
+     * Default constructor
+     *
+     * @param context
+     */
     public PinHandler(Context context) {
         this.notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
         this.context = context;
     }
 
+    /**
+     * Persist and display a {@param pin} to shared-preferences
+     * and notification bar
+     */
     public void persistPin(Pin pin) {
         PendingIntent pinIntent = pin.toIntent(context);
         Notification pinNotification = pin.toNotification(context, pinIntent);
@@ -51,11 +60,17 @@ public class PinHandler {
         addToIndex(pin.getId());
     }
 
+    /**
+     * Delete a {@param pin} from preferences and index
+     */
     public void removePin(Pin pin) {
         removeFromPreferences(pin);
         removeFromIndex(pin);
     }
 
+    /**
+     * Add a {@param id}'s id to the index
+     */
     private void addToIndex(int id) {
         List<Integer> ids = getIndex();
         ids.add(id);
@@ -63,19 +78,28 @@ public class PinHandler {
         this.writeIndex(ids);
     }
 
-    private void removeFromIndex(Pin pinToRemove) {
+    /**
+     * Removes a {@param pin} from the index
+     */
+    private void removeFromIndex(Pin pin) {
         List<Integer> oldIndex = getIndex(), newIndex = new ArrayList<>();
 
         for (Integer id : oldIndex)
-            if (id != pinToRemove.getId()) newIndex.add(id);
+            if (id != pin.getId()) newIndex.add(id);
 
         this.writeIndex(newIndex);
     }
 
-    private void removeFromPreferences(Pin pinToRemove) {
-        preferences.edit().remove(pinToRemove.getName()).apply();
+    /**
+     * Deleted a {@param pin} from the shared preferences
+     */
+    private void removeFromPreferences(Pin pin) {
+        preferences.edit().remove(pin.getName()).apply();
     }
 
+    /**
+     * @return all pins in a key-map
+     */
     public Map<Integer, Pin> getPins() {
         Map<Integer, Pin> pinMap = new HashMap<>();
         List<Integer> ids = getIndex();
@@ -87,6 +111,10 @@ public class PinHandler {
         return pinMap;
     }
 
+    /**
+     * Serializes the {@param index} and writes it to shared preferences
+     * @return true on success, false on error
+     */
     private boolean writeIndex(List<Integer> index) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         String serializedIndex = "";
@@ -106,6 +134,9 @@ public class PinHandler {
         return true;
     }
 
+    /**
+     * @return the current index of pins
+     */
     private List<Integer> getIndex() {
         String serializedIndex = preferences.getString("index", null);
         List<Integer> index = new ArrayList<>();
@@ -124,6 +155,9 @@ public class PinHandler {
         return index;
     }
 
+    /**
+     * @return a pin by its {@param id}
+     */
     private Pin getPin(int id) {
         String key = "pin_" + id;
         Pin pin = null;
@@ -150,14 +184,12 @@ public class PinHandler {
     public static class Pin implements Serializable {
         public final static String EXTRA_INTENT = "IAMAPIN";
         private final static String LOG_TAG = "Pin";
+
         int visibility = 1;
-
         int priority = 0;
-
         int id = 0;
 
         String title = "";
-
         String content = "";
 
         boolean persistent = false;
@@ -170,31 +202,6 @@ public class PinHandler {
             this.title = title;
             this.content = content;
             this.persistent = persistent;
-        }
-
-        public Pin(int visibility, int priority, String title, String content, boolean persistent, int id) {
-            this.id = id;
-            this.visibility = visibility;
-            this.priority = priority;
-            this.title = title;
-            this.content = content;
-            this.persistent = persistent;
-        }
-
-        public int getVisibility() {
-            return visibility;
-        }
-
-        public void setVisibility(int visibility) {
-            this.visibility = visibility;
-        }
-
-        public int getPriority() {
-            return priority;
-        }
-
-        public void setPriority(int priority) {
-            this.priority = priority;
         }
 
         public int getId() {
@@ -217,16 +224,8 @@ public class PinHandler {
             return content;
         }
 
-        public void setContent(String content) {
-            this.content = content;
-        }
-
         public boolean isPersistent() {
             return persistent;
-        }
-
-        public void setPersistent(boolean persistent) {
-            this.persistent = persistent;
         }
 
         public PendingIntent toIntent(Context context) {

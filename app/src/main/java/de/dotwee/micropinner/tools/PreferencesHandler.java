@@ -11,7 +11,6 @@ import android.preference.PreferenceManager;
 public class PreferencesHandler {
     public static final String PREF_FIRSTUSE = "pref_firstuse",
             PREF_SHOWNEWPIN = "pref_shownewpin",
-            PREF_ENABLERESTORE = "pref_enablerestore",
             PREF_ADVANCEDUSE = "pref_advanceduse",
             PREF_LIGHTTHEME = "pref_lighttheme";
 

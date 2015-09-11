@@ -3,10 +3,14 @@ package de.dotwee.micropinner.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
 import de.dotwee.micropinner.tools.PinHandler;
 
 /**
  * Created by Lukas on 26.06.2015.
+ *
+ * Receiver for swiped-away pins,
+ * tells the pin handler to delete a pin
  */
 public class OnDeleteReceiver extends BroadcastReceiver {
     private final static String LOG_TAG = "OnDeleteReceiver";

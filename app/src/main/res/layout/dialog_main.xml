@@ -110,15 +110,11 @@
         <Button
             android:id="@+id/buttonCancel"
             style="@style/DialogButtons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/dialog_action_cancel" />
 
         <Button
             android:id="@+id/buttonPin"
             style="@style/DialogButtons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/dialog_action_pin" />
 
     </LinearLayout>

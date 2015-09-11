@@ -35,7 +35,7 @@
         <item name="android:paddingBottom">20dp</item>
     </style>
 
-    <style name="DialogInput" />
+    <style name="DialogInput" parent="Widget.AppCompat.EditText" />
 
     <style name="DialogInput.EditText">
         <item name="android:layout_height">wrap_content</item>
@@ -99,6 +99,9 @@
     <style name="DialogButtons" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:singleLine">true</item>
         <item name="android:layout_marginRight">2dp</item>
+
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
 </resources>

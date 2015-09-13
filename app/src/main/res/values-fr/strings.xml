@@ -5,6 +5,9 @@
     <string name="main_name">Nouvelle Épingle</string>
     <string name="edit_name">Éditer Épingle</string>
 
+    <string name="input_description_title">Titre</string>
+    <string name="input_description_content">Teneur</string>
+
     <string name="input_description_priority">Priorité</string>
     <string name="input_description_visibility">Visibilité</string>
 

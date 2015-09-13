@@ -5,6 +5,9 @@
     <string name="main_name">Neuer Pin</string>
     <string name="edit_name">Bearbeite Pin</string>
 
+    <string name="input_description_title">Titel</string>
+    <string name="input_description_content">Inhalt</string>
+
     <string name="input_description_priority">Priorität</string>
     <string name="input_description_visibility">Sichtbarkeit</string>
 

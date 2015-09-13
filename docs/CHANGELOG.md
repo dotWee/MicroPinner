@@ -73,6 +73,8 @@
 - changes:
     - New light-theme (hold the advanced-switch to enable/disable)
     - Updated UI after the august-release of Material Design
+    - Updated translations (German & French)
+    - Fixed UI for tablets and phablets
     - Enable pin-restoring by default
     - Fix restoring deleted pins
     - Reduced apk to 730kb

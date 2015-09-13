@@ -14,7 +14,7 @@ MicroPinner is a lightweight dialog-only application, which lets you create your
 Design follows the [Material Design](https://www.google.com/design/spec/components/dialogs.html#dialogs-specs) dialog-guidelines.
 
 + **Lightweight**
-Weights less than 750kb.
+Weights less than 730kb.
 
 + **Zero battery & memory impact**  
 It won't drain your battery nor your memory.

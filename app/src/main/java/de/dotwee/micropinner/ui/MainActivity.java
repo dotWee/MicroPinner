@@ -3,11 +3,15 @@ package de.dotwee.micropinner.ui;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -25,6 +29,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     PinHandler.Pin parentPin;
     boolean hasParentPin;
     MainView mainView;
+
+    /**
+     * This method checks if the user's device is a tablet, depending on device density.
+     *
+     * @param context needed to get resources
+     * @return true if device screen size is greater than 6 inches
+     */
+    private static boolean isTablet(Context context) {
+
+        // Compute screen size
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
+
+        float width = dm.widthPixels / dm.xdpi;
+        float height = dm.heightPixels / dm.ydpi;
+
+        double size = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
+
+        // Tablet devices should have a screen size greater than 6 inches
+        return size >= 6;
+    }
+
+    /**
+     * This method converts dp unit to equivalent pixels, depending on device density.
+     *
+     * @param dp      A value in dp (density independent pixels) unit. Which we need to convert into pixels
+     * @param context Context to get resources and device specific display metrics
+     * @return A integer value to represent px equivalent to dp depending on device density
+     */
+    public static int dpToPixel(float dp, Context context) {
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        return Math.round(dp * (metrics.densityDpi / 160f));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,5 +179,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return false;
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        if (isTablet(this)) {
+            setContentView(
+                    View.inflate(this, layoutResID, null),
+                    new FrameLayout.LayoutParams(
+                            dpToPixel(320, this),
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
+            );
+        } else super.setContentView(layoutResID);
     }
 }

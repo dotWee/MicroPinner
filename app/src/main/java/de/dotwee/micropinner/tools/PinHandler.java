@@ -32,6 +32,7 @@ import de.dotwee.micropinner.ui.MainActivity;
  */
 public class PinHandler {
     private final static String LOG_TAG = "PinHandler";
+    private final static String BASE64_REGEX = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
     private NotificationManager notificationManager;
     private SharedPreferences preferences;
     private Context context;
@@ -45,6 +46,16 @@ public class PinHandler {
         this.notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
         this.context = context;
+    }
+
+    /**
+     * This method checks if a string matches the official base64 regular expression.
+     *
+     * @param string to check
+     * @return true if valid base64, false is invalid or null
+     */
+    private static boolean isValidBase64(String string) {
+        return string != null && string.matches(BASE64_REGEX);
     }
 
     /**
@@ -137,11 +148,11 @@ public class PinHandler {
     /**
      * @return the current index of pins
      */
-    private List<Integer> getIndex() {
+    private List<Integer> getIndex() throws IllegalStateException {
         String serializedIndex = preferences.getString("index", null);
         List<Integer> index = new ArrayList<>();
 
-        if (serializedIndex != null) {
+        if (serializedIndex != null && isValidBase64(serializedIndex)) {
             byte[] indexData = Base64.decode(serializedIndex, Base64.DEFAULT);
             try {
                 ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(indexData));
@@ -150,20 +161,20 @@ public class PinHandler {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        }
 
-        return index;
+            return index;
+        } else throw new IllegalStateException("Serialized pin is not valid base64!");
     }
 
     /**
      * @return a pin by its {@param id}
      */
-    private Pin getPin(int id) {
+    private Pin getPin(int id) throws IllegalStateException {
         String key = "pin_" + id;
         Pin pin = null;
 
         String serializedPin = preferences.getString(key, null);
-        if (serializedPin != null) {
+        if (serializedPin != null && isValidBase64(serializedPin)) {
             byte[] pinData = Base64.decode(serializedPin, Base64.DEFAULT);
             try {
                 ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(pinData));
@@ -172,9 +183,9 @@ public class PinHandler {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        }
 
-        return pin;
+            return pin;
+        } else throw new IllegalStateException("Serialized pin is not valid base64!");
     }
 
     /**

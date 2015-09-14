@@ -21,6 +21,10 @@ import de.dotwee.micropinner.ui.MainActivity;
  */
 public class OnBootReceiver extends BroadcastReceiver {
     private final static String LOG_TAG = "OnBootReceiver";
+
+    /**
+     * The static and final notification id for "new pin" notifications
+     */
     private final static int DEFAULT_NOTIFICATIONID = 0;
 
     @Override
@@ -51,6 +55,8 @@ public class OnBootReceiver extends BroadcastReceiver {
     }
 
     /**
+     * This method returns a {@link android.app.Notification.Builder}, made for "New pin" notifications
+     *
      * @param context
      * @return the default "new pin" notification
      */

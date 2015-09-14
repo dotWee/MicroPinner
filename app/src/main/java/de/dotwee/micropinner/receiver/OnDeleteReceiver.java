@@ -10,8 +10,10 @@ import de.dotwee.micropinner.tools.PinHandler;
 /**
  * Created by Lukas on 26.06.2015.
  *
- * Receiver for swiped-away pins,
- * tells the pin handler to delete a pin
+ * This class is a broadcast receiver for {@link android.app.Notification} DeleteIntents.
+ *
+ * Intents should contain a serialized pin as extra.
+ * If yes, tell the {@link PinHandler} to delete and remove it from the index.
  */
 public class OnDeleteReceiver extends BroadcastReceiver {
     private final static String LOG_TAG = "OnDeleteReceiver";
@@ -23,9 +25,12 @@ public class OnDeleteReceiver extends BroadcastReceiver {
         PinHandler.Pin pin = (PinHandler.Pin)
                 intent.getSerializableExtra(PinHandler.Pin.EXTRA_INTENT);
 
-        Log.i(LOG_TAG, "Received deleteIntent from pin " + pin.getId());
+        if (pin != null) {
+            Log.i(LOG_TAG, "Received deleteIntent from pin " + pin.getId());
 
-        // and tell the pin handler to remove it from the index
-        new PinHandler(context).removePin(pin);
+            // and tell the pin handler to remove it from the index
+            new PinHandler(context).removePin(pin);
+        } else
+            Log.w(LOG_TAG, "Intent did not contain a pin as serialized extra! " + intent.toString());
     }
 }

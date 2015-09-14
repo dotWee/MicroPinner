@@ -3,6 +3,7 @@ package de.dotwee.micropinner.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import de.dotwee.micropinner.tools.PinHandler;
 
@@ -21,6 +22,8 @@ public class OnDeleteReceiver extends BroadcastReceiver {
         // deserialize our pin from the intent
         PinHandler.Pin pin = (PinHandler.Pin)
                 intent.getSerializableExtra(PinHandler.Pin.EXTRA_INTENT);
+
+        Log.i(LOG_TAG, "Received deleteIntent from pin " + pin.getId());
 
         // and tell the pin handler to remove it from the index
         new PinHandler(context).removePin(pin);

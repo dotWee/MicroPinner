@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,7 +33,6 @@ import de.dotwee.micropinner.ui.MainActivity;
  */
 public class PinHandler {
     private final static String LOG_TAG = "PinHandler";
-    private final static String BASE64_REGEX = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
     private NotificationManager notificationManager;
     private SharedPreferences preferences;
     private Context context;
@@ -55,7 +55,43 @@ public class PinHandler {
      * @return true if valid base64, false is invalid or null
      */
     private static boolean isValidBase64(String string) {
-        return string != null && string.matches(BASE64_REGEX);
+        final String BASE64_REGEX = "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$";
+        if (string != null) if (string.matches(BASE64_REGEX)) return true;
+
+        return false;
+    }
+
+    /**
+     * This method decodes a object from a base64 string.
+     *
+     * @param serializedObject the object to deserialize
+     * @return a deserialized object
+     * @throws IllegalArgumentException
+     */
+    private static Object deserialize(String serializedObject) throws IllegalArgumentException {
+        ObjectInputStream objectInputStream;
+        Object object = new Object();
+
+        if (serializedObject != null) {
+
+            // remove all line seperators
+            serializedObject = serializedObject.replaceAll("\\r\\n|\\r|\\n", "");
+
+            if (isValidBase64(serializedObject)) {
+                byte[] rawData = Base64.decode(serializedObject, Base64.DEFAULT);
+
+                try {
+                    objectInputStream = new ObjectInputStream(new ByteArrayInputStream(rawData));
+                    object = objectInputStream.readObject();
+                    objectInputStream.close();
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+            } else
+                throw new IllegalArgumentException("Input is not valid base64! \nInput: " + serializedObject);
+        } else throw new IllegalArgumentException("Input is null.");
+        return object;
     }
 
     /**
@@ -117,7 +153,12 @@ public class PinHandler {
 
         if (!ids.isEmpty())
             for (int id : ids)
-                pinMap.put(id, getPin(id));
+                try {
+                    pinMap.put(id, getPin(id));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.i(LOG_TAG, "Pin with id=" + id + " does not exist. Skipping...");
+                }
 
         return pinMap;
     }
@@ -128,7 +169,7 @@ public class PinHandler {
      */
     private boolean writeIndex(List<Integer> index) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        String serializedIndex = "";
+        String serializedIndex;
 
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
@@ -150,42 +191,36 @@ public class PinHandler {
      */
     private List<Integer> getIndex() throws IllegalStateException {
         String serializedIndex = preferences.getString("index", null);
-        List<Integer> index = new ArrayList<>();
+        try {
+            Object object = deserialize(serializedIndex);
 
-        if (serializedIndex != null && isValidBase64(serializedIndex)) {
-            byte[] indexData = Base64.decode(serializedIndex, Base64.DEFAULT);
-            try {
-                ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(indexData));
-                index = (List<Integer>) objectInputStream.readObject();
-                objectInputStream.close();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+            if (object instanceof List<?>)
+                return (List<Integer>) object;
 
-            return index;
-        } else throw new IllegalStateException("Serialized pin is not valid base64!");
+            else throw new IllegalStateException("Deserialized object is not a instance of List!");
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            e.printStackTrace();
+
+            Log.w(LOG_TAG, "Couldn't deserialize the index. Returning emply list.");
+        }
+
+        return new ArrayList<Integer>();
     }
 
     /**
      * @return a pin by its {@param id}
      */
-    private Pin getPin(int id) throws IllegalStateException {
-        String key = "pin_" + id;
-        Pin pin = null;
+    private Pin getPin(int id) throws Exception {
 
-        String serializedPin = preferences.getString(key, null);
-        if (serializedPin != null && isValidBase64(serializedPin)) {
-            byte[] pinData = Base64.decode(serializedPin, Base64.DEFAULT);
-            try {
-                ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(pinData));
-                pin = (Pin) objectInputStream.readObject();
-                objectInputStream.close();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+        String serializedPin = preferences.getString(Pin.getName(id), null);
+        if (serializedPin != null) {
+            Object object = deserialize(serializedPin);
 
-            return pin;
-        } else throw new IllegalStateException("Serialized pin is not valid base64!");
+            if (object instanceof Pin) {
+                Log.i(LOG_TAG, "Successfully deserialized pin " + ((Pin) object).getId());
+                return (Pin) object;
+            } else throw new IllegalStateException("Deserialized object is not a instance of Pin!");
+        } else throw new Exception("Pin does not exist.");
     }
 
     /**
@@ -205,6 +240,10 @@ public class PinHandler {
 
         boolean persistent = false;
 
+        public Pin() {
+
+        }
+
         public Pin(int visibility, int priority, String title, String content, boolean persistent) {
             this.id = new Random().nextInt(Integer.MAX_VALUE - 2) + 1;
 
@@ -213,6 +252,13 @@ public class PinHandler {
             this.title = title;
             this.content = content;
             this.persistent = persistent;
+        }
+
+        public static String getName(int id) {
+            Pin pin = new Pin();
+            pin.setId(id);
+
+            return pin.getName();
         }
 
         public int getId() {

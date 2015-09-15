@@ -40,7 +40,7 @@ public class PinHandler {
     /**
      * Default constructor
      *
-     * @param context
+     * @param context needed to get access to {@link SharedPreferences} and {@link NotificationManager}
      */
     public PinHandler(Context context) {
         this.notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -108,7 +108,9 @@ public class PinHandler {
     }
 
     /**
-     * Delete a {@param pin} from preferences and index
+     * This method calls methods to delete a pin from shared preferences and remove it from the index.
+     *
+     * @param pin to delete / remove
      */
     public void removePin(Pin pin) {
         removeFromPreferences(pin);
@@ -116,7 +118,9 @@ public class PinHandler {
     }
 
     /**
-     * Add a {@param id}'s id to the index
+     * This method add a pin-id to the list of undeleted pins.
+     *
+     * @param id to add to index
      */
     private void addToIndex(int id) {
         List<Integer> ids = getIndex();
@@ -126,7 +130,9 @@ public class PinHandler {
     }
 
     /**
-     * Removes a {@param pin} from the index
+     * This method removes a pin from the index.
+     *
+     * @param pin to remove
      */
     private void removeFromIndex(Pin pin) {
         List<Integer> oldIndex = getIndex(), newIndex = new ArrayList<>();
@@ -145,7 +151,9 @@ public class PinHandler {
     }
 
     /**
-     * @return all pins in a key-map
+     * This method returns a map of all pins
+     *
+     * @return a key-map with all pins
      */
     public Map<Integer, Pin> getPins() {
         Map<Integer, Pin> pinMap = new HashMap<>();
@@ -164,8 +172,7 @@ public class PinHandler {
     }
 
     /**
-     * Serializes the {@param index} and writes it to shared preferences
-     * @return true on success, false on error
+     * This method serializes the {@param index} and writes it to shared preferences
      */
     private void writeIndex(List<Integer> index) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -186,6 +193,8 @@ public class PinHandler {
     }
 
     /**
+     * This method returns the current index of pin ids
+     *
      * @return the current index of pins
      */
     private List<Integer> getIndex() throws IllegalStateException {
@@ -207,7 +216,11 @@ public class PinHandler {
     }
 
     /**
-     * @return a pin by its {@param id}
+     * This method tries to read a pin from shared preferences by its id
+     *
+     * @param id of the pin to return
+     * @return the specific pin
+     * @throws Exception is pin does not exist or is not actually a pin
      */
     private Pin getPin(int id) throws Exception {
 
@@ -230,11 +243,17 @@ public class PinHandler {
         public final static String EXTRA_INTENT = "IAMAPIN";
         private final static String LOG_TAG = "Pin";
 
+        /* default visibility */
         int visibility = 1;
+
+        /* default priority */
         int priority = 0;
+
+        /* default pin id */
         int id = 0;
 
         String title = "";
+
         String content = "";
 
         boolean persistent = false;

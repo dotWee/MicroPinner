@@ -24,11 +24,11 @@ import de.dotwee.micropinner.tools.PreferencesHandler;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, Switch.OnCheckedChangeListener {
     private final static String LOG_TAG = "MainActivity";
 
-    NotificationManager notificationManager;
-    PreferencesHandler preferencesHandler;
-    PinHandler.Pin parentPin;
-    boolean hasParentPin;
-    MainView mainView;
+    private NotificationManager notificationManager;
+    private PreferencesHandler preferencesHandler;
+    private PinHandler.Pin parentPin;
+    private boolean hasParentPin;
+    private MainView mainView;
 
     /**
      * This method checks if the user's device is a tablet, depending on device density.

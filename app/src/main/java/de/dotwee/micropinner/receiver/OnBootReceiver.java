@@ -16,9 +16,6 @@ import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 import de.dotwee.micropinner.ui.MainActivity;
 
-/**
- * Created by Lukas on 09.06.2015.
- */
 public class OnBootReceiver extends BroadcastReceiver {
     private final static String LOG_TAG = "OnBootReceiver";
 

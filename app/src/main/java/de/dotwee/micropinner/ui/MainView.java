@@ -23,23 +23,26 @@ import de.dotwee.micropinner.tools.PreferencesHandler;
 /**
  * Created by Lukas Wolfsteiner on 08.09.2015
  */
-public class MainView {
-    public CheckBox checkBoxShowNewPin, checkBoxPersistentPin;
-    public Spinner spinnerVisibility, spinnerPriority;
-    public EditText editTextContent, editTextTitle;
+class MainView {
+    public CheckBox checkBoxShowNewPin;
+    private CheckBox checkBoxPersistentPin;
+    private Spinner spinnerVisibility;
+    private Spinner spinnerPriority;
+    private EditText editTextContent;
+    private EditText editTextTitle;
 
-    public List<View> advancedViewList, clickViewList;
+    public List<View> advancedViewList;
     public Button buttonCancel;
     public Switch switchAdvanced;
-    public TextView dialogTitle;
+    private TextView dialogTitle;
 
-    private Switch.OnCheckedChangeListener onCheckedChangeListener;
-    private View.OnClickListener onClickListener;
-    private View.OnLongClickListener onLongClickListener;
+    private final Switch.OnCheckedChangeListener onCheckedChangeListener;
+    private final View.OnClickListener onClickListener;
+    private final View.OnLongClickListener onLongClickListener;
 
-    private PreferencesHandler preferencesHandler;
-    private Context activity;
-    private View view;
+    private final PreferencesHandler preferencesHandler;
+    private final Context activity;
+    private final View view;
 
     public MainView(Context context, View.OnClickListener onClickListener, View.OnLongClickListener onLongClickListener, Switch.OnCheckedChangeListener onCheckedChangeListener) {
         this.preferencesHandler = PreferencesHandler.getInstance(context);
@@ -120,7 +123,7 @@ public class MainView {
         advancedViewList.add(checkBoxPersistentPin);
         advancedViewList.add(checkBoxShowNewPin);
 
-        clickViewList = new ArrayList<>();
+        List<View> clickViewList = new ArrayList<>();
         clickViewList.add(view.findViewById(R.id.buttonCancel));
         clickViewList.add(view.findViewById(R.id.buttonPin));
         clickViewList.add(switchAdvanced);

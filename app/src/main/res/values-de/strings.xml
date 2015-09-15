@@ -21,15 +21,15 @@
     <string name="input_hint_title">Titel</string>
     <string name="input_hint_content">Inhalt</string>
 
-    <string name="message_visibility_unsupported">Hey! Sieht aus als verwendest du eine Android-Version, bei der die Sichtbarkein nicht unterstützt wird.</string>
+    <string name="message_visibility_unsupported">Du verwendest eine Android-Version, bei der unterschiedliche Sichtbarkeit leider nicht unterstützt wird.</string>
     <string name="message_empty_title">Du musst einen Titel eingeben.</string>
-    <string name="message_pin_new">Klick um einen neuen Pin zu erstellen.</string>
+    <string name="message_pin_new">Klicke hier, um einen neuen Pin zu erstellen</string>
 
     <string name="visibility_public">Normal</string>
     <string name="visibility_private">Privat</string>
     <string name="visibility_secret">Geheim</string>
 
-    <string name="priority_min">Minimum</string>
+    <string name="priority_min">Minimal</string>
     <string name="priority_low">Niedrig</string>
     <string name="priority_high">Hoch</string>
     <string name="priority_default">Normal</string>

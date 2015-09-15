@@ -9,14 +9,14 @@ import android.preference.PreferenceManager;
  * for project MicroPinner.
  */
 public class PreferencesHandler {
-    public static final String PREF_FIRSTUSE = "pref_firstuse",
-            PREF_SHOWNEWPIN = "pref_shownewpin",
-            PREF_ADVANCEDUSE = "pref_advanceduse",
-            PREF_LIGHTTHEME = "pref_lighttheme";
+    private static final String PREF_FIRSTUSE = "pref_firstuse";
+    private static final String PREF_SHOWNEWPIN = "pref_shownewpin";
+    private static final String PREF_ADVANCEDUSE = "pref_advanceduse";
+    private static final String PREF_LIGHTTHEME = "pref_lighttheme";
 
     private final static String LOG_TAG = "PreferencesHandler";
     private static PreferencesHandler instance;
-    private SharedPreferences preferences;
+    private final SharedPreferences preferences;
 
     private PreferencesHandler(Context context) {
         this.preferences = PreferenceManager.getDefaultSharedPreferences(context);

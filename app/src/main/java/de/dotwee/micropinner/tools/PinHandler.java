@@ -33,9 +33,9 @@ import de.dotwee.micropinner.ui.MainActivity;
  */
 public class PinHandler {
     private final static String LOG_TAG = "PinHandler";
-    private NotificationManager notificationManager;
-    private SharedPreferences preferences;
-    private Context context;
+    private final NotificationManager notificationManager;
+    private final SharedPreferences preferences;
+    private final Context context;
 
     /**
      * Default constructor
@@ -167,7 +167,7 @@ public class PinHandler {
      * Serializes the {@param index} and writes it to shared preferences
      * @return true on success, false on error
      */
-    private boolean writeIndex(List<Integer> index) {
+    private void writeIndex(List<Integer> index) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         String serializedIndex;
 
@@ -179,11 +179,10 @@ public class PinHandler {
             serializedIndex = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            return;
         }
 
         preferences.edit().putString("index", serializedIndex).apply();
-        return true;
     }
 
     /**
@@ -204,7 +203,7 @@ public class PinHandler {
             Log.w(LOG_TAG, "Couldn't deserialize the index. Returning emply list.");
         }
 
-        return new ArrayList<Integer>();
+        return new ArrayList<>();
     }
 
     /**

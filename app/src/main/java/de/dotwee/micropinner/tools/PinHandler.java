@@ -90,6 +90,7 @@ public class PinHandler {
 
             } else
                 throw new IllegalArgumentException("Input is not valid base64! \nInput: " + serializedObject);
+
         } else throw new IllegalArgumentException("Input is null.");
         return object;
     }
@@ -199,11 +200,12 @@ public class PinHandler {
      */
     private List<Integer> getIndex() throws IllegalStateException {
         String serializedIndex = preferences.getString("index", null);
+        List<Integer> list = new ArrayList<>();
         try {
             Object object = deserialize(serializedIndex);
 
             if (object instanceof List<?>)
-                return (List<Integer>) object;
+                list = (List<Integer>) object;
 
             else throw new IllegalStateException("Deserialized object is not a instance of List!");
         } catch (IllegalArgumentException | IllegalStateException e) {
@@ -212,7 +214,7 @@ public class PinHandler {
             Log.w(LOG_TAG, "Couldn't deserialize the index. Returning emply list.");
         }
 
-        return new ArrayList<>();
+        return list;
     }
 
     /**
@@ -231,8 +233,10 @@ public class PinHandler {
             if (object instanceof Pin) {
                 Log.i(LOG_TAG, "Successfully deserialized pin " + ((Pin) object).getId());
                 return (Pin) object;
+
             } else throw new IllegalStateException("Deserialized object is not a instance of Pin!");
-        } else throw new Exception("Pin does not exist.");
+
+        } else throw new IllegalArgumentException("Pin does not exist.");
     }
 
     /**
@@ -343,6 +347,8 @@ public class PinHandler {
                 return Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
             } catch (IOException e) {
                 e.printStackTrace();
+
+                Log.w(LOG_TAG, "Couldn't encode object to base64!");
             }
 
             return null;

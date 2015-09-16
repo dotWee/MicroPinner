@@ -33,6 +33,11 @@ import de.dotwee.micropinner.ui.MainActivity;
  */
 public class PinHandler {
     private final static String LOG_TAG = "PinHandler";
+    /**
+     * Encoder flag bit to omit all line terminators (i.e., the output
+     * will be on one long line).
+     */
+    private final static int BASE64_DEFAULT_FLAG = Base64.NO_WRAP;
     private final NotificationManager notificationManager;
     private final SharedPreferences preferences;
     private final Context context;
@@ -78,7 +83,7 @@ public class PinHandler {
             serializedObject = serializedObject.replaceAll("\\r\\n|\\r|\\n", "");
 
             if (isValidBase64(serializedObject)) {
-                byte[] rawData = Base64.decode(serializedObject, Base64.DEFAULT);
+                byte[] rawData = Base64.decode(serializedObject, BASE64_DEFAULT_FLAG);
 
                 try {
                     objectInputStream = new ObjectInputStream(new ByteArrayInputStream(rawData));
@@ -184,7 +189,7 @@ public class PinHandler {
             objectOutputStream.writeObject(index);
             objectOutputStream.close();
 
-            serializedIndex = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+            serializedIndex = Base64.encodeToString(byteArrayOutputStream.toByteArray(), BASE64_DEFAULT_FLAG);
         } catch (IOException e) {
             e.printStackTrace();
             return;
@@ -344,7 +349,7 @@ public class PinHandler {
                 objectOutputStream.writeObject(this);
                 objectOutputStream.close();
 
-                return Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+                return Base64.encodeToString(byteArrayOutputStream.toByteArray(), BASE64_DEFAULT_FLAG);
             } catch (IOException e) {
                 e.printStackTrace();
 

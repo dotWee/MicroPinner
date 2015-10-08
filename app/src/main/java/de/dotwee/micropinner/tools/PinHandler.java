@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Random;
 
 import de.dotwee.micropinner.R;
+import de.dotwee.micropinner.receiver.OnClipReceiver;
 import de.dotwee.micropinner.receiver.OnDeleteReceiver;
 import de.dotwee.micropinner.ui.MainActivity;
 
@@ -323,13 +324,18 @@ public class PinHandler {
             return "pin_" + id;
         }
 
-        @SuppressWarnings("ResourceType")
         public Notification toNotification(Context context, PendingIntent contentIntent) {
+            //noinspection ResourceType
             Notification.Builder notification = new Notification.Builder(context)
                     .setContentTitle(title)
                     .setContentText(content)
                     .setSmallIcon(R.drawable.ic_notif_star)
                     .setPriority(priority)
+                    .addAction(
+                            R.drawable.ic_action_clip,
+                            context.getString(R.string.message_save_to_clipboard),
+                            PendingIntent.getBroadcast(context, (id + 1), new Intent(context, OnClipReceiver.class).putExtra(Pin.EXTRA_INTENT, this), PendingIntent.FLAG_CANCEL_CURRENT)
+                    )
                     .setDeleteIntent(PendingIntent.getBroadcast(context, id, new Intent(context, OnDeleteReceiver.class).setAction("notification_cancelled").putExtra(Pin.EXTRA_INTENT, this), PendingIntent.FLAG_CANCEL_CURRENT))
                     .setOngoing(persistent);
 
@@ -339,6 +345,13 @@ public class PinHandler {
 
             notification.setContentIntent(contentIntent);
             return notification.build();
+        }
+
+        public String toClipString() {
+            if (content != null && !content.isEmpty())
+                return title + " - " + content;
+
+            else return title;
         }
 
         @Override

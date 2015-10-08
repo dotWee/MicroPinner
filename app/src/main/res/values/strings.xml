@@ -22,8 +22,10 @@
     <string name="input_hint_content">Content</string>
 
     <string name="message_visibility_unsupported">Hey! Seems like you are using a older Android Version, where the visibility-setting is unsupported.</string>
+    <string name="message_cliped_pin">Pin has been copied to clipboard.</string>
     <string name="message_empty_title">The title has to contain text.</string>
     <string name="message_pin_new">Click to pin something new.</string>
+    <string name="message_save_to_clipboard">Save to clipboard</string>
 
     <string name="visibility_public">public</string>
     <string name="visibility_private">private</string>

@@ -22,8 +22,10 @@
     <string name="input_hint_content">Inhalt</string>
 
     <string name="message_visibility_unsupported">Du verwendest eine Android-Version, bei der unterschiedliche Sichtbarkeit leider nicht unterstützt wird.</string>
+    <string name="message_cliped_pin">Pin wurde in die Zwischenablage kopiert.</string>
     <string name="message_empty_title">Du musst einen Titel eingeben.</string>
     <string name="message_pin_new">Klicke hier, um einen neuen Pin zu erstellen</string>
+    <string name="message_save_to_clipboard">In die Zwischenablage kopieren</string>
 
     <string name="visibility_public">Normal</string>
     <string name="visibility_private">Privat</string>

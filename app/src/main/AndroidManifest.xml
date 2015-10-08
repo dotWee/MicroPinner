@@ -24,6 +24,8 @@
 
         <receiver android:name=".receiver.OnDeleteReceiver" />
 
+        <receiver android:name=".receiver.OnClipReceiver" />
+
         <receiver
             android:name=".receiver.OnBootReceiver"
             android:exported="true">

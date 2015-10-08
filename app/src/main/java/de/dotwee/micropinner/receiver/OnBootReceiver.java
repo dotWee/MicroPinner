@@ -71,7 +71,7 @@ public class OnBootReceiver extends BroadcastReceiver {
                 .setOngoing(true)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.ic_pin_24dp);
+                .setSmallIcon(R.drawable.ic_notif_pin);
 
 
         // function .setShowWhen is only available on API => 17

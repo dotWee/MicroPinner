@@ -328,7 +328,7 @@ public class PinHandler {
             Notification.Builder notification = new Notification.Builder(context)
                     .setContentTitle(title)
                     .setContentText(content)
-                    .setSmallIcon(R.drawable.ic_star_24dp)
+                    .setSmallIcon(R.drawable.ic_notif_star)
                     .setPriority(priority)
                     .setDeleteIntent(PendingIntent.getBroadcast(context, id, new Intent(context, OnDeleteReceiver.class).setAction("notification_cancelled").putExtra(Pin.EXTRA_INTENT, this), PendingIntent.FLAG_CANCEL_CURRENT))
                     .setOngoing(persistent);

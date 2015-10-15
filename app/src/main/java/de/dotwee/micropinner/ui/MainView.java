@@ -21,28 +21,26 @@ import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 
 /**
- * Created by Lukas Wolfsteiner on 08.09.2015
+ * Created by Lukas Wolfsteiner on 12.10.2015.
  */
-class MainView {
+public class MainView implements MainActivity.ViewWrapper {
+    private static final String LOG_TAG = "MainView";
+    private final Switch.OnCheckedChangeListener onCheckedChangeListener;
+    private final View.OnClickListener onClickListener;
+    private final View.OnLongClickListener onLongClickListener;
+    private final PreferencesHandler preferencesHandler;
+    private final Context activity;
+    private final View view;
     public CheckBox checkBoxShowNewPin;
+    public List<View> advancedViewList;
+    public Button buttonCancel;
+    public Switch switchAdvanced;
     private CheckBox checkBoxPersistentPin;
     private Spinner spinnerVisibility;
     private Spinner spinnerPriority;
     private EditText editTextContent;
     private EditText editTextTitle;
-
-    public List<View> advancedViewList;
-    public Button buttonCancel;
-    public Switch switchAdvanced;
     private TextView dialogTitle;
-
-    private final Switch.OnCheckedChangeListener onCheckedChangeListener;
-    private final View.OnClickListener onClickListener;
-    private final View.OnLongClickListener onLongClickListener;
-
-    private final PreferencesHandler preferencesHandler;
-    private final Context activity;
-    private final View view;
 
     public MainView(Context context, View.OnClickListener onClickListener, View.OnLongClickListener onLongClickListener, Switch.OnCheckedChangeListener onCheckedChangeListener) {
         this.preferencesHandler = PreferencesHandler.getInstance(context);
@@ -54,22 +52,17 @@ class MainView {
         this.view = ((MainActivity) activity).findViewById(android.R.id.content);
     }
 
-    /**
-     * Main function to coordinate sub-functions.
-     */
-    public void init() {
-        this.find();
+    @Override
+    public void onCreate() {
+        onViewCreated();
+        onViewRestore();
 
         adaptSpinner();
         adaptLists();
-        restore();
     }
 
-    /**
-     * Setup aaaall the view object by finding them on the context's view.
-     */
-    private void find() {
-
+    @Override
+    public void onViewCreated() {
         // setup the dialog header and title
         dialogTitle = (TextView) view.findViewById(R.id.dialogTitle);
         buttonCancel = (Button) view.findViewById(R.id.buttonCancel);
@@ -91,10 +84,31 @@ class MainView {
         spinnerVisibility = (Spinner) view.findViewById(R.id.spinnerVisibility);
     }
 
-    /**
-     * Init the spinner with adapters.
-     */
-    private void adaptSpinner() {
+    @Override
+    public void onViewRestore() {
+        // set the dialog title
+        dialogTitle.setText(activity.getResources().getString(R.string.main_name));
+
+        // set focus to the title input
+        editTextTitle.performClick();
+
+        switchAdvanced.setChecked(preferencesHandler.isAdvancedUsed());
+        checkBoxShowNewPin.setChecked(preferencesHandler.isShowNewPinEnabled());
+    }
+
+    @Override
+    public void onViewRestore(PinHandler.Pin pin) {
+
+        // set the dialog title
+        dialogTitle.setText(activity.getResources().getString(R.string.edit_name));
+
+        editTextTitle.setText(pin.getTitle());
+        editTextContent.setText(pin.getContent());
+        checkBoxPersistentPin.setChecked(pin.isPersistent());
+    }
+
+    @Override
+    public void adaptSpinner() {
         ArrayAdapter<String> visibilityAdapter = new ArrayAdapter<>(
                 activity,
                 android.R.layout.simple_spinner_item,
@@ -114,11 +128,8 @@ class MainView {
         spinnerPriority.setAdapter(priorityAdapter);
     }
 
-    /**
-     * Init the view lists advancedViewList and clickViewList.
-     * Used to simplify view.setOnClickListener() and the advanced view switch.
-     */
-    private void adaptLists() {
+    @Override
+    public void adaptLists() {
         advancedViewList = new ArrayList<>();
         advancedViewList.add(checkBoxPersistentPin);
         advancedViewList.add(checkBoxShowNewPin);
@@ -133,57 +144,17 @@ class MainView {
             view.setOnClickListener(onClickListener);
     }
 
-    /**
-     * Restore checkBoxes and the main view to their last state and set the view-focus to editTextTitle.
-     */
-    private void restore() {
-
-        // set the dialog title
-        dialogTitle.setText(activity.getResources().getString(R.string.main_name));
-
-        // set focus to the title input
-        editTextTitle.performClick();
-
-        switchAdvanced.setChecked(preferencesHandler.isAdvancedUsed());
-        checkBoxShowNewPin.setChecked(preferencesHandler.isShowNewPinEnabled());
-    }
-
-    /**
-     * Restore data from a parent.
-     *
-     * @param pin should be the parent.
-     */
-    public void restore(PinHandler.Pin pin) {
-
-        // set the dialog title
-        dialogTitle.setText(activity.getResources().getString(R.string.edit_name));
-
-        editTextTitle.setText(pin.getTitle());
-        editTextContent.setText(pin.getContent());
-        checkBoxPersistentPin.setChecked(pin.isPersistent());
-    }
-
-    /**
-     * Getter for pin's title.
-     *
-     * @return the content of editTextTitle.
-     */
+    @Override
     public String getTitle() {
         return editTextTitle.getText().toString();
     }
 
-    /**
-     * Getter for pin's content.
-     *
-     * @return the content of editTextContent.
-     */
+    @Override
     public String getContent() {
         return editTextContent.getText().toString();
     }
 
-    /**
-     * @return the selected priority.
-     */
+    @Override
     public int getPriority() {
         String selected = spinnerPriority.getSelectedItem().toString();
 
@@ -196,11 +167,7 @@ class MainView {
         else return Notification.PRIORITY_DEFAULT;
     }
 
-    /**
-     * Checks the availability of the visibility-api.
-     *
-     * @return the selected visibility or zero if it's not supported.
-     */
+    @Override
     public int getVisibility() {
         String selected = spinnerVisibility.getSelectedItem().toString();
 
@@ -216,18 +183,7 @@ class MainView {
         } else return 0;
     }
 
-    /**
-     * @return the state of the persistent-checkbox.
-     */
-    public boolean isPersistent() {
-        return checkBoxPersistentPin.isChecked();
-    }
-
-    /**
-     * Check if the title is not null and not empty.
-     *
-     * @return true if state is acceptable, show a toast if not.
-     */
+    @Override
     public boolean isReady() {
 
         // return true if everything is okay
@@ -238,5 +194,10 @@ class MainView {
         // if not ready, show a message and return false
         Toast.makeText(activity, activity.getText(R.string.message_empty_title), Toast.LENGTH_SHORT).show();
         return false;
+    }
+
+    @Override
+    public boolean isPersistent() {
+        return checkBoxPersistentPin.isChecked();
     }
 }

@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getSystemService(Context.NOTIFICATION_SERVICE);
 
         mainView = new MainView(this, this, this, this);
-        mainView.init();
+        mainView.onViewCreated();
 
         // simulate device-boot by sending a new intent to class OnBootReceiver
         sendBroadcast(new Intent(this, OnBootReceiver.class));
@@ -99,9 +99,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (parentPin.isPersistent())
                 mainView.buttonCancel.setText(getString(R.string.dialog_action_delete));
 
-            mainView.restore(parentPin);
+            mainView.onViewRestore(parentPin);
         }
-
 
     }
 
@@ -192,5 +191,79 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     )
             );
         } else super.setContentView(layoutResID);
+    }
+
+    public interface ViewWrapper {
+
+        /**
+         * This method is a post-init.
+         */
+        void onCreate();
+
+        /**
+         * This method inits all the necessary view variables.
+         */
+        void onViewCreated();
+
+        /**
+         *
+         */
+        void onViewRestore();
+
+        void onViewRestore(PinHandler.Pin pin);
+
+        /**
+         * This method inits the two spinners visibility and priority with adapters.
+         */
+        void adaptSpinner();
+
+        /**
+         * This method inits the view lists advancedViewList and clickViewList.
+         * <p/>
+         * Used to simplify view.setOnClickListener() and the advanced view switch.
+         */
+        void adaptLists();
+
+        /**
+         * This method reads the title edittext and returns its value.
+         *
+         * @return The edittext title's value.
+         */
+        String getTitle();
+
+        /**
+         * This method reads the content edittext and returns its value.
+         *
+         * @return The edittext content's value.
+         */
+        String getContent();
+
+        /**
+         * This method reads the priority spinner and returns its matching type.
+         *
+         * @return Either {@see android.app.Notification.PRIORITY_LOW}, {@see android.app.Notification.PRIORITY_MIN}, {@see android.app.Notification.PRIORITY_HIGH} or {@see android.app.Notification.PRIORITY_DEFAULT}.
+         */
+        int getPriority();
+
+        /**
+         * This method reads the visibility spinner and returns its matching type.
+         *
+         * @return Either {@see android.app.Notification.VISIBILITY_PRIVATE} {@see android.app.Notification.VISIBILITY_SECRET}, {@see android.app.Notification.VISIBILITY_PUBLIC} or 0 if visibility api is not supported.
+         */
+        int getVisibility();
+
+        /**
+         * This method reads the state of the title.
+         *
+         * @return True is title is not null and not empty.
+         */
+        boolean isReady();
+
+        /**
+         * This method reads the state of the persistent-checkbox
+         *
+         * @return True if checkbox is checked.
+         */
+        boolean isPersistent();
     }
 }

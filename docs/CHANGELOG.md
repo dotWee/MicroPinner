@@ -80,10 +80,12 @@
     - Reduced apk to 730kb
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.7/release_v1.7.apk)
 
-#### [Version: 1.7.1 / 8th October 2015]
-- sha1 checksum: 7e409fcf79ed34585dcbefbc7316d2e260366a63
+#### [Version: 1.7.1 / work-in-progress]
+- sha1 checksum:
 - changes:
     - Notification action to copy pin's title (and content, if exists) to clipboard
+    - Built with latest build-tools and updated support package
+    - Material Design Switch for devices with Android 4.x (through updated dependencies)
 
-- download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.7/release_v1.7.apk)
+- download: [Github]()
 

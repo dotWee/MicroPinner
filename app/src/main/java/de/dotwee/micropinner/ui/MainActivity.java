@@ -76,14 +76,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         notificationManager = (NotificationManager)
                 getSystemService(Context.NOTIFICATION_SERVICE);
 
-        mainView = new MainView(this, this, this, this);
-        mainView.onViewCreated();
+        mainView = new MainView(this);
+        mainView.onCreate();
 
         // simulate device-boot by sending a new intent to class OnBootReceiver
         sendBroadcast(new Intent(this, OnBootReceiver.class));
 
         // hide advanced stuff if it hasn't been used the last time
-        switchAdvancedLayout(preferencesHandler.isAdvancedUsed());
+        mainView.onViewExpand(preferencesHandler.isAdvancedUsed());
 
         // check if first use
         if (preferencesHandler.isFirstUse())
@@ -122,11 +122,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void switchAdvancedLayout(boolean expand) {
-        for (View view : mainView.advancedViewList)
-            view.setVisibility(expand ? View.VISIBLE : View.GONE);
-    }
-
     @Override
     public void onClick(View v) {
 
@@ -154,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.switchAdvanced:
-                switchAdvancedLayout(mainView.switchAdvanced.isChecked());
+                mainView.onViewExpand(mainView.switchAdvanced.isChecked());
                 preferencesHandler.setAdvancedUse(mainView.switchAdvanced.isChecked());
                 break;
         }
@@ -164,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
             case R.id.switchAdvanced:
-                switchAdvancedLayout(mainView.switchAdvanced.isChecked());
+                mainView.onViewExpand(mainView.switchAdvanced.isChecked());
                 preferencesHandler.setAdvancedUse(mainView.switchAdvanced.isChecked());
                 break;
         }
@@ -210,7 +205,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          */
         void onViewRestore();
 
+        /**
+         * @param pin
+         */
         void onViewRestore(PinHandler.Pin pin);
+
+        /**
+         *
+         * @param expand
+         */
+        void onViewExpand(boolean expand);
+
+        /**
+         * @param id
+         * @return
+         */
+        View findView(int id);
 
         /**
          * This method inits the two spinners visibility and priority with adapters.

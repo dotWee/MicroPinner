@@ -1,7 +1,7 @@
 package de.dotwee.micropinner.ui;
 
+import android.app.Activity;
 import android.app.Notification;
-import android.content.Context;
 import android.os.Build;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -12,9 +12,6 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.tools.PinHandler;
@@ -29,12 +26,12 @@ public class MainView implements MainActivity.ViewWrapper {
     private final View.OnClickListener onClickListener;
     private final View.OnLongClickListener onLongClickListener;
     private final PreferencesHandler preferencesHandler;
-    private final Context activity;
-    private final View view;
-    public CheckBox checkBoxShowNewPin;
-    public List<View> advancedViewList;
+    private final Activity activity;
+
+    public int[] advancedViewIds, clickViewIds;
     public Button buttonCancel;
     public Switch switchAdvanced;
+    public CheckBox checkBoxShowNewPin;
     private CheckBox checkBoxPersistentPin;
     private Spinner spinnerVisibility;
     private Spinner spinnerPriority;
@@ -42,14 +39,13 @@ public class MainView implements MainActivity.ViewWrapper {
     private EditText editTextTitle;
     private TextView dialogTitle;
 
-    public MainView(Context context, View.OnClickListener onClickListener, View.OnLongClickListener onLongClickListener, Switch.OnCheckedChangeListener onCheckedChangeListener) {
-        this.preferencesHandler = PreferencesHandler.getInstance(context);
-        this.onCheckedChangeListener = onCheckedChangeListener;
-        this.onLongClickListener = onLongClickListener;
-        this.onClickListener = onClickListener;
+    public MainView(MainActivity activity) {
+        this.preferencesHandler = PreferencesHandler.getInstance(activity);
 
-        this.activity = context;
-        this.view = ((MainActivity) activity).findViewById(android.R.id.content);
+        this.onCheckedChangeListener = activity;
+        this.onLongClickListener = activity;
+        this.onClickListener = activity;
+        this.activity = activity;
     }
 
     @Override
@@ -64,24 +60,24 @@ public class MainView implements MainActivity.ViewWrapper {
     @Override
     public void onViewCreated() {
         // setup the dialog header and title
-        dialogTitle = (TextView) view.findViewById(R.id.dialogTitle);
-        buttonCancel = (Button) view.findViewById(R.id.buttonCancel);
+        dialogTitle = (TextView) findView(R.id.dialogTitle);
+        buttonCancel = (Button) findView(R.id.buttonCancel);
 
-        checkBoxShowNewPin = (CheckBox) view.findViewById(R.id.checkBoxNewPin);
-        checkBoxPersistentPin = (CheckBox) view.findViewById(R.id.checkBoxPersistentPin);
+        checkBoxShowNewPin = (CheckBox) findView(R.id.checkBoxNewPin);
+        checkBoxPersistentPin = (CheckBox) findView(R.id.checkBoxPersistentPin);
 
         // edit texts for title and content
-        editTextContent = (EditText) view.findViewById(R.id.editTextContent);
-        editTextTitle = (EditText) view.findViewById(R.id.editTextTitle);
+        editTextContent = (EditText) findView(R.id.editTextContent);
+        editTextTitle = (EditText) findView(R.id.editTextTitle);
 
         // 'advanced' switch
-        switchAdvanced = (Switch) view.findViewById(R.id.switchAdvanced);
+        switchAdvanced = (Switch) findView(R.id.switchAdvanced);
         switchAdvanced.setOnCheckedChangeListener(onCheckedChangeListener);
         switchAdvanced.setOnLongClickListener(onLongClickListener);
 
         // spinner for priority and visibility
-        spinnerPriority = (Spinner) view.findViewById(R.id.spinnerPriority);
-        spinnerVisibility = (Spinner) view.findViewById(R.id.spinnerVisibility);
+        spinnerPriority = (Spinner) findView(R.id.spinnerPriority);
+        spinnerVisibility = (Spinner) findView(R.id.spinnerVisibility);
     }
 
     @Override
@@ -108,6 +104,17 @@ public class MainView implements MainActivity.ViewWrapper {
     }
 
     @Override
+    public void onViewExpand(boolean expand) {
+        for (int viewId : advancedViewIds)
+            findView(viewId).setVisibility(expand ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public View findView(int id) {
+        return activity.findViewById(android.R.id.content);
+    }
+
+    @Override
     public void adaptSpinner() {
         ArrayAdapter<String> visibilityAdapter = new ArrayAdapter<>(
                 activity,
@@ -130,18 +137,22 @@ public class MainView implements MainActivity.ViewWrapper {
 
     @Override
     public void adaptLists() {
-        advancedViewList = new ArrayList<>();
-        advancedViewList.add(checkBoxPersistentPin);
-        advancedViewList.add(checkBoxShowNewPin);
+        this.advancedViewIds = new int[]{
+                R.id.checkBoxPersistentPin,
+                R.id.checkBoxNewPin
+        };
 
-        List<View> clickViewList = new ArrayList<>();
-        clickViewList.add(view.findViewById(R.id.buttonCancel));
-        clickViewList.add(view.findViewById(R.id.buttonPin));
-        clickViewList.add(switchAdvanced);
-        clickViewList.addAll(advancedViewList);
+        this.clickViewIds = new int[]{
+                R.id.checkBoxPersistentPin,
+                R.id.checkBoxNewPin,
 
-        for (View view : clickViewList)
-            view.setOnClickListener(onClickListener);
+                R.id.switchAdvanced,
+                R.id.buttonCancel,
+                R.id.buttonPin
+        };
+
+        for (int viewId : clickViewIds)
+            findView(viewId).setOnClickListener(onClickListener);
     }
 
     @Override

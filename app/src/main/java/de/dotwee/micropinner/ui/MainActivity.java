@@ -18,6 +18,7 @@ import android.widget.Toast;
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.receiver.OnBootReceiver;
 import de.dotwee.micropinner.receiver.OnDeleteReceiver;
+import de.dotwee.micropinner.receiver.OnNewPinReceiver;
 import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.checkBoxNewPin:
                 preferencesHandler.setShowNewPinEnabled(mainView.checkBoxShowNewPin.isChecked());
-                sendBroadcast(new Intent(this, OnBootReceiver.class));
+                sendBroadcast(new Intent(this, OnNewPinReceiver.class));
                 break;
 
             case R.id.switchAdvanced:

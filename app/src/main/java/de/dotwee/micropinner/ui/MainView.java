@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Notification;
 import android.os.Build;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -14,21 +13,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import de.dotwee.micropinner.R;
+import de.dotwee.micropinner.tools.ListTools;
 import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
+import de.dotwee.micropinner.tools.SpinnerTools;
 
 /**
  * Created by Lukas Wolfsteiner on 12.10.2015.
  */
 public class MainView implements MainActivity.ViewWrapper {
     private static final String LOG_TAG = "MainView";
+    public final int[] advancedViewIds, clickViewIds;
     private final Switch.OnCheckedChangeListener onCheckedChangeListener;
     private final View.OnClickListener onClickListener;
     private final View.OnLongClickListener onLongClickListener;
     private final PreferencesHandler preferencesHandler;
     private final Activity activity;
 
-    public int[] advancedViewIds, clickViewIds;
     public Button buttonCancel;
     public Switch switchAdvanced;
     public CheckBox checkBoxShowNewPin;
@@ -41,6 +42,9 @@ public class MainView implements MainActivity.ViewWrapper {
 
     public MainView(MainActivity activity) {
         this.preferencesHandler = PreferencesHandler.getInstance(activity);
+
+        this.advancedViewIds = ListTools.getAdvancedViewIds();
+        this.clickViewIds = ListTools.getClickableViewIds();
 
         this.onCheckedChangeListener = activity;
         this.onLongClickListener = activity;
@@ -111,46 +115,18 @@ public class MainView implements MainActivity.ViewWrapper {
 
     @Override
     public View findView(int id) {
-        return activity.findViewById(android.R.id.content);
+        return activity.findViewById(android.R.id.content).findViewById(id);
     }
 
     @Override
     public void adaptSpinner() {
-        ArrayAdapter<String> visibilityAdapter = new ArrayAdapter<>(
-                activity,
-                android.R.layout.simple_spinner_item,
-                activity.getResources().getStringArray(R.array.array_visibilities)
-        );
+        SpinnerTools.setVisibilityAdapter(activity.getResources(), spinnerVisibility);
 
-        visibilityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerVisibility.setAdapter(visibilityAdapter);
-
-        ArrayAdapter<String> priorityAdapter = new ArrayAdapter<>(
-                activity,
-                android.R.layout.simple_spinner_item,
-                activity.getResources().getStringArray(R.array.array_priorities)
-        );
-
-        priorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerPriority.setAdapter(priorityAdapter);
+        SpinnerTools.setPriorityAdapter(activity.getResources(), spinnerPriority);
     }
 
     @Override
     public void adaptLists() {
-        this.advancedViewIds = new int[]{
-                R.id.checkBoxPersistentPin,
-                R.id.checkBoxNewPin
-        };
-
-        this.clickViewIds = new int[]{
-                R.id.checkBoxPersistentPin,
-                R.id.checkBoxNewPin,
-
-                R.id.switchAdvanced,
-                R.id.buttonCancel,
-                R.id.buttonPin
-        };
-
         for (int viewId : clickViewIds)
             findView(viewId).setOnClickListener(onClickListener);
     }
@@ -171,10 +147,13 @@ public class MainView implements MainActivity.ViewWrapper {
 
         if (selected.equalsIgnoreCase(activity.getString(R.string.priority_low)))
             return Notification.PRIORITY_LOW;
+
         else if (selected.equalsIgnoreCase(activity.getString(R.string.priority_min)))
             return Notification.PRIORITY_MIN;
+
         else if (selected.equalsIgnoreCase(activity.getString(R.string.priority_high)))
             return Notification.PRIORITY_HIGH;
+
         else return Notification.PRIORITY_DEFAULT;
     }
 

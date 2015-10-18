@@ -3,6 +3,11 @@
 MicroPinner is a lightweight dialog-only application, which lets you create your own notifications.
 <br>You can also customize the notifications title and content, as well as its priority and visibility (Android 5.+ only).
 
+[![Build Status](https://travis-ci.org/dotWee/MicroPinner.svg?branch=master)](https://travis-ci.org/dotWee/MicroPinner)
+[![Issues](https://img.shields.io/github/issues/dotWee/MicroPinner.svg)](https://github.com/dotWee/MicroPinner/issues)
+[![Forks](https://img.shields.io/github/forks/dotWee/MicroPinner.svg)](https://github.com/dotWee/MicroPinner/network/members)
+[![Language](https://img.shields.io/badge/language-java-orange.svg)](https://github.com/dotWee/MicroPinner/search?l=java)
+
 <a href="https://play.google.com/store/apps/details?id=de.dotwee.micropinner">
   <img alt="Get it on Google Play"
        src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />

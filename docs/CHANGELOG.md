@@ -83,9 +83,9 @@
 #### [Version: 1.7.1 / work-in-progress]
 - sha1 checksum:
 - changes:
-    - Notification action to copy pin's title (and content, if exists) to clipboard
     - Built with latest build-tools and updated support package
+    - Light-Theme enabled by default (switch back to dark by long-click on the advanced-switch)
     - Material Design Switch for devices with Android 4.x (through updated dependencies)
-
+    - Notification action to copy pin's title (and content, if exists) to clipboard
 - download: [Github]()
 

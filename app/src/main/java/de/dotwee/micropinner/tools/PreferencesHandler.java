@@ -57,7 +57,7 @@ public class PreferencesHandler {
     }
 
     public boolean isLightThemeEnabled() {
-        return preferences.getBoolean(PREF_LIGHTTHEME, false);
+        return preferences.getBoolean(PREF_LIGHTTHEME, true);
     }
 
     public void setLightThemeEnabled(Boolean b) {

@@ -309,6 +309,14 @@ public class PinHandler {
             return content;
         }
 
+        public int getVisibility() {
+            return visibility;
+        }
+
+        public int getPriority() {
+            return priority;
+        }
+
         public boolean isPersistent() {
             return persistent;
         }

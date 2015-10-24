@@ -87,5 +87,6 @@
     - Light-Theme enabled by default (switch back to dark by long-click on the advanced-switch)
     - Material Design Switch for devices with Android 4.x (through updated dependencies)
     - Notification action to copy pin's title (and content, if exists) to clipboard
+    - Priority and visibility restoring for pin-editing
 - download: [Github]()
 

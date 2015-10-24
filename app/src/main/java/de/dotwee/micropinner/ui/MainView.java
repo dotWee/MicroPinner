@@ -1,8 +1,6 @@
 package de.dotwee.micropinner.ui;
 
 import android.app.Activity;
-import android.app.Notification;
-import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -104,6 +102,18 @@ public class MainView implements MainActivity.ViewWrapper {
 
         editTextTitle.setText(pin.getTitle());
         editTextContent.setText(pin.getContent());
+
+        spinnerPriority.setSelection(
+                SpinnerTools.getPriorityPosition(pin.getPriority()),
+                true // true for animation
+        );
+
+
+        spinnerVisibility.setSelection(
+                SpinnerTools.getVisibilityPosition(pin.getVisibility()),
+                true // true for animation
+        );
+
         checkBoxPersistentPin.setChecked(pin.isPersistent());
     }
 
@@ -143,34 +153,12 @@ public class MainView implements MainActivity.ViewWrapper {
 
     @Override
     public int getPriority() {
-        String selected = spinnerPriority.getSelectedItem().toString();
-
-        if (selected.equalsIgnoreCase(activity.getString(R.string.priority_low)))
-            return Notification.PRIORITY_LOW;
-
-        else if (selected.equalsIgnoreCase(activity.getString(R.string.priority_min)))
-            return Notification.PRIORITY_MIN;
-
-        else if (selected.equalsIgnoreCase(activity.getString(R.string.priority_high)))
-            return Notification.PRIORITY_HIGH;
-
-        else return Notification.PRIORITY_DEFAULT;
+        return SpinnerTools.getPriorityResource(spinnerPriority.getSelectedItemPosition());
     }
 
     @Override
     public int getVisibility() {
-        String selected = spinnerVisibility.getSelectedItem().toString();
-
-        // check availability
-        if (Build.VERSION.SDK_INT >= 21) {
-            if (selected.equalsIgnoreCase(activity.getString(R.string.visibility_private)))
-                return Notification.VISIBILITY_PRIVATE;
-
-            else if (selected.equalsIgnoreCase(activity.getString(R.string.visibility_secret)))
-                return Notification.VISIBILITY_SECRET;
-
-            else return Notification.VISIBILITY_PUBLIC;
-        } else return 0;
+        return SpinnerTools.getVisibilityResource(spinnerVisibility.getSelectedItemPosition());
     }
 
     @Override

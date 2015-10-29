@@ -11,7 +11,7 @@ import android.os.Build;
 
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.tools.PreferencesHandler;
-import de.dotwee.micropinner.ui.MainActivity;
+import de.dotwee.micropinner.view.MainActivity;
 
 /**
  * Created by Lukas Wolfsteiner on 17.10.2015.
@@ -27,7 +27,7 @@ public class OnNewPinReceiver extends BroadcastReceiver {
     /**
      * This method returns a {@link android.app.Notification.Builder}, made for "New pin" notifications
      *
-     * @param context
+     * @param context Needed to get access to the Notification Manager
      * @return the default "new pin" notification
      */
     private static Notification getNotification(Context context) {

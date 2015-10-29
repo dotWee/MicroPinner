@@ -26,7 +26,7 @@ import java.util.Random;
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.receiver.OnClipReceiver;
 import de.dotwee.micropinner.receiver.OnDeleteReceiver;
-import de.dotwee.micropinner.ui.MainActivity;
+import de.dotwee.micropinner.view.MainActivity;
 
 /**
  * Created by lukas on 18.08.2015 - 16:33

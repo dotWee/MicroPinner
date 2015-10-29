@@ -3,6 +3,7 @@ package de.dotwee.micropinner.view;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -32,23 +33,15 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
     private MainPresenterImpl mainPresenter;
 
     /**
-     * This method checks if the user's device is a tablet, depending on device density.
+     * This method checks if the user's device is a tablet, depending on the official resource {@link Configuration}.
      *
      * @param context needed to get resources
      * @return true if device screen size is greater than 6 inches
      */
     private static boolean isTablet(Context context) {
-
-        // Compute screen size
-        DisplayMetrics dm = context.getResources().getDisplayMetrics();
-
-        float width = dm.widthPixels / dm.xdpi;
-        float height = dm.heightPixels / dm.ydpi;
-
-        double size = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-        // Tablet devices should have a screen size greater than 6 inches
-        return size >= 6;
+        return (context.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
     @Override

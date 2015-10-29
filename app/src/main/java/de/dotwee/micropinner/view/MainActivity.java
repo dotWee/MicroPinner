@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
      *
      */
     @Override
-    public void setOnLongClickListener(int... ids) {
+    public void setOnLongClickListener(@NonNull @IdRes int... ids) {
         for (int id : ids) {
             View view = findViewById(id);
 

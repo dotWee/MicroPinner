@@ -22,8 +22,7 @@ public class OnDeleteReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         // deserialize our pin from the intent
-        PinHandler.Pin pin = (PinHandler.Pin)
-                intent.getSerializableExtra(PinHandler.Pin.EXTRA_INTENT);
+        PinHandler.Pin pin = (PinHandler.Pin) intent.getSerializableExtra(PinHandler.Pin.EXTRA_INTENT);
 
         if (pin != null) {
             Log.i(LOG_TAG, "Received deleteIntent from pin " + pin.getId());

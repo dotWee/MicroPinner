@@ -22,7 +22,7 @@ public class OnNewPinReceiver extends BroadcastReceiver {
     /**
      * The static and final notification id for "new pin" notifications
      */
-    private static final int DEFAULT_NOTIFICATIONID = 0;
+    private static final int DEFAULT_NOTIFICATION_ID = 0;
 
     /**
      * This method returns a {@link android.app.Notification.Builder}, made for "New pin" notifications
@@ -35,7 +35,7 @@ public class OnNewPinReceiver extends BroadcastReceiver {
         PendingIntent pendingIntent = TaskStackBuilder.create(context)
                 .addParentStack(MainActivity.class)
                 .addNextIntent(new Intent(context, MainActivity.class))
-                .getPendingIntent(DEFAULT_NOTIFICATIONID, PendingIntent.FLAG_UPDATE_CURRENT);
+                .getPendingIntent(DEFAULT_NOTIFICATION_ID, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification.Builder defaultNotification = new Notification.Builder(context)
                 .setContentTitle(context.getResources().getString(R.string.main_name))
@@ -66,12 +66,12 @@ public class OnNewPinReceiver extends BroadcastReceiver {
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (showNotification) notificationManager.notify(
-                DEFAULT_NOTIFICATIONID,
+                DEFAULT_NOTIFICATION_ID,
                 getNotification(context)
         );
 
         else notificationManager.cancel(
-                DEFAULT_NOTIFICATIONID
+                DEFAULT_NOTIFICATION_ID
         );
 
     }

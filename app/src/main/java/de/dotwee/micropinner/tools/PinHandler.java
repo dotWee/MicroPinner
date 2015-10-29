@@ -71,7 +71,7 @@ public class PinHandler {
      * This method decodes a object from a base64 string.
      *
      * @param serializedObject the object to deserialize
-     * @return a deserialized object
+     * @return a unserialized object
      * @throws IllegalArgumentException
      */
     private static Object deserialize(String serializedObject) throws IllegalArgumentException {
@@ -80,7 +80,7 @@ public class PinHandler {
 
         if (serializedObject != null) {
 
-            // remove all line seperators
+            // remove all line separators
             serializedObject = serializedObject.replaceAll("\\r\\n|\\r|\\n", "");
 
             if (isValidBase64(serializedObject)) {
@@ -125,7 +125,7 @@ public class PinHandler {
     }
 
     /**
-     * This method add a pin-id to the list of undeleted pins.
+     * This method adds a pin-id to the list of pins.
      *
      * @param id to add to index
      */
@@ -213,11 +213,11 @@ public class PinHandler {
             if (object instanceof List<?>)
                 list = (List<Integer>) object;
 
-            else throw new IllegalStateException("Deserialized object is not a instance of List!");
+            else throw new IllegalStateException("Object is not a instance of List!");
         } catch (IllegalArgumentException | IllegalStateException e) {
             e.printStackTrace();
 
-            Log.w(LOG_TAG, "Couldn't deserialize the index. Returning emply list.");
+            Log.w(LOG_TAG, "Couldn't deserialize the index. Returning empty list.");
         }
 
         return list;
@@ -240,7 +240,7 @@ public class PinHandler {
                 Log.i(LOG_TAG, "Successfully deserialized pin " + ((Pin) object).getId());
                 return (Pin) object;
 
-            } else throw new IllegalStateException("Deserialized object is not a instance of Pin!");
+            } else throw new IllegalStateException("Deserialize object is not a instance of Pin!");
 
         } else throw new IllegalArgumentException("Pin does not exist.");
     }

@@ -9,10 +9,10 @@ import android.preference.PreferenceManager;
  * for project MicroPinner.
  */
 public class PreferencesHandler {
-    private static final String PREF_FIRSTUSE = "pref_firstuse";
-    private static final String PREF_SHOWNEWPIN = "pref_shownewpin";
-    private static final String PREF_ADVANCEDUSE = "pref_advanceduse";
-    private static final String PREF_LIGHTTHEME = "pref_lighttheme";
+    private static final String PREF_FIRST_USE = "pref_firstuse";
+    private static final String PREF_SHOW_NEW_PIN_NOTIFICATION = "pref_shownewpin";
+    private static final String PREF_ADVANCED_USE = "pref_advanceduse";
+    private static final String PREF_LIGHT_THEME = "pref_lighttheme";
 
     private final static String LOG_TAG = "PreferencesHandler";
     private static PreferencesHandler instance;
@@ -30,18 +30,18 @@ public class PreferencesHandler {
     }
 
     public boolean isShowNewPinEnabled() {
-        return preferences.getBoolean(PREF_SHOWNEWPIN, true);
+        return preferences.getBoolean(PREF_SHOW_NEW_PIN_NOTIFICATION, true);
     }
 
     public void setShowNewPinEnabled(boolean b) {
-        applyPreference(PREF_SHOWNEWPIN, b);
+        applyPreference(PREF_SHOW_NEW_PIN_NOTIFICATION, b);
     }
 
     public boolean isFirstUse() {
         boolean ret = false;
 
-        if (!preferences.contains(PREF_FIRSTUSE)) {
-            preferences.edit().putBoolean(PREF_FIRSTUSE, true).apply();
+        if (!preferences.contains(PREF_FIRST_USE)) {
+            preferences.edit().putBoolean(PREF_FIRST_USE, true).apply();
             ret = true;
         }
 
@@ -49,19 +49,19 @@ public class PreferencesHandler {
     }
 
     public boolean isAdvancedUsed() {
-        return preferences.getBoolean(PREF_ADVANCEDUSE, false);
+        return preferences.getBoolean(PREF_ADVANCED_USE, false);
     }
 
     public void setAdvancedUse(Boolean b) {
-        applyPreference(PREF_ADVANCEDUSE, b);
+        applyPreference(PREF_ADVANCED_USE, b);
     }
 
     public boolean isLightThemeEnabled() {
-        return preferences.getBoolean(PREF_LIGHTTHEME, true);
+        return preferences.getBoolean(PREF_LIGHT_THEME, true);
     }
 
     public void setLightThemeEnabled(Boolean b) {
-        applyPreference(PREF_LIGHTTHEME, b);
+        applyPreference(PREF_LIGHT_THEME, b);
     }
 
     private void applyPreference(String key, boolean state) {

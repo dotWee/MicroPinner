@@ -29,7 +29,7 @@ public class OnClipReceiver extends BroadcastReceiver {
             ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
             clipboard.setPrimaryClip(ClipData.newPlainText(null, pin.toClipString()));
 
-            Toast.makeText(context, context.getString(R.string.message_cliped_pin), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.message_clipped_pin), Toast.LENGTH_SHORT).show();
         } else
             Log.w(LOG_TAG, "Intent did not contain a pin as serialized extra! " + intent.toString());
     }

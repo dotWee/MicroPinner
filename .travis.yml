@@ -2,8 +2,13 @@
 #   https://github.com/JakeWharton/RxBinding/blob/master/.travis.yml
 language: android
 
-jdk:
-  - oraclejdk7
+jdk: oraclejdk7
+
+cache: false
+
+env:
+  global:
+    - ADB_INSTALL_TIMEOUT=8
 
 android:
   components:
@@ -26,9 +31,3 @@ before_script:
 
 # script for build
 script: ./gradlew connectedAndroidTest
-
-# cache between builds
-cache:
-  directories:
-  - $HOME/.m2
-  - $HOME/.gradle

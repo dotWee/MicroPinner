@@ -8,7 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-
+import android.util.Log;
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 import de.dotwee.micropinner.view.MainActivity;
@@ -30,7 +30,7 @@ public class OnNewPinReceiver extends BroadcastReceiver {
      * @param context Needed to get access to the Notification Manager
      * @return the default "new pin" notification
      */
-    private static Notification getNotification(Context context) {
+    private Notification getNotification(Context context) {
 
         PendingIntent pendingIntent = TaskStackBuilder.create(context)
                 .addParentStack(MainActivity.class)
@@ -48,12 +48,17 @@ public class OnNewPinReceiver extends BroadcastReceiver {
 
 
         // function .setShowWhen is only available on API => 17
-        if (Build.VERSION.SDK_INT >= 17)
+        if (Build.VERSION.SDK_INT >= 17) {
             defaultNotification.setShowWhen(false);
 
-        // the visibility api is only available on lollipop and up
-        if (Build.VERSION.SDK_INT >= 21)
-            defaultNotification.setVisibility(Notification.VISIBILITY_PUBLIC);
+            /**
+             *  the visibility api is only available on API => 21,
+             *  see http://developer.android.com/design/patterns/notifications.html for more information.
+             */
+            if (Build.VERSION.SDK_INT >= 21) {
+                defaultNotification.setVisibility(Notification.VISIBILITY_PUBLIC);
+            }
+        }
 
         return defaultNotification.build();
     }
@@ -61,6 +66,8 @@ public class OnNewPinReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         boolean showNotification = PreferencesHandler.getInstance(context).isShowNewPinEnabled();
+        Log.i(LOG_TAG, "Received intent. Shall we show the new-pin notification? "
+                + (showNotification ? "Hell yeah" : "Nope") + "!");
 
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);

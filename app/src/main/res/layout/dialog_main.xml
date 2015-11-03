@@ -5,118 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout style="@style/DialogHeader">
-
-        <TextView
-            android:id="@+id/dialogTitle"
-            style="@style/TextAppearance.AppCompat.Widget.ActionMode.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical" />
-
-        <Switch
-            android:id="@+id/switchAdvanced"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
+    <include layout="@layout/dialog_main_head"/>
 
     <TableLayout style="@style/DialogContent.Table">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <include layout="@layout/dialog_main_input_text"/>
 
-            <TextView
-                style="@style/DialogText.Description"
-                android:layout_column="0"
-                android:text="@string/input_description_title" />
+        <include layout="@layout/dialog_main_input_spinner"/>
 
-            <TextView
-                style="@style/DialogText.Description"
-                android:layout_column="1"
-                android:text="@string/input_description_content" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextTitle"
-                style="@style/DialogInput.EditText"
-                android:layout_column="0"
-                android:hint="@string/input_hint_title" />
-
-            <EditText
-                android:id="@+id/editTextContent"
-                style="@style/DialogInput.EditText"
-                android:layout_column="1"
-                android:hint="@string/input_hint_content" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                style="@style/DialogText.Description"
-                android:layout_column="0"
-                android:text="@string/input_description_visibility" />
-
-            <TextView
-                style="@style/DialogText.Description"
-                android:layout_column="1"
-                android:text="@string/input_description_priority" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Spinner
-                android:id="@+id/spinnerVisibility"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_column="0" />
-
-            <Spinner
-                android:id="@+id/spinnerPriority"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_column="1" />
-        </TableRow>
     </TableLayout>
 
-    <LinearLayout
-        style="@style/DialogContent.List"
-        android:animateLayoutChanges="true">
+    <include layout="@layout/dialog_main_input_checkboxes"/>
 
-        <CheckBox
-            android:id="@+id/checkBoxNewPin"
-            style="@style/DialogText.CheckBox"
-            android:text="@string/input_description_shownewpin" />
-
-        <CheckBox
-            android:id="@+id/checkBoxPersistentPin"
-            style="@style/DialogText.CheckBox"
-            android:text="@string/input_description_makepinpersistent" />
-
-    </LinearLayout>
-
-    <LinearLayout style="@style/DialogFooter">
-
-        <Button
-            android:id="@+id/buttonCancel"
-            style="@style/DialogButtons"
-            android:text="@string/dialog_action_cancel" />
-
-        <Button
-            android:id="@+id/buttonPin"
-            style="@style/DialogButtons"
-            android:text="@string/dialog_action_pin" />
-
-    </LinearLayout>
+    <include layout="@layout/dialog_main_footer"/>
 
 </LinearLayout>

@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
         );
 
         setOnLongClickListener(
+                R.id.switchAdvanced,
+                R.id.linearLayoutHeader
         );
 
         // simulate device-boot by sending a new intent to class OnBootReceiver
@@ -192,6 +194,13 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
 
             case R.id.switchAdvanced:
                 mainPresenter.onSwitchHold();
+                return true;
+
+            case R.id.linearLayoutHeader:
+                View view = findViewById(R.id.switchAdvanced);
+                if (view != null) {
+                    view.performLongClick();
+                }
                 return true;
         }
 

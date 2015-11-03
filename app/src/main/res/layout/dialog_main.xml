@@ -13,9 +13,9 @@
 
         <include layout="@layout/dialog_main_input_spinner"/>
 
-    </TableLayout>
+        <include layout="@layout/dialog_main_input_checkboxes"/>
 
-    <include layout="@layout/dialog_main_input_checkboxes"/>
+    </TableLayout>
 
     <include layout="@layout/dialog_main_footer"/>
 

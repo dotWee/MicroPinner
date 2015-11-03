@@ -12,13 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.Spinner;
-
+import android.widget.*;
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.presenter.MainPresenter;
 import de.dotwee.micropinner.presenter.MainPresenterImpl;
@@ -30,7 +24,7 @@ import de.dotwee.micropinner.tools.PreferencesHandler;
  */
 public class MainActivity extends AppCompatActivity implements MainPresenter.Listeners, MainPresenter.Data, View.OnClickListener, View.OnLongClickListener, CompoundButton.OnCheckedChangeListener {
     private static final String LOG_TAG = "MainActivity";
-    private MainPresenterImpl mainPresenter;
+    private MainPresenter mainPresenter;
 
     /**
      * This method checks if the user's device is a tablet, depending on the official resource {@link Configuration}.

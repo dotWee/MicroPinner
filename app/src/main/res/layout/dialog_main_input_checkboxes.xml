@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              tools:showIn="@layout/dialog_main"
-              style="@style/DialogContent.List"
-              android:animateLayoutChanges="true">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       tools:showIn="@layout/dialog_main"
+       style="@style/DialogContent.List"
+       android:animateLayoutChanges="true">
+
+    <Space
+            android:id="@+id/checkBoxPlaceholder"
+            android:layout_height="16dp"/>
 
     <CheckBox
             android:id="@+id/checkBoxNewPin"
@@ -15,4 +19,4 @@
             style="@style/DialogText.CheckBox"
             android:text="@string/input_description_makepinpersistent"/>
 
-</LinearLayout>
+</merge>

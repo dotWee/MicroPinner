@@ -10,20 +10,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.Serializable;
-
+import android.widget.*;
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.receiver.OnBootReceiver;
 import de.dotwee.micropinner.receiver.OnDeleteReceiver;
 import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 import de.dotwee.micropinner.view.MainActivity;
+
+import java.io.Serializable;
 
 /**
  * Created by Lukas Wolfsteiner on 29.10.2015.
@@ -126,12 +121,14 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onViewExpand(boolean expand) {
         final int[] ids = new int[]{
+                R.id.checkBoxPlaceholder,
                 R.id.checkBoxPersistentPin,
                 R.id.checkBoxNewPin
         };
 
         for (int id : ids) {
             View view = mainActivity.findViewById(id);
+
             if (view != null) {
                 view.setVisibility(expand ? View.VISIBLE : View.GONE);
             }

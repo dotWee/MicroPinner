@@ -42,7 +42,6 @@ public class OnNewPinReceiver extends BroadcastReceiver {
                 .setContentText(context.getResources().getString(R.string.message_pin_new))
                 .setPriority(Notification.PRIORITY_LOW)
                 .setOngoing(true)
-                .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.ic_notif_pin);
 

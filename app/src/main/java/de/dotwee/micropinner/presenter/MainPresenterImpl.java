@@ -50,6 +50,16 @@ public class MainPresenterImpl implements MainPresenter {
             }
         }
 
+        // restore the switch's state if advanced is enabled
+        if (preferencesHandler.isAdvancedUsed()) {
+
+            Switch advancedSwitch = (Switch) mainActivity.findViewById(R.id.switchAdvanced);
+            if (advancedSwitch != null) {
+
+                advancedSwitch.setChecked(true);
+            }
+        }
+
         this.onViewExpand(preferencesHandler.isAdvancedUsed());
     }
 

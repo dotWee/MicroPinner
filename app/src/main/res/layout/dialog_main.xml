@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/MainWrapper"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              style="@style/MainWrapper"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              tools:context=".view.MainActivity">
 
     <include layout="@layout/dialog_main_head"/>
 

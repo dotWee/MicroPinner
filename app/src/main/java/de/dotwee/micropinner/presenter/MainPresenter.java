@@ -3,7 +3,6 @@ package de.dotwee.micropinner.presenter;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.view.MainActivity;
 

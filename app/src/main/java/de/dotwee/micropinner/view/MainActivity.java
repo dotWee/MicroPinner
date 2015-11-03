@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
 
                 R.id.switchAdvanced,
 
+                R.id.linearLayoutHeader,
+
                 R.id.buttonCancel,
                 R.id.buttonPin
         );
@@ -166,6 +168,14 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
             case R.id.buttonCancel:
                 mainPresenter.onButtonNegative();
                 break;
+
+            case R.id.linearLayoutHeader:
+                View view = findViewById(R.id.switchAdvanced);
+                if (view != null) {
+
+                    view.performClick();
+                }
+                break;
         }
     }
 
@@ -212,7 +222,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
         for (int id : ids) {
             View view = findViewById(id);
 
-            view.setOnLongClickListener(this);
+            if (view != null) {
+                view.setOnLongClickListener(this);
+            }
         }
     }
 

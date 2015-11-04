@@ -118,9 +118,9 @@ public class MainPresenterImpl implements MainPresenter {
             Intent intent = new Intent(mainActivity, OnDeleteReceiver.class);
             intent.putExtra(PinHandler.Pin.EXTRA_INTENT, parentPin);
             mainActivity.sendBroadcast(intent);
-        } else {
-            mainActivity.finish();
         }
+
+        mainActivity.finish();
     }
 
     /**
@@ -224,7 +224,25 @@ public class MainPresenterImpl implements MainPresenter {
             );
         }
 
-        if (parentPin == null) return;
+        if (state) {
+
+            handleParentVisibility(parentPin);
+            handleParentPriority(parentPin);
+
+            handleParentTitle(parentPin);
+            handleParentContent(parentPin);
+
+            CheckBox checkBoxPersistent = (CheckBox) mainActivity.findViewById(R.id.checkBoxPersistentPin);
+            if (checkBoxPersistent != null) {
+
+                checkBoxPersistent.setChecked(parentPin.isPersistent());
+            }
+
+        }
+    }
+
+    @Override
+    public void handleParentVisibility(@NonNull PinHandler.Pin pin) {
 
         Spinner spinnerVisibility = (Spinner) mainActivity.findViewById(R.id.spinnerVisibility);
         if (spinnerVisibility != null) {
@@ -250,6 +268,10 @@ public class MainPresenterImpl implements MainPresenter {
 
             spinnerVisibility.setSelection(visibilityPosition, true);
         }
+    }
+
+    @Override
+    public void handleParentPriority(@NonNull PinHandler.Pin pin) {
 
         Spinner spinnerPriority = (Spinner) mainActivity.findViewById(R.id.spinnerPriority);
         if (spinnerPriority != null) {
@@ -279,10 +301,25 @@ public class MainPresenterImpl implements MainPresenter {
 
             spinnerPriority.setSelection(priorityPosition, true);
         }
+    }
 
-        CheckBox checkBoxPersistent = (CheckBox) mainActivity.findViewById(R.id.checkBoxPersistentPin);
-        if (checkBoxPersistent != null) {
-            checkBoxPersistent.setChecked(parentPin.isPersistent());
+    @Override
+    public void handleParentTitle(@NonNull PinHandler.Pin pin) {
+
+        EditText editTextTitle = (EditText) mainActivity.findViewById(R.id.editTextTitle);
+        if (editTextTitle != null) {
+
+            editTextTitle.setText(pin.getTitle());
+        }
+    }
+
+    @Override
+    public void handleParentContent(@NonNull PinHandler.Pin pin) {
+
+        EditText editTextContent = (EditText) mainActivity.findViewById(R.id.editTextContent);
+        if (editTextContent != null) {
+
+            editTextContent.setText(pin.getContent());
         }
     }
 }

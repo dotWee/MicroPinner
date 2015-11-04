@@ -48,10 +48,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
         }
 
         this.setContentView(R.layout.dialog_main);
-        this.mainPresenter = new MainPresenterImpl(this, getIntent());
 
         setVisibilityAdapter();
         setPriorityAdapter();
+
+        this.mainPresenter = new MainPresenterImpl(this, getIntent());
 
         setOnClickListener(
                 R.id.checkBoxPersistentPin,

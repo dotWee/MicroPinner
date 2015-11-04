@@ -68,6 +68,38 @@ public interface MainPresenter {
     void notifyAboutParentPin();
 
     /**
+     * This method handles the visibility of an instance
+     * of a {@link de.dotwee.micropinner.tools.PinHandler.Pin}
+     *
+     * @param pin the instance to handle
+     */
+    void handleParentVisibility(@NonNull PinHandler.Pin pin);
+
+    /**
+     * This method handles the visibility of an instance
+     * of a {@link de.dotwee.micropinner.tools.PinHandler.Pin}
+     *
+     * @param pin the instance to handle
+     */
+    void handleParentPriority(@NonNull PinHandler.Pin pin);
+
+    /**
+     * This method handles the visibility of an instance
+     * of a {@link de.dotwee.micropinner.tools.PinHandler.Pin}
+     *
+     * @param pin the instance to handle
+     */
+    void handleParentTitle(@NonNull PinHandler.Pin pin);
+
+    /**
+     * This method handles the visibility of an instance
+     * of a {@link de.dotwee.micropinner.tools.PinHandler.Pin}
+     *
+     * @param pin the instance to handle
+     */
+    void handleParentContent(@NonNull PinHandler.Pin pin);
+
+    /**
      * Created by Lukas Wolfsteiner on 29.10.2015.
      */
     interface Listeners {

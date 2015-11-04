@@ -29,6 +29,9 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
 
+        <item name="android:clickable">true</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+
         <item name="android:paddingTop">24dp</item>
         <item name="android:paddingLeft">24dp</item>
         <item name="android:paddingRight">24dp</item>
@@ -57,6 +60,7 @@
         <item name="android:paddingLeft">24dp</item>
         <item name="android:paddingRight">24dp</item>
 
+        <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">16dp</item>
 
         <item name="android:minWidth">256dp</item>
@@ -92,6 +96,10 @@
     <style name="DialogFooter">
         <item name="android:gravity">end</item>
         <item name="android:orientation">horizontal</item>
+
+        <item name="android:clickable">true</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>

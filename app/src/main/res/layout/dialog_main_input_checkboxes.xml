@@ -5,13 +5,10 @@
        style="@style/DialogContent.List"
        android:animateLayoutChanges="true">
 
-    <Space
-            android:id="@+id/checkBoxPlaceholder"
-            android:layout_height="16dp"/>
-
     <CheckBox
             android:id="@+id/checkBoxNewPin"
             style="@style/DialogText.CheckBox"
+            android:layout_marginTop="16dp"
             android:text="@string/input_description_shownewpin"/>
 
     <CheckBox

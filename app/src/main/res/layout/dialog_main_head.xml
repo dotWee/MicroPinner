@@ -3,19 +3,34 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:id="@+id/linearLayoutHeader"
               tools:showIn="@layout/dialog_main"
-              style="@style/DialogHeader">
+              style="@style/DialogHeader"
+              android:measureWithLargestChild="false"
+>
 
     <TextView
             android:id="@+id/dialogTitle"
             style="@style/TextAppearance.AppCompat.Widget.ActionMode.Title"
+            android:text="@string/app_name"
+            android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"/>
 
-    <Switch
-            android:id="@+id/switchAdvanced"
+    <Space
+            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent"/>
+
+    <LinearLayout
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <Switch
+                android:id="@+id/switchAdvanced"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </LinearLayout>

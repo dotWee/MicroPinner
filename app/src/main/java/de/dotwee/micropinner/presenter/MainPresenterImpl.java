@@ -131,7 +131,6 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onViewExpand(boolean expand) {
         final int[] ids = new int[]{
-                R.id.checkBoxPlaceholder,
                 R.id.checkBoxPersistentPin,
                 R.id.checkBoxNewPin
         };

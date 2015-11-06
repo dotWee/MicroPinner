@@ -101,6 +101,9 @@ public class MainActivityTest {
      */
     @Test
     public void testExpandMechanism() {
+        getPreferencesHandler().setAdvancedUse(false);
+        recreateActivity();
+
         onView(withId(R.id.switchAdvanced)).perform(click());
 
         try {
@@ -145,20 +148,13 @@ public class MainActivityTest {
      */
     @Test
     public void testThemeLightAccent() {
-        if (preferencesHandler == null) {
-            preferencesHandler = PreferencesHandler.getInstance(activityTestRule.getActivity());
-        }
+        preferencesHandler = getPreferencesHandler();
 
         preferencesHandler.setLightThemeEnabled(true);
         assertTrue(preferencesHandler.isLightThemeEnabled());
 
         // recreate activity to apply theme
-        activityTestRule.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activityTestRule.getActivity().recreate();
-            }
-        });
+        recreateActivity();
 
         // check color for all TextView descriptions
         for (int description : new int[]{R.string.input_description_title, R.string.input_description_content, R.string.input_description_priority, R.string.input_description_visibility}) {
@@ -171,20 +167,13 @@ public class MainActivityTest {
      */
     @Test
     public void testThemeLightBackground() {
-        if (preferencesHandler == null) {
-            preferencesHandler = PreferencesHandler.getInstance(activityTestRule.getActivity());
-        }
+        preferencesHandler = getPreferencesHandler();
 
         preferencesHandler.setLightThemeEnabled(true);
         assertTrue(preferencesHandler.isLightThemeEnabled());
 
         // recreate activity to apply theme
-        activityTestRule.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activityTestRule.getActivity().recreate();
-            }
-        });
+        recreateActivity();
 
         onView(withId(android.R.id.content)).check(matches(Matches.withBackgroundColor(activityTestRule.getActivity().getResources().getColor(R.color.background))));
     }
@@ -194,20 +183,13 @@ public class MainActivityTest {
      */
     @Test
     public void testThemeDarkAccent() {
-        if (preferencesHandler == null) {
-            preferencesHandler = PreferencesHandler.getInstance(activityTestRule.getActivity());
-        }
+        preferencesHandler = getPreferencesHandler();
 
         preferencesHandler.setLightThemeEnabled(false);
         assertFalse(preferencesHandler.isLightThemeEnabled());
 
         // recreate activity to apply theme
-        activityTestRule.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activityTestRule.getActivity().recreate();
-            }
-        });
+        recreateActivity();
 
         // check color for all TextView descriptions
         for (int description : new int[]{R.string.input_description_title, R.string.input_description_content, R.string.input_description_priority, R.string.input_description_visibility}) {
@@ -220,20 +202,13 @@ public class MainActivityTest {
      */
     @Test
     public void testThemeDarkBackground() {
-        if (preferencesHandler == null) {
-            preferencesHandler = PreferencesHandler.getInstance(activityTestRule.getActivity());
-        }
+        preferencesHandler = getPreferencesHandler();
 
         preferencesHandler.setLightThemeEnabled(false);
         assertFalse(preferencesHandler.isLightThemeEnabled());
 
         // recreate activity to apply theme
-        activityTestRule.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activityTestRule.getActivity().recreate();
-            }
-        });
+        recreateActivity();
 
         onView(withId(android.R.id.content)).check(matches(Matches.withBackgroundColor(activityTestRule.getActivity().getResources().getColor(R.color.background_dark))));
     }
@@ -243,11 +218,30 @@ public class MainActivityTest {
      */
     @Test
     public void testPreferencesAdvanced() {
+        preferencesHandler = getPreferencesHandler();
+
+        preferencesHandler.setAdvancedUse(true);
+        assertTrue(preferencesHandler.isAdvancedUsed());
+    }
+
+    private PreferencesHandler getPreferencesHandler() {
         if (preferencesHandler == null) {
             preferencesHandler = PreferencesHandler.getInstance(activityTestRule.getActivity());
         }
 
-        preferencesHandler.setAdvancedUse(true);
-        assertTrue(preferencesHandler.isAdvancedUsed());
+        return preferencesHandler;
+    }
+
+    /**
+     * This method recreates the main activity in order
+     * to apply themes or reload the preference cache.
+     */
+    private void recreateActivity() {
+        activityTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activityTestRule.getActivity().recreate();
+            }
+        });
     }
 }

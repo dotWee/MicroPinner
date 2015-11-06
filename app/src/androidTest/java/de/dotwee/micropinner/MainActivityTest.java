@@ -46,6 +46,22 @@ public class MainActivityTest {
     }
 
     /**
+     * This method recreates the main activity and verifies the focus,
+     * which should be on the title EditText.
+     */
+    @Test
+    public void testEditTextFocus() {
+        activityTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activityTestRule.getActivity().recreate();
+            }
+        });
+
+        onView(withId(R.id.editTextTitle)).check(matches(isFocusable()));
+    }
+
+    /**
      * This method looks for an EditText with id = R.id.editTextContent,
      * performs some inout and verifies the EditText's entered value.
      */

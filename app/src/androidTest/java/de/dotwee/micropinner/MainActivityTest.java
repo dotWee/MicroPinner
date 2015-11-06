@@ -1,9 +1,12 @@
 package de.dotwee.micropinner;
 
+import android.app.Notification;
+import android.content.Intent;
 import android.support.test.espresso.NoMatchingViewException;
-import android.support.test.espresso.action.ViewActions;
+import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.view.MainActivity;
 import org.junit.Rule;
 import org.junit.Test;
@@ -53,6 +56,10 @@ public class MainActivityTest {
         onView(withId(R.id.editTextContent)).perform(typeText(value)).check(matches(withText(value)));
     }
 
+    /**
+     * This method performs an empty input on the title EditText and
+     * clicks on the pin-button. Verifies if a Toast appears.
+     */
     @Test
     public void testEmptyTitleToast() {
 
@@ -74,7 +81,7 @@ public class MainActivityTest {
      */
     @Test
     public void testExpandMechanism() {
-        onView(withId(R.id.switchAdvanced)).perform(ViewActions.click());
+        onView(withId(R.id.switchAdvanced)).perform(click());
 
         try {
             onView(withText(R.string.input_description_shownewpin)).perform(click());
@@ -83,5 +90,34 @@ public class MainActivityTest {
         } catch (NoMatchingViewException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * This method verifies the parent-pin mechanism using a
+     * custom pin and intents.
+     */
+    @Test
+    public void testParentPinIntent() {
+        final PinHandler.Pin testPin = new PinHandler.Pin(
+                Notification.VISIBILITY_PRIVATE,
+                Notification.PRIORITY_HIGH,
+                LOG_TAG,
+                null,
+                true
+        );
+
+        final Intent testIntent = new Intent(activityTestRule.getActivity(), MainActivity.class)
+                .putExtra(PinHandler.Pin.EXTRA_INTENT, testPin);
+
+        Intents.init();
+        activityTestRule.launchActivity(testIntent);
+
+        // verify changed buttons
+        onView(withId(R.id.buttonCancel)).check(matches(withText(R.string.dialog_action_delete)));
+
+        // verify pin content
+        onView(withId(R.id.editTextTitle)).check(matches(withText(LOG_TAG)));
+
+        Intents.release();
     }
 }

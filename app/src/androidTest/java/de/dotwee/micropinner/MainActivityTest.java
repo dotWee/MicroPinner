@@ -20,6 +20,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.*;
 import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -140,6 +141,104 @@ public class MainActivityTest {
     }
 
     /**
+     * This method verifies the light theme's accent.
+     */
+    @Test
+    public void testThemeLightAccent() {
+        if (preferencesHandler == null) {
+            preferencesHandler = PreferencesHandler.getInstance(activityTestRule.getActivity());
+        }
+
+        preferencesHandler.setLightThemeEnabled(true);
+        assertTrue(preferencesHandler.isLightThemeEnabled());
+
+        // recreate activity to apply theme
+        activityTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activityTestRule.getActivity().recreate();
+            }
+        });
+
+        // check color for all TextView descriptions
+        for (int description : new int[]{R.string.input_description_title, R.string.input_description_content, R.string.input_description_priority, R.string.input_description_visibility}) {
+            onView(withText(description)).check(matches(Matches.withTextColor(activityTestRule.getActivity().getResources().getColor(R.color.accent))));
+        }
+    }
+
+    /**
+     * This method verifies the light theme's background.
+     */
+    @Test
+    public void testThemeLightBackground() {
+        if (preferencesHandler == null) {
+            preferencesHandler = PreferencesHandler.getInstance(activityTestRule.getActivity());
+        }
+
+        preferencesHandler.setLightThemeEnabled(true);
+        assertTrue(preferencesHandler.isLightThemeEnabled());
+
+        // recreate activity to apply theme
+        activityTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activityTestRule.getActivity().recreate();
+            }
+        });
+
+        onView(withId(android.R.id.content)).check(matches(Matches.withBackgroundColor(activityTestRule.getActivity().getResources().getColor(R.color.background))));
+    }
+
+    /**
+     * This method verifies the light theme's accent.
+     */
+    @Test
+    public void testThemeDarkAccent() {
+        if (preferencesHandler == null) {
+            preferencesHandler = PreferencesHandler.getInstance(activityTestRule.getActivity());
+        }
+
+        preferencesHandler.setLightThemeEnabled(false);
+        assertFalse(preferencesHandler.isLightThemeEnabled());
+
+        // recreate activity to apply theme
+        activityTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activityTestRule.getActivity().recreate();
+            }
+        });
+
+        // check color for all TextView descriptions
+        for (int description : new int[]{R.string.input_description_title, R.string.input_description_content, R.string.input_description_priority, R.string.input_description_visibility}) {
+            onView(withText(description)).check(matches(Matches.withTextColor(activityTestRule.getActivity().getResources().getColor(R.color.accent_dark))));
+        }
+    }
+
+    /**
+     * This method verifies the dark theme's background.
+     */
+    @Test
+    public void testThemeDarkBackground() {
+        if (preferencesHandler == null) {
+            preferencesHandler = PreferencesHandler.getInstance(activityTestRule.getActivity());
+        }
+
+        preferencesHandler.setLightThemeEnabled(false);
+        assertFalse(preferencesHandler.isLightThemeEnabled());
+
+        // recreate activity to apply theme
+        activityTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activityTestRule.getActivity().recreate();
+            }
+        });
+
+        onView(withId(android.R.id.content)).check(matches(Matches.withBackgroundColor(activityTestRule.getActivity().getResources().getColor(R.color.background_dark))));
+    }
+
+    /**
      * This method verifies the preference mechanism for the advanced usage.
      */
     @Test
@@ -150,18 +249,5 @@ public class MainActivityTest {
 
         preferencesHandler.setAdvancedUse(true);
         assertTrue(preferencesHandler.isAdvancedUsed());
-    }
-
-    /**
-     * This method verifies the preference mechanism for the theme settings.
-     */
-    @Test
-    public void testPreferencesLightTheme() {
-        if (preferencesHandler == null) {
-            preferencesHandler = PreferencesHandler.getInstance(activityTestRule.getActivity());
-        }
-
-        preferencesHandler.setLightThemeEnabled(true);
-        assertTrue(preferencesHandler.isLightThemeEnabled());
     }
 }

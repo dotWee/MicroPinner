@@ -7,6 +7,7 @@ import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import de.dotwee.micropinner.tools.PinHandler;
+import de.dotwee.micropinner.tools.PreferencesHandler;
 import de.dotwee.micropinner.view.MainActivity;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,6 +20,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.*;
 import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertTrue;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
@@ -27,13 +29,13 @@ import static org.hamcrest.Matchers.not;
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
     private static final String LOG_TAG = "MainActivityTest";
-
     /**
      * Preferred JUnit 4 mechanism of specifying the
      * activity to be launched before each test
      */
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
+    PreferencesHandler preferencesHandler;
 
     /**
      * This method looks for an EditText with id = R.id.editTextTitle,
@@ -135,5 +137,31 @@ public class MainActivityTest {
         onView(withId(R.id.editTextTitle)).check(matches(withText(LOG_TAG)));
 
         Intents.release();
+    }
+
+    /**
+     * This method verifies the preference mechanism for the advanced usage.
+     */
+    @Test
+    public void testPreferencesAdvanced() {
+        if (preferencesHandler == null) {
+            preferencesHandler = PreferencesHandler.getInstance(activityTestRule.getActivity());
+        }
+
+        preferencesHandler.setAdvancedUse(true);
+        assertTrue(preferencesHandler.isAdvancedUsed());
+    }
+
+    /**
+     * This method verifies the preference mechanism for the theme settings.
+     */
+    @Test
+    public void testPreferencesLightTheme() {
+        if (preferencesHandler == null) {
+            preferencesHandler = PreferencesHandler.getInstance(activityTestRule.getActivity());
+        }
+
+        preferencesHandler.setLightThemeEnabled(true);
+        assertTrue(preferencesHandler.isLightThemeEnabled());
     }
 }

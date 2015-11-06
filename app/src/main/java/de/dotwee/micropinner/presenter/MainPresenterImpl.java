@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import de.dotwee.micropinner.R;
@@ -94,17 +92,20 @@ public class MainPresenterImpl implements MainPresenter {
      */
     @Override
     public void onButtonPositive() {
-        PinHandler.Pin newPin = toPin();
+        PinHandler.Pin newPin;
 
-        if (newPin != null) {
+        try {
+            newPin = toPin();
+
             if (hasParentPin()) {
                 newPin.setId(parentPin.getId());
             }
 
             pinHandler.persistPin(newPin);
-        } else Log.w(LOG_TAG, "New pin is null!");
-
-        mainActivity.finish();
+            mainActivity.finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -167,28 +168,23 @@ public class MainPresenterImpl implements MainPresenter {
      * This method creates a {@link PinHandler.Pin} from the view.
      *
      * @return A not null {@link PinHandler.Pin}.
+     * @throws Exception if pin is null or an error appeared on creation
      */
-    @Nullable
+    @NonNull
     @Override
-    public PinHandler.Pin toPin() {
-        if (mainActivity.getPinTitle() != null) {
+    public PinHandler.Pin toPin() throws Exception {
+        if (mainActivity.getPinTitle().isEmpty()) {
 
-            if (!mainActivity.getPinTitle().isEmpty()) {
+            Toast.makeText(mainActivity, R.string.message_empty_title, Toast.LENGTH_SHORT).show();
+            throw new Exception(mainActivity.getString(R.string.message_empty_title));
 
-                // return new pin if everything is okay
-                return new PinHandler.Pin(
-                        mainActivity.getVisibility(),
-                        mainActivity.getPriority(),
-                        mainActivity.getPinTitle(),
-                        mainActivity.getPinContent(),
-                        mainActivity.isPersistent()
-                );
-            }
-        }
-
-        // if not ready, show a message and return null
-        Toast.makeText(mainActivity, mainActivity.getText(R.string.message_empty_title), Toast.LENGTH_SHORT).show();
-        return null;
+        } else return new PinHandler.Pin(
+                mainActivity.getVisibility(),
+                mainActivity.getPriority(),
+                mainActivity.getPinTitle(),
+                mainActivity.getPinContent(),
+                mainActivity.isPersistent()
+        );
     }
 
     /**

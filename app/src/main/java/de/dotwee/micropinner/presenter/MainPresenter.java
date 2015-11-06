@@ -2,7 +2,6 @@ package de.dotwee.micropinner.presenter;
 
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.view.MainActivity;
 
@@ -49,10 +48,11 @@ public interface MainPresenter {
     /**
      * This method creates a {@link PinHandler.Pin} from the view.
      *
-     * @return Null or new {@link PinHandler.Pin}.
+     * @return New instance of a {@link PinHandler.Pin}.
+     * @throws Exception if pin is null or an error appeared on creation
      */
-    @Nullable
-    PinHandler.Pin toPin();
+    @NonNull
+    PinHandler.Pin toPin() throws Exception;
 
     /**
      * This method returns the corresponding view of the presenter.

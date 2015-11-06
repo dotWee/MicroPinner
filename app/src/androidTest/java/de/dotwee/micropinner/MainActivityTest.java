@@ -3,21 +3,25 @@ package de.dotwee.micropinner;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
 import de.dotwee.micropinner.view.MainActivity;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
+import static android.support.test.espresso.matcher.ViewMatchers.*;
+import static org.hamcrest.Matchers.not;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
 
+@RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
     private static final String LOG_TAG = "MainActivityTest";
 
@@ -47,6 +51,21 @@ public class MainActivityTest {
         final String value = "MicroPinner title input";
 
         onView(withId(R.id.editTextContent)).perform(typeText(value)).check(matches(withText(value)));
+    }
+
+    @Test
+    public void testEmptyTitleToast() {
+
+        // perform empty input
+        onView(withId(R.id.editTextTitle)).perform(typeText(""));
+
+        // click pin button
+        onView(withText(R.string.dialog_action_pin)).perform(click());
+
+        // verify toast existence
+        onView(withText(R.string.message_empty_title))
+                .inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
+                .check(matches(isDisplayed()));
     }
 
     /**

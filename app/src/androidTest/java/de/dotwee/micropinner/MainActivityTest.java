@@ -134,6 +134,9 @@ public class MainActivityTest {
         Intents.init();
         activityTestRule.launchActivity(testIntent);
 
+        // verify changed dialog title
+        onView(withId(R.id.dialogTitle)).check(matches(withText(R.string.app_name)));
+
         // verify changed buttons
         onView(withId(R.id.buttonCancel)).check(matches(withText(R.string.dialog_action_delete)));
 

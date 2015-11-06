@@ -11,7 +11,6 @@
     <string name="input_description_priority">Priorité</string>
     <string name="input_description_visibility">Visibilité</string>
 
-    <string name="input_description_shownewpin">Notification &quot;Nouvelle Épingle&quot;</string>
     <string name="input_description_makepinpersistent">Épingle permanente</string>
 
     <string name="dialog_action_pin">Épingler</string>

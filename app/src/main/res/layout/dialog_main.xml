@@ -13,7 +13,7 @@
 
         <include layout="@layout/dialog_main_input_spinner"/>
 
-        <include layout="@layout/dialog_main_input_checkboxes"/>
+        <include layout="@layout/dialog_main_input_checkbox"/>
 
     </TableLayout>
 

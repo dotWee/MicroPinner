@@ -6,13 +6,8 @@
        android:animateLayoutChanges="true">
 
     <CheckBox
-            android:id="@+id/checkBoxNewPin"
-            style="@style/DialogText.CheckBox"
-            android:layout_marginTop="16dp"
-            android:text="@string/input_description_shownewpin"/>
-
-    <CheckBox
             android:id="@+id/checkBoxPersistentPin"
+            android:layout_marginTop="16dp"
             style="@style/DialogText.CheckBox"
             android:text="@string/input_description_makepinpersistent"/>
 

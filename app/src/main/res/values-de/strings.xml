@@ -11,7 +11,6 @@
     <string name="input_description_priority">Priorität</string>
     <string name="input_description_visibility">Sichtbarkeit</string>
 
-    <string name="input_description_shownewpin">Zeige &quot;Neuer Pin&quot; Benachrichtigung</string>
     <string name="input_description_makepinpersistent">Mache Pin permanent</string>
 
     <string name="dialog_action_pin">Pin</string>

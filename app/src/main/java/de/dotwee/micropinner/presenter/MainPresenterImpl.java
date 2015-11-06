@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.*;
 import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.receiver.OnBootReceiver;
 import de.dotwee.micropinner.receiver.OnDeleteReceiver;
 import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
@@ -59,20 +58,6 @@ public class MainPresenterImpl implements MainPresenter {
         }
 
         this.onViewExpand(preferencesHandler.isAdvancedUsed());
-    }
-
-    /**
-     * This method handles a click on a checkbox.
-     *
-     * @param checked The state of a checkbox.
-     */
-    @Override
-    public void onCheckBoxClick(boolean checked) {
-        preferencesHandler.setShowNewPinEnabled(checked);
-
-        // notify boot receiver that notifications changed
-        Intent intent = new Intent(mainActivity, OnBootReceiver.class);
-        mainActivity.sendBroadcast(intent);
     }
 
     /**
@@ -131,17 +116,10 @@ public class MainPresenterImpl implements MainPresenter {
      */
     @Override
     public void onViewExpand(boolean expand) {
-        final int[] ids = new int[]{
-                R.id.checkBoxPersistentPin,
-                R.id.checkBoxNewPin
-        };
+        View view = mainActivity.findViewById(R.id.checkBoxPersistentPin);
 
-        for (int id : ids) {
-            View view = mainActivity.findViewById(id);
-
-            if (view != null) {
-                view.setVisibility(expand ? View.VISIBLE : View.GONE);
-            }
+        if (view != null) {
+            view.setVisibility(expand ? View.VISIBLE : View.GONE);
         }
 
         preferencesHandler.setAdvancedUse(expand);

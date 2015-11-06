@@ -55,11 +55,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
         this.mainPresenter = new MainPresenterImpl(this, getIntent());
 
         setOnClickListener(
-                R.id.checkBoxPersistentPin,
-                R.id.checkBoxNewPin,
-
                 R.id.switchAdvanced,
-
                 R.id.linearLayoutHeader,
 
                 R.id.buttonCancel,
@@ -67,8 +63,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
         );
 
         setOnCheckedChangeListener(
-                R.id.checkBoxNewPin,
-
                 R.id.switchAdvanced
         );
 
@@ -143,10 +137,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
         switch (buttonView.getId()) {
-
-            case R.id.checkBoxNewPin:
-                mainPresenter.onCheckBoxClick(isChecked);
-                break;
 
             case R.id.switchAdvanced:
                 mainPresenter.onViewExpand(isChecked);

@@ -10,7 +10,6 @@ import android.preference.PreferenceManager;
  */
 public class PreferencesHandler {
     private static final String PREF_FIRST_USE = "pref_firstuse";
-    private static final String PREF_SHOW_NEW_PIN_NOTIFICATION = "pref_shownewpin";
     private static final String PREF_ADVANCED_USE = "pref_advanceduse";
     private static final String PREF_LIGHT_THEME = "pref_lighttheme";
 
@@ -27,14 +26,6 @@ public class PreferencesHandler {
             instance = new PreferencesHandler(context);
 
         return instance;
-    }
-
-    public boolean isShowNewPinEnabled() {
-        return preferences.getBoolean(PREF_SHOW_NEW_PIN_NOTIFICATION, true);
-    }
-
-    public void setShowNewPinEnabled(boolean b) {
-        applyPreference(PREF_SHOW_NEW_PIN_NOTIFICATION, b);
     }
 
     public boolean isFirstUse() {

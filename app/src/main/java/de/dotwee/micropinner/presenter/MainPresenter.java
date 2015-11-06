@@ -12,13 +12,6 @@ public interface MainPresenter {
     String LOG_TAG = "MainPresenter";
 
     /**
-     * This method handles a click on a checkbox.
-     *
-     * @param checked The state of a checkbox.
-     */
-    void onCheckBoxClick(boolean checked);
-
-    /**
      * This method handles a long-click on a switch
      */
     void onSwitchHold();

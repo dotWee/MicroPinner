@@ -29,7 +29,8 @@ public class MainActivityTest {
     private static final String LOG_TAG = "MainActivityTest";
 
     /**
-     * Preferred JUnit 4 mechanism of specifying the activity to be launched before each test
+     * Preferred JUnit 4 mechanism of specifying the
+     * activity to be launched before each test
      */
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -100,7 +101,6 @@ public class MainActivityTest {
         onView(withId(R.id.switchAdvanced)).perform(click());
 
         try {
-            onView(withText(R.string.input_description_shownewpin)).perform(click());
             onView(withText(R.string.input_description_makepinpersistent)).perform(click());
 
         } catch (NoMatchingViewException e) {

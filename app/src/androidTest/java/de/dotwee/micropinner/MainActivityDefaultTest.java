@@ -1,20 +1,25 @@
 package de.dotwee.micropinner;
 
-import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import de.dotwee.micropinner.tools.PreferencesHandler;
-import de.dotwee.micropinner.view.MainActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import de.dotwee.micropinner.tools.PreferencesHandler;
+import de.dotwee.micropinner.view.MainActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
-import static android.support.test.espresso.matcher.ViewMatchers.*;
+import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.isFocusable;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertTrue;
 
@@ -67,7 +72,9 @@ public class MainActivityDefaultTest {
     public void testEditTextTitle() throws Exception {
         final String value = "MicroPinner title input";
 
-        onView(withId(R.id.editTextTitle)).perform(typeText(value)).check(matches(withText(value)));
+        onView(withId(R.id.editTextTitle))
+                .perform(typeText(value))
+                .check(matches(withText(value)));
     }
 
     /**
@@ -83,7 +90,8 @@ public class MainActivityDefaultTest {
             }
         });
 
-        onView(withId(R.id.editTextTitle)).check(matches(isFocusable()));
+        onView(withId(R.id.editTextTitle))
+                .check(matches(isFocusable()));
     }
 
     /**
@@ -94,7 +102,9 @@ public class MainActivityDefaultTest {
     public void testEditTextContent() throws Exception {
         final String value = "MicroPinner title input";
 
-        onView(withId(R.id.editTextContent)).perform(typeText(value)).check(matches(withText(value)));
+        onView(withId(R.id.editTextContent))
+                .perform(typeText(value))
+                .check(matches(withText(value)));
     }
 
     /**
@@ -105,10 +115,12 @@ public class MainActivityDefaultTest {
     public void testEmptyTitleToast() throws Exception {
 
         // perform empty input
-        onView(withId(R.id.editTextTitle)).perform(typeText(""));
+        onView(withId(R.id.editTextTitle))
+                .perform(typeText(""));
 
         // click pin button
-        onView(withText(R.string.dialog_action_pin)).perform(click());
+        onView(withText(R.string.dialog_action_pin))
+                .perform(click());
 
         // verify toast existence
         onView(withText(R.string.message_empty_title))
@@ -125,14 +137,13 @@ public class MainActivityDefaultTest {
         getPreferencesHandler(activityTestRule).setAdvancedUse(false);
         recreateActivity(activityTestRule);
 
-        onView(withId(R.id.switchAdvanced)).perform(click());
+        // perform click on the advanced switch
+        onView(withId(R.id.switchAdvanced))
+                .perform(click());
 
-        try {
-            onView(withText(R.string.input_description_makepinpersistent)).check(matches(isDisplayed()));
-
-        } catch (NoMatchingViewException e) {
-            e.printStackTrace();
-        }
+        // checkBox should be not visible
+        onView(withId(R.id.checkBoxPersistentPin))
+                .check(matches(not(isChecked())));
     }
 
     /**

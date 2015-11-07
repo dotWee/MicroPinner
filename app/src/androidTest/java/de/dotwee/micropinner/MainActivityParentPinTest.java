@@ -5,17 +5,22 @@ import android.content.Intent;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import de.dotwee.micropinner.tools.PinHandler;
-import de.dotwee.micropinner.view.MainActivity;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import de.dotwee.micropinner.tools.PinHandler;
+import de.dotwee.micropinner.view.MainActivity;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.*;
+import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * Created by Lukas Wolfsteiner on 06.11.2015.
@@ -99,6 +104,18 @@ public class MainActivityParentPinTest {
     public void testPinVisibility() throws Exception {
 
         onView(withId(R.id.spinnerVisibility)).check(matches(withSpinnerText(R.string.visibility_private)));
+    }
+
+    /**
+     * This method verifies the pin's persistence.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testPinPersistence() throws Exception {
+
+        onView(withId(R.id.checkBoxPersistentPin))
+                .check(matches(isChecked()));
     }
 
     @After

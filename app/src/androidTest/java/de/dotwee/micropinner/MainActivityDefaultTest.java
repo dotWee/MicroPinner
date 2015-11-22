@@ -21,6 +21,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isFocusable;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -62,6 +63,29 @@ public class MainActivityDefaultTest {
                 activityTestRule.getActivity().recreate();
             }
         });
+    }
+
+    /**
+     * This method verifies the advanced-switch's functionality.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testAdvancedSwitch() throws Exception {
+        getPreferencesHandler(activityTestRule).setAdvancedUse(false);
+        recreateActivity(activityTestRule);
+
+        onView(withId(R.id.switchAdvanced))
+                .perform(click())
+                .check(matches(isChecked()));
+
+        assertTrue(getPreferencesHandler(activityTestRule).isAdvancedUsed());
+
+        onView(withId(R.id.switchAdvanced))
+                .perform(click())
+                .check(matches(not(isChecked())));
+
+        assertFalse(getPreferencesHandler(activityTestRule).isAdvancedUsed());
     }
 
     /**

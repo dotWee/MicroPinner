@@ -1,14 +1,18 @@
 package de.dotwee.micropinner;
 
+import android.support.test.espresso.PerformException;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import de.dotwee.micropinner.tools.PreferencesHandler;
-import de.dotwee.micropinner.view.MainActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import de.dotwee.micropinner.tools.PreferencesHandler;
+import de.dotwee.micropinner.view.MainActivity;
+
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.*;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -32,6 +36,54 @@ public class MainActivityThemeTest {
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
     PreferencesHandler preferencesHandler;
 
+    /**
+     * This method verifies the theme-change mechanism through
+     * multiple long-clicks on the header and advanced-switch.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testThemeChangeMechanism() throws Exception {
+        getPreferencesHandler(activityTestRule).setLightThemeEnabled(false);
+        recreateActivity(activityTestRule);
+
+        try {
+            onView(withId(R.id.linearLayoutHeader))
+                    .perform(longClick());
+        } catch (PerformException e) {
+            e.printStackTrace();
+        } finally {
+            assertTrue(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
+        }
+
+        try {
+            onView(withId(R.id.linearLayoutHeader))
+                    .perform(longClick());
+        } catch (PerformException e) {
+            e.printStackTrace();
+        } finally {
+            assertFalse(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
+        }
+
+        try {
+            onView(withId(R.id.switchAdvanced))
+                    .perform(longClick());
+        } catch (PerformException e) {
+            e.printStackTrace();
+        } finally {
+            assertTrue(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
+        }
+
+        try {
+            onView(withId(R.id.switchAdvanced))
+                    .perform(longClick());
+        } catch (PerformException e) {
+            e.printStackTrace();
+        } finally {
+            assertFalse(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
+        }
+
+    }
 
     /**
      * This method verifies the light theme's accent.
@@ -46,9 +98,12 @@ public class MainActivityThemeTest {
         // recreate activity to apply theme
         recreateActivity(activityTestRule);
 
+        int accentColor = activityTestRule.getActivity().getResources().getColor(R.color.accent);
+
         // check color for all TextView descriptions
         for (int description : new int[]{R.string.input_description_title, R.string.input_description_content, R.string.input_description_priority, R.string.input_description_visibility}) {
-            onView(withText(description)).check(matches(Matches.withTextColor(activityTestRule.getActivity().getResources().getColor(R.color.accent))));
+            onView(withText(description))
+                    .check(matches(Matches.withTextColor(accentColor)));
         }
     }
 
@@ -65,7 +120,10 @@ public class MainActivityThemeTest {
         // recreate activity to apply theme
         recreateActivity(activityTestRule);
 
-        onView(withId(android.R.id.content)).check(matches(Matches.withBackgroundColor(activityTestRule.getActivity().getResources().getColor(R.color.background))));
+        int accentColor = activityTestRule.getActivity().getResources().getColor(R.color.background);
+
+        onView(withId(android.R.id.content))
+                .check(matches(Matches.withBackgroundColor(accentColor)));
     }
 
     /**
@@ -83,7 +141,8 @@ public class MainActivityThemeTest {
 
         // check color for all TextView descriptions
         for (int description : new int[]{R.string.input_description_title, R.string.input_description_content, R.string.input_description_priority, R.string.input_description_visibility}) {
-            onView(withText(description)).check(matches(Matches.withTextColor(activityTestRule.getActivity().getResources().getColor(R.color.accent_dark))));
+            onView(withText(description))
+                    .check(matches(Matches.withTextColor(activityTestRule.getActivity().getResources().getColor(R.color.accent_dark))));
         }
     }
 
@@ -100,6 +159,7 @@ public class MainActivityThemeTest {
         // recreate activity to apply theme
         recreateActivity(activityTestRule);
 
-        onView(withId(android.R.id.content)).check(matches(Matches.withBackgroundColor(activityTestRule.getActivity().getResources().getColor(R.color.background_dark))));
+        onView(withId(android.R.id.content))
+                .check(matches(Matches.withBackgroundColor(activityTestRule.getActivity().getResources().getColor(R.color.background_dark))));
     }
 }

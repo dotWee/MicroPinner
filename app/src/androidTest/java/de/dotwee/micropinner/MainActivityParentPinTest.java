@@ -59,28 +59,32 @@ public class MainActivityParentPinTest {
     public void testDialogTitle() throws Exception {
 
         // verify changed dialog title
-        onView(withId(R.id.dialogTitle)).check(matches(withText(R.string.edit_name)));
+        onView(withId(R.id.dialogTitle))
+                .check(matches(withText(R.string.edit_name)));
     }
 
     @Test
     public void testDialogButtons() throws Exception {
 
         // verify changed buttons
-        onView(withId(R.id.buttonCancel)).check(matches(withText(R.string.dialog_action_delete)));
+        onView(withId(R.id.buttonCancel))
+                .check(matches(withText(R.string.dialog_action_delete)));
     }
 
     @Test
     public void testPinTitle() throws Exception {
 
         // verify pin title
-        onView(withId(R.id.editTextTitle)).check(matches(withText(LOG_TAG)));
+        onView(withId(R.id.editTextTitle))
+                .check(matches(withText(LOG_TAG)));
     }
 
     @Test
     public void testPinContent() throws Exception {
 
         // verify pin content
-        onView(withId(R.id.editTextContent)).check(matches(withText(LOG_TAG)));
+        onView(withId(R.id.editTextContent))
+                .check(matches(withText(LOG_TAG)));
     }
 
     /**
@@ -92,7 +96,8 @@ public class MainActivityParentPinTest {
     public void testPinPriority() throws Exception {
 
         // verify selected priority
-        onView(withId(R.id.spinnerPriority)).check(matches(withSpinnerText(R.string.priority_high)));
+        onView(withId(R.id.spinnerPriority))
+                .check(matches(withSpinnerText(R.string.priority_high)));
     }
 
     /**
@@ -103,7 +108,8 @@ public class MainActivityParentPinTest {
     @Test
     public void testPinVisibility() throws Exception {
 
-        onView(withId(R.id.spinnerVisibility)).check(matches(withSpinnerText(R.string.visibility_private)));
+        onView(withId(R.id.spinnerVisibility))
+                .check(matches(withSpinnerText(R.string.visibility_private)));
     }
 
     /**

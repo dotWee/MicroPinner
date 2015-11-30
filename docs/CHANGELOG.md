@@ -80,13 +80,15 @@
     - Reduced apk to 730kb
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.7/release_v1.7.apk)
 
-#### [Version: 1.7.1 / work-in-progress]
-- sha1 checksum:
+#### [Version: 1.8 / 30th November 2015]
+- sha1 checksum: 4fd84e11af08e9297ba45ae7cf5fb937e587bc0e
 - changes:
     - Built with latest build-tools and updated support package
     - Light-Theme enabled by default (switch back to dark by long-click on the advanced-switch)
     - Material Design Switch for devices with Android 4.x (through updated dependencies)
     - Notification action to copy pin's title (and content, if exists) to clipboard
+    - Make notification expandable (no longer wrapped content text)
     - Priority and visibility restoring for pin-editing
-- download: [Github]()
+    - Reduced application size to 680kb
+- download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.8/release_v1.8.apk)
 

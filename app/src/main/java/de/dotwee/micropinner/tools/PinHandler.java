@@ -6,8 +6,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.util.Base64;
 import android.util.Log;
 
@@ -333,12 +333,15 @@ public class PinHandler {
         }
 
         public Notification toNotification(Context context, PendingIntent contentIntent) {
-            //noinspection ResourceType
-            Notification.Builder notification = new Notification.Builder(context)
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                     .setContentTitle(title)
                     .setContentText(content)
                     .setSmallIcon(R.drawable.ic_notif_star)
                     .setPriority(priority)
+                    .setVisibility(visibility)
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
+                    .setContentIntent(contentIntent)
                     .addAction(
                             R.drawable.ic_action_clip,
                             context.getString(R.string.message_save_to_clipboard),
@@ -347,12 +350,7 @@ public class PinHandler {
                     .setDeleteIntent(PendingIntent.getBroadcast(context, id, new Intent(context, OnDeleteReceiver.class).setAction("notification_cancelled").putExtra(Pin.EXTRA_INTENT, this), PendingIntent.FLAG_CANCEL_CURRENT))
                     .setOngoing(persistent);
 
-            if (Build.VERSION.SDK_INT >= 21) {
-                notification.setVisibility(visibility);
-            }
-
-            notification.setContentIntent(contentIntent);
-            return notification.build();
+            return builder.build();
         }
 
         public String toClipString() {

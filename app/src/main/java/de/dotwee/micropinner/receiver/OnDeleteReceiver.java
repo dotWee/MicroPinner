@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
 import de.dotwee.micropinner.tools.PinHandler;
 
 /**
@@ -30,8 +31,8 @@ public class OnDeleteReceiver extends BroadcastReceiver {
 
             // and tell the pin handler to remove it from the index
             new PinHandler(context).removePin(pin);
-        } else {
-            Log.w(LOG_TAG, "Intent did not contain a pin as serialized extra! " + intent.toString());
-        }
+
+        } else
+            throw new IllegalArgumentException("Intent did not contain a pin as serialized extra! " + intent.toString());
     }
 }

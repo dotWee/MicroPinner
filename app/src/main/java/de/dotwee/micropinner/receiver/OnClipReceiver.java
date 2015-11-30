@@ -1,8 +1,13 @@
 package de.dotwee.micropinner.receiver;
 
-import android.content.*;
+import android.content.BroadcastReceiver;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
+
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.tools.PinHandler;
 
@@ -34,8 +39,8 @@ public class OnClipReceiver extends BroadcastReceiver {
             clipboard.setPrimaryClip(ClipData.newPlainText(null, pin.toClipString()));
 
             Toast.makeText(context, context.getString(R.string.message_clipped_pin), Toast.LENGTH_SHORT).show();
-        } else {
-            Log.w(LOG_TAG, "Intent did not contain a pin as serialized extra! " + intent.toString());
-        }
+
+        } else
+            throw new IllegalArgumentException("Intent did not contain a pin as serialized extra! " + intent.toString());
     }
 }

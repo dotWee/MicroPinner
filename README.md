@@ -1,7 +1,7 @@
 # <img src="art/ic_web.png" height="50px"/> MicroPinner
 
-MicroPinner is a lightweight dialog-only application, which lets you create your own notifications.
-<br>You can also customize the notifications title and content, as well as its priority and visibility (Android 5 or greater only).
+MicroPinner is a lightweight dialog-only application, that turns your statusbar into a pingboard. (You can basically create your own notifications)
+You can also customize the notifications title and content, as well as its priority and visibility (Android 5 or greater only).
 
 [![Build Status](https://travis-ci.org/dotWee/MicroPinner.svg?branch=master)](https://travis-ci.org/dotWee/MicroPinner)
 [![Issues](https://img.shields.io/github/issues/dotWee/MicroPinner.svg)](https://github.com/dotWee/MicroPinner/issues)
@@ -20,41 +20,19 @@ MicroPinner is a lightweight dialog-only application, which lets you create your
 
 ## Features
 
-+ **Material Design aligned**
-Design follows the [Material Design](https://www.google.com/design/spec/components/dialogs.html#dialogs-specs) dialog-guidelines.
+<b>The application itself</b>
++ consumes no memory in the background - background-services, no background-processes 
++ has no impact on your battery - it uses only native functions of Android
++ is compatible down to Android Jelly Bean
++ weights less than 700kb (Version v1.8)
++ is fully open source!  
 
-+ **Lightweight**
-Weights less than 730kb.
+<b>Design & UI</b>
+MicroPinner follows the official [Material Design](https://www.google.com/design/spec/components/dialogs.html#dialogs-specs) specs for dialogs.
 
-+ **Zero battery & memory impact**  
-It won't drain your battery nor your memory.
-No background-services, no background-processes.
-
-+ **Backwards compatible**  
-Works on Android 4.1 and up. Lower than 4.1 breaks priority feature.
-
-+ **Permission free**
-It will neither spy on your SMS's, nor call it's mothership over network.
-
-+ **Open source**
-The whole source-code is available here on Github.
-
-+ **Restore functions**
-Pins are saved until you swipe them away.
-
-+ **Permanent pins**
-Declare your pins as permanent and delete them by clicking on them.
-
-+ **Choosable priority**
-Give your pin the priority you think it deserves.
-
-+ **Editable pins**
-Edit your pins easily by clicking on them.
-
-#### Android 5 or greater only
-
-+ **Choosable visibility**
-Hide your pin on the lockscreen by using Android Lollipop's visibility-API: Choose between *public*, *private* and *secret*.
+<b>Customization</b>
+You can customize the notifications title and content text as well as its system wide priority (choose between *normal*, *minimal*, *low* and *high*) and visibility (choose between *public*, *private* and *secret*) if you're running Android Lollipop and up. 
+Created pins are restored on reboot. Delete them by simply swiping it away. 
 
 ## Screenshots
 

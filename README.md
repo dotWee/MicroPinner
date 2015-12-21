@@ -36,17 +36,9 @@ Created pins are restored on reboot. Delete them by simply swiping it away.
 
 ## Screenshots
 
-<img src="gp-res/sc_light_new.png" height="400px"/>
-&nbsp;<img src="gp-res/sc_light_new_advanced.png" height="400px"/>
-&nbsp;<img src="gp-res/sc_light_new_filled.png" height="400px"/>
-
-<img src="gp-res/sc_new.png" height="400px"/>
-&nbsp;<img src="gp-res/sc_new_advanced.png" height="400px"/>
-&nbsp;<img src="gp-res/sc_new_filled.png" height="400px"/>
-
-<img src="gp-res/sc_pin_example.png" height="400px"/>
-&nbsp;<img src="gp-res/sc_edit_filled.png" height="400px"/>
-&nbsp;<img src="gp-res/sc_edit_advanced.png" height="400px"/>
+<img src="art/sc_light_new_framed.png" height="400px"/>
+&nbsp;<img src="art/sc_light_new_advanced_framed.png" height="400px"/>
+&nbsp;<img src="art/sc_light_new_filled_framed.png" height="400px"/>
 
 ## Changelog
 

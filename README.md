@@ -1,4 +1,4 @@
-# <img src="art/ic_web.png" height="50px"/> MicroPinner
+# <img src="gp-res/playstore_icon.png" height="50px"/> MicroPinner
 
 MicroPinner is a lightweight dialog-only application, that turns your statusbar into a pingboard. (You can basically create your own notifications)
 You can also customize the notifications title and content, as well as its priority and visibility (Android 5 or greater only).
@@ -36,17 +36,17 @@ Created pins are restored on reboot. Delete them by simply swiping it away.
 
 ## Screenshots
 
-<img src="art/sc_light_new.png" height="400px"/>
-&nbsp;<img src="art/sc_light_new_advanced.png" height="400px"/>
-&nbsp;<img src="art/sc_light_new_filled.png" height="400px"/>
+<img src="gp-res/sc_light_new.png" height="400px"/>
+&nbsp;<img src="gp-res/sc_light_new_advanced.png" height="400px"/>
+&nbsp;<img src="gp-res/sc_light_new_filled.png" height="400px"/>
 
-<img src="art/sc_new.png" height="400px"/>
-&nbsp;<img src="art/sc_new_advanced.png" height="400px"/>
-&nbsp;<img src="art/sc_new_filled.png" height="400px"/>
+<img src="gp-res/sc_new.png" height="400px"/>
+&nbsp;<img src="gp-res/sc_new_advanced.png" height="400px"/>
+&nbsp;<img src="gp-res/sc_new_filled.png" height="400px"/>
 
-<img src="art/sc_pin_example.png" height="400px"/>
-&nbsp;<img src="art/sc_edit_filled.png" height="400px"/>
-&nbsp;<img src="art/sc_edit_advanced.png" height="400px"/>
+<img src="gp-res/sc_pin_example.png" height="400px"/>
+&nbsp;<img src="gp-res/sc_edit_filled.png" height="400px"/>
+&nbsp;<img src="gp-res/sc_edit_advanced.png" height="400px"/>
 
 ## Changelog
 

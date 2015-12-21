@@ -1,0 +1,24 @@
+This application allows you basically to create your own notifications.
+
+<b>The application itself</b>
++ consumes no memory in the background - background-services, no background-processes
++ has no impact on your battery - it uses only native functions of Android
++ is compatible down to Android Jelly Bean
++ weights less than 700kb (Version v1.8)
++ is fully open source!
+
+<b>Design & UI</b>
+MicroPinner follows the official [Material Design](https://www.google.com/design/spec/components/dialogs.html#dialogs-specs) specs for dialogs.
+
+<b>Customization</b>
+You can customize the notifications title and content text as well as its system wide priority (choose between *normal*, *minimal*, *low* and *high*) and visibility (choose between *public*, *private* and *secret*) if you're running Android Lollipop and up.
+Created pins are restored on reboot. Delete them by simply swiping it away.
+
+<b>Source code</b>
+The complete source code is available on Github: https://github.com/dotWee/MicroPinner
+
+
+
+
+
+Copyright (c) 2015 Lukas 'dotwee' Wolfsteiner The source-code of MicroPinner is licensed under the Do What The F**k You Want To public license.

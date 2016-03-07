@@ -8,14 +8,21 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.Serializable;
+
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.receiver.OnDeleteReceiver;
 import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 import de.dotwee.micropinner.view.MainActivity;
-
-import java.io.Serializable;
 
 /**
  * Created by Lukas Wolfsteiner on 29.10.2015.
@@ -55,6 +62,12 @@ public class MainPresenterImpl implements MainPresenter {
 
                 advancedSwitch.setChecked(true);
             }
+        }
+
+        // restore show-actions checkbox
+        if (preferencesHandler.isNotificationActionsEnabled()) {
+            CheckBox checkBox = (CheckBox) mainActivity.findViewById(R.id.checkBoxShowActions);
+            checkBox.setChecked(true);
         }
 
         this.onViewExpand(preferencesHandler.isAdvancedUsed());
@@ -110,6 +123,15 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     /**
+     * This method handles the click on the show-actions checkbox.
+     */
+    @Override
+    public void onShowActions() {
+        CheckBox checkBox = (CheckBox) mainActivity.findViewById(R.id.checkBoxShowActions);
+        preferencesHandler.setNotificationActionsEnabled(checkBox.isChecked());
+    }
+
+    /**
      * This method handles the expand action.
      *
      * @param expand If view should expand or not.
@@ -161,7 +183,8 @@ public class MainPresenterImpl implements MainPresenter {
                 mainActivity.getPriority(),
                 mainActivity.getPinTitle(),
                 mainActivity.getPinContent(),
-                mainActivity.isPersistent()
+                mainActivity.isPersistent(),
+                mainActivity.showActions()
         );
     }
 

@@ -12,7 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.Spinner;
+
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.presenter.MainPresenter;
 import de.dotwee.micropinner.presenter.MainPresenterImpl;
@@ -63,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
         );
 
         setOnCheckedChangeListener(
+                R.id.checkBoxShowActions,
                 R.id.switchAdvanced
         );
 
@@ -137,6 +144,10 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
         switch (buttonView.getId()) {
+
+            case R.id.checkBoxShowActions:
+                mainPresenter.onShowActions();
+                break;
 
             case R.id.switchAdvanced:
                 mainPresenter.onViewExpand(isChecked);
@@ -335,6 +346,17 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
         CheckBox checkBox = (CheckBox) findViewById(R.id.checkBoxPersistentPin);
         return checkBox != null && checkBox.isChecked();
 
+    }
+
+    /**
+     * This method reads the state of the show-actions checkbox widget.
+     *
+     * @return State of the show-actions checkbox.
+     */
+    @Override
+    public boolean showActions() {
+        CheckBox checkBox = (CheckBox) findViewById(R.id.checkBoxShowActions);
+        return checkBox != null && checkBox.isChecked();
     }
 }
 

@@ -268,11 +268,13 @@ public class PinHandler {
 
         boolean persistent = false;
 
+        boolean showActions = false;
+
         public Pin() {
 
         }
 
-        public Pin(int visibility, int priority, String title, String content, boolean persistent) {
+        public Pin(int visibility, int priority, String title, String content, boolean persistent, boolean showActions) {
             this.id = new Random().nextInt(Integer.MAX_VALUE - 2) + 1;
 
             this.visibility = visibility;
@@ -280,6 +282,7 @@ public class PinHandler {
             this.title = title;
             this.content = content;
             this.persistent = persistent;
+            this.showActions = showActions;
         }
 
         public static String getName(int id) {
@@ -321,6 +324,10 @@ public class PinHandler {
             return persistent;
         }
 
+        public boolean showActions() {
+            return showActions;
+        }
+
         public PendingIntent toIntent(Context context) {
             Intent resultIntent = new Intent(context, MainActivity.class);
             resultIntent.putExtra(EXTRA_INTENT, this);
@@ -342,13 +349,17 @@ public class PinHandler {
                     .setVisibility(visibility)
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
                     .setContentIntent(contentIntent)
-                    .addAction(
-                            R.drawable.ic_action_clip,
-                            context.getString(R.string.message_save_to_clipboard),
-                            PendingIntent.getBroadcast(context, (id + 1), new Intent(context, OnClipReceiver.class).putExtra(Pin.EXTRA_INTENT, this), PendingIntent.FLAG_CANCEL_CURRENT)
-                    )
+
                     .setDeleteIntent(PendingIntent.getBroadcast(context, id, new Intent(context, OnDeleteReceiver.class).setAction("notification_cancelled").putExtra(Pin.EXTRA_INTENT, this), PendingIntent.FLAG_CANCEL_CURRENT))
                     .setOngoing(persistent);
+
+            if (showActions()) {
+                builder.addAction(
+                        R.drawable.ic_action_clip,
+                        context.getString(R.string.message_save_to_clipboard),
+                        PendingIntent.getBroadcast(context, (id + 1), new Intent(context, OnClipReceiver.class).putExtra(Pin.EXTRA_INTENT, this), PendingIntent.FLAG_CANCEL_CURRENT)
+                );
+            }
 
             return builder.build();
         }

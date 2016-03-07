@@ -2,6 +2,7 @@ package de.dotwee.micropinner.presenter;
 
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+
 import de.dotwee.micropinner.tools.PinHandler;
 import de.dotwee.micropinner.view.MainActivity;
 
@@ -25,6 +26,11 @@ public interface MainPresenter {
      * This method handles the click on the negative dialog button.
      */
     void onButtonNegative();
+
+    /**
+     * This method handles the click on the show-actions checkbox.
+     */
+    void onShowActions();
 
     /**
      * This method handles the expand action.
@@ -160,5 +166,12 @@ public interface MainPresenter {
          * @return State of the persistent checkbox.
          */
         boolean isPersistent();
+
+        /**
+         * This method reads the state of the show-actions checkbox widget.
+         *
+         * @return State of the show-actions checkbox.
+         */
+        boolean showActions();
     }
 }

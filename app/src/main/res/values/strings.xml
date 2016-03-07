@@ -12,6 +12,7 @@
     <string name="input_description_visibility">Visibility</string>
 
     <string name="input_description_makepinpersistent">Make pin persistent</string>
+    <string name="input_description_shownotificationactions">Show notification actions</string>
 
     <string name="dialog_action_pin">Pin</string>
     <string name="dialog_action_cancel">Cancel</string>

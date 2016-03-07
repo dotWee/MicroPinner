@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
        xmlns:tools="http://schemas.android.com/tools"
-       tools:showIn="@layout/dialog_main"
        style="@style/DialogContent.List"
-       android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    tools:showIn="@layout/dialog_main">
 
     <CheckBox
             android:id="@+id/checkBoxPersistentPin"
-            android:layout_marginTop="16dp"
             style="@style/DialogText.CheckBox"
+        android:layout_marginTop="16dp"
             android:text="@string/input_description_makepinpersistent"/>
+
+    <CheckBox
+        android:id="@+id/checkBoxShowActions"
+        style="@style/DialogText.CheckBox"
+        android:layout_marginTop="4dp"
+        android:text="@string/input_description_shownotificationactions" />
 
 </merge>

@@ -12,6 +12,7 @@ public class PreferencesHandler {
     private static final String PREF_FIRST_USE = "pref_firstuse";
     private static final String PREF_ADVANCED_USE = "pref_advanceduse";
     private static final String PREF_LIGHT_THEME = "pref_lighttheme";
+    private static final String PREF_SHOW_NOTIFICATION_ACTIONS = "pref_shownotificationactions";
 
     private final static String LOG_TAG = "PreferencesHandler";
     private static PreferencesHandler instance;
@@ -53,6 +54,14 @@ public class PreferencesHandler {
 
     public void setLightThemeEnabled(Boolean b) {
         applyPreference(PREF_LIGHT_THEME, b);
+    }
+
+    public boolean isNotificationActionsEnabled() {
+        return preferences.getBoolean(PREF_SHOW_NOTIFICATION_ACTIONS, false);
+    }
+
+    public void setNotificationActionsEnabled(Boolean b) {
+        applyPreference(PREF_SHOW_NOTIFICATION_ACTIONS, b);
     }
 
     private void applyPreference(String key, boolean state) {

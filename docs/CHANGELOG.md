@@ -92,3 +92,8 @@
     - Reduced application size to 680kb
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.8/release_v1.8.apk)
 
+#### [Version: 1.9 / 07th March 2016]
+- sha1 checksum: 
+- changes:
+    - Built with latest build-tools and updated support package
+    - Pin's notification actions are now optional

@@ -34,4 +34,5 @@
     <string name="priority_low">basse</string>
     <string name="priority_high">haute</string>
     <string name="priority_default">par défaut</string>
+    <string name="input_description_shownotificationactions">Afficher les actions de notification</string>
 </resources>

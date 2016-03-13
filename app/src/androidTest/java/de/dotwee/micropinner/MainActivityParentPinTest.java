@@ -34,6 +34,7 @@ public class MainActivityParentPinTest {
             Notification.PRIORITY_HIGH,
             LOG_TAG,
             LOG_TAG,
+            true,
             true
     );
 

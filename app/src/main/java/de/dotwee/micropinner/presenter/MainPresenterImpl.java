@@ -138,10 +138,14 @@ public class MainPresenterImpl implements MainPresenter {
      */
     @Override
     public void onViewExpand(boolean expand) {
-        View view = mainActivity.findViewById(R.id.checkBoxPersistentPin);
+        int[] expandedIds = new int[]{R.id.checkBoxPersistentPin, R.id.checkBoxShowActions};
 
-        if (view != null) {
-            view.setVisibility(expand ? View.VISIBLE : View.GONE);
+        for (int id : expandedIds) {
+            View view = mainActivity.findViewById(id);
+
+            if (view != null) {
+                view.setVisibility(expand ? View.VISIBLE : View.GONE);
+            }
         }
 
         preferencesHandler.setAdvancedUse(expand);

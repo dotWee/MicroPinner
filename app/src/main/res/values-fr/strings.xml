@@ -6,12 +6,13 @@
     <string name="edit_name">Éditer Épingle</string>
 
     <string name="input_description_title">Titre</string>
-    <string name="input_description_content">Teneur</string>
+    <string name="input_description_content">Contenu</string>
 
     <string name="input_description_priority">Priorité</string>
     <string name="input_description_visibility">Visibilité</string>
 
     <string name="input_description_makepinpersistent">Épingle permanente</string>
+    <string name="input_description_shownotificationactions">Afficher les actions de notification</string>    
 
     <string name="dialog_action_pin">Épingler</string>
     <string name="dialog_action_cancel">Annuler</string>
@@ -21,7 +22,7 @@
     <string name="input_hint_content">Contenu</string>
 
     <string name="message_visibility_unsupported">Il semblerait que vous utilisiez une ancienne version d\'Android, qui ne supporte pas l\'option de visibilité.</string>
-    <string name="message_clipped_pin">Pin a été copié dans le presse-papiers.</string>
+    <string name="message_clipped_pin">L\'épingle a été copiée dans le presse-papiers.</string>
     <string name="message_empty_title">Le titre doit contenir du texte.</string>
     <string name="message_pin_new">Appuyer pour ajouter une épingle.</string>
     <string name="message_save_to_clipboard">Copier dans le presse-papiers</string>
@@ -34,5 +35,4 @@
     <string name="priority_low">basse</string>
     <string name="priority_high">haute</string>
     <string name="priority_default">par défaut</string>
-    <string name="input_description_shownotificationactions">Afficher les actions de notification</string>
 </resources>

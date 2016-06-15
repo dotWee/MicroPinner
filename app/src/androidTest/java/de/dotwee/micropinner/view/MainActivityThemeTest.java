@@ -1,6 +1,7 @@
-package de.dotwee.micropinner;
+package de.dotwee.micropinner.view;
 
 import android.support.test.espresso.PerformException;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -8,16 +9,17 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import de.dotwee.micropinner.R;
+import de.dotwee.micropinner.tools.Matches;
 import de.dotwee.micropinner.tools.PreferencesHandler;
-import de.dotwee.micropinner.view.MainActivity;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.*;
+import static android.support.test.espresso.action.ViewActions.longClick;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static de.dotwee.micropinner.MainActivityDefaultTest.getPreferencesHandler;
-import static de.dotwee.micropinner.MainActivityDefaultTest.recreateActivity;
+import static de.dotwee.micropinner.view.MainActivityDefaultTest.getPreferencesHandler;
+import static de.dotwee.micropinner.view.MainActivityDefaultTest.recreateActivity;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -48,7 +50,7 @@ public class MainActivityThemeTest {
         recreateActivity(activityTestRule);
 
         try {
-            onView(withId(R.id.linearLayoutHeader))
+            onView(ViewMatchers.withId(R.id.linearLayoutHeader))
                     .perform(longClick());
         } catch (PerformException e) {
             e.printStackTrace();

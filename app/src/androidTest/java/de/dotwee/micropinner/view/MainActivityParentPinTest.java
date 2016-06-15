@@ -1,8 +1,9 @@
-package de.dotwee.micropinner;
+package de.dotwee.micropinner.view;
 
 import android.app.Notification;
 import android.content.Intent;
 import android.support.test.espresso.intent.Intents;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -12,8 +13,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.tools.PinHandler;
-import de.dotwee.micropinner.view.MainActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -60,7 +61,7 @@ public class MainActivityParentPinTest {
     public void testDialogTitle() throws Exception {
 
         // verify changed dialog title
-        onView(withId(R.id.dialogTitle))
+        onView(ViewMatchers.withId(R.id.dialogTitle))
                 .check(matches(withText(R.string.edit_name)));
     }
 

@@ -1,4 +1,4 @@
-package de.dotwee.micropinner;
+package de.dotwee.micropinner.tools;
 
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.ColorInt;
@@ -7,6 +7,7 @@ import android.support.test.espresso.intent.Checks;
 import android.support.test.espresso.matcher.BoundedMatcher;
 import android.view.View;
 import android.widget.TextView;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 

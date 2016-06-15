@@ -3,6 +3,7 @@ package de.dotwee.micropinner.tools;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 
 /**
  * Created by lukas on 18.08.2015 - 16:11
@@ -18,7 +19,7 @@ public class PreferencesHandler {
     private static PreferencesHandler instance;
     private final SharedPreferences preferences;
 
-    private PreferencesHandler(Context context) {
+    private PreferencesHandler(@NonNull Context context) {
         this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
@@ -44,7 +45,7 @@ public class PreferencesHandler {
         return preferences.getBoolean(PREF_ADVANCED_USE, false);
     }
 
-    public void setAdvancedUse(Boolean b) {
+    public void setAdvancedUse(boolean b) {
         applyPreference(PREF_ADVANCED_USE, b);
     }
 
@@ -52,7 +53,7 @@ public class PreferencesHandler {
         return preferences.getBoolean(PREF_LIGHT_THEME, true);
     }
 
-    public void setLightThemeEnabled(Boolean b) {
+    public void setLightThemeEnabled(boolean b) {
         applyPreference(PREF_LIGHT_THEME, b);
     }
 
@@ -60,11 +61,11 @@ public class PreferencesHandler {
         return preferences.getBoolean(PREF_SHOW_NOTIFICATION_ACTIONS, false);
     }
 
-    public void setNotificationActionsEnabled(Boolean b) {
+    public void setNotificationActionsEnabled(boolean b) {
         applyPreference(PREF_SHOW_NOTIFICATION_ACTIONS, b);
     }
 
-    private void applyPreference(String key, boolean state) {
+    private void applyPreference(@NonNull String key, boolean state) {
         preferences.edit().putBoolean(key, state).apply();
     }
 }

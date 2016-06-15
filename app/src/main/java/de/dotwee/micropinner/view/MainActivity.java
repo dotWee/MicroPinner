@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -38,14 +39,14 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
      * @param context needed to get resources
      * @return true if device screen size is greater than 6 inches
      */
-    private static boolean isTablet(Context context) {
+    private static boolean isTablet(@NonNull Context context) {
         return (context.getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK)
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@NonNull Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         PreferencesHandler preferencesHandler = PreferencesHandler.getInstance(this);
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
     }
 
     @Override
-    public void setContentView(int layoutResID) {
+    public void setContentView(@LayoutRes int layoutResID) {
         if (isTablet(this)) {
 
             DisplayMetrics metrics = getResources().getDisplayMetrics();
@@ -141,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
      * @param isChecked  The new checked state of buttonView.
      */
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
 
         switch (buttonView.getId()) {
 
@@ -226,7 +227,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
 
     /**
      * This method applies a long-click-listener to its given view-ids.
-     *
      */
     @Override
     public void setOnLongClickListener(@NonNull @IdRes int... ids) {

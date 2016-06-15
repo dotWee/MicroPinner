@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Base64;
 import android.util.Log;
@@ -48,7 +50,7 @@ public class PinHandler {
      *
      * @param context needed to get access to {@link SharedPreferences} and {@link NotificationManager}
      */
-    public PinHandler(Context context) {
+    public PinHandler(@NonNull Context context) {
         this.notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
         this.context = context;
@@ -60,7 +62,7 @@ public class PinHandler {
      * @param string to check
      * @return true if valid base64, false is invalid or null
      */
-    private static boolean isValidBase64(String string) {
+    private static boolean isValidBase64(@NonNull String string) {
         final String BASE64_REGEX = "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$";
         if (string != null) if (string.matches(BASE64_REGEX)) return true;
 
@@ -74,7 +76,8 @@ public class PinHandler {
      * @return a unserialized object
      * @throws IllegalArgumentException
      */
-    private static Object deserialize(String serializedObject) throws IllegalArgumentException {
+    @NonNull
+    private static Object deserialize(@NonNull String serializedObject) throws IllegalArgumentException {
         ObjectInputStream objectInputStream;
         Object object = new Object();
 
@@ -105,7 +108,7 @@ public class PinHandler {
      * Persist and display a {@param pin} to shared-preferences
      * and notification bar
      */
-    public void persistPin(Pin pin) {
+    public void persistPin(@NonNull Pin pin) {
         PendingIntent pinIntent = pin.toIntent(context);
         Notification pinNotification = pin.toNotification(context, pinIntent);
         notificationManager.notify(pin.getId(), pinNotification);
@@ -119,7 +122,7 @@ public class PinHandler {
      *
      * @param pin to delete / remove
      */
-    public void removePin(Pin pin) {
+    public void removePin(@NonNull Pin pin) {
         removeFromPreferences(pin);
         removeFromIndex(pin);
     }
@@ -141,7 +144,7 @@ public class PinHandler {
      *
      * @param pin to remove
      */
-    private void removeFromIndex(Pin pin) {
+    private void removeFromIndex(@NonNull Pin pin) {
         List<Integer> oldIndex = getIndex(), newIndex = new ArrayList<>();
 
         for (Integer id : oldIndex)
@@ -153,7 +156,7 @@ public class PinHandler {
     /**
      * Deleted a {@param pin} from the shared preferences
      */
-    private void removeFromPreferences(Pin pin) {
+    private void removeFromPreferences(@NonNull Pin pin) {
         preferences.edit().remove(pin.getName()).apply();
     }
 
@@ -162,6 +165,7 @@ public class PinHandler {
      *
      * @return a key-map with all pins
      */
+    @NonNull
     public Map<Integer, Pin> getPins() {
         Map<Integer, Pin> pinMap = new HashMap<>();
         List<Integer> ids = getIndex();
@@ -181,7 +185,7 @@ public class PinHandler {
     /**
      * This method serializes the {@param index} and writes it to shared preferences
      */
-    private void writeIndex(List<Integer> index) {
+    private void writeIndex(@NonNull List<Integer> index) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         String serializedIndex;
 
@@ -204,6 +208,7 @@ public class PinHandler {
      *
      * @return the current index of pins
      */
+    @NonNull
     private List<Integer> getIndex() throws IllegalStateException {
         String serializedIndex = preferences.getString("index", null);
         List<Integer> list = new ArrayList<>();
@@ -230,6 +235,7 @@ public class PinHandler {
      * @return the specific pin
      * @throws Exception is pin does not exist or is not actually a pin
      */
+    @NonNull
     private Pin getPin(int id) throws Exception {
 
         String serializedPin = preferences.getString(Pin.getName(id), null);
@@ -274,7 +280,9 @@ public class PinHandler {
 
         }
 
-        public Pin(int visibility, int priority, String title, String content, boolean persistent, boolean showActions) {
+        public Pin(int visibility, int priority, @NonNull String title, @NonNull String content,
+                   boolean persistent, boolean showActions) {
+
             this.id = new Random().nextInt(Integer.MAX_VALUE - 2) + 1;
 
             this.visibility = visibility;
@@ -285,6 +293,7 @@ public class PinHandler {
             this.showActions = showActions;
         }
 
+        @NonNull
         public static String getName(int id) {
             Pin pin = new Pin();
             pin.setId(id);
@@ -300,14 +309,16 @@ public class PinHandler {
             this.id = id;
         }
 
+        @NonNull
         public String getTitle() {
             return title;
         }
 
-        public void setTitle(String title) {
+        public void setTitle(@NonNull String title) {
             this.title = title;
         }
 
+        @NonNull
         public String getContent() {
             return content;
         }
@@ -328,18 +339,21 @@ public class PinHandler {
             return showActions;
         }
 
-        public PendingIntent toIntent(Context context) {
+        @NonNull
+        public PendingIntent toIntent(@NonNull Context context) {
             Intent resultIntent = new Intent(context, MainActivity.class);
             resultIntent.putExtra(EXTRA_INTENT, this);
 
             return PendingIntent.getActivity(context, id, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         }
 
+        @NonNull
         public String getName() {
             return "pin_" + id;
         }
 
-        public Notification toNotification(Context context, PendingIntent contentIntent) {
+        @NonNull
+        public Notification toNotification(@NonNull Context context, @NonNull PendingIntent contentIntent) {
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                     .setContentTitle(title)
@@ -364,6 +378,7 @@ public class PinHandler {
             return builder.build();
         }
 
+        @NonNull
         public String toClipString() {
             if (content != null && !content.isEmpty())
                 return title + " - " + content;
@@ -371,6 +386,7 @@ public class PinHandler {
             else return title;
         }
 
+        @Nullable
         @Override
         public String toString() {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

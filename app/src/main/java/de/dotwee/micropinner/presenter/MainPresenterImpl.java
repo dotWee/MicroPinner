@@ -36,7 +36,7 @@ public class MainPresenterImpl implements MainPresenter {
     private final Intent intent;
     private PinHandler.Pin parentPin;
 
-    public MainPresenterImpl(MainActivity mainActivity, Intent intent) {
+    public MainPresenterImpl(@NonNull MainActivity mainActivity, @NonNull Intent intent) {
         this.preferencesHandler = PreferencesHandler.getInstance(mainActivity);
         this.pinHandler = new PinHandler(mainActivity);
         this.mainActivity = mainActivity;

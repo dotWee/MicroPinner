@@ -3,16 +3,17 @@ package de.dotwee.micropinner.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import de.dotwee.micropinner.tools.PinHandler;
 
 /**
  * Created by Lukas on 26.06.2015.
- *
+ * <p/>
  * This class is a broadcast receiver for {@link android.app.Notification}
  * DeleteIntents.
- *
+ * <p/>
  * Intents should contain a serialized pin as extra.
  * If yes, tell the {@link PinHandler} to delete
  * and remove it from the index.
@@ -21,7 +22,7 @@ public class OnDeleteReceiver extends BroadcastReceiver {
     private final static String LOG_TAG = "OnDeleteReceiver";
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(@NonNull Context context, @NonNull Intent intent) {
 
         // deserialize our pin from the intent
         PinHandler.Pin pin = (PinHandler.Pin) intent.getSerializableExtra(PinHandler.Pin.EXTRA_INTENT);

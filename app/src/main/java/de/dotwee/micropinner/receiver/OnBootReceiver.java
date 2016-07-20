@@ -17,6 +17,10 @@ public class OnBootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
+        if (! intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
+            throw new IllegalStateException("OnBootReceiver's intent actions is not " + Intent.ACTION_BOOT_COMPLETED);
+        }
+
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         // get all pins

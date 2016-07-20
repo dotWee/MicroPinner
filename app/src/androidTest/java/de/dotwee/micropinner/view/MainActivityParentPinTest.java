@@ -1,7 +1,6 @@
 package de.dotwee.micropinner.view;
 
 import android.annotation.TargetApi;
-import android.app.Notification;
 import android.content.Intent;
 import android.os.Build;
 import android.support.test.espresso.intent.Intents;
@@ -15,6 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import de.dotwee.micropinner.Constants;
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.tools.PinHandler;
 
@@ -33,15 +33,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class MainActivityParentPinTest {
     private static final String LOG_TAG = "MainActivityParentPinTest";
 
-    private final PinHandler.Pin testPin = new PinHandler.Pin(
-            Notification.VISIBILITY_PRIVATE,
-            Notification.PRIORITY_HIGH,
-            LOG_TAG,
-            LOG_TAG,
-            true,
-            true
-    );
-
     /**
      * Preferred JUnit 4 mechanism of specifying the
      * activity to be launched before each test
@@ -54,7 +45,7 @@ public class MainActivityParentPinTest {
 
 
         final Intent testIntent = new Intent(activityTestRule.getActivity(), MainActivity.class)
-                .putExtra(PinHandler.Pin.EXTRA_INTENT, testPin);
+                .putExtra(PinHandler.Pin.EXTRA_INTENT, Constants.testPin);
 
         Intents.init();
         activityTestRule.launchActivity(testIntent);

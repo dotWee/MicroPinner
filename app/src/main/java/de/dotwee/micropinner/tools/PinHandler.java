@@ -228,7 +228,7 @@ public class PinHandler {
      *
      * @param id of the pin to return
      * @return the specific pin
-     * @throws Exception is pin does not exist or is not actually a pin
+     * @throws IllegalStateException is pin does not exist or is not actually a pin
      */
     @NonNull
     private Pin getPin(int id) throws IllegalStateException {

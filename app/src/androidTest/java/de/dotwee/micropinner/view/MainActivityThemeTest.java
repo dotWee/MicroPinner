@@ -1,10 +1,10 @@
 package de.dotwee.micropinner.view;
 
-import android.support.test.espresso.PerformException;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,53 +38,40 @@ public class MainActivityThemeTest {
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
     PreferencesHandler preferencesHandler;
 
-    /**
-     * This method verifies the theme-change mechanism through
-     * multiple long-clicks on the header and advanced-switch.
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testThemeChangeMechanism() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         getPreferencesHandler(activityTestRule).setLightThemeEnabled(false);
         recreateActivity(activityTestRule);
+    }
 
-        try {
-            onView(ViewMatchers.withId(R.id.linearLayoutHeader))
-                    .perform(longClick());
-        } catch (PerformException e) {
-            e.printStackTrace();
-        } finally {
-            assertTrue(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
-        }
+    /**
+     * This method verifies the theme-change mechanism through
+     * multiple long-clicks on the header.
+     */
+    @Test
+    public void testThemeChangeThroughHeader() throws Exception {
+        onView(ViewMatchers.withId(R.id.linearLayoutHeader))
+                .perform(longClick());
+        assertTrue(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
 
-        try {
-            onView(withId(R.id.linearLayoutHeader))
-                    .perform(longClick());
-        } catch (PerformException e) {
-            e.printStackTrace();
-        } finally {
-            assertFalse(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
-        }
+        onView(withId(R.id.linearLayoutHeader))
+                .perform(longClick());
+        assertFalse(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
+    }
 
-        try {
-            onView(withId(R.id.switchAdvanced))
-                    .perform(longClick());
-        } catch (PerformException e) {
-            e.printStackTrace();
-        } finally {
-            assertTrue(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
-        }
+    /**
+     * This method verifies the theme-change mechanism through
+     * multiple long-clicks on the advanced-switch.
+     */
+    @Test
+    public void testThemeChangeThroughSwitch() throws Exception {
+        onView(withId(R.id.switchAdvanced))
+                .perform(longClick());
+        assertTrue(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
 
-        try {
-            onView(withId(R.id.switchAdvanced))
-                    .perform(longClick());
-        } catch (PerformException e) {
-            e.printStackTrace();
-        } finally {
-            assertFalse(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
-        }
-
+        onView(withId(R.id.switchAdvanced))
+                .perform(longClick());
+        assertFalse(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
     }
 
     /**

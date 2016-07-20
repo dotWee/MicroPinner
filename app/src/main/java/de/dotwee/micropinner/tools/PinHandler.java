@@ -207,17 +207,19 @@ public class PinHandler {
     private List<Integer> getIndex() throws IllegalStateException {
         String serializedIndex = preferences.getString("index", null);
         List<Integer> list = new ArrayList<>();
-        try {
-            Object object = deserialize(serializedIndex);
+        if (serializedIndex != null) {
+            try {
+                Object object = deserialize(serializedIndex);
 
-            if (object instanceof List<?>)
-                list = (List<Integer>) object;
+                if (object instanceof List<?>)
+                    list = (List<Integer>) object;
 
-            else throw new IllegalStateException("Object is not a instance of List!");
-        } catch (IllegalArgumentException | IllegalStateException e) {
-            e.printStackTrace();
+                else throw new IllegalStateException("Object is not a instance of List!");
+            } catch (IllegalArgumentException | IllegalStateException e) {
+                e.printStackTrace();
 
-            Log.w(LOG_TAG, "Couldn't deserialize the index. Returning empty list.");
+                Log.w(LOG_TAG, "Couldn't deserialize the index. Returning empty list.");
+            }
         }
 
         return list;

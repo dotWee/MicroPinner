@@ -64,9 +64,7 @@ public class PinHandler {
      */
     private static boolean isValidBase64(@NonNull String string) {
         final String BASE64_REGEX = "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$";
-        if (string != null) if (string.matches(BASE64_REGEX)) return true;
-
-        return false;
+        return string.matches(BASE64_REGEX);
     }
 
     /**
@@ -81,26 +79,23 @@ public class PinHandler {
         ObjectInputStream objectInputStream;
         Object object = new Object();
 
-        if (serializedObject != null) {
+        // remove all line separators
+        serializedObject = serializedObject.replaceAll("\\r\\n|\\r|\\n", "");
 
-            // remove all line separators
-            serializedObject = serializedObject.replaceAll("\\r\\n|\\r|\\n", "");
+        if (isValidBase64(serializedObject)) {
+            byte[] rawData = Base64.decode(serializedObject, BASE64_DEFAULT_FLAG);
 
-            if (isValidBase64(serializedObject)) {
-                byte[] rawData = Base64.decode(serializedObject, BASE64_DEFAULT_FLAG);
+            try {
+                objectInputStream = new ObjectInputStream(new ByteArrayInputStream(rawData));
+                object = objectInputStream.readObject();
+                objectInputStream.close();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
 
-                try {
-                    objectInputStream = new ObjectInputStream(new ByteArrayInputStream(rawData));
-                    object = objectInputStream.readObject();
-                    objectInputStream.close();
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+        } else
+            throw new IllegalArgumentException("Input is not valid base64! \nInput: " + serializedObject);
 
-            } else
-                throw new IllegalArgumentException("Input is not valid base64! \nInput: " + serializedObject);
-
-        } else throw new IllegalArgumentException("Input is null.");
         return object;
     }
 

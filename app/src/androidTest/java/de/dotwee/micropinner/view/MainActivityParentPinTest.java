@@ -1,7 +1,9 @@
 package de.dotwee.micropinner.view;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.content.Intent;
+import android.os.Build;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
@@ -26,6 +28,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 /**
  * Created by Lukas Wolfsteiner on 06.11.2015.
  */
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 @RunWith(AndroidJUnit4.class)
 public class MainActivityParentPinTest {
     private static final String LOG_TAG = "MainActivityParentPinTest";

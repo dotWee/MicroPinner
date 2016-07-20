@@ -20,6 +20,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static de.dotwee.micropinner.view.MainActivityDefaultTest.getPreferencesHandler;
 import static de.dotwee.micropinner.view.MainActivityDefaultTest.recreateActivity;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -50,13 +51,11 @@ public class MainActivityThemeTest {
      */
     @Test
     public void testThemeChangeThroughHeader() throws Exception {
+        boolean lightThemeEnabled = getPreferencesHandler(activityTestRule).isLightThemeEnabled();
         onView(ViewMatchers.withId(R.id.linearLayoutHeader))
                 .perform(longClick());
-        assertTrue(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
-
-        onView(withId(R.id.linearLayoutHeader))
-                .perform(longClick());
-        assertFalse(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
+        // boolean should be inverted now
+        assertEquals(! lightThemeEnabled, getPreferencesHandler(activityTestRule).isLightThemeEnabled());
     }
 
     /**
@@ -65,13 +64,12 @@ public class MainActivityThemeTest {
      */
     @Test
     public void testThemeChangeThroughSwitch() throws Exception {
+        boolean lightThemeEnabled = getPreferencesHandler(activityTestRule).isLightThemeEnabled();
         onView(withId(R.id.switchAdvanced))
                 .perform(longClick());
         assertTrue(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
-
-        onView(withId(R.id.switchAdvanced))
-                .perform(longClick());
-        assertFalse(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
+        // boolean should be inverted now
+        assertEquals(! lightThemeEnabled, getPreferencesHandler(activityTestRule).isLightThemeEnabled());
     }
 
     /**

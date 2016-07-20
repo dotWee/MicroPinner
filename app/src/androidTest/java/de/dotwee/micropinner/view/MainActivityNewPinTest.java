@@ -21,6 +21,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isFocusable;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static de.dotwee.micropinner.tools.TestTools.getPreferencesHandler;
+import static de.dotwee.micropinner.tools.TestTools.recreateActivity;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -30,8 +32,8 @@ import static org.junit.Assert.assertTrue;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityDefaultTest {
-    private static final String LOG_TAG = "MainActivityDefaultTest";
+public class MainActivityNewPinTest {
+    private static final String LOG_TAG = "MainActivityNewPinTest";
     /**
      * Preferred JUnit 4 mechanism of specifying the
      * activity to be launched before each test
@@ -39,32 +41,6 @@ public class MainActivityDefaultTest {
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
     PreferencesHandler preferencesHandler;
-
-    /**
-     * This method returns an instance of {@link PreferencesHandler}
-     * for an activity test rule.
-     *
-     * @param activityTestRule Source to get the PreferenceHandler.
-     * @return An instance of {@link PreferencesHandler}
-     */
-    static PreferencesHandler getPreferencesHandler(ActivityTestRule<MainActivity> activityTestRule) {
-        return PreferencesHandler.getInstance(activityTestRule.getActivity());
-    }
-
-    /**
-     * This method recreates the main activity in order to apply
-     * themes or reload the preference cache.
-     *
-     * @param activityTestRule Source to get access to the activity.
-     */
-    static void recreateActivity(final ActivityTestRule<MainActivity> activityTestRule) {
-        activityTestRule.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activityTestRule.getActivity().recreate();
-            }
-        });
-    }
 
     /**
      * This method verifies the advanced-switch's functionality.

@@ -30,7 +30,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class MainActivityParentPinTest {
     private static final String LOG_TAG = "MainActivityParentPinTest";
 
-    final PinHandler.Pin testPin = new PinHandler.Pin(
+    private final PinHandler.Pin testPin = new PinHandler.Pin(
             Notification.VISIBILITY_PRIVATE,
             Notification.PRIORITY_HIGH,
             LOG_TAG,

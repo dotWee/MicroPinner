@@ -236,7 +236,7 @@ public class PinHandler {
      * @throws Exception is pin does not exist or is not actually a pin
      */
     @NonNull
-    private Pin getPin(int id) throws Exception {
+    private Pin getPin(int id) throws IllegalStateException {
 
         String serializedPin = preferences.getString(Pin.getName(id), null);
         if (serializedPin != null) {

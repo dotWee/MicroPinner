@@ -40,7 +40,7 @@ public class MainActivityNewPinTest {
      */
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
-    PreferencesHandler preferencesHandler;
+    private PreferencesHandler preferencesHandler;
 
     /**
      * This method verifies the advanced-switch's functionality.

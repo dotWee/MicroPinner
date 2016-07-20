@@ -37,7 +37,7 @@ public class MainActivityThemeTest {
      */
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
-    PreferencesHandler preferencesHandler;
+    private PreferencesHandler preferencesHandler;
 
     @Before
     public void setUp() throws Exception {

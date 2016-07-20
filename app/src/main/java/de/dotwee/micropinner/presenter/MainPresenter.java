@@ -1,10 +1,10 @@
 package de.dotwee.micropinner.presenter;
 
+import android.app.Activity;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 
 import de.dotwee.micropinner.tools.PinHandler;
-import de.dotwee.micropinner.view.MainActivity;
 
 /**
  * Created by Lukas Wolfsteiner on 29.10.2015.
@@ -56,10 +56,9 @@ public interface MainPresenter {
     /**
      * This method returns the corresponding view of the presenter.
      *
-     * @return A non null {@link android.support.v7.app.AppCompatActivity} activity.
+     * @return A non null {@link Activity} activity.
      */
-    @NonNull
-    MainActivity getView();
+    @NonNull Activity getView();
 
     /**
      * This method notifies all views about the parent pin.

@@ -101,8 +101,12 @@
     - Reduced application size to 670kb
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.9/release_v1.9.apk)
 
-#### [Version: 1.9.1 / 13th March 2016]
-- sha1 checksum: c3f172244e132b31174d29668413ba315f396750
+#### [Version: 1.9.2 / ]
+- sha1 checksum:
 - changes:
-    - Hide new checkbox when expanded layout is closed
-- download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.9.1/release_v1.9.1.apk)
+    - Target latest Android release (MicroPinner is ready for Android Nougat!)
+    - Built with latest build-tools and updated support package
+    - Some code refactoring and cleanups
+    - Improved and updated translations
+- download: [Github]()
+

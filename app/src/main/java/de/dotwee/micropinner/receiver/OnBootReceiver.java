@@ -7,6 +7,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.util.Map;
 
@@ -16,9 +18,15 @@ public class OnBootReceiver extends BroadcastReceiver {
     private final static String LOG_TAG = "OnBootReceiver";
 
     @Override
-    public void onReceive(@NonNull Context context, @NonNull Intent intent) {
+    public void onReceive(@NonNull Context context, @Nullable Intent intent) {
+        if (intent == null || intent.getAction() == null) {
+            Log.w(LOG_TAG, "Intent (and its action) must be not null to work with it, returning without work");
+            return;
+        }
+
         if (! intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
-            throw new IllegalStateException("OnBootReceiver's intent actions is not " + Intent.ACTION_BOOT_COMPLETED);
+            Log.w(LOG_TAG, "OnBootReceiver's intent actions is not " + Intent.ACTION_BOOT_COMPLETED + ", returning without work");
+            return;
         }
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

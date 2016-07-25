@@ -104,9 +104,10 @@
 #### [Version: 1.9.2 / ]
 - sha1 checksum:
 - changes:
+    - Turn hard-coded layout into dynamic custom views (drastically improved start time)
     - Target latest Android release (MicroPinner is ready for Android Nougat!)
     - Built with latest build-tools and updated support package
-    - Some code refactoring and cleanups
+    - Some code refactoring and cleanup
     - Improved and updated translations
 - download: [Github]()
 

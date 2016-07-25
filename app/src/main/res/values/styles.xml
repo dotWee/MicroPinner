@@ -68,6 +68,7 @@
     </style>
 
     <style name="DialogContent.Table">
+        <item name="android:animateLayoutChanges">true</item>
         <item name="android:stretchColumns">0,1</item>
     </style>
 

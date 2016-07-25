@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,9 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
@@ -26,12 +23,19 @@ import de.dotwee.micropinner.presenter.MainPresenter;
 import de.dotwee.micropinner.presenter.MainPresenterImpl;
 import de.dotwee.micropinner.receiver.OnBootReceiver;
 import de.dotwee.micropinner.tools.PreferencesHandler;
+import de.dotwee.micropinner.view.custom.DialogContentView;
+import de.dotwee.micropinner.view.custom.DialogFooterView;
+import de.dotwee.micropinner.view.custom.DialogHeaderView;
 
 /**
  * Created by Lukas Wolfsteiner on 29.10.2015.
  */
-public class MainActivity extends AppCompatActivity implements MainPresenter.Listeners, MainPresenter.Data, View.OnClickListener, View.OnLongClickListener, CompoundButton.OnCheckedChangeListener {
+public class MainActivity extends AppCompatActivity implements MainPresenter.Data {
+
     private static final String LOG_TAG = "MainActivity";
+    DialogHeaderView headerView;
+    DialogContentView contentView;
+    DialogFooterView footerView;
     private MainPresenter mainPresenter;
 
     /**
@@ -57,28 +61,19 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
 
         this.setContentView(R.layout.dialog_main);
 
-        setVisibilityAdapter();
-        setPriorityAdapter();
-
         this.mainPresenter = new MainPresenterImpl(this, getIntent());
 
-        setOnClickListener(
-                R.id.switchAdvanced,
-                R.id.linearLayoutHeader,
+        headerView = (DialogHeaderView) findViewById(R.id.dialogHeaderView);
+        headerView.setMainPresenter(mainPresenter);
 
-                R.id.buttonCancel,
-                R.id.buttonPin
-        );
+        contentView = (DialogContentView) findViewById(R.id.dialogContentView);
+        contentView.setMainPresenter(mainPresenter);
 
-        setOnCheckedChangeListener(
-                R.id.checkBoxShowActions,
-                R.id.switchAdvanced
-        );
+        footerView = (DialogFooterView) findViewById(R.id.dialogFooterView);
+        footerView.setMainPresenter(mainPresenter);
 
-        setOnLongClickListener(
-                R.id.switchAdvanced,
-                R.id.linearLayoutHeader
-        );
+        // restore previous state
+        mainPresenter.restore();
 
         // simulate device-boot by sending a new intent to class OnBootReceiver
         sendBroadcast(new Intent(this, OnBootReceiver.class));
@@ -100,158 +95,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Lis
             );
 
         } else super.setContentView(layoutResID);
-    }
-
-    private void setVisibilityAdapter() {
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerVisibility);
-        if (spinner != null) {
-
-            ArrayAdapter<String> visibilityAdapter = new ArrayAdapter<>(
-                    spinner.getContext(),
-                    android.R.layout.simple_spinner_item,
-                    this.getResources().getStringArray(R.array.array_visibilities)
-            );
-
-            visibilityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(visibilityAdapter);
-
-            spinner.setAdapter(visibilityAdapter);
-        }
-    }
-
-    private void setPriorityAdapter() {
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerPriority);
-        if (spinner != null) {
-
-            ArrayAdapter<String> priorityAdapter = new ArrayAdapter<>(
-                    spinner.getContext(),
-                    android.R.layout.simple_spinner_item,
-                    this.getResources().getStringArray(R.array.array_priorities)
-            );
-
-            priorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(priorityAdapter);
-
-            spinner.setAdapter(priorityAdapter);
-        }
-    }
-
-    /**
-     * Called when the checked state of a compound button has changed.
-     *
-     * @param buttonView The compound button view whose state has changed.
-     * @param isChecked  The new checked state of buttonView.
-     */
-    @Override
-    public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
-
-        switch (buttonView.getId()) {
-
-            case R.id.checkBoxShowActions:
-                mainPresenter.onShowActions();
-                break;
-
-            case R.id.switchAdvanced:
-                mainPresenter.onViewExpand(isChecked);
-                break;
-        }
-    }
-
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()) {
-
-            case R.id.buttonPin:
-                mainPresenter.onButtonPositive();
-                break;
-
-            case R.id.buttonCancel:
-                mainPresenter.onButtonNegative();
-                break;
-
-            case R.id.linearLayoutHeader:
-                View view = findViewById(R.id.switchAdvanced);
-                if (view != null) {
-
-                    view.performClick();
-                }
-                break;
-        }
-    }
-
-    /**
-     * Called when a view has been clicked and held.
-     *
-     * @param v The view that was clicked and held.
-     * @return true if the callback consumed the long click, false otherwise.
-     */
-    @Override
-    public boolean onLongClick(View v) {
-
-        switch (v.getId()) {
-
-            case R.id.switchAdvanced:
-                mainPresenter.onSwitchHold();
-                return true;
-
-            case R.id.linearLayoutHeader:
-                View view = findViewById(R.id.switchAdvanced);
-                if (view != null) {
-                    view.performLongClick();
-                }
-                return true;
-        }
-
-
-        return false;
-    }
-
-    /**
-     * This method applies a click-listener to its given view-ids.
-     *
-     * @param ids The ids to set a click-listener on.
-     */
-    @Override
-    public void setOnClickListener(@NonNull @IdRes int... ids) {
-        for (int id : ids) {
-            View view = findViewById(id);
-
-            view.setOnClickListener(this);
-        }
-    }
-
-    /**
-     * This method applies a long-click-listener to its given view-ids.
-     */
-    @Override
-    public void setOnLongClickListener(@NonNull @IdRes int... ids) {
-        for (int id : ids) {
-            View view = findViewById(id);
-
-            if (view != null) {
-                view.setOnLongClickListener(this);
-            }
-        }
-    }
-
-    /**
-     * This method applies a checked-change-listener to its given view-ids.
-     *
-     * @param ids The ids to set a checked-change-listener on.
-     */
-    @Override
-    public void setOnCheckedChangeListener(@NonNull @IdRes int... ids) {
-        for (int id : ids) {
-            CompoundButton compoundButton = (CompoundButton) findViewById(id);
-
-            compoundButton.setOnCheckedChangeListener(this);
-        }
     }
 
     /**

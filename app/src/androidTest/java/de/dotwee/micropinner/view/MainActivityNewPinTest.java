@@ -1,7 +1,6 @@
 package de.dotwee.micropinner.view;
 
 import android.app.Notification;
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.Switch;
@@ -35,7 +34,6 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -60,20 +58,14 @@ public class MainActivityNewPinTest {
      */
     @Test
     public void testAdvancedSwitch() throws Exception {
-        getPreferencesHandler(activityTestRule).setAdvancedUse(false);
-        recreateActivity(activityTestRule);
-
-        onView(ViewMatchers.withId(R.id.switchAdvanced))
-                .perform(click())
-                .check(matches(isChecked()));
-
-        assertTrue(getPreferencesHandler(activityTestRule).isAdvancedUsed());
+        boolean currentState = getPreferencesHandler(activityTestRule).isAdvancedUsed();
+        onView(withId(R.id.switchAdvanced))
+                .perform(click());
+        assertEquals(! currentState, getPreferencesHandler(activityTestRule).isAdvancedUsed());
 
         onView(withId(R.id.switchAdvanced))
-                .perform(click())
-                .check(matches(not(isChecked())));
-
-        assertFalse(getPreferencesHandler(activityTestRule).isAdvancedUsed());
+                .perform(click());
+        assertEquals(currentState, getPreferencesHandler(activityTestRule).isAdvancedUsed());
     }
 
     /**

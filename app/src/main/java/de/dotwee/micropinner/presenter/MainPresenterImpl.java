@@ -42,7 +42,6 @@ public class MainPresenterImpl implements MainPresenter {
         this.intent = intent;
 
         notificationManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
-        notifyAboutParentPin();
 
         // check if first use
         if (preferencesHandler.isFirstUse()) {
@@ -52,24 +51,6 @@ public class MainPresenterImpl implements MainPresenter {
                 Toast.makeText(activity, activity.getResources().getText(R.string.message_visibility_unsupported), Toast.LENGTH_LONG).show();
             }
         }
-
-        // restore the switch's state if advanced is enabled
-        if (preferencesHandler.isAdvancedUsed()) {
-
-            Switch advancedSwitch = (Switch) activity.findViewById(R.id.switchAdvanced);
-            if (advancedSwitch != null) {
-
-                advancedSwitch.setChecked(true);
-            }
-        }
-
-        // restore show-actions checkbox
-        if (preferencesHandler.isNotificationActionsEnabled()) {
-            CheckBox checkBox = (CheckBox) activity.findViewById(R.id.checkBoxShowActions);
-            checkBox.setChecked(true);
-        }
-
-        this.onViewExpand(preferencesHandler.isAdvancedUsed());
     }
 
     /**
@@ -119,6 +100,31 @@ public class MainPresenterImpl implements MainPresenter {
         }
 
         activity.finish();
+    }
+
+    @Override public void restore() {
+
+        // restore the switch's state if advanced is enabled
+        if (preferencesHandler.isAdvancedUsed()) {
+
+            Switch advancedSwitch = (Switch) activity.findViewById(R.id.switchAdvanced);
+            if (advancedSwitch != null) {
+
+                advancedSwitch.setChecked(true);
+            }
+        }
+
+        // restore show-actions checkbox
+        if (preferencesHandler.isNotificationActionsEnabled()) {
+            CheckBox checkBox = (CheckBox) activity.findViewById(R.id.checkBoxShowActions);
+            checkBox.setChecked(true);
+        }
+
+        // restore advanced layout
+        this.onViewExpand(preferencesHandler.isAdvancedUsed());
+
+        // notify about provided intent
+        notifyAboutParentPin();
     }
 
     /**

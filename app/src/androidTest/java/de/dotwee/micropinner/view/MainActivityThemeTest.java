@@ -1,6 +1,5 @@
 package de.dotwee.micropinner.view;
 
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -52,8 +51,9 @@ public class MainActivityThemeTest {
     @Test
     public void testThemeChangeThroughHeader() throws Exception {
         boolean lightThemeEnabled = getPreferencesHandler(activityTestRule).isLightThemeEnabled();
-        onView(ViewMatchers.withId(R.id.linearLayoutHeader))
+        onView(withId(R.id.linearLayoutHeader))
                 .perform(longClick());
+
         // boolean should be inverted now
         assertEquals(! lightThemeEnabled, getPreferencesHandler(activityTestRule).isLightThemeEnabled());
     }
@@ -67,7 +67,7 @@ public class MainActivityThemeTest {
         boolean lightThemeEnabled = getPreferencesHandler(activityTestRule).isLightThemeEnabled();
         onView(withId(R.id.switchAdvanced))
                 .perform(longClick());
-        assertTrue(getPreferencesHandler(activityTestRule).isLightThemeEnabled());
+
         // boolean should be inverted now
         assertEquals(! lightThemeEnabled, getPreferencesHandler(activityTestRule).isLightThemeEnabled());
     }

@@ -5,18 +5,20 @@
               android:layout_height="match_parent"
               tools:context=".view.MainActivity">
 
-    <include layout="@layout/dialog_main_head"/>
+    <de.dotwee.micropinner.view.custom.DialogHeaderView
+        android:id="@+id/dialogHeaderView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-    <TableLayout style="@style/DialogContent.Table">
+    <de.dotwee.micropinner.view.custom.DialogContentView
+        android:id="@+id/dialogContentView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        <include layout="@layout/dialog_main_input_text"/>
-
-        <include layout="@layout/dialog_main_input_spinner"/>
-
-        <include layout="@layout/dialog_main_input_checkbox"/>
-
-    </TableLayout>
-
-    <include layout="@layout/dialog_main_footer"/>
+    <de.dotwee.micropinner.view.custom.DialogFooterView
+        android:id="@+id/dialogFooterView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 </LinearLayout>

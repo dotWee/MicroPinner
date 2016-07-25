@@ -28,6 +28,11 @@ public interface MainPresenter {
     void onButtonNegative();
 
     /**
+     * This method restores CheckBoxes and Switches to their saved state.
+     */
+    void restore();
+
+    /**
      * This method handles the click on the show-actions checkbox.
      */
     void onShowActions();

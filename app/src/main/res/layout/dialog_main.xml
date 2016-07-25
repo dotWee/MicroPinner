@@ -3,7 +3,7 @@
     style="@style/MainWrapper"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
+    tools:context=".view.MainDialog">
 
     <de.dotwee.micropinner.view.custom.DialogHeaderView
         android:id="@+id/dialogHeaderView"

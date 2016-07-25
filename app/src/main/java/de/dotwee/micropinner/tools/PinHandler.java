@@ -28,7 +28,7 @@ import java.util.Random;
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.receiver.OnClipReceiver;
 import de.dotwee.micropinner.receiver.OnDeleteReceiver;
-import de.dotwee.micropinner.view.MainActivity;
+import de.dotwee.micropinner.view.MainDialog;
 
 /**
  * Created by lukas on 18.08.2015 - 16:33
@@ -374,7 +374,7 @@ public class PinHandler {
 
         @NonNull
         public PendingIntent toIntent(@NonNull Context context) {
-            Intent resultIntent = new Intent(context, MainActivity.class);
+            Intent resultIntent = new Intent(context, MainDialog.class);
             resultIntent.putExtra(EXTRA_INTENT, this);
 
             return PendingIntent.getActivity(context, id, resultIntent,

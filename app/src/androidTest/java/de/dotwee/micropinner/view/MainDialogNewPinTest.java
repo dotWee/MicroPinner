@@ -41,15 +41,15 @@ import static org.junit.Assert.assertTrue;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityNewPinTest {
-    private static final String LOG_TAG = "MainActivityNewPinTest";
+public class MainDialogNewPinTest {
+    private static final String LOG_TAG = "MainDialogNewPinTest";
     /**
      * Preferred JUnit 4 mechanism of specifying the
      * activity to be launched before each test
      */
     @Rule
-    public ActivityTestRule<MainActivity> activityTestRule =
-            new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<MainDialog> activityTestRule =
+            new ActivityTestRule<>(MainDialog.class);
     private PreferencesHandler preferencesHandler;
 
     /**

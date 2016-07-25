@@ -27,16 +27,16 @@ import static org.junit.Assert.assertTrue;
  * Created by Lukas Wolfsteiner on 06.11.2015.
  */
 @RunWith(AndroidJUnit4.class)
-public class MainActivityThemeTest {
-    private static final String LOG_TAG = "MainActivityThemeTest";
+public class MainDialogThemeTest {
+    private static final String LOG_TAG = "MainDialogThemeTest";
 
     /**
      * Preferred JUnit 4 mechanism of specifying the
      * activity to be launched before each test
      */
     @Rule
-    public ActivityTestRule<MainActivity> activityTestRule =
-            new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<MainDialog> activityTestRule =
+            new ActivityTestRule<>(MainDialog.class);
     private PreferencesHandler preferencesHandler;
 
     @Before

@@ -30,22 +30,22 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 @RunWith(AndroidJUnit4.class)
-public class MainActivityParentPinTest {
-    private static final String LOG_TAG = "MainActivityParentPinTest";
+public class MainDialogParentPinTest {
+    private static final String LOG_TAG = "MainDialogParentPinTest";
 
     /**
      * Preferred JUnit 4 mechanism of specifying the
      * activity to be launched before each test
      */
     @Rule
-    public ActivityTestRule<MainActivity> activityTestRule =
-            new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<MainDialog> activityTestRule =
+            new ActivityTestRule<>(MainDialog.class);
 
     @Before
     public void setUp() throws Exception {
 
         final Intent testIntent =
-                new Intent(activityTestRule.getActivity(), MainActivity.class).putExtra(
+                new Intent(activityTestRule.getActivity(), MainDialog.class).putExtra(
                         PinHandler.Pin.EXTRA_INTENT, Constants.testPin);
 
         Intents.init();

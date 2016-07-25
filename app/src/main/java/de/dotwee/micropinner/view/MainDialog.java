@@ -33,9 +33,9 @@ import de.dotwee.micropinner.view.custom.DialogHeaderView;
 public class MainDialog extends AppCompatActivity implements MainPresenter.Data {
 
     private static final String LOG_TAG = "MainDialog";
-    DialogHeaderView headerView;
-    DialogContentView contentView;
-    DialogFooterView footerView;
+    private DialogHeaderView headerView;
+    private DialogContentView contentView;
+    private DialogFooterView footerView;
     private MainPresenter mainPresenter;
 
     /**

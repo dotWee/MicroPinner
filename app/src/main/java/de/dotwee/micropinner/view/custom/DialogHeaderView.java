@@ -17,9 +17,9 @@ public class DialogHeaderView extends AbstractDialogView
         implements Switch.OnCheckedChangeListener, View.OnClickListener, View.OnLongClickListener {
 
     static final String TAG = "DialogHeaderView";
-    LinearLayout linearLayoutHeader;
-    TextView textViewTitle;
-    Switch switchAdvanced;
+    private LinearLayout linearLayoutHeader;
+    private TextView textViewTitle;
+    private Switch switchAdvanced;
 
     public DialogHeaderView(Context context) {
         super(context);

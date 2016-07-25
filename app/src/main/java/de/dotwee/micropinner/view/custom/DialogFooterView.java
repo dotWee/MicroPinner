@@ -13,8 +13,9 @@ import de.dotwee.micropinner.R;
  * Created by lukas on 25.07.2016.
  */
 public class DialogFooterView extends AbstractDialogView implements View.OnClickListener {
-    static final String TAG = "DialogFooterView";
-    Button buttonPin, buttonCancel;
+    private static final String TAG = "DialogFooterView";
+    private Button buttonPin;
+    private Button buttonCancel;
 
     public DialogFooterView(Context context) {
         super(context);

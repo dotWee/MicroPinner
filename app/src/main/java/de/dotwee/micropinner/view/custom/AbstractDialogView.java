@@ -33,5 +33,5 @@ public abstract class AbstractDialogView extends FrameLayout {
         this.mainPresenter = mainPresenter;
     }
 
-    public abstract void init();
+    protected abstract void init();
 }

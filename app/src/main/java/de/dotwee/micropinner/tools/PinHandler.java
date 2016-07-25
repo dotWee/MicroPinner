@@ -135,6 +135,35 @@ public class PinHandler {
     }
 
     /**
+     * This method deletes all persisted pins.
+     */
+    public void removeAllPins() {
+        removeAllFromIndex();
+        removeAllFromPreferences();
+    }
+
+    /**
+     * This method looks for pin-keys in the preferences and removes them all
+     */
+    private void removeAllFromPreferences() {
+        Map<String, ?> allKeys = preferences.getAll();
+
+        for (Map.Entry<String, ?> entry : allKeys.entrySet()) {
+            String key = entry.getKey();
+            if (key.startsWith("pin_")) {
+                preferences.edit().remove(key).apply();
+            }
+        }
+    }
+
+    /**
+     * This method resets the index, which removes access to previous pins
+     */
+    private void removeAllFromIndex() {
+        this.writeIndex(new ArrayList<Integer>());
+    }
+
+    /**
      * This method removes a pin from the index.
      *
      * @param pin to remove

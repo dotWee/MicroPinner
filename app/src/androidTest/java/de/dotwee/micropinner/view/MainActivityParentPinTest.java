@@ -38,49 +38,49 @@ public class MainActivityParentPinTest {
      * activity to be launched before each test
      */
     @Rule
-    public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<MainActivity> activityTestRule =
+            new ActivityTestRule<>(MainActivity.class);
 
     @Before
     public void setUp() throws Exception {
 
-
-        final Intent testIntent = new Intent(activityTestRule.getActivity(), MainActivity.class)
-                .putExtra(PinHandler.Pin.EXTRA_INTENT, Constants.testPin);
+        final Intent testIntent =
+                new Intent(activityTestRule.getActivity(), MainActivity.class).putExtra(
+                        PinHandler.Pin.EXTRA_INTENT, Constants.testPin);
 
         Intents.init();
         activityTestRule.launchActivity(testIntent);
     }
 
+    /**
+     * @throws Exception
+     */
     @Test
     public void testDialogTitle() throws Exception {
 
         // verify changed dialog title
-        onView(ViewMatchers.withId(R.id.dialogTitle))
-                .check(matches(withText(R.string.edit_name)));
+        onView(ViewMatchers.withId(R.id.dialogTitle)).check(matches(withText(R.string.edit_name)));
     }
 
     @Test
     public void testDialogButtons() throws Exception {
 
         // verify changed buttons
-        onView(withId(R.id.buttonCancel))
-                .check(matches(withText(R.string.dialog_action_delete)));
+        onView(withId(R.id.buttonCancel)).check(matches(withText(R.string.dialog_action_delete)));
     }
 
     @Test
     public void testPinTitle() throws Exception {
 
         // verify pin title
-        onView(withId(R.id.editTextTitle))
-                .check(matches(withText(Constants.testPinTitle)));
+        onView(withId(R.id.editTextTitle)).check(matches(withText(Constants.testPinTitle)));
     }
 
     @Test
     public void testPinContent() throws Exception {
 
         // verify pin content
-        onView(withId(R.id.editTextContent))
-                .check(matches(withText(Constants.testPinContent)));
+        onView(withId(R.id.editTextContent)).check(matches(withText(Constants.testPinContent)));
     }
 
     /**
@@ -92,8 +92,7 @@ public class MainActivityParentPinTest {
     public void testPinPriority() throws Exception {
 
         // verify selected priority
-        onView(withId(R.id.spinnerPriority))
-                .check(matches(withSpinnerText(R.string.priority_high)));
+        onView(withId(R.id.spinnerPriority)).check(matches(withSpinnerText(R.string.priority_high)));
     }
 
     /**
@@ -104,8 +103,8 @@ public class MainActivityParentPinTest {
     @Test
     public void testPinVisibility() throws Exception {
 
-        onView(withId(R.id.spinnerVisibility))
-                .check(matches(withSpinnerText(R.string.visibility_private)));
+        onView(withId(R.id.spinnerVisibility)).check(
+                matches(withSpinnerText(R.string.visibility_private)));
     }
 
     /**
@@ -116,8 +115,7 @@ public class MainActivityParentPinTest {
     @Test
     public void testPinPersistence() throws Exception {
 
-        onView(withId(R.id.checkBoxPersistentPin))
-                .check(matches(isChecked()));
+        onView(withId(R.id.checkBoxPersistentPin)).check(matches(isChecked()));
     }
 
     @After

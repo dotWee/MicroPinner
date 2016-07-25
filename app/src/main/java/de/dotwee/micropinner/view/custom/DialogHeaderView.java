@@ -13,10 +13,8 @@ import de.dotwee.micropinner.R;
 /**
  * Created by lukas on 25.07.2016.
  */
-public class DialogHeaderView extends AbstractDialogView implements Switch.OnCheckedChangeListener,
-        View.OnClickListener,
-        View.OnLongClickListener {
-
+public class DialogHeaderView extends AbstractDialogView
+        implements Switch.OnCheckedChangeListener, View.OnClickListener, View.OnLongClickListener {
 
     static final String TAG = "DialogHeaderView";
     LinearLayout linearLayoutHeader;
@@ -50,8 +48,8 @@ public class DialogHeaderView extends AbstractDialogView implements Switch.OnChe
         switchAdvanced.setOnLongClickListener(this);
     }
 
-
-    @Override public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
         if (mainPresenter == null) {
             throw new IllegalStateException("Passed MainPresenter instance is null");
         }
@@ -64,7 +62,8 @@ public class DialogHeaderView extends AbstractDialogView implements Switch.OnChe
         }
     }
 
-    @Override public void onClick(View view) {
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
 
             case R.id.linearLayoutHeader:
@@ -77,10 +76,10 @@ public class DialogHeaderView extends AbstractDialogView implements Switch.OnChe
      * Called when a view has been clicked and held.
      *
      * @param view The view that was clicked and held.
-     *
      * @return true if the callback consumed the long click, false otherwise.
      */
-    @Override public boolean onLongClick(View view) {
+    @Override
+    public boolean onLongClick(View view) {
         switch (view.getId()) {
 
             case R.id.switchAdvanced:

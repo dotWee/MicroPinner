@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             style="@style/DialogContent.Table">
+    style="@style/DialogContent.Table">
 
     <TableRow
         android:layout_width="match_parent"
@@ -9,12 +9,12 @@
         <TextView
             style="@style/DialogText.Description"
             android:layout_column="0"
-            android:text="@string/input_description_title"/>
+            android:text="@string/input_description_title" />
 
         <TextView
             style="@style/DialogText.Description"
             android:layout_column="1"
-            android:text="@string/input_description_content"/>
+            android:text="@string/input_description_content" />
     </TableRow>
 
     <TableRow
@@ -25,13 +25,13 @@
             android:id="@+id/editTextTitle"
             style="@style/DialogInput.EditText"
             android:layout_column="0"
-            android:hint="@string/input_hint_title"/>
+            android:hint="@string/input_hint_title" />
 
         <EditText
             android:id="@+id/editTextContent"
             style="@style/DialogInput.EditText"
             android:layout_column="1"
-            android:hint="@string/input_hint_content"/>
+            android:hint="@string/input_hint_content" />
     </TableRow>
 
 
@@ -42,12 +42,12 @@
         <TextView
             style="@style/DialogText.Description"
             android:layout_column="0"
-            android:text="@string/input_description_visibility"/>
+            android:text="@string/input_description_visibility" />
 
         <TextView
             style="@style/DialogText.Description"
             android:layout_column="1"
-            android:text="@string/input_description_priority"/>
+            android:text="@string/input_description_priority" />
     </TableRow>
 
     <TableRow
@@ -58,13 +58,13 @@
             android:id="@+id/spinnerVisibility"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_column="0"/>
+            android:layout_column="0" />
 
         <Spinner
             android:id="@+id/spinnerPriority"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_column="1"/>
+            android:layout_column="1" />
     </TableRow>
 
     <TableRow
@@ -76,7 +76,7 @@
             style="@style/DialogText.CheckBox"
             android:layout_marginTop="16dp"
             android:layout_span="2"
-            android:text="@string/input_description_makepinpersistent"/>
+            android:text="@string/input_description_makepinpersistent" />
 
     </TableRow>
 
@@ -89,7 +89,7 @@
             style="@style/DialogText.CheckBox"
             android:layout_marginTop="4dp"
             android:layout_span="2"
-            android:text="@string/input_description_shownotificationactions"/>
+            android:text="@string/input_description_shownotificationactions" />
 
     </TableRow>
 

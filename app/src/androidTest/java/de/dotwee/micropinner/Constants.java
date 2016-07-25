@@ -10,16 +10,10 @@ import de.dotwee.micropinner.tools.PinHandler;
 public final class Constants {
     public static final String LOG_TAG = "Constants";
 
-    public static final String testPinTitle = LOG_TAG,
-            testPinContent = LOG_TAG;
+    public static final String testPinTitle = LOG_TAG, testPinContent = LOG_TAG;
 
     // static pin to test
-    public static final PinHandler.Pin testPin = new PinHandler.Pin(
-            Notification.VISIBILITY_PRIVATE,
-            Notification.PRIORITY_HIGH,
-            testPinTitle,
-            testPinContent,
-            true,
-            true
-    );
+    public static final PinHandler.Pin testPin =
+            new PinHandler.Pin(Notification.VISIBILITY_PRIVATE, Notification.PRIORITY_HIGH, testPinTitle,
+                    testPinContent, true, true);
 }

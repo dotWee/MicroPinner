@@ -48,10 +48,12 @@ public class PinHandler {
     /**
      * Default constructor
      *
-     * @param context needed to get access to {@link SharedPreferences} and {@link NotificationManager}
+     * @param context needed to get access to {@link SharedPreferences} and {@link
+     *                NotificationManager}
      */
     public PinHandler(@NonNull Context context) {
-        this.notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        this.notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
         this.context = context;
     }
@@ -63,7 +65,8 @@ public class PinHandler {
      * @return true if valid base64, false is invalid or null
      */
     private static boolean isValidBase64(@NonNull String string) {
-        final String BASE64_REGEX = "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$";
+        final String BASE64_REGEX =
+                "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$";
         return string.matches(BASE64_REGEX);
     }
 
@@ -75,7 +78,8 @@ public class PinHandler {
      * @throws IllegalArgumentException
      */
     @NonNull
-    private static Object deserialize(@NonNull String serializedObject) throws IllegalArgumentException {
+    private static Object deserialize(@NonNull String serializedObject)
+            throws IllegalArgumentException {
         ObjectInputStream objectInputStream;
         Object object = new Object();
 
@@ -92,9 +96,9 @@ public class PinHandler {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
-        } else
+        } else {
             throw new IllegalArgumentException("Input is not valid base64! \nInput: " + serializedObject);
+        }
 
         return object;
     }
@@ -113,7 +117,8 @@ public class PinHandler {
     }
 
     /**
-     * This method calls methods to delete a pin from shared preferences and remove it from the index.
+     * This method calls methods to delete a pin from shared preferences and remove it from the
+     * index.
      *
      * @param pin to delete / remove
      */
@@ -194,7 +199,7 @@ public class PinHandler {
         Map<Integer, Pin> pinMap = new HashMap<>();
         List<Integer> ids = getIndex();
 
-        if (!ids.isEmpty())
+        if (!ids.isEmpty()) {
             for (int id : ids)
                 try {
                     pinMap.put(id, getPin(id));
@@ -202,6 +207,7 @@ public class PinHandler {
                     e.printStackTrace();
                     Log.i(LOG_TAG, "Pin with id=" + id + " does not exist. Skipping...");
                 }
+        }
 
         return pinMap;
     }
@@ -218,7 +224,8 @@ public class PinHandler {
             objectOutputStream.writeObject(index);
             objectOutputStream.close();
 
-            serializedIndex = Base64.encodeToString(byteArrayOutputStream.toByteArray(), BASE64_DEFAULT_FLAG);
+            serializedIndex =
+                    Base64.encodeToString(byteArrayOutputStream.toByteArray(), BASE64_DEFAULT_FLAG);
         } catch (IOException e) {
             e.printStackTrace();
             return;
@@ -240,10 +247,11 @@ public class PinHandler {
             try {
                 Object object = deserialize(serializedIndex);
 
-                if (object instanceof List<?>)
+                if (object instanceof List<?>) {
                     list = (List<Integer>) object;
-
-                else throw new IllegalStateException("Object is not a instance of List!");
+                } else {
+                    throw new IllegalStateException("Object is not a instance of List!");
+                }
             } catch (IllegalArgumentException | IllegalStateException e) {
                 e.printStackTrace();
 
@@ -271,10 +279,12 @@ public class PinHandler {
             if (object instanceof Pin) {
                 Log.i(LOG_TAG, "Successfully deserialized pin " + ((Pin) object).getId());
                 return (Pin) object;
-
-            } else throw new IllegalStateException("Deserialize object is not a instance of Pin!");
-
-        } else throw new IllegalArgumentException("Pin does not exist.");
+            } else {
+                throw new IllegalStateException("Deserialize object is not a instance of Pin!");
+            }
+        } else {
+            throw new IllegalArgumentException("Pin does not exist.");
+        }
     }
 
     /**
@@ -285,14 +295,11 @@ public class PinHandler {
         public final static String EXTRA_INTENT = "IAMAPIN";
         private final static String LOG_TAG = "Pin";
 
-        /* default visibility */
-        int visibility = 1;
+        /* default visibility */ int visibility = 1;
 
-        /* default priority */
-        int priority = 0;
+        /* default priority */ int priority = 0;
 
-        /* default pin id */
-        int id = 0;
+        /* default pin id */ int id = 0;
 
         String title = "";
 
@@ -370,7 +377,8 @@ public class PinHandler {
             Intent resultIntent = new Intent(context, MainActivity.class);
             resultIntent.putExtra(EXTRA_INTENT, this);
 
-            return PendingIntent.getActivity(context, id, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            return PendingIntent.getActivity(context, id, resultIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
         }
 
         @NonNull
@@ -379,26 +387,29 @@ public class PinHandler {
         }
 
         @NonNull
-        public Notification toNotification(@NonNull Context context, @NonNull PendingIntent contentIntent) {
+        public Notification toNotification(@NonNull Context context,
+                                           @NonNull PendingIntent contentIntent) {
 
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                    .setContentTitle(title)
-                    .setContentText(content)
-                    .setSmallIcon(R.drawable.ic_notif_star)
-                    .setPriority(priority)
-                    .setVisibility(visibility)
-                    .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
-                    .setContentIntent(contentIntent)
+            NotificationCompat.Builder builder =
+                    new NotificationCompat.Builder(context).setContentTitle(title)
+                            .setContentText(content)
+                            .setSmallIcon(R.drawable.ic_notif_star)
+                            .setPriority(priority)
+                            .setVisibility(visibility)
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
+                            .setContentIntent(contentIntent)
 
-                    .setDeleteIntent(PendingIntent.getBroadcast(context, id, new Intent(context, OnDeleteReceiver.class).setAction("notification_cancelled").putExtra(Pin.EXTRA_INTENT, this), PendingIntent.FLAG_CANCEL_CURRENT))
-                    .setOngoing(persistent);
+                            .setDeleteIntent(PendingIntent.getBroadcast(context, id,
+                                    new Intent(context, OnDeleteReceiver.class).setAction("notification_cancelled")
+                                            .putExtra(Pin.EXTRA_INTENT, this), PendingIntent.FLAG_CANCEL_CURRENT))
+                            .setOngoing(persistent);
 
             if (showActions()) {
-                builder.addAction(
-                        R.drawable.ic_action_clip,
+                builder.addAction(R.drawable.ic_action_clip,
                         context.getString(R.string.message_save_to_clipboard),
-                        PendingIntent.getBroadcast(context, (id + 1), new Intent(context, OnClipReceiver.class).putExtra(Pin.EXTRA_INTENT, this), PendingIntent.FLAG_CANCEL_CURRENT)
-                );
+                        PendingIntent.getBroadcast(context, (id + 1),
+                                new Intent(context, OnClipReceiver.class).putExtra(Pin.EXTRA_INTENT, this),
+                                PendingIntent.FLAG_CANCEL_CURRENT));
             }
 
             return builder.build();
@@ -406,10 +417,11 @@ public class PinHandler {
 
         @NonNull
         public String toClipString() {
-            if (content != null && !content.isEmpty())
+            if (content != null && !content.isEmpty()) {
                 return title + " - " + content;
-
-            else return title;
+            } else {
+                return title;
+            }
         }
 
         @Nullable

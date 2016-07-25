@@ -1,24 +1,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              style="@style/MainWrapper"
-              android:layout_width="wrap_content"
-              android:layout_height="match_parent"
-              tools:context=".view.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MainWrapper"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity">
 
     <de.dotwee.micropinner.view.custom.DialogHeaderView
         android:id="@+id/dialogHeaderView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <de.dotwee.micropinner.view.custom.DialogContentView
         android:id="@+id/dialogContentView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <de.dotwee.micropinner.view.custom.DialogFooterView
         android:id="@+id/dialogFooterView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

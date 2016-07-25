@@ -63,7 +63,8 @@ public interface MainPresenter {
      *
      * @return A non null {@link Activity} activity.
      */
-    @NonNull Activity getView();
+    @NonNull
+    Activity getView();
 
     /**
      * This method notifies all views about the parent pin.

@@ -35,7 +35,8 @@ public class MainActivityThemeTest {
      * activity to be launched before each test
      */
     @Rule
-    public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<MainActivity> activityTestRule =
+            new ActivityTestRule<>(MainActivity.class);
     private PreferencesHandler preferencesHandler;
 
     @Before
@@ -51,11 +52,10 @@ public class MainActivityThemeTest {
     @Test
     public void testThemeChangeThroughHeader() throws Exception {
         boolean lightThemeEnabled = getPreferencesHandler(activityTestRule).isLightThemeEnabled();
-        onView(withId(R.id.linearLayoutHeader))
-                .perform(longClick());
+        onView(withId(R.id.linearLayoutHeader)).perform(longClick());
 
         // boolean should be inverted now
-        assertEquals(! lightThemeEnabled, getPreferencesHandler(activityTestRule).isLightThemeEnabled());
+        assertEquals(!lightThemeEnabled, getPreferencesHandler(activityTestRule).isLightThemeEnabled());
     }
 
     /**
@@ -65,11 +65,10 @@ public class MainActivityThemeTest {
     @Test
     public void testThemeChangeThroughSwitch() throws Exception {
         boolean lightThemeEnabled = getPreferencesHandler(activityTestRule).isLightThemeEnabled();
-        onView(withId(R.id.switchAdvanced))
-                .perform(longClick());
+        onView(withId(R.id.switchAdvanced)).perform(longClick());
 
         // boolean should be inverted now
-        assertEquals(! lightThemeEnabled, getPreferencesHandler(activityTestRule).isLightThemeEnabled());
+        assertEquals(!lightThemeEnabled, getPreferencesHandler(activityTestRule).isLightThemeEnabled());
     }
 
     /**
@@ -88,9 +87,11 @@ public class MainActivityThemeTest {
         int accentColor = activityTestRule.getActivity().getResources().getColor(R.color.accent);
 
         // check color for all TextView descriptions
-        for (int description : new int[]{R.string.input_description_title, R.string.input_description_content, R.string.input_description_priority, R.string.input_description_visibility}) {
-            onView(withText(description))
-                    .check(matches(Matches.withTextColor(accentColor)));
+        for (int description : new int[]{
+                R.string.input_description_title, R.string.input_description_content,
+                R.string.input_description_priority, R.string.input_description_visibility
+        }) {
+            onView(withText(description)).check(matches(Matches.withTextColor(accentColor)));
         }
     }
 
@@ -109,8 +110,7 @@ public class MainActivityThemeTest {
 
         int accentColor = activityTestRule.getActivity().getResources().getColor(R.color.background);
 
-        onView(withId(android.R.id.content))
-                .check(matches(Matches.withBackgroundColor(accentColor)));
+        onView(withId(android.R.id.content)).check(matches(Matches.withBackgroundColor(accentColor)));
     }
 
     /**
@@ -127,9 +127,12 @@ public class MainActivityThemeTest {
         recreateActivity(activityTestRule);
 
         // check color for all TextView descriptions
-        for (int description : new int[]{R.string.input_description_title, R.string.input_description_content, R.string.input_description_priority, R.string.input_description_visibility}) {
-            onView(withText(description))
-                    .check(matches(Matches.withTextColor(activityTestRule.getActivity().getResources().getColor(R.color.accent_dark))));
+        for (int description : new int[]{
+                R.string.input_description_title, R.string.input_description_content,
+                R.string.input_description_priority, R.string.input_description_visibility
+        }) {
+            onView(withText(description)).check(matches(Matches.withTextColor(
+                    activityTestRule.getActivity().getResources().getColor(R.color.accent_dark))));
         }
     }
 
@@ -146,7 +149,7 @@ public class MainActivityThemeTest {
         // recreate activity to apply theme
         recreateActivity(activityTestRule);
 
-        onView(withId(android.R.id.content))
-                .check(matches(Matches.withBackgroundColor(activityTestRule.getActivity().getResources().getColor(R.color.background_dark))));
+        onView(withId(android.R.id.content)).check(matches(Matches.withBackgroundColor(
+                activityTestRule.getActivity().getResources().getColor(R.color.background_dark))));
     }
 }

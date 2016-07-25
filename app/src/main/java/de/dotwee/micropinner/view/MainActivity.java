@@ -39,15 +39,15 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Dat
     private MainPresenter mainPresenter;
 
     /**
-     * This method checks if the user's device is a tablet, depending on the official resource {@link Configuration}.
+     * This method checks if the user's device is a tablet, depending on the official resource {@link
+     * Configuration}.
      *
      * @param context needed to get resources
      * @return true if device screen size is greater than 6 inches
      */
     private static boolean isTablet(@NonNull Context context) {
         return (context.getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK)
-                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+                & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
     @Override
@@ -86,15 +86,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Dat
             DisplayMetrics metrics = getResources().getDisplayMetrics();
             int newWidth = Math.round(320 * (metrics.densityDpi / 160f));
 
-            setContentView(
-                    View.inflate(this, layoutResID, null),
-                    new FrameLayout.LayoutParams(
-                            newWidth,
-                            ViewGroup.LayoutParams.WRAP_CONTENT
-                    )
-            );
-
-        } else super.setContentView(layoutResID);
+            setContentView(View.inflate(this, layoutResID, null),
+                    new FrameLayout.LayoutParams(newWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+        } else {
+            super.setContentView(layoutResID);
+        }
     }
 
     /**
@@ -189,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Dat
     public boolean isPersistent() {
         CheckBox checkBox = (CheckBox) findViewById(R.id.checkBoxPersistentPin);
         return checkBox != null && checkBox.isChecked();
-
     }
 
     /**

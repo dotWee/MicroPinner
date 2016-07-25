@@ -12,7 +12,7 @@
     <string name="input_description_visibility">Visibilité</string>
 
     <string name="input_description_makepinpersistent">Épingle permanente</string>
-    <string name="input_description_shownotificationactions">Afficher les actions de notification</string>    
+    <string name="input_description_shownotificationactions">Afficher les actions de notification</string>
 
     <string name="dialog_action_pin">Épingler</string>
     <string name="dialog_action_cancel">Annuler</string>

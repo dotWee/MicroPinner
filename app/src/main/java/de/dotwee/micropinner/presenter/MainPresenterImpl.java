@@ -41,14 +41,17 @@ public class MainPresenterImpl implements MainPresenter {
         this.activity = activity;
         this.intent = intent;
 
-        notificationManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager =
+                (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
 
         // check if first use
         if (preferencesHandler.isFirstUse()) {
 
             // friendly notification that visibility is broken for SDK < 21
             if (Build.VERSION.SDK_INT < 21) {
-                Toast.makeText(activity, activity.getResources().getText(R.string.message_visibility_unsupported), Toast.LENGTH_LONG).show();
+                Toast.makeText(activity,
+                        activity.getResources().getText(R.string.message_visibility_unsupported),
+                        Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -102,7 +105,8 @@ public class MainPresenterImpl implements MainPresenter {
         activity.finish();
     }
 
-    @Override public void restore() {
+    @Override
+    public void restore() {
 
         // restore the switch's state if advanced is enabled
         if (preferencesHandler.isAdvancedUsed()) {
@@ -189,16 +193,13 @@ public class MainPresenterImpl implements MainPresenter {
 
                 Toast.makeText(activity, R.string.message_empty_title, Toast.LENGTH_SHORT).show();
                 throw new Exception(activity.getString(R.string.message_empty_title));
-
-            } else return new PinHandler.Pin(
-                    data.getVisibility(),
-                    data.getPriority(),
-                    data.getPinTitle(),
-                    data.getPinContent(),
-                    data.isPersistent(),
-                    data.showActions()
-            );
-        } else throw new IllegalStateException("Activity does not implement the Data callback");
+            } else {
+                return new PinHandler.Pin(data.getVisibility(), data.getPriority(), data.getPinTitle(),
+                        data.getPinContent(), data.isPersistent(), data.showActions());
+            }
+        } else {
+            throw new IllegalStateException("Activity does not implement the Data callback");
+        }
     }
 
     /**
@@ -221,16 +222,12 @@ public class MainPresenterImpl implements MainPresenter {
 
         TextView textViewTitle = (TextView) activity.findViewById(R.id.dialogTitle);
         if (textViewTitle != null) {
-            textViewTitle.setText(
-                    state ? R.string.edit_name : R.string.app_name
-            );
+            textViewTitle.setText(state ? R.string.edit_name : R.string.app_name);
         }
 
         Button buttonNegative = (Button) activity.findViewById(R.id.buttonCancel);
         if (buttonNegative != null) {
-            buttonNegative.setText(
-                    state ? R.string.dialog_action_delete : R.string.dialog_action_cancel
-            );
+            buttonNegative.setText(state ? R.string.dialog_action_delete : R.string.dialog_action_cancel);
         }
 
         if (state) {
@@ -246,7 +243,6 @@ public class MainPresenterImpl implements MainPresenter {
 
                 checkBoxPersistent.setChecked(parentPin.isPersistent());
             }
-
         }
     }
 

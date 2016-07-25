@@ -24,8 +24,7 @@ public class PreferencesHandler {
     }
 
     public static synchronized PreferencesHandler getInstance(Context context) {
-        if (instance == null)
-            instance = new PreferencesHandler(context);
+        if (instance == null) instance = new PreferencesHandler(context);
 
         return instance;
     }

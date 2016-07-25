@@ -12,7 +12,8 @@ import de.dotwee.micropinner.R;
 /**
  * Created by lukas on 25.07.2016.
  */
-public class DialogContentView extends AbstractDialogView implements CheckBox.OnCheckedChangeListener {
+public class DialogContentView extends AbstractDialogView
+        implements CheckBox.OnCheckedChangeListener {
     static final String TAG = "DialogContentView";
     Spinner spinnerVisibility, spinnerPriority;
 
@@ -42,11 +43,9 @@ public class DialogContentView extends AbstractDialogView implements CheckBox.On
     private void setVisibilityAdapter() {
         if (spinnerVisibility != null) {
 
-            ArrayAdapter<String> visibilityAdapter = new ArrayAdapter<>(
-                    spinnerVisibility.getContext(),
-                    android.R.layout.simple_spinner_item,
-                    this.getResources().getStringArray(R.array.array_visibilities)
-            );
+            ArrayAdapter<String> visibilityAdapter =
+                    new ArrayAdapter<>(spinnerVisibility.getContext(), android.R.layout.simple_spinner_item,
+                            this.getResources().getStringArray(R.array.array_visibilities));
 
             visibilityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerVisibility.setAdapter(visibilityAdapter);
@@ -58,11 +57,9 @@ public class DialogContentView extends AbstractDialogView implements CheckBox.On
     private void setPriorityAdapter() {
         if (spinnerPriority != null) {
 
-            ArrayAdapter<String> priorityAdapter = new ArrayAdapter<>(
-                    spinnerPriority.getContext(),
-                    android.R.layout.simple_spinner_item,
-                    this.getResources().getStringArray(R.array.array_priorities)
-            );
+            ArrayAdapter<String> priorityAdapter =
+                    new ArrayAdapter<>(spinnerPriority.getContext(), android.R.layout.simple_spinner_item,
+                            this.getResources().getStringArray(R.array.array_priorities));
 
             priorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerPriority.setAdapter(priorityAdapter);
@@ -71,7 +68,8 @@ public class DialogContentView extends AbstractDialogView implements CheckBox.On
         }
     }
 
-    @Override public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
         switch (compoundButton.getId()) {
 

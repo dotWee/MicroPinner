@@ -15,10 +15,10 @@ public final class TestTools {
      * for an activity test rule.
      *
      * @param activityTestRule Source to get the PreferenceHandler.
-     *
      * @return An instance of {@link PreferencesHandler}
      */
-    public static PreferencesHandler getPreferencesHandler(ActivityTestRule<MainActivity> activityTestRule) {
+    public static PreferencesHandler getPreferencesHandler(
+            ActivityTestRule<MainActivity> activityTestRule) {
         return PreferencesHandler.getInstance(activityTestRule.getActivity());
     }
 

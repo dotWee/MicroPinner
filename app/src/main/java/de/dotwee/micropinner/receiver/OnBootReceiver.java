@@ -20,16 +20,20 @@ public class OnBootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(@NonNull Context context, @Nullable Intent intent) {
         if (intent == null || intent.getAction() == null) {
-            Log.w(LOG_TAG, "Intent (and its action) must be not null to work with it, returning without work");
+            Log.w(LOG_TAG,
+                    "Intent (and its action) must be not null to work with it, returning without work");
             return;
         }
 
-        if (! intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
-            Log.w(LOG_TAG, "OnBootReceiver's intent actions is not " + Intent.ACTION_BOOT_COMPLETED + ", returning without work");
+        if (!intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
+            Log.w(LOG_TAG, "OnBootReceiver's intent actions is not "
+                    + Intent.ACTION_BOOT_COMPLETED
+                    + ", returning without work");
             return;
         }
 
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         // get all pins
         final Map<Integer, PinHandler.Pin> pinMap = new PinHandler(context).getPins();
@@ -47,5 +51,4 @@ public class OnBootReceiver extends BroadcastReceiver {
             notificationManager.notify(pin.getId(), pinNotification);
         }
     }
-
 }

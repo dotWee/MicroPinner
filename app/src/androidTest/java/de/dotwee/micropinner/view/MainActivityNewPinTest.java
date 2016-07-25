@@ -48,7 +48,8 @@ public class MainActivityNewPinTest {
      * activity to be launched before each test
      */
     @Rule
-    public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<MainActivity> activityTestRule =
+            new ActivityTestRule<>(MainActivity.class);
     private PreferencesHandler preferencesHandler;
 
     /**
@@ -59,12 +60,10 @@ public class MainActivityNewPinTest {
     @Test
     public void testAdvancedSwitch() throws Exception {
         boolean currentState = getPreferencesHandler(activityTestRule).isAdvancedUsed();
-        onView(withId(R.id.switchAdvanced))
-                .perform(click());
-        assertEquals(! currentState, getPreferencesHandler(activityTestRule).isAdvancedUsed());
+        onView(withId(R.id.switchAdvanced)).perform(click());
+        assertEquals(!currentState, getPreferencesHandler(activityTestRule).isAdvancedUsed());
 
-        onView(withId(R.id.switchAdvanced))
-                .perform(click());
+        onView(withId(R.id.switchAdvanced)).perform(click());
         assertEquals(currentState, getPreferencesHandler(activityTestRule).isAdvancedUsed());
     }
 
@@ -76,9 +75,7 @@ public class MainActivityNewPinTest {
     public void testEditTextTitle() throws Exception {
         final String value = "MicroPinner title input";
 
-        onView(withId(R.id.editTextTitle))
-                .perform(typeText(value))
-                .check(matches(withText(value)));
+        onView(withId(R.id.editTextTitle)).perform(typeText(value)).check(matches(withText(value)));
     }
 
     /**
@@ -94,8 +91,7 @@ public class MainActivityNewPinTest {
             }
         });
 
-        onView(withId(R.id.editTextTitle))
-                .check(matches(isFocusable()));
+        onView(withId(R.id.editTextTitle)).check(matches(isFocusable()));
     }
 
     /**
@@ -106,9 +102,7 @@ public class MainActivityNewPinTest {
     public void testEditTextContent() throws Exception {
         final String value = "MicroPinner title input";
 
-        onView(withId(R.id.editTextContent))
-                .perform(typeText(value))
-                .check(matches(withText(value)));
+        onView(withId(R.id.editTextContent)).perform(typeText(value)).check(matches(withText(value)));
     }
 
     /**
@@ -119,16 +113,14 @@ public class MainActivityNewPinTest {
     public void testEmptyTitleToast() throws Exception {
 
         // perform empty input
-        onView(withId(R.id.editTextTitle))
-                .perform(typeText(""));
+        onView(withId(R.id.editTextTitle)).perform(typeText(""));
 
         // click pin button
-        onView(withText(R.string.dialog_action_pin))
-                .perform(click());
+        onView(withText(R.string.dialog_action_pin)).perform(click());
 
         // verify toast existence
-        onView(withText(R.string.message_empty_title))
-                .inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
+        onView(withText(R.string.message_empty_title)).inRoot(
+                withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
                 .check(matches(isDisplayed()));
     }
 
@@ -142,14 +134,11 @@ public class MainActivityNewPinTest {
         recreateActivity(activityTestRule);
 
         // perform click on the advanced switch
-        onView(withId(R.id.switchAdvanced))
-                .perform(click());
+        onView(withId(R.id.switchAdvanced)).perform(click());
 
         // CheckBoxes should be not visible
-        onView(withId(R.id.checkBoxPersistentPin))
-                .check(matches(not(isDisplayed())));
-        onView(withId(R.id.checkBoxShowActions))
-                .check(matches(not(isDisplayed())));
+        onView(withId(R.id.checkBoxPersistentPin)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.checkBoxShowActions)).check(matches(not(isDisplayed())));
     }
 
     /**
@@ -162,14 +151,11 @@ public class MainActivityNewPinTest {
         recreateActivity(activityTestRule);
 
         // perform click on the advanced switch
-        onView(withId(R.id.linearLayoutHeader))
-                .perform(click());
+        onView(withId(R.id.linearLayoutHeader)).perform(click());
 
         // CheckBoxes should be not visible
-        onView(withId(R.id.checkBoxPersistentPin))
-                .check(matches(not(isDisplayed())));
-        onView(withId(R.id.checkBoxShowActions))
-                .check(matches(not(isDisplayed())));
+        onView(withId(R.id.checkBoxPersistentPin)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.checkBoxShowActions)).check(matches(not(isDisplayed())));
     }
 
     /**
@@ -194,44 +180,34 @@ public class MainActivityNewPinTest {
         pinHandler.removeAllPins();
 
         // enter a title
-        onView(withId(R.id.editTextTitle))
-                .perform(typeText(LOG_TAG));
+        onView(withId(R.id.editTextTitle)).perform(typeText(LOG_TAG));
 
         // mark with high priority
-        onView(withId(R.id.spinnerPriority))
-                .perform(click());
+        onView(withId(R.id.spinnerPriority)).perform(click());
         String highPriority = activityTestRule.getActivity().getString(R.string.priority_high);
-        onData(allOf(is(instanceOf(String.class)), is(highPriority)))
-                .perform(click());
-        onView(withId(R.id.spinnerPriority))
-                .check(matches(withSpinnerText(R.string.priority_high)));
+        onData(allOf(is(instanceOf(String.class)), is(highPriority))).perform(click());
+        onView(withId(R.id.spinnerPriority)).check(matches(withSpinnerText(R.string.priority_high)));
 
         // mark with private visibility
-        onView(withId(R.id.spinnerVisibility))
-                .perform(click());
-        String privateVisibility = activityTestRule.getActivity().getString(R.string.visibility_private);
-        onData(allOf(is(instanceOf(String.class)), is(privateVisibility)))
-                .perform(click());
-        onView(withId(R.id.spinnerVisibility))
-                .check(matches(withSpinnerText(R.string.visibility_private)));
+        onView(withId(R.id.spinnerVisibility)).perform(click());
+        String privateVisibility =
+                activityTestRule.getActivity().getString(R.string.visibility_private);
+        onData(allOf(is(instanceOf(String.class)), is(privateVisibility))).perform(click());
+        onView(withId(R.id.spinnerVisibility)).check(
+                matches(withSpinnerText(R.string.visibility_private)));
 
         // expand layout
-        if (! ((Switch) activityTestRule.getActivity().findViewById(R.id.switchAdvanced)).isChecked()) {
-            onView(withId(R.id.switchAdvanced))
-                    .perform(click())
-                    .check(matches(isChecked()));
+        if (!((Switch) activityTestRule.getActivity().findViewById(R.id.switchAdvanced)).isChecked()) {
+            onView(withId(R.id.switchAdvanced)).perform(click()).check(matches(isChecked()));
         }
 
         // mark as persistent
-        if (! activityTestRule.getActivity().isPersistent()) {
-            onView(withId(R.id.checkBoxPersistentPin))
-                    .perform(click())
-                    .check(matches(isChecked()));
+        if (!activityTestRule.getActivity().isPersistent()) {
+            onView(withId(R.id.checkBoxPersistentPin)).perform(click()).check(matches(isChecked()));
         }
 
         // select persist button
-        onView(withId(R.id.buttonPin))
-                .perform(click());
+        onView(withId(R.id.buttonPin)).perform(click());
 
         // make sure pin exists
         Map<Integer, PinHandler.Pin> pins = pinHandler.getPins();

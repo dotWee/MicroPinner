@@ -44,7 +44,8 @@ public class DialogFooterView extends AbstractDialogView implements View.OnClick
      *
      * @param view The view that was clicked.
      */
-    @Override public void onClick(@NonNull View view) {
+    @Override
+    public void onClick(@NonNull View view) {
         switch (view.getId()) {
             case R.id.buttonPin:
                 mainPresenter.onButtonPositive();

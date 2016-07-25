@@ -10,10 +10,10 @@ import de.dotwee.micropinner.tools.PinHandler;
 
 /**
  * Created by Lukas on 26.06.2015.
- * <p/>
+ * <p>
  * This class is a broadcast receiver for {@link android.app.Notification}
  * DeleteIntents.
- * <p/>
+ * <p>
  * Intents should contain a serialized pin as extra.
  * If yes, tell the {@link PinHandler} to delete
  * and remove it from the index.
@@ -32,8 +32,9 @@ public class OnDeleteReceiver extends BroadcastReceiver {
 
             // and tell the pin handler to remove it from the index
             new PinHandler(context).removePin(pin);
-
-        } else
-            throw new IllegalArgumentException("Intent did not contain a pin as serialized extra! " + intent.toString());
+        } else {
+            throw new IllegalArgumentException(
+                    "Intent did not contain a pin as serialized extra! " + intent.toString());
+        }
     }
 }

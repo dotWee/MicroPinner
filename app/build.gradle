@@ -8,8 +8,8 @@ android {
         applicationId "de.dotwee.micropinner"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 23
-        versionName "v1.9.1"
+        versionCode 24
+        versionName "v1.9.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

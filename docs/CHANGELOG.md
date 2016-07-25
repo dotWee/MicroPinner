@@ -101,13 +101,13 @@
     - Reduced application size to 670kb
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.9/release_v1.9.apk)
 
-#### [Version: 1.9.2 / ]
-- sha1 checksum:
+#### [Version: 1.9.2 / 25th July 2016]
+- sha1 checksum: a919f5f8813bbe4e44b1dbc1a3fff0de45df3850
 - changes:
     - Turn hard-coded layout into dynamic custom views (drastically improved start time)
     - Target latest Android release (MicroPinner is ready for Android Nougat!)
     - Built with latest build-tools and updated support package
     - Some code refactoring and cleanup
     - Improved and updated translations
-- download: [Github]()
+- download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.9.2/release_v1.9.2.apk)
 

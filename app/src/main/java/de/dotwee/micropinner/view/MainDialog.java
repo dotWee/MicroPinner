@@ -33,10 +33,6 @@ import de.dotwee.micropinner.view.custom.DialogHeaderView;
 public class MainDialog extends AppCompatActivity implements MainPresenter.Data {
 
     private static final String LOG_TAG = "MainDialog";
-    private DialogHeaderView headerView;
-    private DialogContentView contentView;
-    private DialogFooterView footerView;
-    private MainPresenter mainPresenter;
 
     /**
      * This method checks if the user's device is a tablet, depending on the official resource {@link
@@ -61,15 +57,15 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
 
         this.setContentView(R.layout.dialog_main);
 
-        this.mainPresenter = new MainPresenterImpl(this, getIntent());
+        MainPresenter mainPresenter = new MainPresenterImpl(this, getIntent());
 
-        headerView = (DialogHeaderView) findViewById(R.id.dialogHeaderView);
+        DialogHeaderView headerView = (DialogHeaderView) findViewById(R.id.dialogHeaderView);
         headerView.setMainPresenter(mainPresenter);
 
-        contentView = (DialogContentView) findViewById(R.id.dialogContentView);
+        DialogContentView contentView = (DialogContentView) findViewById(R.id.dialogContentView);
         contentView.setMainPresenter(mainPresenter);
 
-        footerView = (DialogFooterView) findViewById(R.id.dialogFooterView);
+        DialogFooterView footerView = (DialogFooterView) findViewById(R.id.dialogFooterView);
         footerView.setMainPresenter(mainPresenter);
 
         // restore previous state

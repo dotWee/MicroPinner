@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import de.dotwee.micropinner.R;
 
@@ -17,8 +16,6 @@ public class DialogHeaderView extends AbstractDialogView
         implements Switch.OnCheckedChangeListener, View.OnClickListener, View.OnLongClickListener {
 
     static final String TAG = "DialogHeaderView";
-    private LinearLayout linearLayoutHeader;
-    private TextView textViewTitle;
     private Switch switchAdvanced;
 
     public DialogHeaderView(Context context) {
@@ -37,11 +34,9 @@ public class DialogHeaderView extends AbstractDialogView
     public void init() {
         inflate(getContext(), R.layout.dialog_main_head, this);
 
-        linearLayoutHeader = (LinearLayout) findViewById(R.id.linearLayoutHeader);
+        LinearLayout linearLayoutHeader = (LinearLayout) findViewById(R.id.linearLayoutHeader);
         linearLayoutHeader.setOnLongClickListener(this);
         linearLayoutHeader.setOnClickListener(this);
-
-        textViewTitle = (TextView) findViewById(R.id.dialogTitle);
 
         switchAdvanced = (Switch) findViewById(R.id.switchAdvanced);
         switchAdvanced.setOnCheckedChangeListener(this);

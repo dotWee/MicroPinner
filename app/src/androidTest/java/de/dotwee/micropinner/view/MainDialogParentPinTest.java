@@ -42,7 +42,7 @@ public class MainDialogParentPinTest {
             new ActivityTestRule<>(MainDialog.class);
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
         final Intent testIntent =
                 new Intent(activityTestRule.getActivity(), MainDialog.class).putExtra(
@@ -119,7 +119,7 @@ public class MainDialogParentPinTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Intents.release();
     }
 }

@@ -347,10 +347,6 @@ public class PinHandler {
             return title;
         }
 
-        public void setTitle(@NonNull String title) {
-            this.title = title;
-        }
-
         @NonNull
         public String getContent() {
             return content;

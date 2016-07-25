@@ -14,8 +14,6 @@ import de.dotwee.micropinner.R;
  */
 public class DialogFooterView extends AbstractDialogView implements View.OnClickListener {
     private static final String TAG = "DialogFooterView";
-    private Button buttonPin;
-    private Button buttonCancel;
 
     public DialogFooterView(Context context) {
         super(context);
@@ -33,10 +31,10 @@ public class DialogFooterView extends AbstractDialogView implements View.OnClick
     public void init() {
         inflate(getContext(), R.layout.dialog_main_footer, this);
 
-        buttonPin = (Button) this.findViewById(R.id.buttonPin);
+        Button buttonPin = (Button) this.findViewById(R.id.buttonPin);
         buttonPin.setOnClickListener(this);
 
-        buttonCancel = (Button) this.findViewById(R.id.buttonCancel);
+        Button buttonCancel = (Button) this.findViewById(R.id.buttonCancel);
         buttonCancel.setOnClickListener(this);
     }
 

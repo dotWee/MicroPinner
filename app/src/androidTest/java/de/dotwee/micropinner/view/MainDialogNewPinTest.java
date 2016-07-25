@@ -50,7 +50,6 @@ public class MainDialogNewPinTest {
     @Rule
     public ActivityTestRule<MainDialog> activityTestRule =
             new ActivityTestRule<>(MainDialog.class);
-    private PreferencesHandler preferencesHandler;
 
     /**
      * This method verifies the advanced-switch's functionality.
@@ -163,7 +162,7 @@ public class MainDialogNewPinTest {
      */
     @Test
     public void testPreferencesAdvanced() throws Exception {
-        preferencesHandler = getPreferencesHandler(activityTestRule);
+        PreferencesHandler preferencesHandler = getPreferencesHandler(activityTestRule);
 
         preferencesHandler.setAdvancedUse(true);
         assertTrue(preferencesHandler.isAdvancedUsed());

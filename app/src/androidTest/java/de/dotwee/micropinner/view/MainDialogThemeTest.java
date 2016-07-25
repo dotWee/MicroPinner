@@ -40,7 +40,7 @@ public class MainDialogThemeTest {
     private PreferencesHandler preferencesHandler;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         getPreferencesHandler(activityTestRule).setLightThemeEnabled(false);
         recreateActivity(activityTestRule);
     }

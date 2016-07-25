@@ -101,6 +101,12 @@
     - Reduced application size to 670kb
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.9/release_v1.9.apk)
 
+#### [Version: 1.9.1 / 13th March 2016]
+- sha1 checksum: c3f172244e132b31174d29668413ba315f396750
+- changes:
+    - Hide new checkbox when expanded layout is closed
+- download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.9.1/release_v1.9.1.apk)
+
 #### [Version: 1.9.2 / 25th July 2016]
 - sha1 checksum: a919f5f8813bbe4e44b1dbc1a3fff0de45df3850
 - changes:

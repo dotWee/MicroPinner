@@ -137,7 +137,7 @@ public class MainActivityNewPinTest {
      * hide CheckBoxes and verifies their (invisible) state.
      */
     @Test
-    public void testExpandMechanism() throws Exception {
+    public void testExpandMechanismThroughSwitch() throws Exception {
         getPreferencesHandler(activityTestRule).setAdvancedUse(false);
         recreateActivity(activityTestRule);
 
@@ -145,9 +145,31 @@ public class MainActivityNewPinTest {
         onView(withId(R.id.switchAdvanced))
                 .perform(click());
 
-        // checkBox should be not visible
+        // CheckBoxes should be not visible
         onView(withId(R.id.checkBoxPersistentPin))
-                .check(matches(not(isChecked())));
+                .check(matches(not(isDisplayed())));
+        onView(withId(R.id.checkBoxShowActions))
+                .check(matches(not(isDisplayed())));
+    }
+
+    /**
+     * This method clicks the header layout, which should
+     * hide CheckBoxes and verifies their (invisible) state.
+     */
+    @Test
+    public void testExpandMechanismThroughHeader() throws Exception {
+        getPreferencesHandler(activityTestRule).setAdvancedUse(false);
+        recreateActivity(activityTestRule);
+
+        // perform click on the advanced switch
+        onView(withId(R.id.linearLayoutHeader))
+                .perform(click());
+
+        // CheckBoxes should be not visible
+        onView(withId(R.id.checkBoxPersistentPin))
+                .check(matches(not(isDisplayed())));
+        onView(withId(R.id.checkBoxShowActions))
+                .check(matches(not(isDisplayed())));
     }
 
     /**

@@ -72,7 +72,7 @@ public class MainActivityParentPinTest {
 
         // verify pin title
         onView(withId(R.id.editTextTitle))
-                .check(matches(withText(LOG_TAG)));
+                .check(matches(withText(Constants.testPinTitle)));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class MainActivityParentPinTest {
 
         // verify pin content
         onView(withId(R.id.editTextContent))
-                .check(matches(withText(LOG_TAG)));
+                .check(matches(withText(Constants.testPinContent)));
     }
 
     /**

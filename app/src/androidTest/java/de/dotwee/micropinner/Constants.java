@@ -8,14 +8,17 @@ import de.dotwee.micropinner.tools.PinHandler;
  * Created by lukas on 20.07.2016.
  */
 public final class Constants {
-    static final String LOG_TAG = "Constants";
+    public static final String LOG_TAG = "Constants";
+
+    public static final String testPinTitle = LOG_TAG,
+            testPinContent = LOG_TAG;
 
     // static pin to test
     public static final PinHandler.Pin testPin = new PinHandler.Pin(
             Notification.VISIBILITY_PRIVATE,
             Notification.PRIORITY_HIGH,
-            LOG_TAG,
-            LOG_TAG,
+            testPinTitle,
+            testPinContent,
             true,
             true
     );

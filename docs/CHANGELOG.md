@@ -117,3 +117,9 @@
     - Improved and updated translations
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.9.2/release_v1.9.2.apk)
 
+#### [Version: 2.0.0 / ]
+- sha1 checksum: 
+- changes:
+    - Launcher icons shows now amount of pins as badge (only if launcher supports this function)
+    
+- download: 

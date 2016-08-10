@@ -215,23 +215,24 @@ public class PinHandler {
     /**
      * This method serializes the {@param index} and writes it to shared preferences
      */
-    private void writeIndex(@NonNull List<Integer> index) {
+    private void writeIndex(@NonNull List<Integer> newIndex) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         String serializedIndex;
 
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-            objectOutputStream.writeObject(index);
+            objectOutputStream.writeObject(newIndex);
             objectOutputStream.close();
 
-            serializedIndex =
-                    Base64.encodeToString(byteArrayOutputStream.toByteArray(), BASE64_DEFAULT_FLAG);
+            serializedIndex = Base64.encodeToString(byteArrayOutputStream.toByteArray(), BASE64_DEFAULT_FLAG);
+
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
 
         preferences.edit().putString("index", serializedIndex).apply();
+        notifyIndexCount(newIndex.size());
     }
 
     /**
@@ -286,6 +287,16 @@ public class PinHandler {
             throw new IllegalArgumentException("Pin does not exist.");
         }
     }
+
+    /**
+     * This method notifies the system to update the launcher icon's badge
+     *
+     * @param count
+     */
+    void notifyIndexCount(int count) {
+        BadgeTools.setBadge(context, count);
+    }
+
 
     /**
      * Created by lukas on 18.08.2015 - 16:48

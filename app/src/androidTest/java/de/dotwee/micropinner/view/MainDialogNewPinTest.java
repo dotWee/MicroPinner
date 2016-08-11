@@ -1,6 +1,5 @@
 package de.dotwee.micropinner.view;
 
-import android.app.Notification;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.Switch;
@@ -9,10 +8,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Map;
-
 import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.tools.PinHandler;
+import de.dotwee.micropinner.database.PinProvider;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 
 import static android.support.test.espresso.Espresso.onData;
@@ -175,8 +172,10 @@ public class MainDialogNewPinTest {
     public void testUserCreateNewPin() throws Exception {
         recreateActivity(activityTestRule);
 
-        PinHandler pinHandler = new PinHandler(activityTestRule.getActivity().getApplicationContext());
-        pinHandler.removeAllPins();
+        PinProvider pinProvider = PinProvider.getInstance(activityTestRule.getActivity().getApplicationContext());
+        pinProvider.deleteAll();
+
+        long previousPinAmount = pinProvider.count();
 
         // enter a title
         onView(withId(R.id.editTextTitle)).perform(typeText(LOG_TAG));
@@ -209,19 +208,7 @@ public class MainDialogNewPinTest {
         onView(withId(R.id.buttonPin)).perform(click());
 
         // make sure pin exists
-        Map<Integer, PinHandler.Pin> pins = pinHandler.getPins();
-        for (Map.Entry<Integer, PinHandler.Pin> pinEntry : pins.entrySet()) {
-            String title = pinEntry.getValue().getTitle();
-            assertEquals(LOG_TAG, title);
-
-            int priority = pinEntry.getValue().getPriority();
-            assertEquals(Notification.PRIORITY_HIGH, priority);
-
-            int visibility = pinEntry.getValue().getVisibility();
-            assertEquals(Notification.VISIBILITY_PRIVATE, visibility);
-
-            boolean isPersistent = pinEntry.getValue().isPersistent();
-            assertTrue(isPersistent);
-        }
+        long newPinAmount = pinProvider.count();
+        assertEquals(previousPinAmount + 1, newPinAmount);
     }
 }

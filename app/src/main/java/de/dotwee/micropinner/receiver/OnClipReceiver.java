@@ -10,7 +10,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.tools.PinHandler;
+import de.dotwee.micropinner.database.PinSpec;
+import de.dotwee.micropinner.tools.NotificationTools;
 
 /**
  * Created by Lukas Wolfsteiner on 08.10.2015.
@@ -18,7 +19,7 @@ import de.dotwee.micropinner.tools.PinHandler;
  * This class represents a broadcast receiver for
  * {@link android.app.Notification} OnAction intents.
  * <p>
- * Intents should contain a serialized {@link de.dotwee.micropinner.tools.PinHandler.Pin}
+ * Intents should contain a serialized {@link PinSpec}
  * as extra.
  * <p>
  * If yes, the onReceive method will copy the serialized
@@ -31,7 +32,7 @@ public class OnClipReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
 
-        PinHandler.Pin pin = (PinHandler.Pin) intent.getSerializableExtra(PinHandler.Pin.EXTRA_INTENT);
+        PinSpec pin = (PinSpec) intent.getSerializableExtra(NotificationTools.EXTRA_INTENT);
 
         if (pin != null) {
             Log.i(LOG_TAG, "Received clipIntent from pin " + pin.getId());

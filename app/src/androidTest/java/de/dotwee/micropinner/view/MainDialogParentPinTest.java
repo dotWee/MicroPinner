@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 
 import de.dotwee.micropinner.Constants;
 import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.tools.PinHandler;
+import de.dotwee.micropinner.tools.NotificationTools;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -46,7 +46,7 @@ public class MainDialogParentPinTest {
 
         final Intent testIntent =
                 new Intent(activityTestRule.getActivity(), MainDialog.class).putExtra(
-                        PinHandler.Pin.EXTRA_INTENT, Constants.testPin);
+                        NotificationTools.EXTRA_INTENT, Constants.testPin);
 
         Intents.init();
         activityTestRule.launchActivity(testIntent);

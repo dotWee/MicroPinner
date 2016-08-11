@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 
-import de.dotwee.micropinner.tools.PinHandler;
+import de.dotwee.micropinner.database.PinSpec;
 
 /**
  * Created by Lukas Wolfsteiner on 29.10.2015.
@@ -50,13 +50,13 @@ public interface MainPresenter {
     boolean hasParentPin();
 
     /**
-     * This method creates a {@link PinHandler.Pin} from the view.
+     * This method creates a {@link PinSpec} from the view.
      *
-     * @return New instance of a {@link PinHandler.Pin}.
+     * @return New instance of a {@link PinSpec}.
      * @throws Exception if pin is null or an error appeared on creation
      */
     @NonNull
-    PinHandler.Pin toPin() throws Exception;
+    PinSpec toPin() throws Exception;
 
     /**
      * This method returns the corresponding view of the presenter.
@@ -73,35 +73,35 @@ public interface MainPresenter {
 
     /**
      * This method handles the visibility of an instance
-     * of a {@link de.dotwee.micropinner.tools.PinHandler.Pin}
+     * of a {@link PinSpec}
      *
      * @param pin the instance to handle
      */
-    void handleParentVisibility(@NonNull PinHandler.Pin pin);
+    void handleParentVisibility(@NonNull PinSpec pin);
 
     /**
      * This method handles the visibility of an instance
-     * of a {@link de.dotwee.micropinner.tools.PinHandler.Pin}
+     * of a {@link PinSpec}
      *
      * @param pin the instance to handle
      */
-    void handleParentPriority(@NonNull PinHandler.Pin pin);
+    void handleParentPriority(@NonNull PinSpec pin);
 
     /**
      * This method handles the visibility of an instance
-     * of a {@link de.dotwee.micropinner.tools.PinHandler.Pin}
+     * of a {@link PinSpec}
      *
      * @param pin the instance to handle
      */
-    void handleParentTitle(@NonNull PinHandler.Pin pin);
+    void handleParentTitle(@NonNull PinSpec pin);
 
     /**
      * This method handles the visibility of an instance
-     * of a {@link de.dotwee.micropinner.tools.PinHandler.Pin}
+     * of a {@link PinSpec}
      *
      * @param pin the instance to handle
      */
-    void handleParentContent(@NonNull PinHandler.Pin pin);
+    void handleParentContent(@NonNull PinSpec pin);
 
     /**
      * Created by Lukas Wolfsteiner on 29.10.2015.

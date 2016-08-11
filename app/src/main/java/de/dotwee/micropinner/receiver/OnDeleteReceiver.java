@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import de.dotwee.micropinner.tools.PinHandler;
+import de.dotwee.micropinner.database.PinProvider;
+import de.dotwee.micropinner.database.PinSpec;
+import de.dotwee.micropinner.tools.NotificationTools;
 
 /**
  * Created by Lukas on 26.06.2015.
@@ -15,8 +17,7 @@ import de.dotwee.micropinner.tools.PinHandler;
  * DeleteIntents.
  * <p>
  * Intents should contain a serialized pin as extra.
- * If yes, tell the {@link PinHandler} to delete
- * and remove it from the index.
+ * If yes, tell the {@link PinProvider} to delete the pin
  */
 public class OnDeleteReceiver extends BroadcastReceiver {
     private final static String LOG_TAG = "OnDeleteReceiver";
@@ -25,13 +26,13 @@ public class OnDeleteReceiver extends BroadcastReceiver {
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
 
         // deserialize our pin from the intent
-        PinHandler.Pin pin = (PinHandler.Pin) intent.getSerializableExtra(PinHandler.Pin.EXTRA_INTENT);
+        PinSpec pin = (PinSpec) intent.getSerializableExtra(NotificationTools.EXTRA_INTENT);
 
         if (pin != null) {
             Log.i(LOG_TAG, "Received deleteIntent from pin " + pin.getId());
 
             // and tell the pin handler to remove it from the index
-            new PinHandler(context).removePin(pin);
+            PinProvider.getInstance(context).deletePin(pin);
         } else {
             throw new IllegalArgumentException(
                     "Intent did not contain a pin as serialized extra! " + intent.toString());

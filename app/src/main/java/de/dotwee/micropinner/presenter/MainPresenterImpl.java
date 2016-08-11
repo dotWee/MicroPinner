@@ -19,8 +19,10 @@ import android.widget.Toast;
 import java.io.Serializable;
 
 import de.dotwee.micropinner.R;
+import de.dotwee.micropinner.database.PinProvider;
+import de.dotwee.micropinner.database.PinSpec;
 import de.dotwee.micropinner.receiver.OnDeleteReceiver;
-import de.dotwee.micropinner.tools.PinHandler;
+import de.dotwee.micropinner.tools.NotificationTools;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 
 /**
@@ -31,15 +33,17 @@ public class MainPresenterImpl implements MainPresenter {
     private final PreferencesHandler preferencesHandler;
     private final NotificationManager notificationManager;
     private final Activity activity;
-    private final PinHandler pinHandler;
+
+    private final PinProvider pinProvider;
     private final Intent intent;
-    private PinHandler.Pin parentPin;
+    private PinSpec parentPin;
 
     public MainPresenterImpl(@NonNull Activity activity, @NonNull Intent intent) {
         this.preferencesHandler = PreferencesHandler.getInstance(activity);
-        this.pinHandler = new PinHandler(activity);
         this.activity = activity;
         this.intent = intent;
+
+        pinProvider = PinProvider.getInstance(activity.getApplicationContext());
 
         notificationManager =
                 (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -73,7 +77,7 @@ public class MainPresenterImpl implements MainPresenter {
      */
     @Override
     public void onButtonPositive() {
-        PinHandler.Pin newPin;
+        PinSpec newPin;
 
         try {
             newPin = toPin();
@@ -82,7 +86,9 @@ public class MainPresenterImpl implements MainPresenter {
                 newPin.setId(parentPin.getId());
             }
 
-            pinHandler.persistPin(newPin);
+            pinProvider.writePin(newPin);
+            NotificationTools.notify(activity, newPin);
+
             activity.finish();
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,10 +101,10 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onButtonNegative() {
         if (hasParentPin()) {
-            notificationManager.cancel(parentPin.getId());
+            notificationManager.cancel(parentPin.getIdAsInt());
 
             Intent intent = new Intent(activity, OnDeleteReceiver.class);
-            intent.putExtra(PinHandler.Pin.EXTRA_INTENT, parentPin);
+            intent.putExtra(NotificationTools.EXTRA_INTENT, parentPin);
             activity.sendBroadcast(intent);
         }
 
@@ -166,10 +172,10 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public boolean hasParentPin() {
         if (intent != null) {
-            Serializable extra = intent.getSerializableExtra(PinHandler.Pin.EXTRA_INTENT);
+            Serializable extra = intent.getSerializableExtra(NotificationTools.EXTRA_INTENT);
 
-            if (extra != null && extra instanceof PinHandler.Pin) {
-                this.parentPin = (PinHandler.Pin) extra;
+            if (extra != null && extra instanceof PinSpec) {
+                this.parentPin = (PinSpec) extra;
                 return true;
             }
         }
@@ -178,14 +184,14 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     /**
-     * This method creates a {@link PinHandler.Pin} from the view.
+     * This method creates a {@link PinSpec} from the view.
      *
-     * @return A not null {@link PinHandler.Pin}.
+     * @return A not null {@link PinSpec}.
      * @throws Exception if pin is null or an error appeared on creation
      */
     @NonNull
     @Override
-    public PinHandler.Pin toPin() throws Exception {
+    public PinSpec toPin() throws Exception {
         if (activity instanceof Data) {
             Data data = (Data) activity;
 
@@ -194,8 +200,7 @@ public class MainPresenterImpl implements MainPresenter {
                 Toast.makeText(activity, R.string.message_empty_title, Toast.LENGTH_SHORT).show();
                 throw new Exception(activity.getString(R.string.message_empty_title));
             } else {
-                return new PinHandler.Pin(data.getVisibility(), data.getPriority(), data.getPinTitle(),
-                        data.getPinContent(), data.isPersistent(), data.showActions());
+                return new PinSpec(data.getPinTitle(), data.getPinContent(), data.getVisibility(), data.getPriority(), data.isPersistent(), data.showActions());
             }
         } else {
             throw new IllegalStateException("Activity does not implement the Data callback");
@@ -247,7 +252,7 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void handleParentVisibility(@NonNull PinHandler.Pin pin) {
+    public void handleParentVisibility(@NonNull PinSpec pin) {
 
         Spinner spinnerVisibility = (Spinner) activity.findViewById(R.id.spinnerVisibility);
         if (spinnerVisibility != null) {
@@ -276,7 +281,7 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void handleParentPriority(@NonNull PinHandler.Pin pin) {
+    public void handleParentPriority(@NonNull PinSpec pin) {
 
         Spinner spinnerPriority = (Spinner) activity.findViewById(R.id.spinnerPriority);
         if (spinnerPriority != null) {
@@ -309,7 +314,7 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void handleParentTitle(@NonNull PinHandler.Pin pin) {
+    public void handleParentTitle(@NonNull PinSpec pin) {
 
         EditText editTextTitle = (EditText) activity.findViewById(R.id.editTextTitle);
         if (editTextTitle != null) {
@@ -319,7 +324,7 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void handleParentContent(@NonNull PinHandler.Pin pin) {
+    public void handleParentContent(@NonNull PinSpec pin) {
 
         EditText editTextContent = (EditText) activity.findViewById(R.id.editTextContent);
         if (editTextContent != null) {

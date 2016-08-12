@@ -4,8 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 import android.support.v4.util.ArrayMap;
 import android.util.Log;
@@ -19,45 +19,77 @@ import de.dotwee.micropinner.tools.BadgeTools;
 /**
  * Created by lukas on 10.08.2016.
  */
-public class PinProvider {
-    static final String TAG = "PinProvider";
+public class PinDatabase extends SQLiteOpenHelper {
+    public static final String TABLE_PINS = "pins";
+    /* integer columns */
+    public static final String COLUMN_ID = "_id";
+    /* string columns */
+    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_CONTENT = "content";
+    /* integer columns */
+    public static final String COLUMN_VISIBILITY = "visibility";
+    public static final String COLUMN_PRIORITY = "priority";
+    /* boolean columns */
+    public static final String COLUMN_PERSISTENT = "persistent";
+    public static final String COLUMN_SHOW_ACTIONS = "show_actions";
+    static final String TAG = "PinDatabase";
+    private static final String DATABASE_NAME = "commments.db";
+    private static final int DATABASE_VERSION = 1;
+    // Database creation sql statement
+    private static final String DATABASE_CREATE = "create table "
+            + TABLE_PINS + "( "
 
-    private static PinProvider instance = null;
-    private SQLiteDatabase database;
-    private PinHelper pinHelper;
-    private Context context;
-    private String[] columns = {
-            PinHelper.COLUMN_ID,
-            PinHelper.COLUMN_TITLE,
-            PinHelper.COLUMN_CONTENT,
-            PinHelper.COLUMN_VISIBILITY,
-            PinHelper.COLUMN_PRIORITY,
-            PinHelper.COLUMN_PERSISTENT,
-            PinHelper.COLUMN_SHOW_ACTIONS
+            + COLUMN_ID + " integer primary key autoincrement, "
+            + COLUMN_TITLE + " text not null, "
+            + COLUMN_CONTENT + " text not null, "
+
+            + COLUMN_VISIBILITY + " integer not null, "
+            + COLUMN_PRIORITY + " integer not null, "
+
+            + COLUMN_PERSISTENT + " boolean not null, "
+            + COLUMN_SHOW_ACTIONS + " boolean not null);";
+    private static PinDatabase instance = null;
+    private static String[] columns = {
+            PinDatabase.COLUMN_ID,
+            PinDatabase.COLUMN_TITLE,
+            PinDatabase.COLUMN_CONTENT,
+            PinDatabase.COLUMN_VISIBILITY,
+            PinDatabase.COLUMN_PRIORITY,
+            PinDatabase.COLUMN_PERSISTENT,
+            PinDatabase.COLUMN_SHOW_ACTIONS
     };
+    private SQLiteDatabase database;
+    private Context context;
 
-    private PinProvider(Context context) {
+    private PinDatabase(@NonNull Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
         this.context = context;
 
-        pinHelper = new PinHelper(context);
-        open();
+        database = getWritableDatabase();
     }
 
-    public static synchronized PinProvider getInstance(@NonNull Context applicationContext) {
-        if (PinProvider.instance == null) {
-            PinProvider.instance = new PinProvider(applicationContext);
+    public static synchronized PinDatabase getInstance(@NonNull Context context) {
+        if (PinDatabase.instance == null) {
+            PinDatabase.instance = new PinDatabase(context.getApplicationContext());
         }
 
-        return PinProvider.instance;
+        return PinDatabase.instance;
     }
 
-    public void open() throws SQLException {
-        database = pinHelper.getWritableDatabase();
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL(DATABASE_CREATE);
     }
 
-    public void close() {
-        pinHelper.close();
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
+
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_PINS);
+        onCreate(sqLiteDatabase);
     }
+
 
     /**
      * This method decides whether a new pin should be created or updated in the database
@@ -67,6 +99,8 @@ public class PinProvider {
      */
     @NonNull
     public PinSpec writePin(@NonNull PinSpec pin) {
+        Log.i(TAG, "Write pin called for pin " + pin.toString());
+
         if (pin.getId() == -1) {
             return createPin(pin);
         } else return updatePin(pin);
@@ -82,7 +116,7 @@ public class PinProvider {
     private PinSpec createPin(@NonNull PinSpec pin) {
         ContentValues contentValues = pin.toContentValues();
 
-        long id = database.insert(PinHelper.TABLE_PINS, null, contentValues);
+        long id = database.insert(PinDatabase.TABLE_PINS, null, contentValues);
         Log.i(TAG, "Created new pin with id " + id);
         pin.setId(id);
 
@@ -100,7 +134,7 @@ public class PinProvider {
     private PinSpec updatePin(@NonNull PinSpec pin) {
         ContentValues contentValues = pin.toContentValues();
 
-        long id = database.update(PinHelper.TABLE_PINS, contentValues, PinHelper.COLUMN_ID + " = " + pin.getId(), null);
+        long id = database.update(PinDatabase.TABLE_PINS, contentValues, PinDatabase.COLUMN_ID + " = " + pin.getId(), null);
         Log.i(TAG, "Updated new pin with id " + id);
         pin.setId(id);
 
@@ -118,7 +152,7 @@ public class PinProvider {
         long id = pin.getId();
 
         Log.i(TAG, "Deleting pin with id " + id);
-        database.delete(PinHelper.TABLE_PINS, PinHelper.COLUMN_ID + " = " + id, null);
+        database.delete(PinDatabase.TABLE_PINS, PinDatabase.COLUMN_ID + " = " + id, null);
         pin.setId(-1);
 
         onDatabaseAction();
@@ -127,18 +161,7 @@ public class PinProvider {
 
     public void deleteAll() {
         Log.i(TAG, "Deleting all pins");
-        database.delete(PinHelper.TABLE_PINS, null, null);
-    }
-
-    /**
-     * This method reads a pin from a cursor
-     *
-     * @param cursor to read from
-     * @return the read pin
-     */
-    @NonNull
-    public PinSpec fromCursor(@NonNull Cursor cursor) {
-        return new PinSpec(cursor);
+        database.delete(PinDatabase.TABLE_PINS, null, null);
     }
 
     /**
@@ -147,7 +170,7 @@ public class PinProvider {
      * @return the amount of entries
      */
     public long count() {
-        return DatabaseUtils.queryNumEntries(database, PinHelper.TABLE_PINS);
+        return DatabaseUtils.queryNumEntries(database, PinDatabase.TABLE_PINS);
     }
 
     /**
@@ -169,7 +192,7 @@ public class PinProvider {
     public List<PinSpec> getAllPins() {
         List<PinSpec> pinList = new ArrayList<>();
 
-        Cursor cursor = database.query(PinHelper.TABLE_PINS, columns, null, null, null, null, null);
+        Cursor cursor = database.query(PinDatabase.TABLE_PINS, columns, null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
@@ -192,7 +215,7 @@ public class PinProvider {
     public Map<Integer, PinSpec> getAllPinsMap() {
         Map<Integer, PinSpec> pinMap = new ArrayMap<>();
 
-        Cursor cursor = database.query(PinHelper.TABLE_PINS, columns, null, null, null, null, null);
+        Cursor cursor = database.query(PinDatabase.TABLE_PINS, columns, null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {

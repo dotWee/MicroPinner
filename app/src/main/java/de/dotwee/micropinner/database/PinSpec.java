@@ -38,13 +38,13 @@ public class PinSpec implements Serializable {
     public PinSpec(@NonNull Cursor cursor) {
         ContentValues contentValues = new ContentValues();
         DatabaseUtils.cursorRowToContentValues(cursor, contentValues);
-        setId(contentValues.getAsLong(PinHelper.COLUMN_ID));
-        setTitle(contentValues.getAsString(PinHelper.COLUMN_TITLE));
-        setContent(contentValues.getAsString(PinHelper.COLUMN_CONTENT));
-        setVisibility(contentValues.getAsInteger(PinHelper.COLUMN_VISIBILITY));
-        setPriority(contentValues.getAsInteger(PinHelper.COLUMN_PRIORITY));
-        setPersistent(contentValues.getAsBoolean(PinHelper.COLUMN_PERSISTENT));
-        setShowActions(contentValues.getAsBoolean(PinHelper.COLUMN_SHOW_ACTIONS));
+        setId(contentValues.getAsLong(PinDatabase.COLUMN_ID));
+        setTitle(contentValues.getAsString(PinDatabase.COLUMN_TITLE));
+        setContent(contentValues.getAsString(PinDatabase.COLUMN_CONTENT));
+        setVisibility(contentValues.getAsInteger(PinDatabase.COLUMN_VISIBILITY));
+        setPriority(contentValues.getAsInteger(PinDatabase.COLUMN_PRIORITY));
+        setPersistent(contentValues.getAsBoolean(PinDatabase.COLUMN_PERSISTENT));
+        setShowActions(contentValues.getAsBoolean(PinDatabase.COLUMN_SHOW_ACTIONS));
     }
 
     public PinSpec(int visibility, int priority, @NonNull String title, @NonNull String content,
@@ -126,12 +126,12 @@ public class PinSpec implements Serializable {
     public ContentValues toContentValues() {
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(PinHelper.COLUMN_TITLE, getTitle());
-        contentValues.put(PinHelper.COLUMN_CONTENT, getContent());
-        contentValues.put(PinHelper.COLUMN_VISIBILITY, getVisibility());
-        contentValues.put(PinHelper.COLUMN_PRIORITY, getPriority());
-        contentValues.put(PinHelper.COLUMN_PERSISTENT, isPersistent());
-        contentValues.put(PinHelper.COLUMN_SHOW_ACTIONS, isShowActions());
+        contentValues.put(PinDatabase.COLUMN_TITLE, getTitle());
+        contentValues.put(PinDatabase.COLUMN_CONTENT, getContent());
+        contentValues.put(PinDatabase.COLUMN_VISIBILITY, getVisibility());
+        contentValues.put(PinDatabase.COLUMN_PRIORITY, getPriority());
+        contentValues.put(PinDatabase.COLUMN_PERSISTENT, isPersistent());
+        contentValues.put(PinDatabase.COLUMN_SHOW_ACTIONS, isShowActions());
 
         return contentValues;
     }
@@ -143,5 +143,29 @@ public class PinSpec implements Serializable {
         } else {
             return title;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "PinSpec{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", visibility=" + visibility +
+                ", priority=" + priority +
+                ", persistent=" + persistent +
+                ", showActions=" + showActions +
+                '}';
+    }
+
+    /**
+     * This method reads a pin from a cursor
+     *
+     * @param cursor to read from
+     * @return the read pin
+     */
+    @NonNull
+    public PinSpec fromCursor(@NonNull Cursor cursor) {
+        return new PinSpec(cursor);
     }
 }

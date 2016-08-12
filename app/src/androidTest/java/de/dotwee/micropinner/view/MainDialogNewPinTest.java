@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.database.PinProvider;
+import de.dotwee.micropinner.database.PinDatabase;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 
 import static android.support.test.espresso.Espresso.onData;
@@ -172,10 +172,10 @@ public class MainDialogNewPinTest {
     public void testUserCreateNewPin() throws Exception {
         recreateActivity(activityTestRule);
 
-        PinProvider pinProvider = PinProvider.getInstance(activityTestRule.getActivity().getApplicationContext());
-        pinProvider.deleteAll();
+        PinDatabase pinDatabase = PinDatabase.getInstance(activityTestRule.getActivity().getApplicationContext());
+        pinDatabase.deleteAll();
 
-        long previousPinAmount = pinProvider.count();
+        long previousPinAmount = pinDatabase.count();
 
         // enter a title
         onView(withId(R.id.editTextTitle)).perform(typeText(LOG_TAG));
@@ -208,7 +208,7 @@ public class MainDialogNewPinTest {
         onView(withId(R.id.buttonPin)).perform(click());
 
         // make sure pin exists
-        long newPinAmount = pinProvider.count();
+        long newPinAmount = pinDatabase.count();
         assertEquals(previousPinAmount + 1, newPinAmount);
     }
 }

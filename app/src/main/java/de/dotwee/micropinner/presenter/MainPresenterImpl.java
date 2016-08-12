@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.io.Serializable;
 
 import de.dotwee.micropinner.R;
-import de.dotwee.micropinner.database.PinProvider;
+import de.dotwee.micropinner.database.PinDatabase;
 import de.dotwee.micropinner.database.PinSpec;
 import de.dotwee.micropinner.receiver.OnDeleteReceiver;
 import de.dotwee.micropinner.tools.NotificationTools;
@@ -34,7 +34,7 @@ public class MainPresenterImpl implements MainPresenter {
     private final NotificationManager notificationManager;
     private final Activity activity;
 
-    private final PinProvider pinProvider;
+    private final PinDatabase pinDatabase;
     private final Intent intent;
     private PinSpec parentPin;
 
@@ -43,7 +43,7 @@ public class MainPresenterImpl implements MainPresenter {
         this.activity = activity;
         this.intent = intent;
 
-        pinProvider = PinProvider.getInstance(activity.getApplicationContext());
+        pinDatabase = PinDatabase.getInstance(activity.getApplicationContext());
 
         notificationManager =
                 (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -86,7 +86,7 @@ public class MainPresenterImpl implements MainPresenter {
                 newPin.setId(parentPin.getId());
             }
 
-            pinProvider.writePin(newPin);
+            pinDatabase.writePin(newPin);
             NotificationTools.notify(activity, newPin);
 
             activity.finish();

@@ -9,7 +9,7 @@ import android.util.Log;
 
 import java.util.Map;
 
-import de.dotwee.micropinner.database.PinProvider;
+import de.dotwee.micropinner.database.PinDatabase;
 import de.dotwee.micropinner.database.PinSpec;
 import de.dotwee.micropinner.tools.NotificationTools;
 
@@ -32,7 +32,7 @@ public class OnBootReceiver extends BroadcastReceiver {
         }
 
         // get all pins
-        final Map<Integer, PinSpec> pinMap = PinProvider.getInstance(context).getAllPinsMap();
+        final Map<Integer, PinSpec> pinMap = PinDatabase.getInstance(context).getAllPinsMap();
 
         // foreach through them all
         for (Map.Entry<Integer, PinSpec> entry : pinMap.entrySet()) {

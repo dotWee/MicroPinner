@@ -12,6 +12,11 @@ android {
         versionName "v1.9.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // Enable the experimental Jack build tools.
+        jackOptions {
+            enabled true
+        }
     }
 
     buildTypes {
@@ -26,15 +31,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    packagingOptions {
-        exclude 'LICENSE.txt'
-    }
-
-    dexOptions {
-        incremental true
-    }
 
     compileOptions {
+        incremental false
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }

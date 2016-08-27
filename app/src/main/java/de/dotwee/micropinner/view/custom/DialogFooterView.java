@@ -29,6 +29,8 @@ public class DialogFooterView extends AbstractDialogView implements View.OnClick
 
     @Override
     public void init() {
+        checkIfPresenterNull();
+
         inflate(getContext(), R.layout.dialog_main_footer, this);
 
         Button buttonPin = (Button) this.findViewById(R.id.buttonPin);

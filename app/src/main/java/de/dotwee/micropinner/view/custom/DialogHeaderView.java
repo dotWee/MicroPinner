@@ -32,6 +32,8 @@ public class DialogHeaderView extends AbstractDialogView
 
     @Override
     public void init() {
+        checkIfPresenterNull();
+
         inflate(getContext(), R.layout.dialog_main_head, this);
 
         LinearLayout linearLayoutHeader = (LinearLayout) findViewById(R.id.linearLayoutHeader);
@@ -45,10 +47,6 @@ public class DialogHeaderView extends AbstractDialogView
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-        if (mainPresenter == null) {
-            throw new IllegalStateException("Passed MainPresenter instance is null");
-        }
-
         switch (compoundButton.getId()) {
 
             case R.id.switchAdvanced:

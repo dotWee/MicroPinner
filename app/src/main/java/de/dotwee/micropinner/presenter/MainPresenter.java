@@ -1,7 +1,6 @@
 package de.dotwee.micropinner.presenter;
 
 import android.app.Activity;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 
 import de.dotwee.micropinner.database.PinSpec;
@@ -102,34 +101,6 @@ public interface MainPresenter {
      * @param pin the instance to handle
      */
     void handleParentContent(@NonNull PinSpec pin);
-
-    /**
-     * Created by Lukas Wolfsteiner on 29.10.2015.
-     */
-    interface Listeners {
-        String LOG_TAG = "Listeners";
-
-        /**
-         * This method applies a click-listener to its given view-ids.
-         *
-         * @param ids The ids to set a click-listener on.
-         */
-        void setOnClickListener(@NonNull @IdRes final int... ids);
-
-        /**
-         * This method applies a long-click-listener to its given view-ids.
-         *
-         * @param ids The ids to set a long-click-listener on.
-         */
-        void setOnLongClickListener(@NonNull @IdRes final int... ids);
-
-        /**
-         * This method applies a checked-change-listener to its given view-ids.
-         *
-         * @param ids The ids to set a checked-change-listener on.
-         */
-        void setOnCheckedChangeListener(@NonNull @IdRes final int... ids);
-    }
 
     /**
      * Created by Lukas Wolfsteiner on 29.10.2015.

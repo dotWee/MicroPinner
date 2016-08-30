@@ -80,12 +80,7 @@ public class MainDialogNewPinTest {
      */
     @Test
     public void testEditTextFocus() throws Exception {
-        activityTestRule.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activityTestRule.getActivity().recreate();
-            }
-        });
+        activityTestRule.getActivity().runOnUiThread(() -> activityTestRule.getActivity().recreate());
 
         onView(withId(R.id.editTextTitle)).check(matches(isFocusable()));
     }

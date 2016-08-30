@@ -29,11 +29,6 @@ public final class TestTools {
      * @param activityTestRule Source to get access to the activity.
      */
     public static void recreateActivity(final ActivityTestRule<MainDialog> activityTestRule) {
-        activityTestRule.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activityTestRule.getActivity().recreate();
-            }
-        });
+        activityTestRule.getActivity().runOnUiThread(() -> activityTestRule.getActivity().recreate());
     }
 }

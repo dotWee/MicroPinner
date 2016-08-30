@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.database.PinSpec;
@@ -19,7 +20,7 @@ import de.dotwee.micropinner.view.MainDialog;
  */
 public class NotificationTools {
     public final static String EXTRA_INTENT = "IAMAPIN";
-    static final String TAG = "NotificationTools";
+    static final String TAG = NotificationTools.class.getSimpleName();
 
     @NonNull
     private static PendingIntent getPinIntent(@NonNull Context context, @NonNull PinSpec pin) {
@@ -57,6 +58,8 @@ public class NotificationTools {
         }
 
         Notification notification = builder.build();
+
+        Log.i(TAG, "Send notification with pin id " + pin.getIdAsInt() + " to system");
         notificationManager.notify(pin.getIdAsInt(), notification);
     }
 }

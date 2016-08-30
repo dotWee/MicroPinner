@@ -10,29 +10,29 @@ import android.support.annotation.NonNull;
 import android.support.v4.util.ArrayMap;
 import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
+import de.dotwee.micropinner.BuildConfig;
 import de.dotwee.micropinner.tools.BadgeTools;
+import de.dotwee.micropinner.tools.SQLiteStatementsLogger;
 
 /**
  * Created by lukas on 10.08.2016.
  */
 public class PinDatabase extends SQLiteOpenHelper {
-    public static final String TABLE_PINS = "pins";
     /* integer columns */
-    public static final String COLUMN_ID = "_id";
+    static final String COLUMN_ID = "_id";
     /* string columns */
-    public static final String COLUMN_TITLE = "title";
-    public static final String COLUMN_CONTENT = "content";
+    static final String COLUMN_TITLE = "title";
+    static final String COLUMN_CONTENT = "content";
     /* integer columns */
-    public static final String COLUMN_VISIBILITY = "visibility";
-    public static final String COLUMN_PRIORITY = "priority";
+    static final String COLUMN_VISIBILITY = "visibility";
+    static final String COLUMN_PRIORITY = "priority";
     /* boolean columns */
-    public static final String COLUMN_PERSISTENT = "persistent";
-    public static final String COLUMN_SHOW_ACTIONS = "show_actions";
-    static final String TAG = "PinDatabase";
+    static final String COLUMN_PERSISTENT = "persistent";
+    static final String COLUMN_SHOW_ACTIONS = "show_actions";
+    private static final String TABLE_PINS = "pins";
+    private static final String TAG = PinDatabase.class.getSimpleName();
     private static final String DATABASE_NAME = "commments.db";
     private static final int DATABASE_VERSION = 1;
     // Database creation sql statement
@@ -90,7 +90,6 @@ public class PinDatabase extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-
     /**
      * This method decides whether a new pin should be created or updated in the database
      *
@@ -116,6 +115,9 @@ public class PinDatabase extends SQLiteOpenHelper {
     private PinSpec createPin(@NonNull PinSpec pin) {
         ContentValues contentValues = pin.toContentValues();
 
+        if (BuildConfig.DEBUG) {
+            SQLiteStatementsLogger.logInsertWithOnConflict(PinDatabase.TABLE_PINS, null, contentValues, SQLiteDatabase.CONFLICT_NONE);
+        }
         long id = database.insert(PinDatabase.TABLE_PINS, null, contentValues);
         Log.i(TAG, "Created new pin with id " + id);
         pin.setId(id);
@@ -133,11 +135,18 @@ public class PinDatabase extends SQLiteOpenHelper {
     @NonNull
     private PinSpec updatePin(@NonNull PinSpec pin) {
         ContentValues contentValues = pin.toContentValues();
+        long id = pin.getId();
 
-        long id = database.update(PinDatabase.TABLE_PINS, contentValues, PinDatabase.COLUMN_ID + " = " + pin.getId(), null);
+        String whereClause = PinDatabase.COLUMN_ID + " = ?";
+        String[] whereArgs = new String[]{String.valueOf(id)};
+        if (BuildConfig.DEBUG) {
+            SQLiteStatementsLogger.logUpdate(PinDatabase.TABLE_PINS, contentValues, whereClause, whereArgs);
+        }
+        database.update(PinDatabase.TABLE_PINS, contentValues, whereClause, whereArgs);
         Log.i(TAG, "Updated new pin with id " + id);
         pin.setId(id);
 
+        onDatabaseAction();
         return pin;
     }
 
@@ -151,8 +160,13 @@ public class PinDatabase extends SQLiteOpenHelper {
     public PinSpec deletePin(PinSpec pin) {
         long id = pin.getId();
 
-        Log.i(TAG, "Deleting pin with id " + id);
-        database.delete(PinDatabase.TABLE_PINS, PinDatabase.COLUMN_ID + " = " + id, null);
+        String whereClause = PinDatabase.COLUMN_ID + " = ?";
+        String[] whereArgs = new String[]{String.valueOf(id)};
+        if (BuildConfig.DEBUG) {
+            SQLiteStatementsLogger.logDelete(PinDatabase.TABLE_PINS, whereClause, whereArgs);
+        }
+        boolean success = database.delete(PinDatabase.TABLE_PINS, whereClause, whereArgs) > 0;
+        Log.i(TAG, "Deleting pin with id " + id + "; success " + success);
         pin.setId(-1);
 
         onDatabaseAction();
@@ -183,28 +197,6 @@ public class PinDatabase extends SQLiteOpenHelper {
         BadgeTools.setBadge(context, (int) count);
     }
 
-    /**
-     * This method returns a list of all pins in the database
-     *
-     * @return list of all pins
-     */
-    @NonNull
-    public List<PinSpec> getAllPins() {
-        List<PinSpec> pinList = new ArrayList<>();
-
-        Cursor cursor = database.query(PinDatabase.TABLE_PINS, columns, null, null, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                PinSpec pinSpec = new PinSpec(cursor);
-                pinList.add(pinSpec);
-                cursor.moveToNext();
-            }
-        }
-
-        cursor.close();
-        return pinList;
-    }
 
     /**
      * This method returns a map of all pins in the database with their id as key
@@ -216,7 +208,6 @@ public class PinDatabase extends SQLiteOpenHelper {
         Map<Integer, PinSpec> pinMap = new ArrayMap<>();
 
         Cursor cursor = database.query(PinDatabase.TABLE_PINS, columns, null, null, null, null, null);
-
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
                 PinSpec pinSpec = new PinSpec(cursor);

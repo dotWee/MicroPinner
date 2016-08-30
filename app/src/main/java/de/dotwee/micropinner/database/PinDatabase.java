@@ -32,7 +32,7 @@ public class PinDatabase extends SQLiteOpenHelper {
     static final String COLUMN_SHOW_ACTIONS = "show_actions";
     private static final String TABLE_PINS = "pins";
     private static final String TAG = PinDatabase.class.getSimpleName();
-    private static final String DATABASE_NAME = "commments.db";
+    private static final String DATABASE_NAME = "comments.db";
     private static final int DATABASE_VERSION = 1;
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "

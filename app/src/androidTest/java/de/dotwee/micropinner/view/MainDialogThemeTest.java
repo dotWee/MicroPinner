@@ -2,6 +2,7 @@ package de.dotwee.micropinner.view;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v4.content.ContextCompat;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -84,7 +85,7 @@ public class MainDialogThemeTest {
         // recreate activity to apply theme
         recreateActivity(activityTestRule);
 
-        int accentColor = activityTestRule.getActivity().getResources().getColor(R.color.accent);
+        int accentColor = ContextCompat.getColor(activityTestRule.getActivity(), R.color.accent);
 
         // check color for all TextView descriptions
         for (int description : new int[]{
@@ -108,9 +109,9 @@ public class MainDialogThemeTest {
         // recreate activity to apply theme
         recreateActivity(activityTestRule);
 
-        int accentColor = activityTestRule.getActivity().getResources().getColor(R.color.background);
+        int backgroundColor = ContextCompat.getColor(activityTestRule.getActivity(), R.color.background);
 
-        onView(withId(android.R.id.content)).check(matches(Matches.withBackgroundColor(accentColor)));
+        onView(withId(android.R.id.content)).check(matches(Matches.withBackgroundColor(backgroundColor)));
     }
 
     /**
@@ -132,7 +133,8 @@ public class MainDialogThemeTest {
                 R.string.input_description_priority, R.string.input_description_visibility
         }) {
             onView(withText(description)).check(matches(Matches.withTextColor(
-                    activityTestRule.getActivity().getResources().getColor(R.color.accent_dark))));
+                    ContextCompat.getColor(activityTestRule.getActivity(), R.color.accent_dark)
+            )));
         }
     }
 
@@ -150,6 +152,6 @@ public class MainDialogThemeTest {
         recreateActivity(activityTestRule);
 
         onView(withId(android.R.id.content)).check(matches(Matches.withBackgroundColor(
-                activityTestRule.getActivity().getResources().getColor(R.color.background_dark))));
+                ContextCompat.getColor(activityTestRule.getActivity(), R.color.background_dark))));
     }
 }

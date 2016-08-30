@@ -13,7 +13,6 @@ import android.util.Log;
 import java.util.Map;
 
 import de.dotwee.micropinner.BuildConfig;
-import de.dotwee.micropinner.tools.BadgeTools;
 import de.dotwee.micropinner.tools.SQLiteStatementsLogger;
 
 /**
@@ -194,7 +193,6 @@ public class PinDatabase extends SQLiteOpenHelper {
         long count = count();
 
         Log.i(TAG, "onDatabaseAction() count " + count);
-        BadgeTools.setBadge(context, (int) count);
     }
 
 

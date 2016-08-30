@@ -20,7 +20,7 @@ import de.dotwee.micropinner.tools.NotificationTools;
  * If yes, tell the {@link PinDatabase} to delete the pin
  */
 public class OnDeleteReceiver extends BroadcastReceiver {
-    private final static String LOG_TAG = "OnDeleteReceiver";
+    private final static String TAG = OnDeleteReceiver.class.getSimpleName();
 
     @Override
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
@@ -29,7 +29,7 @@ public class OnDeleteReceiver extends BroadcastReceiver {
         PinSpec pin = (PinSpec) intent.getSerializableExtra(NotificationTools.EXTRA_INTENT);
 
         if (pin != null) {
-            Log.i(LOG_TAG, "Received deleteIntent from pin " + pin.getId());
+            Log.i(TAG, "Received deleteIntent from pin " + pin.getId());
 
             // and tell the pin handler to remove it from the index
             PinDatabase.getInstance(context).deletePin(pin);

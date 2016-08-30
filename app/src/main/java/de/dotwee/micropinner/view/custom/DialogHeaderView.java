@@ -15,7 +15,7 @@ import de.dotwee.micropinner.R;
 public class DialogHeaderView extends AbstractDialogView
         implements Switch.OnCheckedChangeListener, View.OnClickListener, View.OnLongClickListener {
 
-    static final String TAG = "DialogHeaderView";
+    static final String TAG = DialogHeaderView.class.getSimpleName();
     private Switch switchAdvanced;
 
     public DialogHeaderView(Context context) {

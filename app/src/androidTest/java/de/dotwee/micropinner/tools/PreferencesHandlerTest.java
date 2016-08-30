@@ -29,10 +29,10 @@ public class PreferencesHandlerTest {
     public ActivityTestRule<MainDialog> activityTestRule =
             new ActivityTestRule<>(MainDialog.class);
 
-    PreferencesHandler preferencesHandler;
+    private PreferencesHandler preferencesHandler;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
         // Removes all previous preferences entries
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activityTestRule.getActivity());

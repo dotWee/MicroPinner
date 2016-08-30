@@ -20,7 +20,7 @@ import de.dotwee.micropinner.view.MainDialog;
  */
 public class NotificationTools {
     public final static String EXTRA_INTENT = "IAMAPIN";
-    static final String TAG = NotificationTools.class.getSimpleName();
+    private static final String TAG = NotificationTools.class.getSimpleName();
 
     @NonNull
     private static PendingIntent getPinIntent(@NonNull Context context, @NonNull PinSpec pin) {

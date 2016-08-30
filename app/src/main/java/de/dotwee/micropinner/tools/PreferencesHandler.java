@@ -15,7 +15,7 @@ public class PreferencesHandler {
     private static final String PREF_LIGHT_THEME = "pref_lighttheme";
     private static final String PREF_SHOW_NOTIFICATION_ACTIONS = "pref_shownotificationactions";
 
-    private final static String LOG_TAG = "PreferencesHandler";
+    private final static String TAG = PreferencesHandler.class.getSimpleName();
     private static PreferencesHandler instance;
     private final SharedPreferences preferences;
 

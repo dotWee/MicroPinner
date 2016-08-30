@@ -29,7 +29,7 @@ import de.dotwee.micropinner.tools.PreferencesHandler;
  * Created by Lukas Wolfsteiner on 29.10.2015.
  */
 public class MainPresenterImpl implements MainPresenter {
-    private static final String LOG_TAG = "MainPresenterImpl";
+    private static final String TAG = MainPresenterImpl.class.getSimpleName();
     private final PreferencesHandler preferencesHandler;
     private final NotificationManager notificationManager;
     private final Activity activity;

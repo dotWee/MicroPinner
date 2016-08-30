@@ -13,7 +13,7 @@ import de.dotwee.micropinner.R;
  * Created by lukas on 25.07.2016.
  */
 public class DialogFooterView extends AbstractDialogView implements View.OnClickListener {
-    private static final String TAG = "DialogFooterView";
+    private static final String TAG = DialogFooterView.class.getSimpleName();
 
     public DialogFooterView(Context context) {
         super(context);

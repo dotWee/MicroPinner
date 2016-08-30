@@ -11,7 +11,7 @@ import de.dotwee.micropinner.presenter.MainPresenter;
  * Created by lukas on 25.07.2016.
  */
 public abstract class AbstractDialogView extends FrameLayout {
-    static final String TAG = "AbstractDialogView";
+    static final String TAG = AbstractDialogView.class.getSimpleName();
     MainPresenter mainPresenter = null;
 
     public AbstractDialogView(Context context) {
@@ -35,7 +35,7 @@ public abstract class AbstractDialogView extends FrameLayout {
 
     protected abstract void init();
 
-    public final void checkIfPresenterNull() {
+    final void checkIfPresenterNull() {
         if (mainPresenter == null) {
             throw new IllegalStateException("MainPresenter must be not null");
         }

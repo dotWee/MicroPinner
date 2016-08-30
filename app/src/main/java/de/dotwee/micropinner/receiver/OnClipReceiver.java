@@ -27,7 +27,7 @@ import de.dotwee.micropinner.tools.NotificationTools;
  * a {@link Toast}.
  */
 public class OnClipReceiver extends BroadcastReceiver {
-    private final static String LOG_TAG = "OnClipReceiver";
+    private final static String TAG = OnClipReceiver.class.getSimpleName();
 
     @Override
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
@@ -35,7 +35,7 @@ public class OnClipReceiver extends BroadcastReceiver {
         PinSpec pin = (PinSpec) intent.getSerializableExtra(NotificationTools.EXTRA_INTENT);
 
         if (pin != null) {
-            Log.i(LOG_TAG, "Received clipIntent from pin " + pin.getId());
+            Log.i(TAG, "Received clipIntent from pin " + pin.getId());
 
             ClipboardManager clipboard =
                     (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);

@@ -14,7 +14,7 @@ import de.dotwee.micropinner.R;
  */
 public class DialogContentView extends AbstractDialogView
         implements CheckBox.OnCheckedChangeListener {
-    static final String TAG = "DialogContentView";
+    static final String TAG = DialogContentView.class.getSimpleName();
     private Spinner spinnerVisibility;
     private Spinner spinnerPriority;
 

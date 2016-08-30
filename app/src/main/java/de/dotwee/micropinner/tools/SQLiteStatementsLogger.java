@@ -54,8 +54,8 @@ public class SQLiteStatementsLogger {
         logUpdateWithOnConflict(table, values, whereClause, whereArgs, 0);
     }
 
-    public static void logUpdateWithOnConflict(String table, ContentValues values,
-                                               String whereClause, String[] whereArgs, int conflictAlgorithm) {
+    private static void logUpdateWithOnConflict(String table, ContentValues values,
+                                                String whereClause, String[] whereArgs, int conflictAlgorithm) {
 
         StringBuilder sql = new StringBuilder(120);
         sql.append("UPDATE ");

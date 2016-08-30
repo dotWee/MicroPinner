@@ -11,18 +11,18 @@ import java.io.Serializable;
  * Created by lukas on 10.08.2016.
  */
 public class PinSpec implements Serializable {
-    static final String TAG = "PinSpec";
+    private static final String TAG = PinSpec.class.getSimpleName();
 
 
-    long id;
-    String title;
-    String content;
+    private long id;
+    private String title;
+    private String content;
 
-    int visibility;
-    int priority;
+    private int visibility;
+    private int priority;
 
-    boolean persistent;
-    boolean showActions;
+    private boolean persistent;
+    private boolean showActions;
 
     public PinSpec(@NonNull String title, @NonNull String content, int visibility, int priority, boolean persistent, boolean showActions) {
 
@@ -35,7 +35,7 @@ public class PinSpec implements Serializable {
         this.showActions = showActions;
     }
 
-    public PinSpec(@NonNull Cursor cursor) {
+    PinSpec(@NonNull Cursor cursor) {
         ContentValues contentValues = new ContentValues();
         DatabaseUtils.cursorRowToContentValues(cursor, contentValues);
         setId(contentValues.getAsLong(PinDatabase.COLUMN_ID));
@@ -47,8 +47,8 @@ public class PinSpec implements Serializable {
         setShowActions(contentValues.getAsBoolean(PinDatabase.COLUMN_SHOW_ACTIONS));
     }
 
-    public PinSpec(int visibility, int priority, @NonNull String title, @NonNull String content,
-                   boolean persistent, boolean showActions) {
+    private PinSpec(int visibility, int priority, @NonNull String title, @NonNull String content,
+                    boolean persistent, boolean showActions) {
 
         setId(-1);
 
@@ -77,7 +77,7 @@ public class PinSpec implements Serializable {
         return title;
     }
 
-    public void setTitle(@NonNull String title) {
+    private void setTitle(@NonNull String title) {
         this.title = title;
     }
 
@@ -86,7 +86,7 @@ public class PinSpec implements Serializable {
         return content;
     }
 
-    public void setContent(@NonNull String content) {
+    private void setContent(@NonNull String content) {
         this.content = content;
     }
 
@@ -94,7 +94,7 @@ public class PinSpec implements Serializable {
         return visibility;
     }
 
-    public void setVisibility(int visibility) {
+    private void setVisibility(int visibility) {
         this.visibility = visibility;
     }
 
@@ -102,7 +102,7 @@ public class PinSpec implements Serializable {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    private void setPriority(int priority) {
         this.priority = priority;
     }
 
@@ -110,7 +110,7 @@ public class PinSpec implements Serializable {
         return persistent;
     }
 
-    public void setPersistent(boolean persistent) {
+    private void setPersistent(boolean persistent) {
         this.persistent = persistent;
     }
 
@@ -118,12 +118,12 @@ public class PinSpec implements Serializable {
         return showActions;
     }
 
-    public void setShowActions(boolean showActions) {
+    private void setShowActions(boolean showActions) {
         this.showActions = showActions;
     }
 
     @NonNull
-    public ContentValues toContentValues() {
+    ContentValues toContentValues() {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(PinDatabase.COLUMN_TITLE, getTitle());
@@ -156,16 +156,5 @@ public class PinSpec implements Serializable {
                 ", persistent=" + persistent +
                 ", showActions=" + showActions +
                 '}';
-    }
-
-    /**
-     * This method reads a pin from a cursor
-     *
-     * @param cursor to read from
-     * @return the read pin
-     */
-    @NonNull
-    public PinSpec fromCursor(@NonNull Cursor cursor) {
-        return new PinSpec(cursor);
     }
 }

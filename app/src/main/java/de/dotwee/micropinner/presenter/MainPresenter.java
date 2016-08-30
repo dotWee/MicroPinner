@@ -9,7 +9,7 @@ import de.dotwee.micropinner.database.PinSpec;
  * Created by Lukas Wolfsteiner on 29.10.2015.
  */
 public interface MainPresenter {
-    String LOG_TAG = "MainPresenter";
+    String TAG = MainPresenter.class.getSimpleName();
 
     /**
      * This method handles a long-click on a switch

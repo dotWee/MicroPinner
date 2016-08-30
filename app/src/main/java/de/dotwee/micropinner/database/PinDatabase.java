@@ -47,8 +47,7 @@ public class PinDatabase extends SQLiteOpenHelper {
 
             + COLUMN_PERSISTENT + " boolean not null, "
             + COLUMN_SHOW_ACTIONS + " boolean not null);";
-    private static PinDatabase instance = null;
-    private static String[] columns = {
+    private static final String[] columns = {
             PinDatabase.COLUMN_ID,
             PinDatabase.COLUMN_TITLE,
             PinDatabase.COLUMN_CONTENT,
@@ -57,14 +56,11 @@ public class PinDatabase extends SQLiteOpenHelper {
             PinDatabase.COLUMN_PERSISTENT,
             PinDatabase.COLUMN_SHOW_ACTIONS
     };
-    private SQLiteDatabase database;
-    private Context context;
+    private static PinDatabase instance = null;
+    private final SQLiteDatabase database;
 
     private PinDatabase(@NonNull Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
-        this.context = context;
-
         database = getWritableDatabase();
     }
 
@@ -93,25 +89,23 @@ public class PinDatabase extends SQLiteOpenHelper {
      * This method decides whether a new pin should be created or updated in the database
      *
      * @param pin the pin to write
-     * @return the written pin
      */
-    @NonNull
-    public PinSpec writePin(@NonNull PinSpec pin) {
+    public void writePin(@NonNull PinSpec pin) {
         Log.i(TAG, "Write pin called for pin " + pin.toString());
 
         if (pin.getId() == -1) {
-            return createPin(pin);
-        } else return updatePin(pin);
+            createPin(pin);
+        } else {
+            updatePin(pin);
+        }
     }
 
     /**
      * This method creates a pin within the database and gives it a unique id
      *
      * @param pin the pin to create
-     * @return the created pin with its id
      */
-    @NonNull
-    private PinSpec createPin(@NonNull PinSpec pin) {
+    private void createPin(@NonNull PinSpec pin) {
         ContentValues contentValues = pin.toContentValues();
 
         if (BuildConfig.DEBUG) {
@@ -122,17 +116,14 @@ public class PinDatabase extends SQLiteOpenHelper {
         pin.setId(id);
 
         onDatabaseAction();
-        return pin;
     }
 
     /**
      * This method updates a pin in the database without changing its id
      *
      * @param pin the pin to update
-     * @return the updated pin
      */
-    @NonNull
-    private PinSpec updatePin(@NonNull PinSpec pin) {
+    private void updatePin(@NonNull PinSpec pin) {
         ContentValues contentValues = pin.toContentValues();
         long id = pin.getId();
 
@@ -146,17 +137,14 @@ public class PinDatabase extends SQLiteOpenHelper {
         pin.setId(id);
 
         onDatabaseAction();
-        return pin;
     }
 
     /**
      * This method deletes a pin from the database
      *
      * @param pin to delete
-     * @return deleted pin
      */
-    @NonNull
-    public PinSpec deletePin(PinSpec pin) {
+    public void deletePin(PinSpec pin) {
         long id = pin.getId();
 
         String whereClause = PinDatabase.COLUMN_ID + " = ?";
@@ -169,7 +157,6 @@ public class PinDatabase extends SQLiteOpenHelper {
         pin.setId(-1);
 
         onDatabaseAction();
-        return pin;
     }
 
     public void deleteAll() {

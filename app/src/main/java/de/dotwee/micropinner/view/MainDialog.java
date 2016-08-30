@@ -31,8 +31,7 @@ import de.dotwee.micropinner.view.custom.DialogHeaderView;
  * Created by Lukas Wolfsteiner on 29.10.2015.
  */
 public class MainDialog extends AppCompatActivity implements MainPresenter.Data {
-
-    private static final String LOG_TAG = "MainDialog";
+    private static final String TAG = MainDialog.class.getSimpleName();
 
     /**
      * This method checks if the user's device is a tablet, depending on the official resource {@link

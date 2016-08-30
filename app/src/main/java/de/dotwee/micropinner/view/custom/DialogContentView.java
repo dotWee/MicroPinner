@@ -32,7 +32,6 @@ public class DialogContentView extends AbstractDialogView
 
     @Override
     public void init() {
-        checkIfPresenterNull();
 
         inflate(getContext(), R.layout.dialog_main_content, this);
 
@@ -73,6 +72,7 @@ public class DialogContentView extends AbstractDialogView
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        checkIfPresenterNull();
 
         switch (compoundButton.getId()) {
 

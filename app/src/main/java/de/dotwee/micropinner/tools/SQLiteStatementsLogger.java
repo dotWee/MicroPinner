@@ -39,12 +39,14 @@ public class SQLiteStatementsLogger {
                 sql.append((i > 0) ? ",?" : "?");
             }
         } else {
-            sql.append(nullColumnHack + ") VALUES (NULL");
+            sql.append(nullColumnHack).append(") VALUES (NULL");
         }
         sql.append(')');
         sql.append(". (");
-        for (Object arg : bindArgs) {
-            sql.append(String.valueOf(arg)).append(",");
+        if (bindArgs != null) {
+            for (Object arg : bindArgs) {
+                sql.append(String.valueOf(arg)).append(",");
+            }
         }
         sql.deleteCharAt(sql.length() - 1).append(')');
         Log.d(TAG, sql.toString());
@@ -94,7 +96,7 @@ public class SQLiteStatementsLogger {
     public static void logDelete(String table, String whereClause, String[] whereArgs) {
         StringBuilder sql = new StringBuilder("DELETE FROM " + table);
         if (!TextUtils.isEmpty(whereClause)) {
-            sql.append(" WHERE " + whereClause);
+            sql.append(" WHERE ").append(whereClause);
             sql.append(". (");
             for (Object arg : whereArgs) {
                 sql.append(String.valueOf(arg)).append(",");

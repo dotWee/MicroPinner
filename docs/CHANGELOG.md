@@ -117,9 +117,10 @@
     - Improved and updated translations
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.9.2/release_v1.9.2.apk)
 
-#### [Version: 2.0.0 / ]
+#### [Version: 2.0.0 / 01st September 2016]
 - sha1 checksum: 
 - changes:
-    - Launcher icons shows now amount of pins as badge (only if launcher supports this function)
-    
+    - Pins are now safe between updates, using a sql database as persist-method
+    - Built with latest build-tools and updated support package    
+    - Fully compatible to Android Nougat (sdk24)
 - download: 

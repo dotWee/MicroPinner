@@ -123,4 +123,4 @@
     - Pins are now safe between updates, using a sql database as persist-method
     - Built with latest build-tools and updated support package    
     - Fully compatible to Android Nougat (sdk24)
-- download: 
+- download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v2.0.0/release_v2.0.0.apk)

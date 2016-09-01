@@ -118,7 +118,7 @@
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v1.9.2/release_v1.9.2.apk)
 
 #### [Version: 2.0.0 / 01st September 2016]
-- sha1 checksum: 
+- sha1 checksum: 610fb370764ea2106402a6b548d4474dc3610b54
 - changes:
     - Pins are now safe between updates, using a sql database as persist-method
     - Built with latest build-tools and updated support package    

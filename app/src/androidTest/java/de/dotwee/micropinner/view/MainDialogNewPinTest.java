@@ -2,7 +2,6 @@ package de.dotwee.micropinner.view;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.widget.Switch;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -121,11 +120,12 @@ public class MainDialogNewPinTest {
      */
     @Test
     public void testExpandMechanismThroughSwitch() throws Exception {
-        getPreferencesHandler(activityTestRule).setAdvancedUse(false);
-        recreateActivity(activityTestRule);
 
-        // perform click on the advanced switch
         onView(withId(R.id.switchAdvanced)).perform(click());
+        if (getPreferencesHandler(activityTestRule).isAdvancedUsed()) {
+
+            onView(withId(R.id.switchAdvanced)).perform(click());
+        } else recreateActivity(activityTestRule);
 
         // CheckBoxes should be not visible
         onView(withId(R.id.checkBoxPersistentPin)).check(matches(not(isDisplayed())));
@@ -138,11 +138,12 @@ public class MainDialogNewPinTest {
      */
     @Test
     public void testExpandMechanismThroughHeader() throws Exception {
-        getPreferencesHandler(activityTestRule).setAdvancedUse(false);
-        recreateActivity(activityTestRule);
 
-        // perform click on the advanced switch
         onView(withId(R.id.linearLayoutHeader)).perform(click());
+        if (getPreferencesHandler(activityTestRule).isAdvancedUsed()) {
+
+            onView(withId(R.id.linearLayoutHeader)).perform(click());
+        } else recreateActivity(activityTestRule);
 
         // CheckBoxes should be not visible
         onView(withId(R.id.checkBoxPersistentPin)).check(matches(not(isDisplayed())));
@@ -190,7 +191,7 @@ public class MainDialogNewPinTest {
                 matches(withSpinnerText(R.string.visibility_private)));
 
         // expand layout
-        if (!((Switch) activityTestRule.getActivity().findViewById(R.id.switchAdvanced)).isChecked()) {
+        if (!getPreferencesHandler(activityTestRule).isAdvancedUsed()) {
             onView(withId(R.id.switchAdvanced)).perform(click()).check(matches(isChecked()));
         }
 

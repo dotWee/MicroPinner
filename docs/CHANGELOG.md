@@ -133,3 +133,8 @@
     - Target latest Android Version (7.1.1 / sdk25)
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v2.0.1/release_v2.0.1.apk)
 
+#### [Version: 2.1.0 / ]
+- sha1 checksum:
+- changes:
+    - Use internal DayNight-Theme changer instead of own implementation
+- download:

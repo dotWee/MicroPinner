@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 public class PreferencesHandler {
     private static final String PREF_FIRST_USE = "pref_firstuse";
     private static final String PREF_ADVANCED_USE = "pref_advanceduse";
-    private static final String PREF_LIGHT_THEME = "pref_lighttheme";
     private static final String PREF_SHOW_NOTIFICATION_ACTIONS = "pref_shownotificationactions";
 
     private final static String TAG = PreferencesHandler.class.getSimpleName();
@@ -48,14 +47,6 @@ public class PreferencesHandler {
 
     public void setAdvancedUse(boolean b) {
         applyPreference(PREF_ADVANCED_USE, b);
-    }
-
-    public boolean isLightThemeEnabled() {
-        return preferences.getBoolean(PREF_LIGHT_THEME, true);
-    }
-
-    public void setLightThemeEnabled(boolean b) {
-        applyPreference(PREF_LIGHT_THEME, b);
     }
 
     public boolean isNotificationActionsEnabled() {

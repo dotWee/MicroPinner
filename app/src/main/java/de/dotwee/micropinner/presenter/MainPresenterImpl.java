@@ -65,11 +65,7 @@ public class MainPresenterImpl implements MainPresenter {
      */
     @Override
     public void onSwitchHold() {
-        boolean previous = preferencesHandler.isLightThemeEnabled();
-        preferencesHandler.setLightThemeEnabled(!previous);
-
-        // recreate activity to apply theme
-        activity.recreate();
+        Toast.makeText(activity, "Theme will change automatically by day and night.", Toast.LENGTH_SHORT).show();
     }
 
     /**

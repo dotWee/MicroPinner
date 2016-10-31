@@ -42,19 +42,6 @@ public class PreferencesHandlerTest {
     }
 
     @Test
-    public void testIsLightThemeEnabled() throws Exception {
-
-        // should be enabled first
-        assertTrue(preferencesHandler.isLightThemeEnabled());
-
-        // tell preference handler to disable light theme
-        preferencesHandler.setLightThemeEnabled(false);
-
-        // should be disabled now
-        assertFalse(preferencesHandler.isLightThemeEnabled());
-    }
-
-    @Test
     public void testIsFirstUse() throws Exception {
 
         // should be enabled since preferences has been cleared

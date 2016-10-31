@@ -2,9 +2,7 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/DialogContent.Table">
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <TableRow style="@style/DialogView">
 
         <TextView
             style="@style/DialogText.Description"
@@ -17,9 +15,7 @@
             android:text="@string/input_description_content" />
     </TableRow>
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <TableRow style="@style/DialogView">
 
         <EditText
             android:id="@+id/editTextTitle"
@@ -35,9 +31,7 @@
     </TableRow>
 
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <TableRow style="@style/DialogView">
 
         <TextView
             style="@style/DialogText.Description"
@@ -50,9 +44,7 @@
             android:text="@string/input_description_priority" />
     </TableRow>
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <TableRow style="@style/DialogView">
 
         <Spinner
             android:id="@+id/spinnerVisibility"
@@ -67,9 +59,7 @@
             android:layout_column="1" />
     </TableRow>
 
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <TableRow style="@style/DialogView">
 
         <CheckBox
             android:id="@+id/checkBoxPersistentPin"
@@ -80,9 +70,7 @@
 
     </TableRow>
 
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <TableRow style="@style/DialogView">
 
         <CheckBox
             android:id="@+id/checkBoxShowActions"

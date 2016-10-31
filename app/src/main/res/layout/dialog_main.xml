@@ -7,17 +7,14 @@
 
     <de.dotwee.micropinner.view.custom.DialogHeaderView
         android:id="@+id/dialogHeaderView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        style="@style/DialogView" />
 
     <de.dotwee.micropinner.view.custom.DialogContentView
         android:id="@+id/dialogContentView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        style="@style/DialogView" />
 
     <de.dotwee.micropinner.view.custom.DialogFooterView
         android:id="@+id/dialogFooterView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        style="@style/DialogView" />
 
 </LinearLayout>

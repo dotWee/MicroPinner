@@ -3,7 +3,6 @@ package de.dotwee.micropinner.database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
@@ -13,7 +12,11 @@ import android.util.Log;
 import java.util.Map;
 
 import de.dotwee.micropinner.BuildConfig;
-import de.dotwee.micropinner.tools.SQLiteStatementsLogger;
+
+import static android.database.DatabaseUtils.queryNumEntries;
+import static de.dotwee.micropinner.tools.SQLiteStatementsLogger.logDelete;
+import static de.dotwee.micropinner.tools.SQLiteStatementsLogger.logInsertWithOnConflict;
+import static de.dotwee.micropinner.tools.SQLiteStatementsLogger.logUpdate;
 
 /**
  * Created by lukas on 10.08.2016.
@@ -109,7 +112,7 @@ public class PinDatabase extends SQLiteOpenHelper {
         ContentValues contentValues = pin.toContentValues();
 
         if (BuildConfig.DEBUG) {
-            SQLiteStatementsLogger.logInsertWithOnConflict(PinDatabase.TABLE_PINS, null, contentValues, SQLiteDatabase.CONFLICT_NONE);
+            logInsertWithOnConflict(PinDatabase.TABLE_PINS, null, contentValues, SQLiteDatabase.CONFLICT_NONE);
         }
         long id = database.insert(PinDatabase.TABLE_PINS, null, contentValues);
         Log.i(TAG, "Created new pin with id " + id);
@@ -130,7 +133,7 @@ public class PinDatabase extends SQLiteOpenHelper {
         String whereClause = PinDatabase.COLUMN_ID + " = ?";
         String[] whereArgs = new String[]{String.valueOf(id)};
         if (BuildConfig.DEBUG) {
-            SQLiteStatementsLogger.logUpdate(PinDatabase.TABLE_PINS, contentValues, whereClause, whereArgs);
+            logUpdate(PinDatabase.TABLE_PINS, contentValues, whereClause, whereArgs);
         }
         database.update(PinDatabase.TABLE_PINS, contentValues, whereClause, whereArgs);
         Log.i(TAG, "Updated new pin with id " + id);
@@ -150,7 +153,7 @@ public class PinDatabase extends SQLiteOpenHelper {
         String whereClause = PinDatabase.COLUMN_ID + " = ?";
         String[] whereArgs = new String[]{String.valueOf(id)};
         if (BuildConfig.DEBUG) {
-            SQLiteStatementsLogger.logDelete(PinDatabase.TABLE_PINS, whereClause, whereArgs);
+            logDelete(PinDatabase.TABLE_PINS, whereClause, whereArgs);
         }
         boolean success = database.delete(PinDatabase.TABLE_PINS, whereClause, whereArgs) > 0;
         Log.i(TAG, "Deleting pin with id " + id + "; success " + success);
@@ -170,7 +173,7 @@ public class PinDatabase extends SQLiteOpenHelper {
      * @return the amount of entries
      */
     public long count() {
-        return DatabaseUtils.queryNumEntries(database, PinDatabase.TABLE_PINS);
+        return queryNumEntries(database, PinDatabase.TABLE_PINS);
     }
 
     /**

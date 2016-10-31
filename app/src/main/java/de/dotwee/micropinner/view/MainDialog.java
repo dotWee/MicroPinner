@@ -23,7 +23,6 @@ import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.presenter.MainPresenter;
 import de.dotwee.micropinner.presenter.MainPresenterImpl;
 import de.dotwee.micropinner.receiver.OnBootReceiver;
-import de.dotwee.micropinner.tools.PreferencesHandler;
 import de.dotwee.micropinner.view.custom.DialogContentView;
 import de.dotwee.micropinner.view.custom.DialogFooterView;
 import de.dotwee.micropinner.view.custom.DialogHeaderView;
@@ -55,7 +54,6 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        PreferencesHandler preferencesHandler = PreferencesHandler.getInstance(this);
         this.setContentView(R.layout.dialog_main);
 
         MainPresenter mainPresenter = new MainPresenterImpl(this, getIntent());

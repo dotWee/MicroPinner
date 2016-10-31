@@ -137,4 +137,5 @@
 - sha1 checksum:
 - changes:
     - Use internal DayNight-Theme changer instead of own implementation
+    - Some code-cleanup and refactor
 - download:

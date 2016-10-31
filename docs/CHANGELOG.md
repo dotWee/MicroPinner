@@ -124,3 +124,12 @@
     - Built with latest build-tools and updated support package    
     - Fully compatible to Android Nougat (sdk24)
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v2.0.0/release_v2.0.0.apk)
+
+#### [Version: 2.0.1 / 31st October 2016]
+- sha1 checksum: e9a49b12d715267e46fff999dd1a93228f6bae31
+- changes:
+    - Built with latest build-tools and updated support package
+    - Updated resources and minor layout adjustments
+    - Target latest Android Version (7.1.1 / sdk25)
+- download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v2.0.1/release_v2.0.1.apk)
+

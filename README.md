@@ -1,7 +1,7 @@
 # <img src="gp-res/playstore_icon.png" height="50px"/> MicroPinner
 
 MicroPinner is a lightweight dialog-only application, that turns your statusbar into a pingboard. (You can basically create your own notifications)
-You can also customize the notifications title and content, as well as its priority and visibility (Android 5 or greater only).
+You can customize the notifications title and content, as well as its priority and visibility (Works on Android 5+ only).
 
 [![Build Status](https://travis-ci.org/dotWee/MicroPinner.svg?branch=master)](https://travis-ci.org/dotWee/MicroPinner)
 [![Issues](https://img.shields.io/github/issues/dotWee/MicroPinner.svg)](https://github.com/dotWee/MicroPinner/issues)
@@ -12,7 +12,6 @@ You can also customize the notifications title and content, as well as its prior
   <img alt="Get it on Google Play"
        src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
 </a>
-
 <a href="https://f-droid.org/repository/browse/?fdid=de.dotwee.micropinner">
   <img alt="Get it on F-Droid"
        src="https://cloud.githubusercontent.com/assets/12447257/8024903/ce8dca32-0d44-11e5-95b0-e97d1d027351.png" />
@@ -21,18 +20,21 @@ You can also customize the notifications title and content, as well as its prior
 ## Features
 
 <b>The application itself</b>
-+ consumes no memory in the background - no background-services, no background-processes 
-+ has no impact on your battery - it uses only native functions of Android
-+ is compatible down to Android Jelly Bean
+
++ consumes no memory in the background (no background-services, no background-processes)
++ has no impact on your battery as it uses only native functions of Android
++ is compatible down to Android 4.1 Jelly Bean (sdk16)
 + weights less than 850kb (Version v2.0.1)
-+ is fully open source!  
++ is fully open source!
 
 <b>Design & UI</b>
-MicroPinner follows the official [Material Design](https://www.google.com/design/spec/components/dialogs.html#dialogs-specs) specs for dialogs.
+
++ MicroPinner follows the official [Material Design](https://www.google.com/design/spec/components/dialogs.html#dialogs-specs) guidelines for dialogs.
 
 <b>Customization</b>
-You can customize the notifications title and content text as well as its system wide priority (choose between *normal*, *minimal*, *low* and *high*) and visibility (choose between *public*, *private* and *secret*) if you're running Android Lollipop and up. 
-Created pins are restored on reboot. Delete them by simply swiping it away. 
+
++ You can customize the notifications title and content text, as well as its system wide priority (choose between *normal*, *minimal*, *low* and *high*) and visibility (choose between *public*, *private* and *secret*) if you're running Android Lollipop and up.
++ Created pins are restored on reboot. Delete them by simply swiping it away. 
 
 ## Screenshots
 

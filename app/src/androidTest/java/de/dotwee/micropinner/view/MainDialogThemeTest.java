@@ -41,7 +41,7 @@ public class MainDialogThemeTest {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @ColorInt
-    static int getAccentColor(@NonNull ActivityTestRule<MainDialog> activityTestRule, boolean light) {
+    private static int getAccentColor(@NonNull ActivityTestRule<MainDialog> activityTestRule, boolean light) {
         Configuration configuration = new Configuration();
         configuration.uiMode = light ? Configuration.UI_MODE_NIGHT_NO : Configuration.UI_MODE_NIGHT_YES;
 
@@ -50,7 +50,7 @@ public class MainDialogThemeTest {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @ColorInt
-    static int getBackgroundColor(@NonNull ActivityTestRule<MainDialog> activityTestRule, boolean light) {
+    private static int getBackgroundColor(@NonNull ActivityTestRule<MainDialog> activityTestRule, boolean light) {
         Configuration configuration = new Configuration();
         configuration.uiMode = light ? Configuration.UI_MODE_NIGHT_NO : Configuration.UI_MODE_NIGHT_YES;
 

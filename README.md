@@ -24,7 +24,7 @@ You can also customize the notifications title and content, as well as its prior
 + consumes no memory in the background - no background-services, no background-processes 
 + has no impact on your battery - it uses only native functions of Android
 + is compatible down to Android Jelly Bean
-+ weights less than 700kb (Version v1.8)
++ weights less than 850kb (Version v2.0.1)
 + is fully open source!  
 
 <b>Design & UI</b>

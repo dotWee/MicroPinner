@@ -15,15 +15,15 @@ import de.dotwee.micropinner.R;
 public class DialogFooterView extends AbstractDialogView implements View.OnClickListener {
     private static final String TAG = DialogFooterView.class.getSimpleName();
 
-    public DialogFooterView(Context context) {
+    public DialogFooterView(@NonNull Context context) {
         super(context);
     }
 
-    public DialogFooterView(Context context, AttributeSet attrs) {
+    public DialogFooterView(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public DialogFooterView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DialogFooterView(@NonNull Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

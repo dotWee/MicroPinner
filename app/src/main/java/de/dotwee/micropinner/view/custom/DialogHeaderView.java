@@ -1,6 +1,7 @@
 package de.dotwee.micropinner.view.custom;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -18,15 +19,15 @@ public class DialogHeaderView extends AbstractDialogView
     static final String TAG = DialogHeaderView.class.getSimpleName();
     private Switch switchAdvanced;
 
-    public DialogHeaderView(Context context) {
+    public DialogHeaderView(@NonNull Context context) {
         super(context);
     }
 
-    public DialogHeaderView(Context context, AttributeSet attrs) {
+    public DialogHeaderView(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public DialogHeaderView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DialogHeaderView(@NonNull Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

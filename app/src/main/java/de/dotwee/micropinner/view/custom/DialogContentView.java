@@ -1,6 +1,7 @@
 package de.dotwee.micropinner.view.custom;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -18,15 +19,15 @@ public class DialogContentView extends AbstractDialogView
     private Spinner spinnerVisibility;
     private Spinner spinnerPriority;
 
-    public DialogContentView(Context context) {
+    public DialogContentView(@NonNull Context context) {
         super(context);
     }
 
-    public DialogContentView(Context context, AttributeSet attrs) {
+    public DialogContentView(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public DialogContentView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DialogContentView(@NonNull Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

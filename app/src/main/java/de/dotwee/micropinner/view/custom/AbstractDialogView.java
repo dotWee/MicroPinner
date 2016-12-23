@@ -14,17 +14,17 @@ public abstract class AbstractDialogView extends FrameLayout {
     static final String TAG = AbstractDialogView.class.getSimpleName();
     MainPresenter mainPresenter = null;
 
-    public AbstractDialogView(Context context) {
+    public AbstractDialogView(@NonNull Context context) {
         super(context);
         init();
     }
 
-    public AbstractDialogView(Context context, AttributeSet attrs) {
+    public AbstractDialogView(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public AbstractDialogView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AbstractDialogView(@NonNull Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }

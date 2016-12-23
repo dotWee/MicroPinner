@@ -68,7 +68,7 @@ public interface MainPresenter {
     /**
      * This method notifies all views about the parent pin.
      */
-    void notifyAboutParentPin();
+    void onParentPin();
 
     /**
      * This method handles the visibility of an instance
@@ -76,7 +76,7 @@ public interface MainPresenter {
      *
      * @param pin the instance to handle
      */
-    void handleParentVisibility(@NonNull PinSpec pin);
+    void onParentPinVisibility(@NonNull PinSpec pin);
 
     /**
      * This method handles the visibility of an instance
@@ -84,7 +84,7 @@ public interface MainPresenter {
      *
      * @param pin the instance to handle
      */
-    void handleParentPriority(@NonNull PinSpec pin);
+    void onParentPinPriority(@NonNull PinSpec pin);
 
     /**
      * This method handles the visibility of an instance
@@ -92,7 +92,7 @@ public interface MainPresenter {
      *
      * @param pin the instance to handle
      */
-    void handleParentTitle(@NonNull PinSpec pin);
+    void onParentPinTitle(@NonNull PinSpec pin);
 
     /**
      * This method handles the visibility of an instance
@@ -100,7 +100,7 @@ public interface MainPresenter {
      *
      * @param pin the instance to handle
      */
-    void handleParentContent(@NonNull PinSpec pin);
+    void onParentPinContent(@NonNull PinSpec pin);
 
     /**
      * Created by Lukas Wolfsteiner on 29.10.2015.

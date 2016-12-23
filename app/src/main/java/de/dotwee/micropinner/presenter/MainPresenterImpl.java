@@ -130,7 +130,7 @@ public class MainPresenterImpl implements MainPresenter {
         this.onViewExpand(preferencesHandler.isAdvancedUsed());
 
         // notify about provided intent
-        notifyAboutParentPin();
+        onParentPin();
     }
 
     /**
@@ -218,7 +218,7 @@ public class MainPresenterImpl implements MainPresenter {
      * This method notifies all layouts about the parent pin.
      */
     @Override
-    public void notifyAboutParentPin() {
+    public void onParentPin() {
         boolean state = hasParentPin();
 
         TextView textViewTitle = (TextView) activity.findViewById(R.id.dialogTitle);
@@ -233,11 +233,11 @@ public class MainPresenterImpl implements MainPresenter {
 
         if (state) {
 
-            handleParentVisibility(parentPin);
-            handleParentPriority(parentPin);
+            onParentPinVisibility(parentPin);
+            onParentPinPriority(parentPin);
 
-            handleParentTitle(parentPin);
-            handleParentContent(parentPin);
+            onParentPinTitle(parentPin);
+            onParentPinContent(parentPin);
 
             CheckBox checkBoxPersistent = (CheckBox) activity.findViewById(R.id.checkBoxPersistentPin);
             if (checkBoxPersistent != null) {
@@ -248,7 +248,7 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void handleParentVisibility(@NonNull PinSpec pin) {
+    public void onParentPinVisibility(@NonNull PinSpec pin) {
 
         Spinner spinnerVisibility = (Spinner) activity.findViewById(R.id.spinnerVisibility);
         if (spinnerVisibility != null) {
@@ -277,7 +277,7 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void handleParentPriority(@NonNull PinSpec pin) {
+    public void onParentPinPriority(@NonNull PinSpec pin) {
 
         Spinner spinnerPriority = (Spinner) activity.findViewById(R.id.spinnerPriority);
         if (spinnerPriority != null) {
@@ -310,7 +310,7 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void handleParentTitle(@NonNull PinSpec pin) {
+    public void onParentPinTitle(@NonNull PinSpec pin) {
 
         EditText editTextTitle = (EditText) activity.findViewById(R.id.editTextTitle);
         if (editTextTitle != null) {
@@ -320,7 +320,7 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void handleParentContent(@NonNull PinSpec pin) {
+    public void onParentPinContent(@NonNull PinSpec pin) {
 
         EditText editTextContent = (EditText) activity.findViewById(R.id.editTextContent);
         if (editTextContent != null) {

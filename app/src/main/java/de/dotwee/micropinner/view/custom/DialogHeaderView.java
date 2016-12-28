@@ -2,11 +2,13 @@ package de.dotwee.micropinner.view.custom;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
+import de.dotwee.micropinner.BuildConfig;
 import de.dotwee.micropinner.R;
 
 /**
@@ -15,7 +17,7 @@ import de.dotwee.micropinner.R;
 public class DialogHeaderView extends AbstractDialogView
         implements Switch.OnCheckedChangeListener, View.OnClickListener, View.OnLongClickListener {
 
-    static final String TAG = DialogHeaderView.class.getSimpleName();
+    private static final String TAG = DialogHeaderView.class.getSimpleName();
     private Switch switchAdvanced;
 
     public DialogHeaderView(Context context) {
@@ -32,6 +34,8 @@ public class DialogHeaderView extends AbstractDialogView
 
     @Override
     public void init() {
+        super.init();
+
         inflate(getContext(), R.layout.dialog_main_head, this);
 
         LinearLayout linearLayoutHeader = (LinearLayout) findViewById(R.id.linearLayoutHeader);
@@ -61,6 +65,12 @@ public class DialogHeaderView extends AbstractDialogView
             case R.id.linearLayoutHeader:
                 switchAdvanced.performClick();
                 break;
+
+            default:
+                if (BuildConfig.DEBUG) {
+                    Log.w(TAG, "Registered click on unknown view");
+                }
+                break;
         }
     }
 
@@ -83,7 +93,12 @@ public class DialogHeaderView extends AbstractDialogView
             case R.id.linearLayoutHeader:
                 mainPresenter.onSwitchHold();
                 return true;
+
+            default:
+                if (BuildConfig.DEBUG) {
+                    Log.w(TAG, "Registered long-click on unknown view");
+                }
+                return false;
         }
-        return false;
     }
 }

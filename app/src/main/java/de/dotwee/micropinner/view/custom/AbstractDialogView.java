@@ -3,8 +3,10 @@ package de.dotwee.micropinner.view.custom;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.FrameLayout;
 
+import de.dotwee.micropinner.BuildConfig;
 import de.dotwee.micropinner.presenter.MainPresenter;
 
 /**
@@ -33,7 +35,11 @@ public abstract class AbstractDialogView extends FrameLayout {
         this.mainPresenter = mainPresenter;
     }
 
-    protected abstract void init();
+    public void init() {
+        if (BuildConfig.DEBUG) {
+            Log.i(super.getClass().getSimpleName(), "New instance created");
+        }
+    }
 
     final void checkIfPresenterNull() {
         if (mainPresenter == null) {

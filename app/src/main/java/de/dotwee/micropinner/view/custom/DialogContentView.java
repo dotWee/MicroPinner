@@ -32,6 +32,7 @@ public class DialogContentView extends AbstractDialogView
 
     @Override
     public void init() {
+        super.init();
 
         inflate(getContext(), R.layout.dialog_main_content, this);
 

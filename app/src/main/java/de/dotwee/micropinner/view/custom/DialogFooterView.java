@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import de.dotwee.micropinner.BuildConfig;
 import de.dotwee.micropinner.R;
 
 /**
@@ -29,6 +30,8 @@ public class DialogFooterView extends AbstractDialogView implements View.OnClick
 
     @Override
     public void init() {
+        super.init();
+
         inflate(getContext(), R.layout.dialog_main_footer, this);
 
         Button buttonPin = (Button) this.findViewById(R.id.buttonPin);
@@ -57,7 +60,9 @@ public class DialogFooterView extends AbstractDialogView implements View.OnClick
                 break;
 
             default:
-                Log.w(TAG, "Registered click on unknown view");
+                if (BuildConfig.DEBUG) {
+                    Log.w(TAG, "Registered click on unknown view");
+                }
                 break;
         }
     }

@@ -14,7 +14,7 @@ android:
   components:
     - tools
     - android-25
-    - build-tools-25.0.0
+    - build-tools-25.0.2
     - extra-android-support
     - extra-android-m2repository
     - sys-img-armeabi-v7a-android-21

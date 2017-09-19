@@ -34,10 +34,10 @@ public class DialogFooterView extends AbstractDialogView implements View.OnClick
 
         inflate(getContext(), R.layout.dialog_main_footer, this);
 
-        Button buttonPin = (Button) this.findViewById(R.id.buttonPin);
+        Button buttonPin = this.findViewById(R.id.buttonPin);
         buttonPin.setOnClickListener(this);
 
-        Button buttonCancel = (Button) this.findViewById(R.id.buttonCancel);
+        Button buttonCancel = this.findViewById(R.id.buttonCancel);
         buttonCancel.setOnClickListener(this);
     }
 

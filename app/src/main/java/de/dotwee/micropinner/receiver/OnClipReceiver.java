@@ -39,6 +39,7 @@ public class OnClipReceiver extends BroadcastReceiver {
 
             ClipboardManager clipboard =
                     (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            //noinspection ConstantConditions
             clipboard.setPrimaryClip(ClipData.newPlainText(null, pin.toClipString()));
 
             Toast.makeText(context, context.getString(R.string.message_clipped_pin), Toast.LENGTH_SHORT)

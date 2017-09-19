@@ -38,11 +38,11 @@ public class DialogHeaderView extends AbstractDialogView
 
         inflate(getContext(), R.layout.dialog_main_head, this);
 
-        LinearLayout linearLayoutHeader = (LinearLayout) findViewById(R.id.linearLayoutHeader);
+        LinearLayout linearLayoutHeader = findViewById(R.id.linearLayoutHeader);
         linearLayoutHeader.setOnLongClickListener(this);
         linearLayoutHeader.setOnClickListener(this);
 
-        switchAdvanced = (Switch) findViewById(R.id.switchAdvanced);
+        switchAdvanced = findViewById(R.id.switchAdvanced);
         switchAdvanced.setOnCheckedChangeListener(this);
         switchAdvanced.setOnLongClickListener(this);
     }

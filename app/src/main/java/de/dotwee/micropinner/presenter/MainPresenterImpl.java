@@ -113,7 +113,7 @@ public class MainPresenterImpl implements MainPresenter {
         // restore the switch's state if advanced is enabled
         if (preferencesHandler.isAdvancedUsed()) {
 
-            Switch advancedSwitch = (Switch) activity.findViewById(R.id.switchAdvanced);
+            Switch advancedSwitch = activity.findViewById(R.id.switchAdvanced);
             if (advancedSwitch != null) {
 
                 advancedSwitch.setChecked(true);
@@ -122,7 +122,7 @@ public class MainPresenterImpl implements MainPresenter {
 
         // restore show-actions checkbox
         if (preferencesHandler.isNotificationActionsEnabled()) {
-            CheckBox checkBox = (CheckBox) activity.findViewById(R.id.checkBoxShowActions);
+            CheckBox checkBox = activity.findViewById(R.id.checkBoxShowActions);
             checkBox.setChecked(true);
         }
 
@@ -138,7 +138,7 @@ public class MainPresenterImpl implements MainPresenter {
      */
     @Override
     public void onShowActions() {
-        CheckBox checkBox = (CheckBox) activity.findViewById(R.id.checkBoxShowActions);
+        CheckBox checkBox = activity.findViewById(R.id.checkBoxShowActions);
         preferencesHandler.setNotificationActionsEnabled(checkBox.isChecked());
     }
 
@@ -221,12 +221,12 @@ public class MainPresenterImpl implements MainPresenter {
     public void notifyAboutParentPin() {
         boolean state = hasParentPin();
 
-        TextView textViewTitle = (TextView) activity.findViewById(R.id.dialogTitle);
+        TextView textViewTitle = activity.findViewById(R.id.dialogTitle);
         if (textViewTitle != null) {
             textViewTitle.setText(state ? R.string.edit_name : R.string.app_name);
         }
 
-        Button buttonNegative = (Button) activity.findViewById(R.id.buttonCancel);
+        Button buttonNegative = activity.findViewById(R.id.buttonCancel);
         if (buttonNegative != null) {
             buttonNegative.setText(state ? R.string.dialog_action_delete : R.string.dialog_action_cancel);
         }
@@ -239,7 +239,7 @@ public class MainPresenterImpl implements MainPresenter {
             handleParentTitle(parentPin);
             handleParentContent(parentPin);
 
-            CheckBox checkBoxPersistent = (CheckBox) activity.findViewById(R.id.checkBoxPersistentPin);
+            CheckBox checkBoxPersistent = activity.findViewById(R.id.checkBoxPersistentPin);
             if (checkBoxPersistent != null) {
 
                 checkBoxPersistent.setChecked(parentPin.isPersistent());
@@ -250,7 +250,7 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void handleParentVisibility(@NonNull PinSpec pin) {
 
-        Spinner spinnerVisibility = (Spinner) activity.findViewById(R.id.spinnerVisibility);
+        Spinner spinnerVisibility = activity.findViewById(R.id.spinnerVisibility);
         if (spinnerVisibility != null) {
             int visibilityPosition;
 
@@ -279,7 +279,7 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void handleParentPriority(@NonNull PinSpec pin) {
 
-        Spinner spinnerPriority = (Spinner) activity.findViewById(R.id.spinnerPriority);
+        Spinner spinnerPriority = activity.findViewById(R.id.spinnerPriority);
         if (spinnerPriority != null) {
             int priorityPosition;
 
@@ -312,7 +312,7 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void handleParentTitle(@NonNull PinSpec pin) {
 
-        EditText editTextTitle = (EditText) activity.findViewById(R.id.editTextTitle);
+        EditText editTextTitle = activity.findViewById(R.id.editTextTitle);
         if (editTextTitle != null) {
 
             editTextTitle.setText(pin.getTitle());
@@ -322,7 +322,7 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void handleParentContent(@NonNull PinSpec pin) {
 
-        EditText editTextContent = (EditText) activity.findViewById(R.id.editTextContent);
+        EditText editTextContent = activity.findViewById(R.id.editTextContent);
         if (editTextContent != null) {
 
             editTextContent.setText(pin.getContent());

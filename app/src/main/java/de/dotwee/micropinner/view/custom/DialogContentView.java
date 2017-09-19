@@ -36,10 +36,10 @@ public class DialogContentView extends AbstractDialogView
 
         inflate(getContext(), R.layout.dialog_main_content, this);
 
-        spinnerVisibility = (Spinner) findViewById(R.id.spinnerVisibility);
+        spinnerVisibility = findViewById(R.id.spinnerVisibility);
         setVisibilityAdapter();
 
-        spinnerPriority = (Spinner) findViewById(R.id.spinnerPriority);
+        spinnerPriority = findViewById(R.id.spinnerPriority);
         setPriorityAdapter();
     }
 

@@ -58,13 +58,13 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
 
         MainPresenter mainPresenter = new MainPresenterImpl(this, getIntent());
 
-        DialogHeaderView headerView = (DialogHeaderView) findViewById(R.id.dialogHeaderView);
+        DialogHeaderView headerView = findViewById(R.id.dialogHeaderView);
         headerView.setMainPresenter(mainPresenter);
 
-        DialogContentView contentView = (DialogContentView) findViewById(R.id.dialogContentView);
+        DialogContentView contentView = findViewById(R.id.dialogContentView);
         contentView.setMainPresenter(mainPresenter);
 
-        DialogFooterView footerView = (DialogFooterView) findViewById(R.id.dialogFooterView);
+        DialogFooterView footerView = findViewById(R.id.dialogFooterView);
         footerView.setMainPresenter(mainPresenter);
 
         // restore previous state
@@ -95,7 +95,7 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
      */
     @Override
     public int getVisibility() {
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerVisibility);
+        Spinner spinner = findViewById(R.id.spinnerVisibility);
         if (spinner != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             switch (spinner.getSelectedItemPosition()) {
@@ -120,7 +120,7 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
      */
     @Override
     public int getPriority() {
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerPriority);
+        Spinner spinner = findViewById(R.id.spinnerPriority);
         if (spinner != null) {
 
             switch (spinner.getSelectedItemPosition()) {
@@ -148,7 +148,7 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
      */
     @Override
     public String getPinTitle() {
-        EditText editText = (EditText) findViewById(R.id.editTextTitle);
+        EditText editText = findViewById(R.id.editTextTitle);
         if (editText != null) {
             return editText.getText().toString();
         }
@@ -163,7 +163,7 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
      */
     @Override
     public String getPinContent() {
-        EditText editText = (EditText) findViewById(R.id.editTextContent);
+        EditText editText = findViewById(R.id.editTextContent);
         if (editText != null) {
             return editText.getText().toString();
         }
@@ -178,7 +178,7 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
      */
     @Override
     public boolean isPersistent() {
-        CheckBox checkBox = (CheckBox) findViewById(R.id.checkBoxPersistentPin);
+        CheckBox checkBox = findViewById(R.id.checkBoxPersistentPin);
         return checkBox != null && checkBox.isChecked();
     }
 
@@ -189,7 +189,7 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
      */
     @Override
     public boolean showActions() {
-        CheckBox checkBox = (CheckBox) findViewById(R.id.checkBoxShowActions);
+        CheckBox checkBox = findViewById(R.id.checkBoxShowActions);
         return checkBox != null && checkBox.isChecked();
     }
 }

@@ -12,11 +12,6 @@ android {
         versionName "v2.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        // Enable the experimental Jack build tools.
-        jackOptions {
-            enabled true
-        }
     }
 
     buildTypes {

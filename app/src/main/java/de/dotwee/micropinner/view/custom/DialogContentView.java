@@ -52,8 +52,6 @@ public class DialogContentView extends AbstractDialogView
 
             visibilityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerVisibility.setAdapter(visibilityAdapter);
-
-            spinnerVisibility.setAdapter(visibilityAdapter);
         }
     }
 
@@ -65,8 +63,6 @@ public class DialogContentView extends AbstractDialogView
                             this.getResources().getStringArray(R.array.array_priorities));
 
             priorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerPriority.setAdapter(priorityAdapter);
-
             spinnerPriority.setAdapter(priorityAdapter);
         }
     }

@@ -60,6 +60,10 @@ public class NotificationTools {
         Notification notification = builder.build();
 
         Log.i(TAG, "Send notification with pin id " + pin.getIdAsInt() + " to system");
-        notificationManager.notify(pin.getIdAsInt(), notification);
+        if (notificationManager != null) {
+            notificationManager.notify(pin.getIdAsInt(), notification);
+        } else {
+            Log.w(TAG, "NotificationManager is null! Couldn't send notification!");
+        }
     }
 }

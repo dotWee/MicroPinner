@@ -67,11 +67,6 @@
         <item name="android:stretchColumns">0,1</item>
     </style>
 
-    <style name="DialogContent.List">
-        <item name="android:orientation">vertical</item>
-        <item name="android:paddingBottom">0dp</item>
-    </style>
-
     <style name="DialogText" parent="TextAppearance.AppCompat.Small" />
 
     <style name="DialogText.CheckBox">

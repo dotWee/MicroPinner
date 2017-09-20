@@ -137,5 +137,8 @@
 - sha1 checksum:
 - changes:
     - Use internal DayNight-Theme changer instead of own implementation
+    - Support for Notification Channels (introduced in Android Oreo)
+    - Built with latest build-tools and updated support package  
+    - Target latest Android Version (8.0.0 / sdk26)
     - Some code-cleanup and refactor
 - download:

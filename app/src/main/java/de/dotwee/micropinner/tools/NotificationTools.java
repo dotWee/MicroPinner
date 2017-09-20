@@ -1,10 +1,13 @@
 package de.dotwee.micropinner.tools;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -20,6 +23,8 @@ import de.dotwee.micropinner.view.MainDialog;
  */
 public class NotificationTools {
     public final static String EXTRA_INTENT = "IAMAPIN";
+
+    private static final String CHANNEL_NAME = "pin_channel";
     private static final String TAG = NotificationTools.class.getSimpleName();
 
     @NonNull
@@ -31,12 +36,42 @@ public class NotificationTools {
                 PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
+    @NonNull
+    @TargetApi(26)
+    private static NotificationChannel getNotificationChannel(int pinPriority) {
+
+        int importance;
+        switch (pinPriority) {
+            case Notification.PRIORITY_DEFAULT:
+                importance = NotificationManager.IMPORTANCE_DEFAULT;
+                break;
+
+            case Notification.PRIORITY_MIN:
+                importance = NotificationManager.IMPORTANCE_MIN;
+                break;
+
+            case Notification.PRIORITY_LOW:
+                importance = NotificationManager.IMPORTANCE_LOW;
+                break;
+
+            case Notification.PRIORITY_HIGH:
+                importance = NotificationManager.IMPORTANCE_HIGH;
+                break;
+
+            default:
+                importance = NotificationManager.IMPORTANCE_UNSPECIFIED;
+                break;
+        }
+
+        return new NotificationChannel(NotificationChannel.DEFAULT_CHANNEL_ID, CHANNEL_NAME, importance);
+    }
+
     public static void notify(@NonNull Context context, @NonNull PinSpec pin) {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(context).setContentTitle(pin.getTitle())
+                new NotificationCompat.Builder(context, CHANNEL_NAME).setContentTitle(pin.getTitle())
                         .setContentText(pin.getContent())
                         .setSmallIcon(R.drawable.ic_notif_star)
                         .setPriority(pin.getPriority())
@@ -57,10 +92,14 @@ public class NotificationTools {
                             PendingIntent.FLAG_CANCEL_CURRENT));
         }
 
-        Notification notification = builder.build();
-
-        Log.i(TAG, "Send notification with pin id " + pin.getIdAsInt() + " to system");
         if (notificationManager != null) {
+            Log.i(TAG, "Send notification with pin id " + pin.getIdAsInt() + " to system");
+            Notification notification = builder.build();
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notificationManager.createNotificationChannel(getNotificationChannel(pin.getPriority()));
+            }
+
             notificationManager.notify(pin.getIdAsInt(), notification);
         } else {
             Log.w(TAG, "NotificationManager is null! Couldn't send notification!");

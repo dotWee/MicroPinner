@@ -48,8 +48,8 @@ public class PinDatabase extends SQLiteOpenHelper {
             + COLUMN_VISIBILITY + " integer not null, "
             + COLUMN_PRIORITY + " integer not null, "
 
-            + COLUMN_PERSISTENT + " boolean not null, "
-            + COLUMN_SHOW_ACTIONS + " boolean not null);";
+            + COLUMN_PERSISTENT + " integer not null, "
+            + COLUMN_SHOW_ACTIONS + " integer not null);";
     private static final String[] columns = {
             PinDatabase.COLUMN_ID,
             PinDatabase.COLUMN_TITLE,

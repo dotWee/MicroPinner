@@ -43,8 +43,8 @@ public class PinSpec implements Serializable {
         setContent(contentValues.getAsString(PinDatabase.COLUMN_CONTENT));
         setVisibility(contentValues.getAsInteger(PinDatabase.COLUMN_VISIBILITY));
         setPriority(contentValues.getAsInteger(PinDatabase.COLUMN_PRIORITY));
-        setPersistent(contentValues.getAsBoolean(PinDatabase.COLUMN_PERSISTENT));
-        setShowActions(contentValues.getAsBoolean(PinDatabase.COLUMN_SHOW_ACTIONS));
+        setPersistent(contentValues.getAsInteger(PinDatabase.COLUMN_PERSISTENT) != 0);
+        setShowActions(contentValues.getAsInteger(PinDatabase.COLUMN_SHOW_ACTIONS) != 0);
     }
 
     private PinSpec(int visibility, int priority, @NonNull String title, @NonNull String content,
@@ -130,8 +130,8 @@ public class PinSpec implements Serializable {
         contentValues.put(PinDatabase.COLUMN_CONTENT, getContent());
         contentValues.put(PinDatabase.COLUMN_VISIBILITY, getVisibility());
         contentValues.put(PinDatabase.COLUMN_PRIORITY, getPriority());
-        contentValues.put(PinDatabase.COLUMN_PERSISTENT, isPersistent());
-        contentValues.put(PinDatabase.COLUMN_SHOW_ACTIONS, isShowActions());
+        contentValues.put(PinDatabase.COLUMN_PERSISTENT, isPersistent() ? 1 : 0);
+        contentValues.put(PinDatabase.COLUMN_SHOW_ACTIONS, isShowActions() ? 1: 0);
 
         return contentValues;
     }

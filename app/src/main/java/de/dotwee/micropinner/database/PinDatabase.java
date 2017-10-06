@@ -22,21 +22,30 @@ import static de.dotwee.micropinner.tools.SQLiteStatementsLogger.logUpdate;
  * Created by lukas on 10.08.2016.
  */
 public class PinDatabase extends SQLiteOpenHelper {
+
     /* integer columns */
     static final String COLUMN_ID = "_id";
+
     /* string columns */
     static final String COLUMN_TITLE = "title";
     static final String COLUMN_CONTENT = "content";
+
     /* integer columns */
     static final String COLUMN_VISIBILITY = "visibility";
     static final String COLUMN_PRIORITY = "priority";
+
     /* boolean columns */
     static final String COLUMN_PERSISTENT = "persistent";
     static final String COLUMN_SHOW_ACTIONS = "show_actions";
+    static final String COLUMN_DELETED = "deleted";
+
     private static final String TABLE_PINS = "pins";
     private static final String TAG = PinDatabase.class.getSimpleName();
     private static final String DATABASE_NAME = "comments.db";
-    private static final int DATABASE_VERSION = 1;
+
+    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION_DELETED = 2;
+
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "
             + TABLE_PINS + "( "
@@ -49,7 +58,12 @@ public class PinDatabase extends SQLiteOpenHelper {
             + COLUMN_PRIORITY + " integer not null, "
 
             + COLUMN_PERSISTENT + " boolean not null, "
-            + COLUMN_SHOW_ACTIONS + " boolean not null);";
+            + COLUMN_SHOW_ACTIONS + " boolean not null,"
+            + COLUMN_DELETED + " boolean not null);";
+
+    // Add DELETED COLUMN
+    private static final String DATABASE_ADD_DELETED = "alter table " + TABLE_PINS + " add column " + COLUMN_DELETED + " integer default 0;";
+
     private static final String[] columns = {
             PinDatabase.COLUMN_ID,
             PinDatabase.COLUMN_TITLE,
@@ -57,8 +71,10 @@ public class PinDatabase extends SQLiteOpenHelper {
             PinDatabase.COLUMN_VISIBILITY,
             PinDatabase.COLUMN_PRIORITY,
             PinDatabase.COLUMN_PERSISTENT,
-            PinDatabase.COLUMN_SHOW_ACTIONS
+            PinDatabase.COLUMN_SHOW_ACTIONS,
+            PinDatabase.COLUMN_DELETED
     };
+
     private static PinDatabase instance = null;
     private final SQLiteDatabase database;
 
@@ -72,6 +88,11 @@ public class PinDatabase extends SQLiteOpenHelper {
             PinDatabase.instance = new PinDatabase(context.getApplicationContext());
         }
 
+        // perform upgrade if necessary
+        if (PinDatabase.instance.database.getVersion() < DATABASE_VERSION) {
+            PinDatabase.instance.onUpgrade(PinDatabase.instance.database, PinDatabase.instance.database.getVersion(), DATABASE_VERSION);
+        }
+
         return PinDatabase.instance;
     }
 
@@ -82,10 +103,12 @@ public class PinDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
+        Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion);
 
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_PINS);
-        onCreate(sqLiteDatabase);
+        if (oldVersion == 1) {
+            Log.i(TAG, "Adding support for deleted items within the database...");
+            sqLiteDatabase.execSQL(DATABASE_ADD_DELETED);
+        }
     }
 
     /**

@@ -13,6 +13,7 @@ public class PreferencesHandler {
     private static final String PREF_FIRST_USE = "pref_firstuse";
     private static final String PREF_ADVANCED_USE = "pref_advanceduse";
     private static final String PREF_SHOW_NOTIFICATION_ACTIONS = "pref_shownotificationactions";
+    private static final String PREF_DELETED_SUPPORT = "pref_deletedsupport";
 
     private final static String TAG = PreferencesHandler.class.getSimpleName();
     private static PreferencesHandler instance;
@@ -47,6 +48,14 @@ public class PreferencesHandler {
 
     public void setAdvancedUse(boolean b) {
         applyPreference(PREF_ADVANCED_USE, b);
+    }
+
+    public boolean isDeletedSupported() {
+        return preferences.getBoolean(PREF_DELETED_SUPPORT, false);
+    }
+
+    public void setDeletedSupport(boolean b) {
+        applyPreference(PREF_DELETED_SUPPORT, b);
     }
 
     public boolean isNotificationActionsEnabled() {

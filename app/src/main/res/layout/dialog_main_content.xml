@@ -1,103 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/scrollView"
+<TableLayout style="@style/DialogContent.Table"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <TableRow style="@style/DialogView">
 
-    <TableLayout
-        style="@style/DialogContent.Table">
+        <TextView
+            style="@style/DialogText.Description"
+            android:layout_column="0"
+            android:layout_span="2"
+            android:text="@string/input_description_title" />
+    </TableRow>
 
-        <TableRow style="@style/DialogView">
+    <TableRow style="@style/DialogView">
 
-            <TextView
-                style="@style/DialogText.Description"
-                android:layout_column="0"
-                android:layout_span="2"
-                android:text="@string/input_description_title" />
-        </TableRow>
+        <EditText
+            android:id="@+id/editTextTitle"
+            style="@style/DialogInput.EditText"
+            android:layout_column="0"
+            android:layout_span="2"
+            android:hint="@string/input_hint_title" />
+    </TableRow>
 
-        <TableRow style="@style/DialogView">
+    <TableRow style="@style/DialogView">
 
-            <EditText
-                android:id="@+id/editTextTitle"
-                style="@style/DialogInput.EditText"
-                android:layout_column="0"
-                android:layout_span="2"
-                android:hint="@string/input_hint_title" />
-        </TableRow>
+        <TextView
+            style="@style/DialogText.Description"
+            android:layout_column="0"
+            android:layout_span="2"
+            android:text="@string/input_description_content" />
+    </TableRow>
 
-        <TableRow style="@style/DialogView">
+    <TableRow style="@style/DialogView">
 
-            <TextView
-                style="@style/DialogText.Description"
-                android:layout_column="0"
-                android:layout_span="2"
-                android:text="@string/input_description_content" />
-        </TableRow>
-
-        <TableRow style="@style/DialogView">
-
-            <EditText
-                android:id="@+id/editTextContent"
-                style="@style/DialogInput.EditText"
-                android:layout_column="0"
-                android:layout_span="2"
-                android:hint="@string/input_hint_content" />
-        </TableRow>
+        <EditText
+            android:id="@+id/editTextContent"
+            style="@style/DialogInput.EditText"
+            android:layout_column="0"
+            android:layout_span="2"
+            android:hint="@string/input_hint_content" />
+    </TableRow>
 
 
-        <TableRow style="@style/DialogView">
+    <TableRow style="@style/DialogView">
 
-            <TextView
-                style="@style/DialogText.Description"
-                android:layout_column="0"
-                android:text="@string/input_description_visibility" />
+        <TextView
+            style="@style/DialogText.Description"
+            android:layout_column="0"
+            android:text="@string/input_description_visibility" />
 
-            <TextView
-                style="@style/DialogText.Description"
-                android:layout_column="1"
-                android:text="@string/input_description_priority" />
-        </TableRow>
+        <TextView
+            style="@style/DialogText.Description"
+            android:layout_column="1"
+            android:text="@string/input_description_priority" />
+    </TableRow>
 
-        <TableRow style="@style/DialogView">
+    <TableRow style="@style/DialogView">
 
-            <Spinner
-                android:id="@+id/spinnerVisibility"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_column="0" />
+        <Spinner
+            android:id="@+id/spinnerVisibility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="0" />
 
-            <Spinner
-                android:id="@+id/spinnerPriority"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_column="1" />
-        </TableRow>
+        <Spinner
+            android:id="@+id/spinnerPriority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="1" />
+    </TableRow>
 
-        <TableRow style="@style/DialogView">
+    <TableRow style="@style/DialogView">
 
-            <CheckBox
-                android:id="@+id/checkBoxPersistentPin"
-                style="@style/DialogText.CheckBox"
-                android:layout_marginTop="16dp"
-                android:layout_span="2"
-                android:text="@string/input_description_makepinpersistent" />
+        <CheckBox
+            android:id="@+id/checkBoxPersistentPin"
+            style="@style/DialogText.CheckBox"
+            android:layout_marginTop="16dp"
+            android:layout_span="2"
+            android:text="@string/input_description_makepinpersistent" />
 
-        </TableRow>
+    </TableRow>
 
-        <TableRow style="@style/DialogView">
+    <TableRow style="@style/DialogView">
 
-            <CheckBox
-                android:id="@+id/checkBoxShowActions"
-                style="@style/DialogText.CheckBox"
-                android:layout_marginTop="4dp"
-                android:layout_span="2"
-                android:text="@string/input_description_shownotificationactions" />
+        <CheckBox
+            android:id="@+id/checkBoxShowActions"
+            style="@style/DialogText.CheckBox"
+            android:layout_marginTop="4dp"
+            android:layout_span="2"
+            android:text="@string/input_description_shownotificationactions" />
 
-        </TableRow>
+    </TableRow>
 
-    </TableLayout>
-
-</ScrollView>
+</TableLayout>

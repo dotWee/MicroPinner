@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/DialogContent.Table">
+
+<TableLayout style="@style/DialogContent.Table"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TableRow style="@style/DialogView">
 
         <TextView
             style="@style/DialogText.Description"
             android:layout_column="0"
+            android:layout_span="2"
             android:text="@string/input_description_title" />
-
-        <TextView
-            style="@style/DialogText.Description"
-            android:layout_column="1"
-            android:text="@string/input_description_content" />
     </TableRow>
 
     <TableRow style="@style/DialogView">
@@ -21,12 +18,26 @@
             android:id="@+id/editTextTitle"
             style="@style/DialogInput.EditText"
             android:layout_column="0"
+            android:layout_span="2"
             android:hint="@string/input_hint_title" />
+    </TableRow>
+
+    <TableRow style="@style/DialogView">
+
+        <TextView
+            style="@style/DialogText.Description"
+            android:layout_column="0"
+            android:layout_span="2"
+            android:text="@string/input_description_content" />
+    </TableRow>
+
+    <TableRow style="@style/DialogView">
 
         <EditText
             android:id="@+id/editTextContent"
             style="@style/DialogInput.EditText"
-            android:layout_column="1"
+            android:layout_column="0"
+            android:layout_span="2"
             android:hint="@string/input_hint_content" />
     </TableRow>
 

@@ -138,7 +138,8 @@
 - changes:
     - Use internal DayNight-Theme changer instead of own implementation
     - Support for Notification Channels (introduced in Android Oreo)
-    - Built with latest build-tools and updated support package  
+    - Built with latest build-tools and updated support package
+    - Updated resources and minor layout adjustments
     - Target latest Android Version (8.0.0 / sdk26)
     - Some code-cleanup and refactor
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v2.1.0/release_v2.1.0.apk)

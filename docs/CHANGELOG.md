@@ -133,12 +133,12 @@
     - Target latest Android Version (7.1.1 / sdk25)
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v2.0.1/release_v2.0.1.apk)
 
-#### [Version: 2.1.0 / ]
-- sha1 checksum:
+#### [Version: 2.1.0 / 03rd November 2017]
+- sha1 checksum: c7fbf939a3992336d595ffc78bc667acd48812db
 - changes:
     - Use internal DayNight-Theme changer instead of own implementation
     - Support for Notification Channels (introduced in Android Oreo)
     - Built with latest build-tools and updated support package  
     - Target latest Android Version (8.0.0 / sdk26)
     - Some code-cleanup and refactor
-- download:
+- download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v2.1.0/release_v2.1.0.apk)

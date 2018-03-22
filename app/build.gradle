@@ -48,7 +48,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 
-    androidTestCompile('com.android.support.test:runner:0.5') {
+    androidTestCompile('com.android.support.test:runner:1.0.1') {
         // Necessary if your app targets Marshmallow (since the test runner
         // hasn't moved to Marshmallow yet)
         exclude group: 'com.android.support', module: 'support-annotations'

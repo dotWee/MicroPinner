@@ -37,13 +37,13 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:27.1.0'
 
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2') {
+    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1') {
         // Necessary if your app targets Marshmallow (since Espresso
         // hasn't moved to Marshmallow yet)
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 
-    androidTestCompile('com.android.support.test.espresso:espresso-intents:2.2.2') {
+    androidTestCompile('com.android.support.test.espresso:espresso-intents:3.0.1') {
         // Necessary to avoid version conflicts
         exclude group: 'com.android.support', module: 'support-annotations'
     }

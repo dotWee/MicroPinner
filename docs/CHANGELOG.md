@@ -143,3 +143,12 @@
     - Target latest Android Version (8.0.0 / sdk26)
     - Some code-cleanup and refactor
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v2.1.0/release_v2.1.0.apk)
+
+#### [Version: 2.1.1 / 04th April 2018]
+- sha1 checksum: 
+- changes:
+    - Fixed issue with Android Oreo
+    - Updated dependencies
+    - Target latest Android Version (8.1.0 / sdk27)
+    - Some code-cleanup and refactor
+- download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v2.1.1/release_v2.1.1.apk)

@@ -7,7 +7,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -95,10 +94,6 @@ public class NotificationTools {
         if (notificationManager != null) {
             Log.i(TAG, "Send notification with pin id " + pin.getIdAsInt() + " to system");
             Notification notification = builder.build();
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                notificationManager.createNotificationChannel(getNotificationChannel(pin.getPriority()));
-            }
 
             notificationManager.notify(pin.getIdAsInt(), notification);
         } else {

@@ -35,7 +35,7 @@ public abstract class AbstractDialogView extends FrameLayout {
         this.mainPresenter = mainPresenter;
     }
 
-    public void init() {
+    void init() {
         if (BuildConfig.DEBUG) {
             Log.i(super.getClass().getSimpleName(), "New instance created");
         }

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MicroPinner</string>
+    <string name="caption_visibility">Visibility</string>
+    <string name="caption_title">Title</string>
+    <string name="caption_content">Content</string>
+    <string name="caption_priority">Priority</string>
+    <string name="caption_show_pin_permanently">Show pin permanently</string>
+    <string name="caption_show_notification_actions">Show notification actions</string>
+    <string name="caption_pin">Pin</string>
+    <string name="caption_cancel">Cancel</string>
 </resources>

@@ -1,18 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="de.dotwee.micropinner.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_margin="24dp"
+        android:stretchColumns="*"
+        tools:context="de.dotwee.micropinner.MainActivity">
 
-</android.support.constraint.ConstraintLayout>
+        <TableRow>
+
+            <TextView
+                android:id="@+id/textViewCaptionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caption_title" />
+
+            <TextView
+                android:id="@+id/textViewCaptionContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caption_content" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/editTextTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/editTextContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </TableRow>
+
+        <TableRow>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_span="2" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/textViewVisibilityTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caption_visibility" />
+
+            <TextView
+                android:id="@+id/textViewPriorityContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caption_priority" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <Spinner
+                android:id="@+id/spinnerVisibilityTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/spinnerPriorityContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caption_priority" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_span="2" />
+        </TableRow>
+
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/checkBoxPermanent"
+                android:layout_span="2"
+                android:text="@string/caption_show_pin_permanently" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_span="2" />
+        </TableRow>
+
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/checkBoxActions"
+                android:layout_span="2"
+                android:text="@string/caption_show_notification_actions" />
+        </TableRow>
+
+    </TableLayout>
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_gravity="end"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/caption_cancel" />
+
+        <Space
+            android:layout_width="8dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/caption_pin" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,106 +1,11 @@
 <resources>
 
-    <style name="DialogTheme" parent="Theme.AppCompat.DayNight.Dialog">
-        <item name="colorAccent">@color/accent</item>
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="android:background">@color/background</item>
-
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="MainWrapper">
-        <item name="android:animateLayoutChanges">true</item>
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="DialogView">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-    </style>
-
-    <style name="DialogHeader">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-
-        <item name="android:clickable">true</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
-
-        <item name="android:paddingTop">@dimen/dialog_content_padding_24</item>
-        <item name="android:paddingLeft">@dimen/dialog_content_padding_24</item>
-        <item name="android:paddingRight">@dimen/dialog_content_padding_24</item>
-        <item name="android:paddingBottom">@dimen/dialog_content_padding_20</item>
-    </style>
-
-    <style name="DialogInput" parent="Widget.AppCompat.EditText" />
-
-    <style name="DialogInput.EditText">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-
-        <item name="android:layout_marginLeft">4dp</item>
-        <item name="android:layout_marginRight">4dp</item>
-
-        <item name="android:maxWidth">128dp</item>
-        <item name="android:inputType">
-            textCapSentences|textAutoComplete|textImeMultiLine|textAutoCorrect|text|textMultiLine
-        </item>
-    </style>
-
-    <style name="DialogContent">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-
-        <item name="android:paddingLeft">@dimen/dialog_content_padding_24</item>
-        <item name="android:paddingRight">@dimen/dialog_content_padding_24</item>
-
-        <item name="android:paddingTop">@dimen/dialog_content_padding_16</item>
-        <item name="android:paddingBottom">@dimen/dialog_content_padding_16</item>
-
-        <item name="android:minWidth">256dp</item>
-        <item name="android:maxWidth">384dp</item>
-    </style>
-
-    <style name="DialogContent.Table">
-        <item name="android:animateLayoutChanges">true</item>
-        <item name="android:stretchColumns">0,1</item>
-    </style>
-
-    <style name="DialogText" parent="TextAppearance.AppCompat.Small" />
-
-    <style name="DialogText.CheckBox">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-
-        <item name="android:singleLine">true</item>
-        <item name="android:animateLayoutChanges">true</item>
-    </style>
-
-    <style name="DialogText.Description">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:textColor">?attr/colorAccent</item>
-        <item name="android:layout_margin">8dp</item>
-    </style>
-
-    <style name="DialogFooter">
-        <item name="android:gravity">end</item>
-        <item name="android:orientation">horizontal</item>
-
-        <item name="android:clickable">true</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
-
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="DialogButtons" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:singleLine">true</item>
-        <item name="android:layout_marginRight">2dp</item>
-
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>

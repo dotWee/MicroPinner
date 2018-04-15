@@ -16,6 +16,7 @@ You can customize the notifications title and content, as well as its priority a
   <img alt="Get it on F-Droid"
        src="https://cloud.githubusercontent.com/assets/12447257/8024903/ce8dca32-0d44-11e5-95b0-e97d1d027351.png" />
 </a>
+<a href="https://app.fossa.io/projects/git%2Bgithub.com%2FdotWee%2FMicroPinner?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2FdotWee%2FMicroPinner.svg?type=shield"/></a>
 
 ## Features
 
@@ -62,3 +63,6 @@ To compile MicroPinner, simply import this project into **Android Studio** or **
 
 Copyright (c) 2015 Lukas 'dotwee' Wolfsteiner
 The source-code of MicroPinner is licensed under the [_Do What The Fuck You Want To_](/LICENSE.md) public license.
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FdotWee%2FMicroPinner.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FdotWee%2FMicroPinner?ref=badge_large)

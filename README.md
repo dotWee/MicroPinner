@@ -1,7 +1,7 @@
 # <img src="gp-res/playstore_icon.png" height="50px"/> MicroPinner
 
-MicroPinner is a lightweight dialog-only application, that turns your statusbar into a pingboard. (You can basically create your own notifications)
-You can customize the notifications title and content, as well as its priority and visibility (Works on Android 5+ only).
+MicroPinner is a lightweight dialog-only application, that turns your statusbar into a pingboard, almost same as sticky notes on your PC. (You can basically create your own notifications or  noted  reminders)
+You can customize the notifications title and content, as well as its priority and visibility (Works on Android 5.0 and above).
 
 [![Build Status](https://travis-ci.org/dotWee/MicroPinner.svg?branch=master)](https://travis-ci.org/dotWee/MicroPinner)
 [![Issues](https://img.shields.io/github/issues/dotWee/MicroPinner.svg)](https://github.com/dotWee/MicroPinner/issues)
@@ -20,13 +20,15 @@ You can customize the notifications title and content, as well as its priority a
 
 ## Features
 
-<b>The application itself</b>
+<b>The application currently has the following features</b>
 
-+ consumes no memory in the background (no background-services, no background-processes)
++ low background memory consumption(no background-services, no background-processes)
 + has no impact on your battery as it uses only native functions of Android
-+ is compatible down to Android 4.1 Jelly Bean (sdk16)
-+ weights less than 850kb (Version v2.0.1)
-+ is fully open source!
++ now works flawlessly on Android Oreo 8.0+
++ it is  light weight less than 850kb (Version v2.2.0)
++ it contains no ads or unnecessary pop-ups
++ it is fully open source!
++ it is absolutely free!
 
 <b>Design & UI</b>
 

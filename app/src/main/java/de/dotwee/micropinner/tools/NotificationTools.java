@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -92,6 +93,15 @@ public class NotificationTools {
         }
 
         if (notificationManager != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                /* Create or update. */
+                NotificationChannel channel = new NotificationChannel(CHANNEL_NAME,
+                        "Pins",
+                        NotificationManager.IMPORTANCE_DEFAULT);
+                notificationManager.createNotificationChannel(channel);
+            }
+
             Log.i(TAG, "Send notification with pin id " + pin.getIdAsInt() + " to system");
             Notification notification = builder.build();
 

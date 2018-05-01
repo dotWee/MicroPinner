@@ -2,13 +2,13 @@ package de.dotwee.micropinner.tools;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.controller.ActivityController;
 
 import de.dotwee.micropinner.view.MainDialog;
 
@@ -18,27 +18,20 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by lukas on 11.08.2016.
  */
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
 public class PreferencesHandlerTest {
-
-    /**
-     * Preferred JUnit 4 mechanism of specifying the
-     * activity to be launched before each test
-     */
-    @Rule
-    public ActivityTestRule<MainDialog> activityTestRule =
-            new ActivityTestRule<>(MainDialog.class);
-
     private PreferencesHandler preferencesHandler;
+    ActivityController<MainDialog> mainDialogActivityController;
 
     @Before
     public void setUp() {
+        mainDialogActivityController = Robolectric.buildActivity(MainDialog.class).create().start();
 
         // Removes all previous preferences entries
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activityTestRule.getActivity());
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mainDialogActivityController.get());
         sharedPreferences.edit().clear().apply();
 
-        preferencesHandler = PreferencesHandler.getInstance(activityTestRule.getActivity());
+        preferencesHandler = PreferencesHandler.getInstance(mainDialogActivityController.get());
     }
 
     @Test

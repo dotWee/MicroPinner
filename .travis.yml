@@ -24,6 +24,7 @@ sudo: false
 
 # Create and start an emulator for instrumentation tests
 before_script:
+  - yes | sdkmanager "platforms;android-27"
   - chmod +x gradlew
   - echo no | android create avd --force -n test -t android-27 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &

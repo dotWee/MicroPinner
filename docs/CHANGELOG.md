@@ -158,3 +158,9 @@
 - changes:
     - Fixed issue non-appearing pins on Android Oreo
 - download: [Github](https://github.com/dotWee/MicroPinner/releases/download/release-v2.2.0/release_v2.2.0.apk)
+
+#### [Version: 2.3.0 / ]
+- sha1 checksum: 
+- changes:
+    - Updated dependencies
+- download: 

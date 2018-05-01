@@ -44,21 +44,4 @@ dependencies {
     testImplementation "com.android.support.test:rules:1.0.2"
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:3.8'
-
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1') {
-        // Necessary if your app targets Marshmallow (since Espresso
-        // hasn't moved to Marshmallow yet)
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-
-    androidTestImplementation('com.android.support.test.espresso:espresso-intents:3.0.1') {
-        // Necessary to avoid version conflicts
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-
-    androidTestImplementation('com.android.support.test:runner:1.0.1') {
-        // Necessary if your app targets Marshmallow (since the test runner
-        // hasn't moved to Marshmallow yet)
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
 }

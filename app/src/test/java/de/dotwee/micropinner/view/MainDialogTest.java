@@ -1,8 +1,10 @@
 package de.dotwee.micropinner.view;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatDelegate;
+import android.view.View;
 import android.widget.TextView;
 
 import org.junit.Before;
@@ -16,6 +18,7 @@ import de.dotwee.micropinner.R;
 
 import static de.dotwee.micropinner.tools.ThemeTools.changeUiMode;
 import static de.dotwee.micropinner.tools.ThemeTools.getAccentColor;
+import static de.dotwee.micropinner.tools.ThemeTools.getBackgroundColor;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(RobolectricTestRunner.class)
@@ -55,5 +58,20 @@ public class MainDialogTest {
         int colorCaptionVisibilityExpected = getAccentColor(mainDialog, true);
         int colorCaptionVisibilityActual = textViewCaptionVisibility.getCurrentTextColor();
         assertEquals(colorCaptionVisibilityExpected, colorCaptionVisibilityActual);
+    }
+
+    /**
+     * This method verifies the light theme's background.
+     */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    @Test
+    public void testThemeLightBackground() throws Exception {
+        changeUiMode(mainDialogActivityController, AppCompatDelegate.MODE_NIGHT_NO);
+        MainDialog mainDialog = mainDialogActivityController.get();
+
+        View view = mainDialog.findViewById(android.R.id.content);
+        int expectedColor = getBackgroundColor(mainDialogActivityController.get(), true);
+        int actualColor = ((ColorDrawable) view.getBackground()).getColor();
+        assertEquals(expectedColor, actualColor);
     }
 }

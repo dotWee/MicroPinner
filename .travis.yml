@@ -13,6 +13,7 @@ env:
 android:
   components:
     - tools
+    - platform-tools
     - android-27
     - build-tools-27.0.3
     - extra-android-support

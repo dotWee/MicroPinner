@@ -2,8 +2,10 @@ MicroPinner
 ===========
 
 Micro Pinner is an open-source application which provides a user with a very simple but needful and productive service. Micro Pinner converts your status bar in a pingboard where you can store personalized notes of reminders or tasks.
+
 Alongside being able to create and edit personalized notifications, or reminders, you can also modify it's privacy. Either it's visible to the public or it's private or it's a top secret. Notification priority can also be modified.
-No need to worry about storage consumption. Micro Pinner is a light-weight software less than 850kb and it has low background memory consumption(no background-services, no background-processes)
+
+No need to worry about storage consumption. Micro Pinner is a light-weight software less than 850kb and it has low background memory consumption(no background-services, no background-processes).
 
 Features
 --------

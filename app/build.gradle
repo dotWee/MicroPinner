@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
 
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1') {
         // Necessary if your app targets Marshmallow (since Espresso

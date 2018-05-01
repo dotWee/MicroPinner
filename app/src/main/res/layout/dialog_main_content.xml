@@ -5,11 +5,13 @@
     <TableRow style="@style/DialogView">
 
         <TextView
+            android:id="@+id/textViewCaptionTitle"
             style="@style/DialogText.Description"
             android:layout_column="0"
             android:text="@string/input_description_title" />
 
         <TextView
+            android:id="@+id/textViewCaptionContent"
             style="@style/DialogText.Description"
             android:layout_column="1"
             android:text="@string/input_description_content" />
@@ -34,11 +36,13 @@
     <TableRow style="@style/DialogView">
 
         <TextView
+            android:id="@+id/textViewCaptionVisibility"
             style="@style/DialogText.Description"
             android:layout_column="0"
             android:text="@string/input_description_visibility" />
 
         <TextView
+            android:id="@+id/textViewCaptionPriority"
             style="@style/DialogText.Description"
             android:layout_column="1"
             android:text="@string/input_description_priority" />

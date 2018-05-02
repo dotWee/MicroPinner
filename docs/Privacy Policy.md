@@ -9,7 +9,7 @@ If you choose to use my Service, then you may be required to agree to the collec
 
 ## What information do we collect?
 
-Micro Pinner will reuest no permission while utilzing it's services. No personal information is requested by the software during or after installation in order to utilize it.
+Micro Pinner will request no permission while utilzing it's services. No personal information is requested by the software during or after installation in order to utilize it.
 
 ## Third party links
 
@@ -19,6 +19,6 @@ The app does not use third party services that may collect information used to i
 
 If we decide to change our privacy policy, we will make those changes on this document, and/or update the Privacy Policy modification date below.
 
-##Contacting Us
+## Contacting Us
 
 If there are any questions regarding this privacy policy you may contact me via the links provided [here](https://dotwee.de/)

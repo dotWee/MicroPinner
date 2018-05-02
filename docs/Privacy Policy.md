@@ -1,11 +1,10 @@
-## Privacy Policy
+# Privacy Policy
 
 Lukas Wolfsteiner built the Micro Pinner app as an Open Source app. This SERVICE is provided by Lukas Wolfsteiner at absolutely no cost and is intended for use as is.
 
 This document is used to inform users of my software and prospective users regarding my policies with the collection, use, and disclosure of Personal Information and Credentials if anyone decided to use my Service.
 
 If you choose to use my Service, then you may be required to agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the Service. I will not use or share your information with anyoneor anywhere except as described in this Privacy Policy.
-
 
 ## What information do we collect?
 

@@ -4,7 +4,10 @@ language: android
 
 jdk: oraclejdk8
 
-cache: false
+cache:
+   directories:
+   - $HOME/.gradle/caches/
+   - $HOME/.gradle/wrapper/
 
 env:
   global:

@@ -38,7 +38,7 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
 
     static {
         AppCompatDelegate.setDefaultNightMode(
-                AppCompatDelegate.MODE_NIGHT_AUTO_TIME);
+                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
     }
 
     private MainPresenter mainPresenter;

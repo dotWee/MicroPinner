@@ -1,12 +1,17 @@
 package de.dotwee.micropinner.presenter;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -33,14 +38,16 @@ public class MainPresenterImpl implements MainPresenter {
     private final PreferencesHandler preferencesHandler;
     private final NotificationManager notificationManager;
     private final Activity activity;
+    private final int activityPermissionRequestCode;
 
     private final PinDatabase pinDatabase;
     private final Intent intent;
     private PinSpec parentPin;
 
-    public MainPresenterImpl(@NonNull Activity activity, @NonNull Intent intent) {
+    public MainPresenterImpl(@NonNull Activity activity, @NonNull Intent intent, int permissionRequestCode) {
         this.preferencesHandler = PreferencesHandler.getInstance(activity);
         this.activity = activity;
+        this.activityPermissionRequestCode = permissionRequestCode;
         this.intent = intent;
 
         pinDatabase = PinDatabase.getInstance(activity.getApplicationContext());
@@ -68,11 +75,39 @@ public class MainPresenterImpl implements MainPresenter {
         Toast.makeText(activity, "Theme will change automatically by day and night.", Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * This method handles the click on the positive dialog button.
-     */
     @Override
-    public void onButtonPositive() {
+    public void onRequestPermissionsResult(@NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            // Permission has been granted.
+            createPin();
+        } else {
+            // Permission request was denied.
+            Toast.makeText(activity,
+                    activity.getResources().getText(R.string.message_notifications_permission_denied),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /**
+     * For sdk version <code>33</code> we need to request permission to send notifications.
+     *
+     * Requests the {@link android.Manifest.permission#POST_NOTIFICATIONS} permission.
+     * If an additional rationale should be displayed, the user has to launch the request from
+     * a SnackBar that includes additional information.
+     *
+     * @see <a href="https://stackoverflow.com/questions/74201274/changed-targetsdkversion-to-33-from-30-and-now-notifications-are-not-coming-up">android - changed targetSdkVersion to 33 from 30 and now notifications are not coming up - Stack Overflow</a>
+     * @see <a href="https://github.com/android/permissions-samples/blob/c4573f1218cef81295b519592718ecef3b144095/RuntimePermissionsBasic/Application/src/main/java/com/example/android/basicpermissions/MainActivity.java">permissions-samples/MainActivity.java · android/permissions-samples</a>
+     * @see <a href="https://developer.android.com/training/permissions/requesting#java">Request app permissions - Android Developers</a>
+     */
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    private void requestNotificationPermission() {
+        // Request the permission. The result will be received in the activity's onRequestPermissionResult().
+        ActivityCompat.requestPermissions(activity,
+            new String[]{Manifest.permission.POST_NOTIFICATIONS}, activityPermissionRequestCode);
+    }
+
+    private void createPin() {
         PinSpec newPin;
 
         try {
@@ -88,6 +123,24 @@ public class MainPresenterImpl implements MainPresenter {
             activity.finish();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method handles the click on the positive dialog button.
+     */
+    @Override
+    public void onButtonPositive() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            // No permission needed:
+            createPin();
+        } else if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.POST_NOTIFICATIONS)
+                == PackageManager.PERMISSION_GRANTED) {
+            // Permission already granted:
+            createPin();
+        } else {
+            // Permission is missing and must be requested.
+            requestNotificationPermission();
         }
     }
 

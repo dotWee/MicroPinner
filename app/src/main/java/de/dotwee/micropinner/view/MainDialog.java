@@ -33,10 +33,15 @@ import de.dotwee.micropinner.view.custom.DialogHeaderView;
 public class MainDialog extends AppCompatActivity implements MainPresenter.Data {
     private static final String TAG = MainDialog.class.getSimpleName();
 
+    /** Used when requesting permission to post notifications. */
+    private static final int PERMISSION_REQUEST_PRESENTER = 0;
+
     static {
         AppCompatDelegate.setDefaultNightMode(
                 AppCompatDelegate.MODE_NIGHT_AUTO_TIME);
     }
+
+    private MainPresenter mainPresenter;
 
     /**
      * This method checks if the user's device is a tablet, depending on the official resource {@link
@@ -56,7 +61,7 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
 
         this.setContentView(R.layout.dialog_main);
 
-        MainPresenter mainPresenter = new MainPresenterImpl(this, getIntent());
+        mainPresenter = new MainPresenterImpl(this, getIntent(), PERMISSION_REQUEST_PRESENTER);
 
         DialogHeaderView headerView = findViewById(R.id.dialogHeaderView);
         headerView.setMainPresenter(mainPresenter);
@@ -72,6 +77,17 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
 
         // simulate device-boot by sending a new intent to class OnBootReceiver
         sendBroadcast(new Intent(this, OnBootReceiver.class));
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSION_REQUEST_PRESENTER) {
+            // Request made by main presenter, so let it handle the results:
+            mainPresenter.onRequestPermissionsResult(permissions, grantResults);
+        }
     }
 
     @Override

@@ -41,6 +41,9 @@ public class DialogContentView extends AbstractDialogView
 
         spinnerPriority = findViewById(R.id.spinnerPriority);
         setPriorityAdapter();
+
+        CheckBox showActions = this.findViewById(R.id.checkBoxShowActions);
+        showActions.setOnCheckedChangeListener(this);
     }
 
     private void setVisibilityAdapter() {

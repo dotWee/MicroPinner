@@ -26,6 +26,11 @@
     <string name="message_clipped_pin">Pin has been copied to clipboard.</string>
     <string name="message_empty_title">The title has to contain text.</string>
     <string name="message_save_to_clipboard">Save to clipboard</string>
+    <string name="message_hidden_private_content">Contents hidden</string>
+
+    <string name="notifications_channel_public">Public Pins</string>
+    <string name="notifications_channel_private">Private Pins</string>
+    <string name="notifications_channel_secret">Secret Pins</string>
 
     <string name="visibility_public">public</string>
     <string name="visibility_private">private</string>

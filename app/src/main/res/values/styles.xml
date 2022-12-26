@@ -4,7 +4,9 @@
         <item name="colorAccent">@color/accent</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="android:background">@color/background</item>
+
+        <item name="android:windowBackground">@color/activityBackground</item>
+        <item name="android:windowIsTranslucent">true</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

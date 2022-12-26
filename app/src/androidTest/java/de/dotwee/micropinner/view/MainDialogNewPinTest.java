@@ -9,14 +9,15 @@ import org.junit.runner.RunWith;
 
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.database.PinDatabase;
+import de.dotwee.micropinner.tools.Matches;
 import de.dotwee.micropinner.tools.PreferencesHandler;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isFocusable;
@@ -108,9 +109,12 @@ public class MainDialogNewPinTest {
         // click pin button
         onView(withText(R.string.dialog_action_pin)).perform(click());
 
+        // can't see toast if another toast is already present
+        onView(withText(R.string.message_visibility_unsupported)).inRoot(Matches.isToast())
+                .check(doesNotExist());
+
         // verify toast existence
-        onView(withText(R.string.message_empty_title)).inRoot(
-                withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
+        onView(withText(R.string.message_empty_title)).inRoot(Matches.isToast())
                 .check(matches(isDisplayed()));
     }
 

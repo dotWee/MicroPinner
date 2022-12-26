@@ -3,6 +3,7 @@ package de.dotwee.micropinner.tools;
 import android.graphics.drawable.ColorDrawable;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.test.espresso.Root;
 import androidx.test.espresso.intent.Checks;
 import androidx.test.espresso.matcher.BoundedMatcher;
 import android.view.View;
@@ -15,6 +16,15 @@ import org.hamcrest.Matcher;
  * Created by Lukas Wolfsteiner on 06.11.2015.
  */
 public final class Matches {
+
+    @NonNull
+    public static Matcher<Root> isToast() {
+        return new ToastMatcher();
+    }
+    @NonNull
+    public static Matcher<Root> isToast(int maxRetries) {
+        return new ToastMatcher(maxRetries);
+    }
 
     /**
      * This matcher checks if a TextView displays its text in

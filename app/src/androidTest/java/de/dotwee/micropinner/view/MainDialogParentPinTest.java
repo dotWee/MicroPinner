@@ -4,13 +4,13 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.rule.ActivityTestRule;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,19 +39,11 @@ public class MainDialogParentPinTest {
      * activity to be launched before each test
      */
     @Rule
-    public ActivityTestRule<MainDialog> activityTestRule =
-            new ActivityTestRule<>(MainDialog.class);
-
-    @Before
-    public void setUp() {
-
-        final Intent testIntent =
-                new Intent(activityTestRule.getActivity(), MainDialog.class).putExtra(
-                        NotificationTools.EXTRA_INTENT, Constants.testPin);
-
-        Intents.init();
-        activityTestRule.launchActivity(testIntent);
-    }
+    public ActivityScenarioRule<MainDialog> activityTestRule =
+            new ActivityScenarioRule<>(
+                    new Intent(ApplicationProvider.getApplicationContext(), MainDialog.class)
+                            .putExtra(NotificationTools.EXTRA_INTENT, Constants.testPin)
+            );
 
     /**
      * @throws Exception

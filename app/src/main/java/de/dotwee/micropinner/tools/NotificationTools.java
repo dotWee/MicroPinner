@@ -8,8 +8,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.NotificationCompat;
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import android.util.Log;
 
 import de.dotwee.micropinner.R;
@@ -27,13 +27,18 @@ public class NotificationTools {
     private static final String CHANNEL_NAME = "pin_channel";
     private static final String TAG = NotificationTools.class.getSimpleName();
 
+    /** Needed for later android versions, see:
+     * https://stackoverflow.com/questions/67045607/how-to-resolve-missing-pendingintent-mutability-flag-lint-warning-in-android-a
+     */
+    private static final int FLAG_IMMUTABLE = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PendingIntent.FLAG_IMMUTABLE : 0;
+
     @NonNull
     private static PendingIntent getPinIntent(@NonNull Context context, @NonNull PinSpec pin) {
         Intent resultIntent = new Intent(context, MainDialog.class);
         resultIntent.putExtra(EXTRA_INTENT, pin);
 
         return PendingIntent.getActivity(context, (int) pin.getId(), resultIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT | FLAG_IMMUTABLE);
     }
 
     @NonNull
@@ -81,7 +86,7 @@ public class NotificationTools {
 
                         .setDeleteIntent(PendingIntent.getBroadcast(context, (int) pin.getId(),
                                 new Intent(context, OnDeleteReceiver.class).setAction("notification_cancelled")
-                                        .putExtra(EXTRA_INTENT, pin), PendingIntent.FLAG_CANCEL_CURRENT))
+                                        .putExtra(EXTRA_INTENT, pin), PendingIntent.FLAG_CANCEL_CURRENT | FLAG_IMMUTABLE))
                         .setOngoing(pin.isPersistent());
 
         if (pin.isShowActions()) {
@@ -89,7 +94,7 @@ public class NotificationTools {
                     context.getString(R.string.message_save_to_clipboard),
                     PendingIntent.getBroadcast(context, (int) pin.getId(),
                             new Intent(context, OnClipReceiver.class).putExtra(EXTRA_INTENT, pin),
-                            PendingIntent.FLAG_CANCEL_CURRENT));
+                            PendingIntent.FLAG_CANCEL_CURRENT | FLAG_IMMUTABLE));
         }
 
         if (notificationManager != null) {

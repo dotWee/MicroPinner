@@ -1,10 +1,10 @@
 package de.dotwee.micropinner.tools;
 
 import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.test.espresso.intent.Checks;
-import android.support.test.espresso.matcher.BoundedMatcher;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.test.espresso.intent.Checks;
+import androidx.test.espresso.matcher.BoundedMatcher;
 import android.view.View;
 import android.widget.TextView;
 

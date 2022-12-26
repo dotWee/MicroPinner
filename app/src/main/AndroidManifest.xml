@@ -16,7 +16,8 @@
             android:name=".view.MainDialog"
             android:excludeFromRecents="true"
             android:label="@string/main_name"
-            android:theme="@style/DialogTheme">
+            android:theme="@style/DialogTheme"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

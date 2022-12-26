@@ -2,13 +2,13 @@ package de.dotwee.micropinner.view;
 
 import android.content.res.Configuration;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -18,10 +18,10 @@ import org.junit.runner.RunWith;
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.tools.Matches;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static de.dotwee.micropinner.tools.TestTools.recreateActivity;
 
 /**

@@ -1,7 +1,7 @@
 package de.dotwee.micropinner.presenter;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import de.dotwee.micropinner.database.PinSpec;
 

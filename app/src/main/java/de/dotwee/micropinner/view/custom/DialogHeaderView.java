@@ -50,27 +50,19 @@ public class DialogHeaderView extends AbstractDialogView
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
         checkIfPresenterNull();
-        switch (compoundButton.getId()) {
-
-            case R.id.switchAdvanced:
-                mainPresenter.onViewExpand(isChecked);
-                break;
+        if (compoundButton.getId() == R.id.switchAdvanced) {
+            mainPresenter.onViewExpand(isChecked);
         }
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-
-            case R.id.linearLayoutHeader:
-                switchAdvanced.performClick();
-                break;
-
-            default:
-                if (BuildConfig.DEBUG) {
-                    Log.w(TAG, "Registered click on unknown view");
-                }
-                break;
+        if (view.getId() == R.id.linearLayoutHeader) {
+            switchAdvanced.performClick();
+        } else {
+            if (BuildConfig.DEBUG) {
+                Log.w(TAG, "Registered click on unknown view");
+            }
         }
     }
 
@@ -84,21 +76,17 @@ public class DialogHeaderView extends AbstractDialogView
     public boolean onLongClick(View view) {
         checkIfPresenterNull();
 
-        switch (view.getId()) {
-
-            case R.id.switchAdvanced:
-                mainPresenter.onSwitchHold();
-                return true;
-
-            case R.id.linearLayoutHeader:
-                mainPresenter.onSwitchHold();
-                return true;
-
-            default:
-                if (BuildConfig.DEBUG) {
-                    Log.w(TAG, "Registered long-click on unknown view");
-                }
-                return false;
+        int id = view.getId();
+        if (id == R.id.switchAdvanced) {
+            mainPresenter.onSwitchHold();
+            return true;
+        } else if (id == R.id.linearLayoutHeader) {
+            mainPresenter.onSwitchHold();
+            return true;
         }
+        if (BuildConfig.DEBUG) {
+            Log.w(TAG, "Registered long-click on unknown view");
+        }
+        return false;
     }
 }

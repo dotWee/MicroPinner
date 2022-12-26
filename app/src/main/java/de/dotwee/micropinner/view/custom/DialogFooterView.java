@@ -1,7 +1,7 @@
 package de.dotwee.micropinner.view.custom;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -50,20 +50,15 @@ public class DialogFooterView extends AbstractDialogView implements View.OnClick
     public void onClick(@NonNull View view) {
         checkIfPresenterNull();
 
-        switch (view.getId()) {
-            case R.id.buttonPin:
-                mainPresenter.onButtonPositive();
-                break;
-
-            case R.id.buttonCancel:
-                mainPresenter.onButtonNegative();
-                break;
-
-            default:
-                if (BuildConfig.DEBUG) {
-                    Log.w(TAG, "Registered click on unknown view");
-                }
-                break;
+        int id = view.getId();
+        if (id == R.id.buttonPin) {
+            mainPresenter.onButtonPositive();
+        } else if (id == R.id.buttonCancel) {
+            mainPresenter.onButtonNegative();
+        } else {
+            if (BuildConfig.DEBUG) {
+                Log.w(TAG, "Registered click on unknown view");
+            }
         }
     }
 }

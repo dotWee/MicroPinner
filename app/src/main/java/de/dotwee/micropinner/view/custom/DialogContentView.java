@@ -71,11 +71,8 @@ public class DialogContentView extends AbstractDialogView
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         checkIfPresenterNull();
 
-        switch (compoundButton.getId()) {
-
-            case R.id.checkBoxShowActions:
-                mainPresenter.onShowActions();
-                break;
+        if (compoundButton.getId() == R.id.checkBoxShowActions) {
+            mainPresenter.onShowActions();
         }
     }
 }

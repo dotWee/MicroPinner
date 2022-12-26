@@ -26,6 +26,7 @@
             android:excludeFromRecents="true"
             android:label="@string/main_name"
             android:theme="@style/DialogTheme"
+            android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>

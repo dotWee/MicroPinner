@@ -6,30 +6,29 @@
 
         <TableRow style="@style/DialogView">
 
-            <TextView
-                style="@style/DialogText.Description"
-                android:layout_column="0"
-                android:text="@string/input_description_title" />
+            <LinearLayout
+                style="@style/DialogView"
+                android:layout_span="2"
+                android:orientation="vertical">
 
-            <TextView
-                style="@style/DialogText.Description"
-                android:layout_column="1"
-                android:text="@string/input_description_content" />
-        </TableRow>
+                <TextView
+                    style="@style/DialogText.Description"
+                    android:text="@string/input_description_title" />
 
-        <TableRow style="@style/DialogView">
+                <EditText
+                    android:id="@+id/editTextTitle"
+                    style="@style/DialogInput.EditText"
+                    android:hint="@string/input_hint_title" />
 
-            <EditText
-                android:id="@+id/editTextTitle"
-                style="@style/DialogInput.EditText"
-                android:layout_column="0"
-                android:hint="@string/input_hint_title" />
+                <TextView
+                    style="@style/DialogText.Description"
+                    android:text="@string/input_description_content" />
 
-            <EditText
-                android:id="@+id/editTextContent"
-                style="@style/DialogInput.EditText"
-                android:layout_column="1"
-                android:hint="@string/input_hint_content" />
+                <EditText
+                    android:id="@+id/editTextContent"
+                    style="@style/DialogInput.EditText"
+                    android:hint="@string/input_hint_content" />
+            </LinearLayout>
         </TableRow>
 
         <TableRow style="@style/DialogView">

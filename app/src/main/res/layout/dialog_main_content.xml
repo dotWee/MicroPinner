@@ -32,7 +32,6 @@
                 android:hint="@string/input_hint_content" />
         </TableRow>
 
-
         <TableRow style="@style/DialogView">
 
             <TextView
@@ -50,14 +49,12 @@
 
             <Spinner
                 android:id="@+id/spinnerVisibility"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/DialogSpinner"
                 android:layout_column="0" />
 
             <Spinner
                 android:id="@+id/spinnerPriority"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/DialogSpinner"
                 android:layout_column="1" />
         </TableRow>
 

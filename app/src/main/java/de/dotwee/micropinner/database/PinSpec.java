@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat.NotificationVisibility;
 
 import java.io.Serializable;
 
@@ -90,6 +91,7 @@ public class PinSpec implements Serializable {
         this.content = content;
     }
 
+    @NotificationVisibility
     public int getVisibility() {
         return visibility;
     }
@@ -145,6 +147,7 @@ public class PinSpec implements Serializable {
         }
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "PinSpec{" +

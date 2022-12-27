@@ -6,7 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.Switch;
+
+import androidx.appcompat.widget.SwitchCompat;
 
 import de.dotwee.micropinner.BuildConfig;
 import de.dotwee.micropinner.R;
@@ -15,10 +16,10 @@ import de.dotwee.micropinner.R;
  * Created by lukas on 25.07.2016.
  */
 public class DialogHeaderView extends AbstractDialogView
-        implements Switch.OnCheckedChangeListener, View.OnClickListener, View.OnLongClickListener {
+        implements SwitchCompat.OnCheckedChangeListener, View.OnClickListener, View.OnLongClickListener {
 
     private static final String TAG = DialogHeaderView.class.getSimpleName();
-    private Switch switchAdvanced;
+    private SwitchCompat switchAdvanced;
 
     public DialogHeaderView(Context context) {
         super(context);

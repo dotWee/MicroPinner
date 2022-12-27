@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     android:background="@color/background"
-    tools:context=".view.MainDialog">
+    tools:context=".view.MainDialog"
+    tools:ignore="Overdraw">
 
     <de.dotwee.micropinner.view.custom.DialogHeaderView
         android:id="@+id/dialogHeaderView"
@@ -15,7 +16,8 @@
     <de.dotwee.micropinner.view.custom.DialogContentView
         android:id="@+id/dialogContentView"
         style="@style/DialogView"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        tools:ignore="InefficientWeight" />
 
     <de.dotwee.micropinner.view.custom.DialogFooterView
         android:id="@+id/dialogFooterView"

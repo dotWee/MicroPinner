@@ -103,11 +103,11 @@ public class NotificationTools {
 
     private static String getChannelName(@NonNull PinSpec pin) {
         switch (pin.getVisibility()) {
-            case Notification.VISIBILITY_PUBLIC:
+            case NotificationCompat.VISIBILITY_PUBLIC:
                 return CHANNEL_NAME_PUBLIC;
-            case Notification.VISIBILITY_PRIVATE:
+            case NotificationCompat.VISIBILITY_PRIVATE:
                 return CHANNEL_NAME_PRIVATE;
-            case Notification.VISIBILITY_SECRET:
+            case NotificationCompat.VISIBILITY_SECRET:
                 return CHANNEL_NAME_SECRET;
             default:
                 throw new RuntimeException("Unknown visibility value");
@@ -141,7 +141,7 @@ public class NotificationTools {
                                         .putExtra(EXTRA_INTENT, pin), PendingIntent.FLAG_CANCEL_CURRENT | FLAG_IMMUTABLE))
                         .setOngoing(pin.isPersistent());
 
-        if (pin.getVisibility() == Notification.VISIBILITY_PRIVATE && !pin.getContent().isEmpty()) {
+        if (pin.getVisibility() == NotificationCompat.VISIBILITY_PRIVATE && !pin.getContent().isEmpty()) {
             // If visibility is hidden then an alternative notification can be shown on the lock screen:
             // More info: https://developer.android.com/develop/ui/views/notifications/build-notification#lockscreenNotification
             // More info: https://gabrieltanner.org/blog/android-notifications-overview/

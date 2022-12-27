@@ -18,7 +18,8 @@
                 <EditText
                     android:id="@+id/editTextTitle"
                     style="@style/DialogInput.EditText"
-                    android:hint="@string/input_hint_title" />
+                    android:hint="@string/input_hint_title"
+                    android:importantForAutofill="no" />
 
                 <TextView
                     style="@style/DialogText.Description"
@@ -27,7 +28,8 @@
                 <EditText
                     android:id="@+id/editTextContent"
                     style="@style/DialogInput.EditText"
-                    android:hint="@string/input_hint_content" />
+                    android:hint="@string/input_hint_content"
+                    android:importantForAutofill="no" />
             </LinearLayout>
         </TableRow>
 

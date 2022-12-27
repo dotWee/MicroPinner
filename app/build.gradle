@@ -6,6 +6,7 @@ android {
 
     defaultConfig {
         applicationId "de.dotwee.micropinner"
+        namespace 'de.dotwee.micropinner'
         minSdkVersion 16
         targetSdkVersion 33
         versionCode 29

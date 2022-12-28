@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <queries>
         <intent>
+
             <!-- Allow custom text actions (like "search selected text") -->
             <action android:name="android.intent.action.PROCESS_TEXT" />
             <data android:mimeType="text/plain" />
@@ -23,11 +24,11 @@
         <activity
             android:name=".view.MainDialog"
             android:excludeFromRecents="true"
-            android:theme="@style/DialogTheme"
+            android:exported="true"
             android:launchMode="singleInstance"
             android:noHistory="true"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true">
+            android:theme="@style/DialogTheme"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,14 +37,20 @@
         </activity>
 
         <receiver android:name=".receiver.OnDeleteReceiver" />
-
         <receiver android:name=".receiver.OnClipReceiver" />
-
         <receiver
             android:name=".receiver.OnBootReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receiver.OnUpdateReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
     </application>

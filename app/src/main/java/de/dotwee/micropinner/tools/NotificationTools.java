@@ -18,7 +18,10 @@ import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.util.Log;
 
+import java.util.Map;
+
 import de.dotwee.micropinner.R;
+import de.dotwee.micropinner.database.PinDatabase;
 import de.dotwee.micropinner.database.PinSpec;
 import de.dotwee.micropinner.receiver.OnClipReceiver;
 import de.dotwee.micropinner.receiver.OnDeleteReceiver;
@@ -43,6 +46,35 @@ public class NotificationTools {
      * https://stackoverflow.com/questions/67045607/how-to-resolve-missing-pendingintent-mutability-flag-lint-warning-in-android-a
      */
     private static final int FLAG_IMMUTABLE = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PendingIntent.FLAG_IMMUTABLE : 0;
+
+    /**
+     * Detect the first time the app is started. Used to prevent restoring notifications more than once.
+     *
+     *  @see <a href="https://stackoverflow.com/questions/19042510/detect-the-first-time-an-activity-is-opened-on-this-session">android - Detect the first time an Activity is opened on this session - Stack Overflow</a>&nbsp;
+     */
+    private static volatile boolean JUST_STARTED = true;
+
+    public static void restoreNotifications(@NonNull Context context) {
+        if (!JUST_STARTED) {
+            return;
+        }
+        JUST_STARTED = false;
+
+        // get all pins
+        final Map<Integer, PinSpec> pinMap = PinDatabase.getInstance(context).getAllPinsMap();
+
+        // foreach through them all
+        for (Map.Entry<Integer, PinSpec> entry : pinMap.entrySet()) {
+            PinSpec pin = entry.getValue();
+
+            // TODO: on API level 23 and above we could double check that the notification doesn't already exists before restoring it, see:
+            // https://stackoverflow.com/questions/23831214/notificationmanager-get-notification-by-id
+
+            // create a notification from the object and finally restore it
+            NotificationTools.notify(context, pin);
+        }
+    }
+
 
     @NonNull
     private static PendingIntent getPinIntent(@NonNull Context context, @NonNull PinSpec pin) {

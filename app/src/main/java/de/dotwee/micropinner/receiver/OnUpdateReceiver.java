@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import de.dotwee.micropinner.tools.NotificationTools;
 
-public class OnBootReceiver extends BroadcastReceiver {
+public class OnUpdateReceiver extends BroadcastReceiver {
     private final static String TAG = OnBootReceiver.class.getSimpleName();
 
     @Override
@@ -21,9 +21,9 @@ public class OnBootReceiver extends BroadcastReceiver {
             return;
         }
 
-        if (!intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
-            Log.w(TAG, "OnBootReceiver's intent actions is not "
-                    + Intent.ACTION_BOOT_COMPLETED
+        if (!intent.getAction().equals(Intent.ACTION_MY_PACKAGE_REPLACED)) {
+            Log.w(TAG, "OnUpdateReceiver's intent actions is not "
+                    + Intent.ACTION_MY_PACKAGE_REPLACED
                     + ", returning without work");
             return;
         }

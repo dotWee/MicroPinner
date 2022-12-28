@@ -22,7 +22,7 @@ import android.widget.Spinner;
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.presenter.MainPresenter;
 import de.dotwee.micropinner.presenter.MainPresenterImpl;
-import de.dotwee.micropinner.receiver.OnBootReceiver;
+import de.dotwee.micropinner.tools.NotificationTools;
 import de.dotwee.micropinner.view.custom.DialogContentView;
 import de.dotwee.micropinner.view.custom.DialogFooterView;
 import de.dotwee.micropinner.view.custom.DialogHeaderView;
@@ -75,8 +75,8 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
         // restore previous state
         mainPresenter.restore();
 
-        // simulate device-boot by sending a new intent to class OnBootReceiver
-        sendBroadcast(new Intent(this, OnBootReceiver.class));
+        // If app was closed then restore notifications from previous session:
+        NotificationTools.restoreNotifications(this);
     }
 
     @Override

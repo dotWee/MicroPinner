@@ -163,6 +163,7 @@ public class NotificationTools {
                         .setContentTitle(pin.getTitle())
                         .setContentText(pin.getContent())
                         .setSmallIcon(R.drawable.ic_notif_star)
+                        .setOnlyAlertOnce(true)
                         .setPriority(pin.getPriority())
                         .setVisibility(pin.getVisibility())
                         .setStyle(new NotificationCompat.BigTextStyle().bigText(pin.getContent()))

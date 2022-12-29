@@ -36,6 +36,10 @@ public class NotificationTools {
      */
     public final static String EXTRA_INTENT = "IAMAPIN";
 
+    /**
+     * Used in app version 2.2.0 and earlier.
+     */
+    private static final String CHANNEL_NAME_OLD = "pin_channel";
     private static final String CHANNEL_NAME_PUBLIC = "pin_channel_public";
     private static final String CHANNEL_NAME_PRIVATE = "pin_channel_private";
     private static final String CHANNEL_NAME_SECRET = "pin_channel_secret";
@@ -117,6 +121,10 @@ public class NotificationTools {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private static void createOrUpdateNotificationChannels(@NonNull Context context, @NonNull NotificationManager notificationManager) {
+        // Delete old channel used in version 2.2.0 and earlier:
+        notificationManager.deleteNotificationChannel(CHANNEL_NAME_OLD);
+
+        // Create one channel per visibility level to allow user to customize how they are shown on the lock screen:
         NotificationChannel public_channel = new NotificationChannel(CHANNEL_NAME_PUBLIC,
                 context.getResources().getString(R.string.notifications_channel_public),
                 NotificationManager.IMPORTANCE_DEFAULT);
@@ -164,6 +172,7 @@ public class NotificationTools {
                         .setContentText(pin.getContent())
                         .setSmallIcon(R.drawable.ic_notif_star)
                         .setOnlyAlertOnce(true)
+                        .setCategory(NotificationCompat.CATEGORY_REMINDER)
                         .setPriority(pin.getPriority())
                         .setVisibility(pin.getVisibility())
                         .setStyle(new NotificationCompat.BigTextStyle().bigText(pin.getContent()))

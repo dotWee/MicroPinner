@@ -121,23 +121,27 @@ public class NotificationTools {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private static void createOrUpdateNotificationChannels(@NonNull Context context, @NonNull NotificationManager notificationManager) {
+        // Use low importance in order to not make a sound when creating a notification.
+        // See: https://developer.android.com/develop/ui/views/notifications/channels#importance
+        final int importance = NotificationManager.IMPORTANCE_LOW;
+
         // Delete old channel used in version 2.2.0 and earlier:
         notificationManager.deleteNotificationChannel(CHANNEL_NAME_OLD);
 
         // Create one channel per visibility level to allow user to customize how they are shown on the lock screen:
         NotificationChannel public_channel = new NotificationChannel(CHANNEL_NAME_PUBLIC,
                 context.getResources().getString(R.string.notifications_channel_public),
-                NotificationManager.IMPORTANCE_DEFAULT);
+                importance);
         notificationManager.createNotificationChannel(public_channel);
 
         NotificationChannel private_channel = new NotificationChannel(CHANNEL_NAME_PRIVATE,
                 context.getResources().getString(R.string.notifications_channel_private),
-                NotificationManager.IMPORTANCE_DEFAULT);
+                importance);
         notificationManager.createNotificationChannel(private_channel);
 
         NotificationChannel secret_channel = new NotificationChannel(CHANNEL_NAME_SECRET,
                 context.getResources().getString(R.string.notifications_channel_secret),
-                NotificationManager.IMPORTANCE_DEFAULT);
+                importance);
         notificationManager.createNotificationChannel(secret_channel);
     }
 

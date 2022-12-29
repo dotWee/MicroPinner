@@ -171,7 +171,7 @@ public class NotificationTools {
         }
     }
 
-    private static Spannable styledText(CharSequence text, StyleSpan style) {
+    private static CharSequence styledText(CharSequence text, StyleSpan style) {
         // https://stackoverflow.com/questions/70698860/how-to-bold-title-in-notification
         Spannable content = new SpannableString(text);
         content.setSpan(style, 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -207,7 +207,7 @@ public class NotificationTools {
 
             // Show "Contents hidden" placeholder as italic:
             // https://stackoverflow.com/questions/70698860/how-to-bold-title-in-notification
-            Spannable hiddenContent = styledText(
+            CharSequence hiddenContent = styledText(
                     context.getResources().getText(R.string.message_hidden_private_content),
                     new StyleSpan(Typeface.ITALIC)
             );

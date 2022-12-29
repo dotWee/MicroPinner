@@ -122,6 +122,7 @@ public class NotificationTools {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private static void createOrUpdateNotificationChannels(@NonNull Context context, @NonNull NotificationManager notificationManager) {
         // Use low importance in order to not make a sound when creating a notification.
+        // If this is too low then the user should be able to manually change channel settings, so this seems like a sensible default.
         // See: https://developer.android.com/develop/ui/views/notifications/channels#importance
         final int importance = NotificationManager.IMPORTANCE_LOW;
 
@@ -132,16 +133,28 @@ public class NotificationTools {
         NotificationChannel public_channel = new NotificationChannel(CHANNEL_NAME_PUBLIC,
                 context.getResources().getString(R.string.notifications_channel_public),
                 importance);
+        public_channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+        public_channel.setShowBadge(false);
+        public_channel.enableLights(false);
+        public_channel.enableVibration(false);
         notificationManager.createNotificationChannel(public_channel);
 
         NotificationChannel private_channel = new NotificationChannel(CHANNEL_NAME_PRIVATE,
                 context.getResources().getString(R.string.notifications_channel_private),
                 importance);
+        private_channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+        private_channel.setShowBadge(false);
+        private_channel.enableLights(false);
+        private_channel.enableVibration(false);
         notificationManager.createNotificationChannel(private_channel);
 
         NotificationChannel secret_channel = new NotificationChannel(CHANNEL_NAME_SECRET,
                 context.getResources().getString(R.string.notifications_channel_secret),
                 importance);
+        secret_channel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
+        secret_channel.setShowBadge(false);
+        secret_channel.enableLights(false);
+        secret_channel.enableVibration(false);
         notificationManager.createNotificationChannel(secret_channel);
     }
 

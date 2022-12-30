@@ -10,14 +10,17 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import android.service.notification.StatusBarNotification;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.util.Log;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import de.dotwee.micropinner.R;
@@ -67,18 +70,49 @@ public class NotificationTools {
         // get all pins
         final Map<Integer, PinSpec> pinMap = PinDatabase.getInstance(context).getAllPinsMap();
 
+        @Nullable final Map<Integer, StatusBarNotification> activeNotifications = getActiveNotifications(context);
+
         // foreach through them all
         for (Map.Entry<Integer, PinSpec> entry : pinMap.entrySet()) {
             PinSpec pin = entry.getValue();
 
-            // TODO: on API level 23 and above we could double check that the notification doesn't already exists before restoring it, see:
-            // https://stackoverflow.com/questions/23831214/notificationmanager-get-notification-by-id
+            // On API level 23 and above we double check that the notification doesn't already exists before restoring it.
+            if (activeNotifications != null && activeNotifications.containsKey(pin.getIdAsInt())) {
+                Log.i(TAG, "skipped restoring notification with id " + pin.getId());
+                continue;
+            }
 
             // create a notification from the object and finally restore it
             NotificationTools.notify(context, pin);
         }
     }
 
+    /**
+     * Get active notifications on API 23 and later.
+     * @return Null on API 22 and earlier, otherwise a map with notification ids as keys and info about the notifications as values.
+     * @see <a href="https://stackoverflow.com/questions/23831214/notificationmanager-get-notification-by-id/47345498#47345498">android - notificationManager get notification by Id - Stack Overflow</a>
+     */
+    @Nullable
+    private static Map<Integer, StatusBarNotification> getActiveNotifications(@NonNull Context context) {
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M) {
+            return null;
+        }
+
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (notificationManager == null) {
+            return null;
+        }
+        StatusBarNotification[] barNotifications = notificationManager.getActiveNotifications();
+
+        Map<Integer, StatusBarNotification> notificationMap = new HashMap<>();
+        for(StatusBarNotification notification: barNotifications) {
+            notificationMap.put(notification.getId(), notification);
+        }
+
+        return notificationMap;
+    }
 
     @NonNull
     private static PendingIntent getPinIntent(@NonNull Context context, @NonNull PinSpec pin) {

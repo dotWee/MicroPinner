@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 33
     buildToolsVersion "30.0.3"
+    namespace 'de.dotwee.micropinner'
 
     defaultConfig {
         applicationId "de.dotwee.micropinner"
-        namespace 'de.dotwee.micropinner'
         minSdkVersion 16
         targetSdkVersion 33
         versionCode 29

@@ -223,7 +223,6 @@ public class NotificationTools {
                         .setContentText(pin.getContent())
                         .setSmallIcon(R.drawable.ic_notif_star)
                         .setOnlyAlertOnce(true)
-                        .setSilent(true)
                         .setCategory(NotificationCompat.CATEGORY_REMINDER)
                         .setPriority(pin.getPriority())
                         .setVisibility(pin.getVisibility())

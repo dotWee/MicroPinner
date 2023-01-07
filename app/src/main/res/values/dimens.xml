@@ -2,7 +2,7 @@
 <resources>
 
     <dimen name="dialog_content_padding_24">24dp</dimen>
-    <dimen name="dialog_content_padding_20">24dp</dimen>
-    <dimen name="dialog_content_padding_16">24dp</dimen>
+    <dimen name="dialog_content_padding_20">20dp</dimen>
+    <dimen name="dialog_content_padding_16">16dp</dimen>
 
 </resources>

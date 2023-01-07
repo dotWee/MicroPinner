@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +22,7 @@ import android.widget.Spinner;
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.presenter.MainPresenter;
 import de.dotwee.micropinner.presenter.MainPresenterImpl;
-import de.dotwee.micropinner.receiver.OnBootReceiver;
+import de.dotwee.micropinner.tools.NotificationTools;
 import de.dotwee.micropinner.view.custom.DialogContentView;
 import de.dotwee.micropinner.view.custom.DialogFooterView;
 import de.dotwee.micropinner.view.custom.DialogHeaderView;
@@ -33,10 +33,15 @@ import de.dotwee.micropinner.view.custom.DialogHeaderView;
 public class MainDialog extends AppCompatActivity implements MainPresenter.Data {
     private static final String TAG = MainDialog.class.getSimpleName();
 
+    /** Used when requesting permission to post notifications. */
+    private static final int PERMISSION_REQUEST_PRESENTER = 0;
+
     static {
         AppCompatDelegate.setDefaultNightMode(
-                AppCompatDelegate.MODE_NIGHT_AUTO);
+                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
     }
+
+    private MainPresenter mainPresenter;
 
     /**
      * This method checks if the user's device is a tablet, depending on the official resource {@link
@@ -56,7 +61,7 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
 
         this.setContentView(R.layout.dialog_main);
 
-        MainPresenter mainPresenter = new MainPresenterImpl(this, getIntent());
+        mainPresenter = new MainPresenterImpl(this, getIntent(), PERMISSION_REQUEST_PRESENTER);
 
         DialogHeaderView headerView = findViewById(R.id.dialogHeaderView);
         headerView.setMainPresenter(mainPresenter);
@@ -70,8 +75,19 @@ public class MainDialog extends AppCompatActivity implements MainPresenter.Data 
         // restore previous state
         mainPresenter.restore();
 
-        // simulate device-boot by sending a new intent to class OnBootReceiver
-        sendBroadcast(new Intent(this, OnBootReceiver.class));
+        // If app was closed then restore notifications from previous session:
+        NotificationTools.restoreNotifications(this);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSION_REQUEST_PRESENTER) {
+            // Request made by main presenter, so let it handle the results:
+            mainPresenter.onRequestPermissionsResult(permissions, grantResults);
+        }
     }
 
     @Override

@@ -1,23 +1,25 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
+    namespace 'de.dotwee.micropinner'
 
     defaultConfig {
         applicationId "de.dotwee.micropinner"
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 33
         versionCode 29
         versionName "v2.2.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
 
         debug {
             minifyEnabled false
+            applicationIdSuffix '.debug'
         }
 
         release {
@@ -34,20 +36,20 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
 
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1') {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.5.0') {
         // Necessary if your app targets Marshmallow (since Espresso
         // hasn't moved to Marshmallow yet)
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 
-    androidTestImplementation('com.android.support.test.espresso:espresso-intents:3.0.1') {
+    androidTestImplementation('androidx.test.espresso:espresso-intents:3.5.0') {
         // Necessary to avoid version conflicts
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 
-    androidTestImplementation('com.android.support.test:runner:1.0.1') {
+    androidTestImplementation('androidx.test.ext:junit:1.1.4') {
         // Necessary if your app targets Marshmallow (since the test runner
         // hasn't moved to Marshmallow yet)
         exclude group: 'com.android.support', module: 'support-annotations'

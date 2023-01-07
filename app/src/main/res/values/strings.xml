@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MicroPinner</string>
 
     <string name="main_name">New Pin</string>
@@ -22,9 +22,15 @@
     <string name="input_hint_content">Content</string>
 
     <string name="message_visibility_unsupported">Hey! Seems like you are using a older Android Version, where the visibility-setting is unsupported.</string>
+    <string name="message_notifications_permission_denied" tools:ignore="MissingTranslation">Permission to send notifications is required for this app to function.</string>
     <string name="message_clipped_pin">Pin has been copied to clipboard.</string>
     <string name="message_empty_title">The title has to contain text.</string>
     <string name="message_save_to_clipboard">Save to clipboard</string>
+    <string name="message_hidden_private_content" tools:ignore="MissingTranslation">Contents hidden</string>
+
+    <string name="notifications_channel_public" tools:ignore="MissingTranslation">Public Pins</string>
+    <string name="notifications_channel_private" tools:ignore="MissingTranslation">Private Pins</string>
+    <string name="notifications_channel_secret" tools:ignore="MissingTranslation">Secret Pins</string>
 
     <string name="visibility_public">public</string>
     <string name="visibility_private">private</string>

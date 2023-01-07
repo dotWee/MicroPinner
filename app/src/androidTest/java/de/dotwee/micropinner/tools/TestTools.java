@@ -1,6 +1,6 @@
 package de.dotwee.micropinner.tools;
 
-import android.support.test.rule.ActivityTestRule;
+import androidx.test.rule.ActivityTestRule;
 
 import de.dotwee.micropinner.view.MainDialog;
 

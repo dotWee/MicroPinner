@@ -1,7 +1,7 @@
 package de.dotwee.micropinner.presenter;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import de.dotwee.micropinner.database.PinSpec;
 
@@ -15,6 +15,15 @@ public interface MainPresenter {
      * This method handles a long-click on a switch
      */
     void onSwitchHold();
+
+    /**
+     * This method handles the result of a permission request that was made on the presenters behalf by an activity.
+     * @param permissions The requested permissions.
+     * @param grantResults The grant results for the corresponding permissions which is either PERMISSION_GRANTED or PERMISSION_DENIED.
+     * @see <a href="https://developer.android.com/reference/androidx/core/app/ActivityCompat.OnRequestPermissionsResultCallback#onRequestPermissionsResult(int,java.lang.String[],int[])">ActivityCompat.OnRequestPermissionsResultCallback | Android Developers</a>
+     */
+    void onRequestPermissionsResult(@NonNull String[] permissions,
+                                    @NonNull int[] grantResults);
 
     /**
      * This method handles the click on the positive dialog button.

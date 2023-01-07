@@ -3,7 +3,7 @@ package de.dotwee.micropinner.tools;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Created by lukas on 18.08.2015 - 16:11

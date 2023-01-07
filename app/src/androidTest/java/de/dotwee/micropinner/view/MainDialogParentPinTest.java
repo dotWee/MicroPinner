@@ -3,13 +3,14 @@ package de.dotwee.micropinner.view;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
-import android.support.test.espresso.intent.Intents;
-import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
+
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.espresso.intent.Intents;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,12 +19,12 @@ import de.dotwee.micropinner.Constants;
 import de.dotwee.micropinner.R;
 import de.dotwee.micropinner.tools.NotificationTools;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * Created by Lukas Wolfsteiner on 06.11.2015.
@@ -38,19 +39,11 @@ public class MainDialogParentPinTest {
      * activity to be launched before each test
      */
     @Rule
-    public ActivityTestRule<MainDialog> activityTestRule =
-            new ActivityTestRule<>(MainDialog.class);
-
-    @Before
-    public void setUp() {
-
-        final Intent testIntent =
-                new Intent(activityTestRule.getActivity(), MainDialog.class).putExtra(
-                        NotificationTools.EXTRA_INTENT, Constants.testPin);
-
-        Intents.init();
-        activityTestRule.launchActivity(testIntent);
-    }
+    public ActivityScenarioRule<MainDialog> activityTestRule =
+            new ActivityScenarioRule<>(
+                    new Intent(ApplicationProvider.getApplicationContext(), MainDialog.class)
+                            .putExtra(NotificationTools.EXTRA_INTENT, Constants.testPin)
+            );
 
     /**
      * @throws Exception
